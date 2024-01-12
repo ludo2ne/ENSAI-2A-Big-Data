@@ -193,7 +193,7 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="objectives" class="level2">
 <h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
-<p>The lab’s goal is to make you familiar with the AWS’s interface. In this lab you will :</p>
+<p>The lab’s goal is to make you familiar with the AWS’s interface. In this lab, you will :</p>
 <ul>
 <li>Create an account on AWS academy if you haven’t done yet</li>
 <li>Store some data on Amazon Simple Storage Service (AWS S3)</li>
@@ -212,8 +212,24 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="log-on-aws" class="level2">
 <h2 class="anchored" data-anchor-id="log-on-aws">1. Log on AWS</h2>
-<p>Follow the instructions you get from the AWS acamedy’s e-mail, then those of the <a href="https://foad-moodle.ensai.fr/pluginfile.php/22636/mod_resource/content/0/AWS%20Academy%20Learner%20Lab%20-%20Student%20Guide.pdf">AWS Academy Learner Lab - Student Guide</a> to access to the AWS console.</p>
-<p>Your AWS account is located in North Virginia, <strong>do not change that</strong>. Because your account is for academic purpose, your don’t have access to all the AWS services. Your account is managed by AWS academy, so you have to use the AWS academy portal to access to your AWS account.</p>
+<ul class="task-list">
+<li><input type="checkbox">Follow the instructions you get from the AWS academy’s e-mail, then those of the <a href="https://foad-moodle.ensai.fr/pluginfile.php/22636/mod_resource/content/0/AWS%20Academy%20Learner%20Lab%20-%20Student%20Guide.pdf">AWS Academy Learner Lab - Student Guide</a> to access to the AWS console.</li>
+</ul>
+<p>Your AWS account is located in North Virginia, <strong>do not change that</strong>.<br>
+Because your account is for academic purpose, your don’t have access to all the AWS services.<br>
+Your account is managed by AWS academy, so you have to use the AWS academy portal to access to your AWS account.</p>
+<ul>
+<li><a href="https://www.awsacademy.com/vforcesite/LMS_Login" target="_blank">AWS Login</a></li>
+<li>Dashboard</li>
+<li>Select <code>AWS Academy Learner Lab - Big Data</code></li>
+<li>Select <code>Modules</code> and then <code>Lancer l'atelier pour étudiants de l'AWS Academy</code></li>
+<li><code>Start Lab</code>
+<ul>
+<li>Wait 2 minutes</li>
+<li>When the dot next to AWS turns green, your lab environment is ready to use</li>
+<li>Click AWS</li>
+</ul></li>
+</ul>
 <p><img src="img/aws console.png" class="img-fluid"></p>
 </section>
 <section id="exploration" class="level2">
@@ -234,23 +250,26 @@ ul.task-list li input[type="checkbox"] {
 <p>The storage is quite expensive (around ~0,02 $/Go/month), knowing that you pay for read operations (around ~0,09 \$/Go). 1 To cost around 240$ a year. For instance, a 1To SSD cost less than 100$ (for a smaller durability), and a cloud storage solution (like drop box) for private individual cost 10$/month for 2To (for the same durability). But the use case are different. S3 is for data access frequently by other AWS services. There is other storage solution (like S3 glacier) for archive, or databases.</p>
 <p>All AWS services can natively read from and write to S3, if they have some access right. So, every application you deploy on AWS can import/export data from/to S3. A file stored in S3 is called an “object”, and can be access by a unique URL. You can limit access right to a specific file.</p>
 <ul class="task-list">
-<li><p><input type="checkbox">In the search bar type <code>S3</code> <img src="img/s3_accueil.png" class="img-fluid"></p></li>
-<li><p><input type="checkbox">Click on <code>Créer un compartiment</code> (“bucket” in English)<br>
-</p></li>
-<li><p><input type="checkbox">Chose a unique name for your bucket (like ensai-firstName-lastName-currentDate)</p></li>
-<li><p><input type="checkbox">Keep all the default value, then create your bucket.</p></li>
+<li><input type="checkbox">In the <code>search bar</code> type <code>S3</code></li>
+<li><input type="checkbox">Click on <code>Créer un compartiment</code> (“bucket” in English)<br>
+</li>
+<li><input type="checkbox">Chose a unique name for your bucket (ex: ensai-firstName-lastName-currentDate)</li>
+<li><input type="checkbox">Keep all the default value</li>
+<li><input type="checkbox">Create your bucket</li>
 </ul>
 </section>
 <section id="import-some-files-to-your-bucket" class="level2">
 <h2 class="anchored" data-anchor-id="import-some-files-to-your-bucket">4. Import some files to your bucket</h2>
 <ul class="task-list">
-<li><p><input type="checkbox">Click on your bucket to go to its dedicated page.</p>
+<li><p><input type="checkbox">Select your bucket to go to its dedicated page</p>
 <p><img src="img/s3_bucket.png" class="img-fluid"></p></li>
-<li><p><input type="checkbox">Click on <code>Charger</code>, and upload the lab0 zip file available on Moodle.</p></li>
+<li><p><input type="checkbox">Click on <code>Charger</code>, and upload the file <a href="lab0_files.zip">Lab0_files.zip</a></p></li>
 </ul>
 <p><img src="img/s3_upload_file.png" class="img-fluid"></p>
-<ul class="task-list">
-<li><p><input type="checkbox">One the upload finished, click on your file. You will land on the file page, and found to link to access to your file. One is the URL of the file, the other is the S3 URI. Copy in a text file your file URI, you will need it later.</p>
+<ul>
+<li><p><input type="checkbox">Once the upload finished, click on your file</p></li>
+<li><p>You will land on the file page, and found to link to access to your file. One is the URL of the file, the other is the S3 URI</p></li>
+<li><p><input type="checkbox">Copy in a text file your file URI, you will need it later</p>
 <p><img src="img/s3_file.png" class="img-fluid"></p></li>
 </ul>
 </section>

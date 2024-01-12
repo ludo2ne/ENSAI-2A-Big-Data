@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Introduction to Big Data",
     "section": "",
-    "text": "🚧\nLessons and Labs created by Rémi Pépin and Arthur Katossky\n\n\n🎯 Objectives\n\nUnderstand the basics of computation in the real world, the bottlenecks and how to solve them\nUnderstand the basics of cloud computing and how to use AWS (or SSP Cloud)\nGet familiar with big data technologies and the most common paradigm\nLearn how to use Spark for data exploration on data at rest or streamed data, and how to use some basics ML algorithm on big data\n\n\n\n📆 Organisation\n\nLessons : 7h30\nLabs : 10h30 + 3h (graded lab)\nPresentations : 3h\n\n\n\n▶️ Lessons\n\n\n▶️ Labs\n\nLab 0 : Discover Amazon Web Service (AWS)\nLab 1 : First steps with Spark\nLab 1 : First steps with Spark"
+    "text": "🚧\nLessons and Labs created by Rémi Pépin and Arthur Katossky\n\n\n🎯 Objectives\n\nUnderstand the basics of computation in the real world, the bottlenecks and how to solve them\nUnderstand the basics of cloud computing and how to use AWS (or SSP Cloud)\nGet familiar with big data technologies and the most common paradigm\nLearn how to use Spark for data exploration on data at rest or streamed data, and how to use some basics ML algorithm on big data\n\n\n\n📆 Organisation\n\nLessons : 7h30\nLabs : 10h30 + 3h (graded lab)\nPresentations : 3h\n\n\n\n▶️ Lessons\n\n\n▶️ Labs\n\nLab 0 : Discover Amazon Web Service (AWS)\nLab 1 : First steps with Spark\nLab 2\nLab 3 : Stream processing with Spark"
   },
   {
     "objectID": "docs/lab/lab1/lab1.html",
@@ -74,21 +74,21 @@
     "href": "docs/lab/lab0/lab0.html",
     "title": "Discover Amazon Web Service (AWS)",
     "section": "",
-    "text": "The lab’s goal is to make you familiar with the AWS’s interface. In this lab you will :\n\nCreate an account on AWS academy if you haven’t done yet\nStore some data on Amazon Simple Storage Service (AWS S3)\nCreate an Elastic Compute Cloud instance (= a virtual machine) and connect to it with SSH\nRun some basic shell commands\n\nls to list files in a directory\ncd to change the current directory\nyum to install a package\naws s3 cp to copy file from S3\nchmod to change some file persmision\ntime [commande] to compute some execution time\n\nShut down your EC2 instance"
+    "text": "The lab’s goal is to make you familiar with the AWS’s interface. In this lab, you will :\n\nCreate an account on AWS academy if you haven’t done yet\nStore some data on Amazon Simple Storage Service (AWS S3)\nCreate an Elastic Compute Cloud instance (= a virtual machine) and connect to it with SSH\nRun some basic shell commands\n\nls to list files in a directory\ncd to change the current directory\nyum to install a package\naws s3 cp to copy file from S3\nchmod to change some file persmision\ntime [commande] to compute some execution time\n\nShut down your EC2 instance"
   },
   {
     "objectID": "docs/lab/lab0/lab0.html#objectives",
     "href": "docs/lab/lab0/lab0.html#objectives",
     "title": "Discover Amazon Web Service (AWS)",
     "section": "",
-    "text": "The lab’s goal is to make you familiar with the AWS’s interface. In this lab you will :\n\nCreate an account on AWS academy if you haven’t done yet\nStore some data on Amazon Simple Storage Service (AWS S3)\nCreate an Elastic Compute Cloud instance (= a virtual machine) and connect to it with SSH\nRun some basic shell commands\n\nls to list files in a directory\ncd to change the current directory\nyum to install a package\naws s3 cp to copy file from S3\nchmod to change some file persmision\ntime [commande] to compute some execution time\n\nShut down your EC2 instance"
+    "text": "The lab’s goal is to make you familiar with the AWS’s interface. In this lab, you will :\n\nCreate an account on AWS academy if you haven’t done yet\nStore some data on Amazon Simple Storage Service (AWS S3)\nCreate an Elastic Compute Cloud instance (= a virtual machine) and connect to it with SSH\nRun some basic shell commands\n\nls to list files in a directory\ncd to change the current directory\nyum to install a package\naws s3 cp to copy file from S3\nchmod to change some file persmision\ntime [commande] to compute some execution time\n\nShut down your EC2 instance"
   },
   {
     "objectID": "docs/lab/lab0/lab0.html#log-on-aws",
     "href": "docs/lab/lab0/lab0.html#log-on-aws",
     "title": "Discover Amazon Web Service (AWS)",
     "section": "1. Log on AWS",
-    "text": "1. Log on AWS\nFollow the instructions you get from the AWS acamedy’s e-mail, then those of the AWS Academy Learner Lab - Student Guide to access to the AWS console.\nYour AWS account is located in North Virginia, do not change that. Because your account is for academic purpose, your don’t have access to all the AWS services. Your account is managed by AWS academy, so you have to use the AWS academy portal to access to your AWS account."
+    "text": "1. Log on AWS\n\nFollow the instructions you get from the AWS academy’s e-mail, then those of the AWS Academy Learner Lab - Student Guide to access to the AWS console.\n\nYour AWS account is located in North Virginia, do not change that.\nBecause your account is for academic purpose, your don’t have access to all the AWS services.\nYour account is managed by AWS academy, so you have to use the AWS academy portal to access to your AWS account.\n\nAWS Login\nDashboard\nSelect AWS Academy Learner Lab - Big Data\nSelect Modules and then Lancer l'atelier pour étudiants de l'AWS Academy\nStart Lab\n\nWait 2 minutes\nWhen the dot next to AWS turns green, your lab environment is ready to use\nClick AWS"
   },
   {
     "objectID": "docs/lab/lab0/lab0.html#exploration",
@@ -102,14 +102,14 @@
     "href": "docs/lab/lab0/lab0.html#create-a-s3-bucket",
     "title": "Discover Amazon Web Service (AWS)",
     "section": "3. Create a S3 bucket",
-    "text": "3. Create a S3 bucket\nAmazon Simple Storage Service (S3) is the standard solution to store data on AWS. Amazon assured a 99,999999999 % durability for your data. This mean, is you store 10 000 000 files on S3, you can on average expect to incur a loss of a single file every 10 000 years.\nThe storage is quite expensive (around ~0,02 $/Go/month), knowing that you pay for read operations (around ~0,09 \\$/Go). 1 To cost around 240$ a year. For instance, a 1To SSD cost less than 100$ (for a smaller durability), and a cloud storage solution (like drop box) for private individual cost 10$/month for 2To (for the same durability). But the use case are different. S3 is for data access frequently by other AWS services. There is other storage solution (like S3 glacier) for archive, or databases.\nAll AWS services can natively read from and write to S3, if they have some access right. So, every application you deploy on AWS can import/export data from/to S3. A file stored in S3 is called an “object”, and can be access by a unique URL. You can limit access right to a specific file.\n\nIn the search bar type S3 \nClick on Créer un compartiment (“bucket” in English)\n\nChose a unique name for your bucket (like ensai-firstName-lastName-currentDate)\nKeep all the default value, then create your bucket."
+    "text": "3. Create a S3 bucket\nAmazon Simple Storage Service (S3) is the standard solution to store data on AWS. Amazon assured a 99,999999999 % durability for your data. This mean, is you store 10 000 000 files on S3, you can on average expect to incur a loss of a single file every 10 000 years.\nThe storage is quite expensive (around ~0,02 $/Go/month), knowing that you pay for read operations (around ~0,09 \\$/Go). 1 To cost around 240$ a year. For instance, a 1To SSD cost less than 100$ (for a smaller durability), and a cloud storage solution (like drop box) for private individual cost 10$/month for 2To (for the same durability). But the use case are different. S3 is for data access frequently by other AWS services. There is other storage solution (like S3 glacier) for archive, or databases.\nAll AWS services can natively read from and write to S3, if they have some access right. So, every application you deploy on AWS can import/export data from/to S3. A file stored in S3 is called an “object”, and can be access by a unique URL. You can limit access right to a specific file.\n\nIn the search bar type S3\nClick on Créer un compartiment (“bucket” in English)\n\nChose a unique name for your bucket (ex: ensai-firstName-lastName-currentDate)\nKeep all the default value\nCreate your bucket"
   },
   {
     "objectID": "docs/lab/lab0/lab0.html#import-some-files-to-your-bucket",
     "href": "docs/lab/lab0/lab0.html#import-some-files-to-your-bucket",
     "title": "Discover Amazon Web Service (AWS)",
     "section": "4. Import some files to your bucket",
-    "text": "4. Import some files to your bucket\n\nClick on your bucket to go to its dedicated page.\n\nClick on Charger, and upload the lab0 zip file available on Moodle.\n\n\n\nOne the upload finished, click on your file. You will land on the file page, and found to link to access to your file. One is the URL of the file, the other is the S3 URI. Copy in a text file your file URI, you will need it later."
+    "text": "4. Import some files to your bucket\n\nSelect your bucket to go to its dedicated page\n\nClick on Charger, and upload the file Lab0_files.zip\n\n\n\nOnce the upload finished, click on your file\nYou will land on the file page, and found to link to access to your file. One is the URL of the file, the other is the S3 URI\nCopy in a text file your file URI, you will need it later"
   },
   {
     "objectID": "docs/lab/lab0/lab0.html#ssh-key-creation",
