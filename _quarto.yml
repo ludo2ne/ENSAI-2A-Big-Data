@@ -1,0 +1,39 @@
+project:
+  type: website
+  render:
+    - "**/*.qmd"
+
+website:
+  title: "Big Data"
+  navbar:
+    background: "#447099"
+    left:
+      - href: index.qmd
+        text: Home
+      - text: Labs
+        menu: 
+          - href: docs/lab/lab0/lab0.qmd
+            text: "Lab 0"
+          - href: docs/lab/lab1/lab1.qmd
+            text: "Lab 1"
+          - href: docs/lab/lab3/lab3.qmd
+            text: "Lab 3"
+    right: 
+      - href: "https://quarto.org/"
+        text: "Quarto"
+        target: "_blank"
+      - href: "https://quarto.org/docs/presentations/revealjs/"
+        text: "Revealjs"
+        target: "_blank"
+      - icon: github
+        href: https://github.com/ludo2ne/ENSAI-2A-Big-Data
+        target: "_blank"
+
+format:
+  html:
+    theme: 
+      dark: solar
+      light: cosmo
+
+
+

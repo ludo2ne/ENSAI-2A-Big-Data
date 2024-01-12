@@ -1,0 +1,33 @@
+---
+title: "Introduction to Big Data"
+format: html
+from: markdown+emoji
+---
+
+
+# :construction: 
+
+Lessons and Labs created by [Rémi Pépin](https://github.com/HealerMikado/panorama_big_data_2021) and [Arthur Katossky](https://github.com/katossky/panorama-bigdata)
+
+# :dart: Objectives
+
+- Understand the basics of computation in the real world, the bottlenecks and how to solve them
+- Understand the basics of cloud computing and how to use AWS (or SSP Cloud)
+- Get familiar with big data technologies and the most common paradigm
+- Learn how to use Spark for data exploration on data at rest or streamed data, and how to use some basics ML algorithm on big data
+
+
+# :calendar: Organisation 
+
+- Lessons : 7h30
+- Labs : 10h30 + 3h (graded lab)
+- Presentations : 3h
+
+# :arrow_forward: Lessons
+
+
+# :arrow_forward: Labs
+
+* [Lab 0](docs/lab/lab0/lab0.qmd) : Discover Amazon Web Service (AWS)
+* [Lab 1](docs/lab/lab1/lab1.qmd) : First steps with Spark
+* [Lab 1](docs/lab/lab3/lab3.qmd) : First steps with Spark
