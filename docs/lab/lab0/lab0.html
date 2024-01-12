@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="Lab 0">
+
+<title>Big Data - Discover Amazon Web Service (AWS)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Big Data</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-labs" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Labs</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-labs">    
+        <li>
+    <a class="dropdown-item" href="../../../docs/lab/lab0/lab0.html" rel="" target="">
+ <span class="dropdown-text">Lab 0</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../docs/lab/lab1/lab1.html" rel="" target="">
+ <span class="dropdown-text">Lab 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../docs/lab/lab3/lab3.html" rel="" target="">
+ <span class="dropdown-text">Lab 3</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://quarto.org/" rel="" target="_blank">
+ <span class="menu-text">Quarto</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://quarto.org/docs/presentations/revealjs/" rel="" target="_blank">
+ <span class="menu-text">Revealjs</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/ludo2ne/ENSAI-2A-Big-Data" rel="" target="_blank"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="3">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link active" data-scroll-target="#objectives">Objectives</a></li>
+  <li><a href="#log-on-aws" id="toc-log-on-aws" class="nav-link" data-scroll-target="#log-on-aws">1. Log on AWS</a></li>
+  <li><a href="#exploration" id="toc-exploration" class="nav-link" data-scroll-target="#exploration">2. Exploration</a></li>
+  <li><a href="#create-a-s3-bucket" id="toc-create-a-s3-bucket" class="nav-link" data-scroll-target="#create-a-s3-bucket">3. Create a S3 bucket</a></li>
+  <li><a href="#import-some-files-to-your-bucket" id="toc-import-some-files-to-your-bucket" class="nav-link" data-scroll-target="#import-some-files-to-your-bucket">4. Import some files to your bucket</a></li>
+  <li><a href="#ssh-key-creation" id="toc-ssh-key-creation" class="nav-link" data-scroll-target="#ssh-key-creation">5. SSH key creation</a></li>
+  <li><a href="#create-your-first-virtual-machine" id="toc-create-your-first-virtual-machine" class="nav-link" data-scroll-target="#create-your-first-virtual-machine">6. Create your first virtual machine</a></li>
+  <li><a href="#connect-to-the-ec2-instance" id="toc-connect-to-the-ec2-instance" class="nav-link" data-scroll-target="#connect-to-the-ec2-instance">7. Connect to the EC2 instance</a>
+  <ul class="collapse">
+  <li><a href="#windows-user" id="toc-windows-user" class="nav-link" data-scroll-target="#windows-user">Windows user</a></li>
+  <li><a href="#macoslinux-user" id="toc-macoslinux-user" class="nav-link" data-scroll-target="#macoslinux-user">macOS/Linux user</a></li>
+  </ul></li>
+  <li><a href="#play-with-your-vm" id="toc-play-with-your-vm" class="nav-link" data-scroll-target="#play-with-your-vm">8. Play with your VM</a>
+  <ul class="collapse">
+  <li><a href="#benchmark-setup" id="toc-benchmark-setup" class="nav-link" data-scroll-target="#benchmark-setup">Benchmark setup</a></li>
+  <li><a href="#install-r-java-c-compiler-and-a-python-package" id="toc-install-r-java-c-compiler-and-a-python-package" class="nav-link" data-scroll-target="#install-r-java-c-compiler-and-a-python-package">Install R, java, C compiler and a python package</a></li>
+  <li><a href="#benchmark" id="toc-benchmark" class="nav-link" data-scroll-target="#benchmark">Benchmark</a></li>
+  <li><a href="#a-shell-in-your-web-browser" id="toc-a-shell-in-your-web-browser" class="nav-link" data-scroll-target="#a-shell-in-your-web-browser">A shell in your web browser</a></li>
+  </ul></li>
+  <li><a href="#shut-down-your-machine" id="toc-shut-down-your-machine" class="nav-link" data-scroll-target="#shut-down-your-machine">9. Shut down your machine</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Discover Amazon Web Service (AWS)</h1>
+</div>
+
+<div>
+  <div class="description">
+    Lab 0
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="objectives" class="level2">
+<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
+<p>The lab’s goal is to make you familiar with the AWS’s interface. In this lab you will :</p>
+<ul>
+<li>Create an account on AWS academy if you haven’t done yet</li>
+<li>Store some data on Amazon Simple Storage Service (AWS S3)</li>
+<li>Create an Elastic Compute Cloud instance (= a virtual machine) and connect to it with SSH</li>
+<li>Run some basic shell commands
+<ul>
+<li><code>ls</code> to list files in a directory</li>
+<li><code>cd</code> to change the current directory</li>
+<li><code>yum</code> to install a package</li>
+<li><code>aws s3 cp</code> to copy file from S3</li>
+<li><code>chmod</code> to change some file persmision</li>
+<li><code>time [commande]</code> to compute some execution time</li>
+</ul></li>
+<li>Shut down your EC2 instance</li>
+</ul>
+</section>
+<section id="log-on-aws" class="level2">
+<h2 class="anchored" data-anchor-id="log-on-aws">1. Log on AWS</h2>
+<p>Follow the instructions you get from the AWS acamedy’s e-mail, then those of the <a href="https://foad-moodle.ensai.fr/pluginfile.php/22636/mod_resource/content/0/AWS%20Academy%20Learner%20Lab%20-%20Student%20Guide.pdf">AWS Academy Learner Lab - Student Guide</a> to access to the AWS console.</p>
+<p>Your AWS account is located in North Virginia, <strong>do not change that</strong>. Because your account is for academic purpose, your don’t have access to all the AWS services. Your account is managed by AWS academy, so you have to use the AWS academy portal to access to your AWS account.</p>
+<p><img src="img/aws console.png" class="img-fluid"></p>
+</section>
+<section id="exploration" class="level2">
+<h2 class="anchored" data-anchor-id="exploration">2. Exploration</h2>
+<p>In the <code>Services</code> tab, you should find for instance :</p>
+<ul>
+<li>EC2 in computation</li>
+<li>S3 in storage</li>
+<li>A section for databases</li>
+<li>A section for <em>machine-learning</em><br>
+</li>
+<li>A section for data analysis</li>
+</ul>
+</section>
+<section id="create-a-s3-bucket" class="level2">
+<h2 class="anchored" data-anchor-id="create-a-s3-bucket">3. Create a S3 bucket</h2>
+<p><strong>Amazon Simple Storage Service</strong> (S3) is the standard solution to store data on AWS. Amazon assured a 99,999999999 % durability for your data. This mean, is you store 10 000 000 files on S3, you can on average expect to incur a loss of a single file every 10 000 years.</p>
+<p>The storage is quite expensive (around ~0,02 $/Go/month), knowing that you pay for read operations (around ~0,09 \$/Go). 1 To cost around 240$ a year. For instance, a 1To SSD cost less than 100$ (for a smaller durability), and a cloud storage solution (like drop box) for private individual cost 10$/month for 2To (for the same durability). But the use case are different. S3 is for data access frequently by other AWS services. There is other storage solution (like S3 glacier) for archive, or databases.</p>
+<p>All AWS services can natively read from and write to S3, if they have some access right. So, every application you deploy on AWS can import/export data from/to S3. A file stored in S3 is called an “object”, and can be access by a unique URL. You can limit access right to a specific file.</p>
+<ul class="task-list">
+<li><p><input type="checkbox">In the search bar type <code>S3</code> <img src="img/s3_accueil.png" class="img-fluid"></p></li>
+<li><p><input type="checkbox">Click on <code>Créer un compartiment</code> (“bucket” in English)<br>
+</p></li>
+<li><p><input type="checkbox">Chose a unique name for your bucket (like ensai-firstName-lastName-currentDate)</p></li>
+<li><p><input type="checkbox">Keep all the default value, then create your bucket.</p></li>
+</ul>
+</section>
+<section id="import-some-files-to-your-bucket" class="level2">
+<h2 class="anchored" data-anchor-id="import-some-files-to-your-bucket">4. Import some files to your bucket</h2>
+<ul class="task-list">
+<li><p><input type="checkbox">Click on your bucket to go to its dedicated page.</p>
+<p><img src="img/s3_bucket.png" class="img-fluid"></p></li>
+<li><p><input type="checkbox">Click on <code>Charger</code>, and upload the lab0 zip file available on Moodle.</p></li>
+</ul>
+<p><img src="img/s3_upload_file.png" class="img-fluid"></p>
+<ul class="task-list">
+<li><p><input type="checkbox">One the upload finished, click on your file. You will land on the file page, and found to link to access to your file. One is the URL of the file, the other is the S3 URI. Copy in a text file your file URI, you will need it later.</p>
+<p><img src="img/s3_file.png" class="img-fluid"></p></li>
+</ul>
+</section>
+<section id="ssh-key-creation" class="level2">
+<h2 class="anchored" data-anchor-id="ssh-key-creation">5. SSH key creation</h2>
+<p><strong>SSH</strong> (<strong>S</strong>ecure <strong>SH</strong>ell) protocol allow a secure remote connection to a machine. Moreover, with SSH you can control the remote machine. For more details, you can read this page <a href="https://doc.fedora-fr.org/wiki/SSH_:_Authentification_par_cl%C3%A9">page web</a>. But first you need a private key to authenticate yourself.</p>
+<ul class="task-list">
+<li><p><input type="checkbox">In the search bar, search <code>paire de clés</code></p></li>
+<li><p><input type="checkbox">Click on <code>Créerune paire de clés</code></p></li>
+<li><p><input type="checkbox">Give it a name (par ex: <code>labsuser</code>), select the ppk format if you use windows, and pem if you use Linux / macOs, then click on <code>créer</code></p></li>
+<li><p><input type="checkbox">This will download your key, do not lost it !</p></li>
+<li><p><input type="checkbox">If you are on Linux / macOs open a terminal and type :</p>
+<pre><code>cd ~/Downloads
+chmod 400 labsuser.pem</code></pre>
+<p>Do not close this terminal</p></li>
+</ul>
+</section>
+<section id="create-your-first-virtual-machine" class="level2">
+<h2 class="anchored" data-anchor-id="create-your-first-virtual-machine">6. Create your first virtual machine</h2>
+<ul class="task-list">
+<li><p><input type="checkbox">In the search bar, search <code>EC2</code></p>
+<p><img src="img/ec2_accueil.png" class="img-fluid"></p></li>
+<li><p><input type="checkbox">Click on <code>Lancer une instance</code></p></li>
+<li><p><input type="checkbox">First, you must choose an image for your machine (called AMI pour Amazon Machine Image). This image contain an OS and some default applications. Choose the first : Amazon Linux 2 AMI (HVM) - Kernel 5.10.</p>
+<p><img src="img/ec2_ami.png" class="img-fluid"></p></li>
+<li><p><input type="checkbox">Then you will select the hardware configuration. For instance, for a general usage machine you can choose a <code>t2.micro</code> for a cheap but weak machine (0.012$/hour, 1 core, 1Go Ram) or a more powerful and more expensive one like <code>t2.xlarge</code> (0.188$/hour, 8 core, 32Go Ram). Because you pay for how long your EC2 instance are up, turn off you machine at the end of the lab !</p>
+<p><img src="img/ec2_machine.png" class="img-fluid"></p></li>
+<li><p><input type="checkbox">On the next screen, select the AIM role <code>LabInstanceProfile</code> <img src="img/ec2_iam.png" class="img-fluid"></p></li>
+<li><p><input type="checkbox">Then click on <code>Vérifier et lancer</code></p></li>
+<li><p><input type="checkbox">Validate your instance</p></li>
+<li><p><input type="checkbox">Select the key pair</p></li>
+<li><p><input type="checkbox">Et voilà! Your VM is launching. Click on <code>Affichez les instances</code> and wait a minute!</p></li>
+</ul>
+</section>
+<section id="connect-to-the-ec2-instance" class="level2">
+<h2 class="anchored" data-anchor-id="connect-to-the-ec2-instance">7. Connect to the EC2 instance</h2>
+<ul class="task-list">
+<li><p><input type="checkbox">Once your VM is running, you can access to the its administration page by clinking on its <code>id d'instance</code></p>
+<p><img src="img/ec2_accueil_instance.png" class="img-fluid"></p></li>
+</ul>
+<p>You will find many information, but the most important it’s its <code>IPv4 publique</code> which is its’s IP address (Internet Protocol) used to access to your machine from outside AWS.</p>
+<section id="windows-user" class="level3">
+<h3 class="anchored" data-anchor-id="windows-user">Windows user</h3>
+<ul class="task-list">
+<li><p><input type="checkbox">Run <code>PuTTY</code></p></li>
+<li><p><input type="checkbox">In Host Name type your <code>public IP</code></p></li>
+<li><p><input type="checkbox">In <code>Saved Session</code> enter <code>AWS EC2</code> and <code>Save</code></p>
+<p><img src="img/putty1.png" class="img-fluid"></p></li>
+<li><p><input type="checkbox">Then go to <code>SSH</code> and find your .ppk file.</p>
+<p><img src="img/putty2.png" class="img-fluid"></p></li>
+<li><p><input type="checkbox">Finally go back to the first screen, click on your session name, <code>Save</code> then <code>Open</code> the session.</p>
+<p><img src="img/putty3.png" class="img-fluid"></p></li>
+<li><p><input type="checkbox">A similar windows will pop up, click on <code>Oui</code></p>
+<p><img src="img/putty_warning.png" class="img-fluid"></p></li>
+<li><p><input type="checkbox">A terminal will open with <code>login as:</code>. Type <code>ec2-user</code> then press <code>Enter</code>(<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/connection-prereqs.html">documentation officielle</a>)</p>
+<p><img src="img/terminal ec2.png" class="img-fluid"></p></li>
+</ul>
+</section>
+<section id="macoslinux-user" class="level3">
+<h3 class="anchored" data-anchor-id="macoslinux-user">macOS/Linux user</h3>
+<ul class="task-list">
+<li><p><input type="checkbox">In the previously open terminal type</p>
+<pre><code>ssh -i labsuser.pem ec2-user@[public-ip]</code></pre>
+<p>Replace [public-ip] by your public ip</p></li>
+</ul>
+<p>Tada ! your are connected to your virtual machine. <strong>Although, this terminal is on your computer, every command you type are executed on the remote machine</strong>. This make it possible to run huge computation without altering your own performance. But, this machine do not have any graphical interface (GUI), so you need so basics of shell command.</p>
+</section>
+</section>
+<section id="play-with-your-vm" class="level2">
+<h2 class="anchored" data-anchor-id="play-with-your-vm">8. Play with your VM</h2>
+<p>In this section you will learn some basics of shell, and reproduce the benchmark of language made in the first lesson. You will :</p>
+<ol type="1">
+<li>Get all the files for the benchmark</li>
+<li>Install R and a python package on your machine</li>
+<li>Run the benchmark</li>
+</ol>
+<p>This benchmark compare the time to compute the max temperature for some year based on the USA weather data. Each file contains all the weather data for one year, and each record isa weather observation. An observation looks like this :</p>
+<pre><code>0029029070999991901010106004+64333+023450FM-12+000599999V0202701N015919999999N0000001N9-00781+99999102001ADDGF108991999999999999999999</code></pre>
+<p>It’s a positional file, with the temperature at the position [87, 91] and it’s quality at position 91. In the example the temperature is -0078 deca Celsius (so -7.8°C), with a quality of 1 (a good quality). Each program loads line by line the data and computes the max by updating the current max value (so a <span class="math inline">\(\mathcal{O}(n)\)</span> in computation time and <span class="math inline">\(\mathcal{O}(1)\)</span> in memory) (expect for R that load all the data in memory so <span class="math inline">\(\mathcal{O}(n)\)</span> in memory). But each language has its specificities :</p>
+<ul>
+<li>python : dynamic typing, just in time compilation to byte code then interpreted by python</li>
+<li>java : static typing, ahead of time compilation to byte code then interpreted by java</li>
+<li>C : statis typing, ahead of time compilation to machine code then executed by the OS</li>
+<li>script bash : no type like python/java/C, interpeted by your OS.</li>
+</ul>
+<p>Here is some bash commands</p>
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 66%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Command</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>sudo</td>
+<td>Super user : basically you have all the rights</td>
+</tr>
+<tr class="even">
+<td>cd [target_directory]</td>
+<td>Change directory : move in the file tree. To go to the parent directory do<code>cd ../</code></td>
+</tr>
+<tr class="odd">
+<td>ls</td>
+<td>List : list all the file in the current directory</td>
+</tr>
+<tr class="even">
+<td>mkdir [directory_name]</td>
+<td>Make directory : create a directory</td>
+</tr>
+<tr class="odd">
+<td>rm [file_name]</td>
+<td>Remove : remove a file. You cannot remove a none empty directory by default. You should use the <code>rm [file_name] -r</code> to do so. Note : <strong>NEVER</strong> execute the command <code>rm -rf /</code> because you will remove all the file on the current machine</td>
+</tr>
+<tr class="even">
+<td>chmod 764 [file_name]</td>
+<td>Change mode : change the access right ofyour files. Without more detail, the access right 764 gives read, write and execution rights to the owner of the file.</td>
+</tr>
+<tr class="odd">
+<td>unzip [file_name]</td>
+<td>Unzip : unzip files</td>
+</tr>
+<tr class="even">
+<td>yum install [package]</td>
+<td>Package manager for some linux distribution. It’s like pip but for Linux.</td>
+</tr>
+<tr class="odd">
+<td>aws s3 cp [s3://URI]</td>
+<td>Specific AWS command. Copy file from s3 to the current machine</td>
+</tr>
+<tr class="even">
+<td>amazon-linux-extras [package]</td>
+<td>Like yum but for amazon machine.</td>
+</tr>
+</tbody>
+</table>
+<section id="benchmark-setup" class="level3">
+<h3 class="anchored" data-anchor-id="benchmark-setup">Benchmark setup</h3>
+<ul class="task-list">
+<li><p><input type="checkbox">Download the file stored on S3. Use the command <code>aws s3 cp [s3://object/uri] [output/folder]</code>. The S3 URI is on S3 file page. For <code>output/folder</code> use the current directory with <code>.</code>. You should get a command and an output like this</p>
+<pre><code>[ec2-user@ip-172-31-85-99 ~]$ aws s3 cp s3://remi-pepin-21032022/fichiersTP0.zip .
+download: s3://remi-pepin-21032022/fichier TP.zip to ./fichier TP.zip</code></pre></li>
+<li><p><input type="checkbox">With <code>ls</code> (<em>list</em>) check you downloaded the file</p></li>
+<li><p><input type="checkbox">Now you will unzip your file with <code>unzip [nom de votre fichier]</code>. Check the result with <code>ls</code></p></li>
+<li><p><input type="checkbox">For security reasons, you cannot execute your files. Do <code>chmod 764 get_data.sh awk.sh GetMaxTempC</code> to change that. For more details, the <a href="https://fr.wikipedia.org/wiki/Chmod">chmod wikipedia page</a> provides more details..</p></li>
+<li><p><input type="checkbox">Now you will execute the <code>get_data.sh</code> script. Just type<code>./get_data.sh</code>. This script download some data from the NOAA (~ météo france in the USA) server</p></li>
+</ul>
+</section>
+<section id="install-r-java-c-compiler-and-a-python-package" class="level3">
+<h3 class="anchored" data-anchor-id="install-r-java-c-compiler-and-a-python-package">Install R, java, C compiler and a python package</h3>
+<p>Your VM doesn’t have all the require packages for the benchmark.</p>
+<ul class="task-list">
+<li><input type="checkbox"><strong>python-dev installation</strong> : <code>python-devel</code> is require to create extension for python. To install it use <code>yum</code>, a package manager for Linux. The exact command is<code>sudo yum install -y python3-devel.x86_64</code> (<code>sudo</code> to have super user right, <code>yum</code> to use the package manager, <code>install</code> to install a package, <code>-y</code> to validate the installation, and <code>python3-devel.x86_64</code> for the package name)</li>
+<li><input type="checkbox"><strong>Java and GCC installation</strong> : in the same way, insatall java and GCC with <code>sudo yum install java gcc -y</code></li>
+<li><input type="checkbox"><strong>Cython installation</strong> : with <code>pip3</code> install <code>Cython</code> and compile the Cython code:
+<ul class="task-list">
+<li><input type="checkbox"><code>cd cython_code</code> for<em>change directory</em> and go in the <code>cython_code</code> directory</li>
+<li><input type="checkbox"><code>python3 setup.py</code> to run the compilation</li>
+<li><input type="checkbox"><code>cd ../</code> to go back to the parent folder</li>
+</ul></li>
+<li><input type="checkbox"><strong>R installation</strong> : to install R, you will use the amazon custome package manager <code>amazon-linux-extras</code>, with the following command : <code>sudo amazon-linux-extras install R4 -y</code>. Just wait 1-2 minutes.</li>
+</ul>
+</section>
+<section id="benchmark" class="level3">
+<h3 class="anchored" data-anchor-id="benchmark">Benchmark</h3>
+<p>Now it’s time to run the benchmark. To do so, you will use the <code>time</code> command. <code>time</code> compute the execution time of the following command. For example : <code>time ./get_data.sh</code> . Write all the results, and compare then with the course. If results are different, try to understand why.</p>
+<ul class="task-list">
+<li><input type="checkbox">To run compiled C or bash : <code>time ./[file]</code></li>
+<li><input type="checkbox">To run compiled java :<code>time java -jar [file.jar]</code></li>
+<li><input type="checkbox">To run python :<code>time python3 [file.py]</code></li>
+<li><input type="checkbox">To run R script : <code>time Rscript [filename.R]</code></li>
+</ul>
+</section>
+<section id="a-shell-in-your-web-browser" class="level3">
+<h3 class="anchored" data-anchor-id="a-shell-in-your-web-browser">A shell in your web browser</h3>
+<ul class="task-list">
+<li><input type="checkbox">Close your terminal and go back to your EC2 instance page. Click on<code>Se connecter</code> then <code>Se connecter</code> <img src="img/ec2_se_connecter.png" class="img-fluid"> Vous allez arriver sur une page similaire à celle ci-dessous. Cliquez sur <code>Se connecter</code> <img src="img/ec2_se_connecter 2.png" class="img-fluid"> After 30 second you can use a <em>cloud shell</em>. You can do the same thing with your cloud shell as the previous SSH shell.</li>
+<li><input type="checkbox"><img src="img/cloud_shell.png" class="img-fluid"></li>
+</ul>
+<p>Type <code>ls</code> to check if your file are still there.</p>
+</section>
+</section>
+<section id="shut-down-your-machine" class="level2">
+<h2 class="anchored" data-anchor-id="shut-down-your-machine">9. Shut down your machine</h2>
+<p>Because your EC2 instance is billed by time and not usage, once your work is done, shut down it. Although the cost is small, a small cost*24*7 for 1 week or running instance can cost 10$. And for bigger machine in a company maybe 100$ or 1000$.</p>
+<p>To shut down your machine, go to <code>EC2 &gt; Instances</code> and find all running instances. Click on <code>état de instance</code> then on <code>resilier l'instance</code>.</p>
+<p><img src="img/ec2_end.png" class="img-fluid"></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
