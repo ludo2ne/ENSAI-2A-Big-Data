@@ -11,7 +11,7 @@ from: markdown+emoji
 
 ## Objectives
 
-The lab's goal is to make you familiar with the AWS's interface. In this lab you will :
+The lab's goal is to make you familiar with the AWS's interface. In this lab, you will :
 
 - Create an account on AWS academy if you haven't done yet
 - Store some data on Amazon Simple Storage Service (AWS S3)
@@ -27,9 +27,22 @@ The lab's goal is to make you familiar with the AWS's interface. In this lab you
 
 ## 1. Log on AWS 
 
-Follow the instructions you get from the AWS acamedy's e-mail, then those of the [AWS Academy Learner Lab - Student Guide ](https://foad-moodle.ensai.fr/pluginfile.php/22636/mod_resource/content/0/AWS%20Academy%20Learner%20Lab%20-%20Student%20Guide.pdf) to access to the AWS console.
+* [ ] Follow the instructions you get from the AWS academy's e-mail, then those of the [AWS Academy Learner Lab - Student Guide ](https://foad-moodle.ensai.fr/pluginfile.php/22636/mod_resource/content/0/AWS%20Academy%20Learner%20Lab%20-%20Student%20Guide.pdf) to access to the AWS console.
 
-Your AWS account is located in North Virginia, **do not change that**. Because your account is for academic purpose, your don't have access to all the AWS services. Your account is managed by AWS academy, so you have to use the AWS academy portal to access to your AWS account.
+Your AWS account is located in North Virginia, **do not change that**.  
+Because your account is for academic purpose, your don't have access to all the AWS services.  
+Your account is managed by AWS academy, so you have to use the AWS academy portal to access to your AWS account.
+
+
+* [AWS Login](https://www.awsacademy.com/vforcesite/LMS_Login){target="_blank"}
+* Dashboard
+* Select `AWS Academy Learner Lab - Big Data`
+* Select `Modules` and then `Lancer l'atelier pour étudiants de l'AWS Academy`
+* `Start Lab`
+  * Wait 2 minutes
+  * When the dot next to AWS turns green, your lab environment is ready to use
+  * Click AWS
+
 
 ![](img/aws console.png)
 
@@ -51,24 +64,25 @@ The storage is quite expensive (around ~0,02 \$/Go/month), knowing that you pay 
 
 All AWS services can natively read from and write to S3, if they have some access right. So, every application you deploy on AWS can import/export data from/to S3. A file stored in S3 is called an "object", and can be access by a unique URL. You can limit access right to a specific file. 
 
-- [ ] In the search bar type `S3`
-![](img/s3_accueil.png)
-
+- [ ] In the `search bar` type `S3`
 - [ ] Click on `Créer un compartiment` ("bucket" in English)  
-- [ ] Chose a unique name for your bucket (like ensai-firstName-lastName-currentDate)
-- [ ] Keep all the default value, then create your bucket.
+- [ ] Chose a unique name for your bucket (ex: ensai-firstName-lastName-currentDate)
+- [ ] Keep all the default value
+- [ ] Create your bucket
 
 ## 4. Import some files to your bucket
 
-* [ ] Click on your bucket to go to its dedicated page.
+* [ ] Select your bucket to go to its dedicated page
 
   ![](img/s3_bucket.png)
 
-- [ ] Click on `Charger`, and upload the lab0 zip file available on Moodle.
+- [ ] Click on `Charger`, and upload the file [Lab0_files.zip](lab0_files.zip)
 
 ![](img/s3_upload_file.png)
 
-- [ ] One the upload finished, click on your file. You will land on the file page, and found to link to access to your file. One is the URL of the file, the other is the S3 URI. Copy in a text file your file URI, you will need it later.
+- [ ] Once the upload finished, click on your file
+- You will land on the file page, and found to link to access to your file. One is the URL of the file, the other is the S3 URI
+- [ ] Copy in a text file your file URI, you will need it later
 
   ![](img/s3_file.png)
 
