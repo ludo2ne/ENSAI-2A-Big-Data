@@ -4,7 +4,21 @@
     "href": "index.html",
     "title": "Introduction to Big Data",
     "section": "",
-    "text": "🚧\nLessons and Labs created by Rémi Pépin and Arthur Katossky\n\n\n🎯 Objectives\n\nUnderstand the basics of computation in the real world, the bottlenecks and how to solve them\nUnderstand the basics of cloud computing and how to use AWS (or SSP Cloud)\nGet familiar with big data technologies and the most common paradigm\nLearn how to use Spark for data exploration on data at rest or streamed data, and how to use some basics ML algorithm on big data\n\n\n\n📆 Organisation\n\nLessons : 7h30\nLabs : 10h30 + 3h (graded lab)\nPresentations : 3h\n\n\n\n▶️ Lessons\n\n\n▶️ Labs\n\nLab 0 : Discover Amazon Web Service (AWS)\nLab 1 : First steps with Spark\nLab 2\nLab 3 : Stream processing with Spark"
+    "text": "Lessons and Labs created by Rémi Pépin and Arthur Katossky"
+  },
+  {
+    "objectID": "index.html#objectives-1",
+    "href": "index.html#objectives-1",
+    "title": "Introduction to Big Data",
+    "section": "▶️ Objectives",
+    "text": "▶️ Objectives\n\nUnderstand the basics of computation in the real world\nUnderstand the basics of cloud computing and how to use AWS\nGet familiar with big data technologies\nLearn how to use Spark for data exploration"
+  },
+  {
+    "objectID": "index.html#lessons-1",
+    "href": "index.html#lessons-1",
+    "title": "Introduction to Big Data",
+    "section": "▶️ Lessons",
+    "text": "▶️ Lessons\n\n🔹 1.1 What is Big Data\n\nWhat is considered big ?\nVolume, Velocity, Variety, Veracity, Value, Variability\n\n\n\n🔹 1.2 Computer science survival kit\n\nProcessors, Memory, Storage, Network\n\n\n\n🔹 1.3 High-performance computing without distribution\n\nProfile code, Analyse code\nStore or process data in chunks, Take advantage of sparcity\nGo low-level\nUse cache\n\n\n\n🔹 1.4 What if ?\n\nWhat if data is too big to fit in memory ?\nWhat if your file is too big for your local file system ?\nWhat if data is too big to fit on disk ?\nWhat if computation takes ages ?\nWhat if computation / storage is too expensive ?\n\n\n\n🔹 1.5 Social issues\n\nEthical issues, Environmental issues, Political issues\n\n\n\n\n🔹 2.1 How to store big data\n\nFile system, Database, Distribution\nThe CAP theorem\n\n\n\n🔹 2.2 Hadoop file system (HDFS)\n\nHadoop Ecosystem, How to use HDFS\n\n\n\n🔹 2.3 Hadoop MapReduce\n\nKey Concepts\n\n\n\n🔹 2.4 Spark\n\nKey Concepts\nImporting/Exporting data\nHow to run Spark ?\n\n\n\n\n🔹 3 Cloud Computing\n\nTraditional IT, Virtualization, Containerization\nWhy cloud computing ?\ncategories of cloud services"
   },
   {
     "objectID": "docs/lab/lab1/lab1.html",
