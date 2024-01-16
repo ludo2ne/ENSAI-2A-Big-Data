@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Lab 1">
 
-<title>Big Data - First steps with Spark</title>
+<title>Big Data - Lab 1 - First steps with Spark</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -97,12 +96,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
-<body class="floating nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -172,58 +169,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="3">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a></li>
-  <li><a href="#spark-cluster-creation-in-aws" id="toc-spark-cluster-creation-in-aws" class="nav-link" data-scroll-target="#spark-cluster-creation-in-aws">1. Spark cluster creation in AWS</a></li>
-  <li><a href="#first-steps-with-spark---data-importation" id="toc-first-steps-with-spark---data-importation" class="nav-link" data-scroll-target="#first-steps-with-spark---data-importation">2. First steps with Spark - Data importation</a>
-  <ul class="collapse">
-  <li><a href="#data-importation" id="toc-data-importation" class="nav-link" data-scroll-target="#data-importation">✍ Data importation</a></li>
-  <li><a href="#lazy-evaluation" id="toc-lazy-evaluation" class="nav-link" data-scroll-target="#lazy-evaluation">Lazy evaluation</a></li>
-  <li><a href="#data-frame-basic-manipulations" id="toc-data-frame-basic-manipulations" class="nav-link" data-scroll-target="#data-frame-basic-manipulations">✍ Data frame basic manipulations</a></li>
-  <li><a href="#basic-dataframe-column-manipulation" id="toc-basic-dataframe-column-manipulation" class="nav-link" data-scroll-target="#basic-dataframe-column-manipulation">✍ Basic DataFrame column manipulation</a></li>
-  </ul></li>
-  <li><a href="#advance-dataframe-column-manipulation" id="toc-advance-dataframe-column-manipulation" class="nav-link" data-scroll-target="#advance-dataframe-column-manipulation">3. Advance DataFrame column manipulation</a>
-  <ul class="collapse">
-  <li><a href="#array-manipulation" id="toc-array-manipulation" class="nav-link" data-scroll-target="#array-manipulation">Array manipulation</a></li>
-  <li><a href="#user-defined-function" id="toc-user-defined-function" class="nav-link" data-scroll-target="#user-defined-function">User defined function</a></li>
-  </ul></li>
-  <li><a href="#aggregation-functions" id="toc-aggregation-functions" class="nav-link" data-scroll-target="#aggregation-functions">4. Aggregation functions</a>
-  <ul class="collapse">
-  <li><a href="#aggregation-functions-1" id="toc-aggregation-functions-1" class="nav-link" data-scroll-target="#aggregation-functions-1">✍ Aggregation functions</a></li>
-  </ul></li>
-  <li><a href="#grouping-functions" id="toc-grouping-functions" class="nav-link" data-scroll-target="#grouping-functions">5. Grouping functions</a>
-  <ul class="collapse">
-  <li><a href="#grouping-functions-1" id="toc-grouping-functions-1" class="nav-link" data-scroll-target="#grouping-functions-1">✍ Grouping functions</a></li>
-  </ul></li>
-  <li><a href="#spark-sql" id="toc-spark-sql" class="nav-link" data-scroll-target="#spark-sql">6. Spark SQL</a>
-  <ul class="collapse">
-  <li><a href="#spark-sql-1" id="toc-spark-sql-1" class="nav-link" data-scroll-target="#spark-sql-1">✍ Spark SQL</a></li>
-  <li><a href="#turn-off-your-cluster" id="toc-turn-off-your-cluster" class="nav-link" data-scroll-target="#turn-off-your-cluster">Turn off your cluster</a></li>
-  </ul></li>
-  </ul>
-</nav>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">First steps with Spark</h1>
+<h1 class="title">Lab 1 - First steps with Spark</h1>
 </div>
 
-<div>
-  <div class="description">
-    Lab 1
-  </div>
-</div>
 
 
 <div class="quarto-title-meta">
@@ -236,83 +191,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="outline" class="level2">
-<h2 class="anchored" data-anchor-id="outline">Outline</h2>
-<ol type="1">
-<li>Launching a Spark cluster on AWS</li>
-<li>First steps with Spark</li>
-</ol>
-</section>
-<section id="spark-cluster-creation-in-aws" class="level2">
-<h2 class="anchored" data-anchor-id="spark-cluster-creation-in-aws">1. Spark cluster creation in AWS</h2>
-<p><span class="emoji" data-emoji="warning">⚠️</span> <strong>DO NOT FORGET TO TURN YOUR CLUSTER OFF A THE END OF THIS TUTORIAL!</strong></p>
-<ul class="task-list">
-<li><p><input type="checkbox">Once connected to the management console, search for “EMR” (Elastic Map Reduce). It a platform as a service made to manage Hadoop cluster in AWS. You just have to choose the configuration of your cluster (how many machines ? How many CPU/Ram ? Which release for Spark ?) and AWS will create your cluster. Doing this all by yourself is time consuming and not a pleasant task. That’s why cloud providers provide service like EMR.</p></li>
-<li><p><input type="checkbox">You should land on a page like this <img src="img/emr_premiere_co.png" class="img-fluid"></p>
-<p>Next time it should be this one.</p>
-<p><img src="img/emr_accueil.png" class="img-fluid"> In every cases click on <code>Bloc-notes</code> then <code>Créer un bloc-notes</code></p>
-<p><img src="img/bloc_note_accueil.png" class="img-fluid"></p></li>
-<li><p><input type="checkbox">You notebook configuration should be</p>
-<ul class="task-list">
-<li><input type="checkbox"><code>Nom du bloc-note</code> : a simple name like “Bloc-note-ensai-TP”</li>
-<li><input type="checkbox">Choose <code>Créer un cluster</code></li>
-<li><input type="checkbox"><code>Instance</code> : between 3 and 5, and for the type use this wheel https://pickerwheel.com/pw?id=Bkz8Q. Those instances are the ones you can access with a academy account.</li>
-<li><input type="checkbox"><code>Rôle de service AWS</code> choose <code>LabRole</code></li>
-<li><input type="checkbox">Then click on <code>Créer un bloc note</code></li>
+<p>At this end of this lab :</p>
+<ul>
+<li>export your notebook : File &gt; Export Notebook As … &gt; Export Notebook To HTML</li>
+<li>An turn your cluster off !</li>
 </ul>
-<p><img src="img/notebook_creation.png" class="img-fluid"></p></li>
-<li><p><input type="checkbox">⏳ The cluster creation takes time (between 5 and 10min), please wait and read this tutorial.</p></li>
+<section id="creating-a-spark-session" class="level2">
+<h2 class="anchored" data-anchor-id="creating-a-spark-session">Creating a Spark session</h2>
+<p>Write in a new cell :</p>
+<ul>
+<li><code>spark</code> to check if everything is ok</li>
+<li><code>spark._jsc.hadoopConfiguration().set("fs.s3.useRequesterPaysHeader","true")</code> : to access to the data</li>
 </ul>
-<p>Here is a table with the hourly price of some instances just to give you an idea of the cost of an EMR cluster (hourly instance price*cluster size)</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th>Instance</th>
-<th>Hourly price per instance</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>m4.xlarge</td>
-<td>0.24 $</td>
-</tr>
-<tr class="even">
-<td>m5.xlarge</td>
-<td>0.23$</td>
-</tr>
-<tr class="odd">
-<td>c4.xlarge</td>
-<td>0.25$</td>
-</tr>
-<tr class="even">
-<td>c5.xlarge</td>
-<td>0.22$</td>
-</tr>
-<tr class="odd">
-<td>r4.xlarge</td>
-<td>0.30$</td>
-</tr>
-<tr class="even">
-<td>c5.24xlarge</td>
-<td>5,3$</td>
-</tr>
-</tbody>
-</table>
-<p>Once your notebook is ready click on <code>Ouvrir dans JupyterLab</code>. This will open JupiterLab. Download the notebook available on moodle and upload it</p>
-<p><img src="img/upload notebook.png" class="img-fluid"></p>
-<p>Then on the first call input :</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Spark session</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>spark</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Configuraion</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>spark._jsc.hadoopConfiguration().<span class="bu">set</span>(<span class="st">"fs.s3.useRequesterPaysHeader"</span>,<span class="st">"true"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>If everything is ok you should get something like this after one or two minutes. <img src="img/notebook_spark.png" class="img-fluid"></p>
-<p>If not, just check if your cluster is <code>En attente</code>. If not, just wait, if so, ask for help.</p>
-<p><strong>DO NOT FORGET TO TURN YOUR CLUSTER OFF A THE END OF THIS TUTORIAL!</strong></p>
+<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}">
+<pre class="pyspark cell-code"><code>#Spark session
+
+
+# Configuraion
+</code></pre>
+</div>
 </section>
 <section id="first-steps-with-spark---data-importation" class="level2">
-<h2 class="anchored" data-anchor-id="first-steps-with-spark---data-importation">2. First steps with Spark - Data importation</h2>
-<p>Spark’s main object class is the <strong>DataFrame</strong>, which is a distributed table. It is analogous to R’s or Python (Pandas)’s data frames: one row represents an observation, one column represents a variable. But contrary to R or Python, Spark’s DataFrames can be distributed over hundreds of nodes.</p>
+<h2 class="anchored" data-anchor-id="first-steps-with-spark---data-importation">💾First steps with Spark - Data importation</h2>
+<p>Spark’s main object class is the DataFrame, which is a distributed table. It is analogous to R’s or Python (Pandas)’s data frames: one row represents an observation, one column represents a variable. But contrary to R or Python, Spark’s DataFrames can be distributed over hundred of nodes.</p>
 <p>Spark support multiple data formats, and multiple ways to load them.</p>
 <ul>
 <li>data format : csv, json, parquet (an open source column oriented format)</li>
@@ -326,61 +227,58 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># csv</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>csv_df <span class="op">=</span> spark.read.csv([location of the <span class="bu">file</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In the future, you may consult the <a href="https://spark.apache.org/docs/latest/sql-data-sources.html">Data Source documentation</a> to have the complete description of Spark’s reading abilities.</p>
-<p>The data you will use in this lab are real data from the twitter <a href="https://developer.twitter.com/en/docs/twitter-api/tweets/sampled-stream/introduction">sampled stream API</a> and <a href="https://developer.twitter.com/en/docs/twitter-api/tweets/filtered-stream/introduction">filtered stream API</a>. The tweets folder contains more than 20 files and more than 2 million tweets (more than 2Go of raw data). The tweets was collected between the 22/03/2021 and the 18/04/2021. The total collection time was less than 10 hours.</p>
+<p>The data you will use in this lab are real data from the twitter <a href="https://developer.twitter.com/en/docs/twitter-api/tweets/sampled-stream/introduction">sampled stream API</a> and <a href="https://developer.twitter.com/en/docs/twitter-api/tweets/filtered-stream/introduction">filtered stream API</a>. The tweets folder contains more than 50 files and more than 2 million tweets. The tweets was collected between the 14/04/2021 and the 18/04/2021. The total collection time was less than 10 hours.</p>
 <hr>
-<section id="data-importation" class="level3">
-<h3 class="anchored" data-anchor-id="data-importation">✍ Data importation</h3>
+<section id="hands-on-1---data-importation" class="level3">
+<h3 class="anchored" data-anchor-id="hands-on-1---data-importation">✍Hands-on 1 - Data importation</h3>
 <ul>
-<li><p>Load the json file store here : <code>s3://spark-lab-input-data-ensai20212022/tweets/tweets20220324-155940.jsonl.gz</code> and name you DataFrame<code>df_tweet</code></p>
-<p><small> ⚙️ This file is an a <code>JSONL</code> (JSON-line) format, which means that each line of it is a JSON object. A JSON object is just a Python dictionary or a JavaScript object and looks like this: <code>{ key1: value1, key2: ["array", "of", "many values]}</code>). This file has been compressed into a <code>GZ</code> archive, hence the <code>.jsonl.gz</code> ending. Also this file is not magically appearing in your S3 storage. It is hosted on one of your teacher’s bucket and has been made public, so that you can access it. </small></p></li>
-<li><p>It’s possible to load multiple file in a unique DataFrame. It’s useful when you have daily files and want to process them all. It’s the same syntax as the previous one, just specify a folder. Like <code>s3n://spark-lab-input-data-ensai20212022/tweets/</code>. Name you DataFrame <code>df_tweet_big</code></p></li>
+<li><p>Load the json file store here : <code>s3://spark-lab-input-data-ensai20212022/tweets/tweets20220324-155940.jsonl.gz</code> and name you data frame <code>df_tweet</code></p>
+<p><small> ⚙️ This file is an a <code>JSONL</code> (JSON-line) format, which means that each line of it is a JSON object. A JSON object is just a Python dictionary or a JavaScript object and looks like this: <code>{ key1: value1, key2: ["array", "of", "many values]}</code>). This file has been compressed into a <code>GZ</code> archive, hence the <code>.jsonl.gz</code> ending. Also this file is not magically appearing in your S3 storage. It is hosted on one of your teacher’s bucket and has been made public, so that you can access it.</small></p></li>
+<li><p>It’s possible to load multiple file in a unique DataFrame. It’s useful when you have daily files and want to process them all. It’s the same syntax as the previous one, just specify a folder. Like <code>s3://spark-lab-input-data-ensai20212022/tweets/</code>. Name you DataFrame <code>df_tweet_big</code></p></li>
 </ul>
-<p>Now you have two DataFrames 🎉.</p>
-<p>Remember that <strong>Spark is lazy</strong>, in the sense that it will avoid at all cost to perform unnecessary operations and wait to the last moment for performing only the duly requested computations. (Maybe you remember that R is lazy in that sense, but Spark is one degree more lazy than R.)</p>
-<ul>
-<li>Knowing that, do you think that when you run <code>spark.read.json()</code>, the data is actually migrated from S3 to the cluster ? If you want some data to be actually loaded, you can use the <code>show(n)</code> method (omitting <code>n</code> defaults to 20).</li>
-<li>Each time you will transform this DataFrame, the data will be transferred to your cluster. To avoid that, you need to cache your two DataFrame with the <code>cache()</code> method.</li>
-</ul>
-<p>Sparks has very loose constraints on what you can actually store in a DataFrame column. The objects we just imported are actually quite messy.</p>
-<ul>
-<li>Use the <code>printSchema()</code> method to see the structure of one object.</li>
-</ul>
-<p><strong>Spark’s DataFrames are immutable</strong>: there is no method to alter one specific value once one is created. This on purpose: mutations are famously hard to track, and Spark want to track them in order to avoid unnecessary computations. Suppressing mutations is actually the the best way to track changes.</p>
-<p>Also, <strong>DataFrames are distributed over the cluster</strong>: they are split into blocks, ill-named <strong>partitions</strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, that are stored separately in the memory of the workers nodes. Since Spark is lazy evaluation, all reading and intermediary computation is only kept in memory as your data are being processed.</p>
+<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}">
+<pre class="pyspark cell-code"><code># DataFrame creation
+
+# caching</code></pre>
+</div>
+<p>Printing schema and some rows</p>
+</section>
+</section>
+<section id="data-frame-basic-manipulations" class="level2">
+<h2 class="anchored" data-anchor-id="data-frame-basic-manipulations">🥉Data frame basic manipulations</h2>
 <p>If DataFrames are immutable, they can however be <strong><em>transformed</em></strong> in other DataFrames, in the sense that a modified copy is returned. Such <strong>transformations</strong> include: filtering, sampling, dropping columns, selecting columns, adding new columns…</p>
 <p>First, you can get information about the columns with:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df.columns       <span class="co"># get the column names</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df.schema        <span class="co"># get the column names and their respective type</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df.printSchema() <span class="co"># same, but human-readable</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df.columns       <span class="co"># get the column names</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df.schema        <span class="co"># get the column names and their respective type</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>df.printSchema() <span class="co"># same, but human-readable</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You can select columns with the <code>select()</code> method. It takes as argument a list of column name. For example :</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_with_less_columns <span class="op">=</span> df<span class="op">\</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  .select(<span class="st">"variable3"</span>,<span class="st">"variable_four"</span>,<span class="st">"variable-6"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Yes, you do need the ugly \ at the end of the line,</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># if you want to chain methods between lines in Python</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_with_less_columns <span class="op">=</span> df<span class="op">\</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  .select(<span class="st">"variable3"</span>,<span class="st">"variable_four"</span>,<span class="st">"variable-6"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Yes, you do need the ugly \ at the end of the line,</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># if you want to chain methods between lines in Python</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You can get nested columns easily with :</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df.select(<span class="st">"parentField.nestedField"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df.select(<span class="st">"parentField.nestedField"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>To filter data you could use the <code>filter()</code> method. It take as input an expression that gets evaluated for each observation and should return a boolean. Sampling is performed with the <code>sample()</code> method. For example :</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_with_less_rows <span class="op">=</span> df<span class="op">\</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  .sample(fraction<span class="op">=</span><span class="fl">0.001</span>)<span class="op">\</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  .<span class="bu">filter</span>(df.variable1<span class="op">==</span><span class="st">"value"</span>)<span class="op">\</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  .show(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df_with_less_rows <span class="op">=</span> df<span class="op">\</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  .sample(fraction<span class="op">=</span><span class="fl">0.001</span>)<span class="op">\</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  .<span class="bu">filter</span>(df.variable1<span class="op">==</span><span class="st">"value"</span>)<span class="op">\</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  .show(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>As said before your data are distributed over multiple nodes (executors) and data inside a node are split into partitions. Then each transformations will be run in parallel. They are called <em>narrow transformation</em> For example, to sample a DataFrame, Spark sample every partitions in parallel because sample all partition produce the sample DataFrame. For some transformations, like <code>groupBy()</code> it’s impossible, and it’s cannot be run in parallel.</p>
-<p><img src="img/spark_exemple1_pipeline.png" class="img-fluid"></p>
+<p><img src="https://raw.githubusercontent.com/HealerMikado/panorama_big_data_2021/main/labs/lab%202%20-%20first%20steps%20with%20Spark/img/spark_exemple1_pipeline.png" class="img-fluid"></p>
 <!-- take() collect() limit() first() show() -->
 <!-- lien vers la doc https://spark.apache.org/docs/3.1.1/api/python/reference/pyspark.sql.html#dataframe-apis -->
-</section>
 <section id="lazy-evaluation" class="level3">
-<h3 class="anchored" data-anchor-id="lazy-evaluation">Lazy evaluation</h3>
+<h3 class="anchored" data-anchor-id="lazy-evaluation">😴Lazy evaluation</h3>
 <p>This is because Spark has what is known as <strong>lazy evaluation</strong>, in the sense that it will wait as much as it can before performing the actual computation. Said otherwise, when you run an instruction such as:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>tweet_author_hashtags <span class="op">=</span> df_tweet_big.select(<span class="st">"auteur"</span>,<span class="st">"hashtags"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>tweet_author_hashtags <span class="op">=</span> df_tweet_big.select(<span class="st">"auteur"</span>,<span class="st">"hashtags"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>… you are not executing anything! Rather, you are building an <strong>execution plan</strong>, to be realised later.</p>
 <p>Spark is quite extreme in its laziness, since only a handful of methods called <strong>actions</strong>, by opposition to <strong>transformations</strong>, will trigger an execution. The most notable are:</p>
 <ol type="1">
 <li><code>collect()</code>, explicitly asking Spark to fetch the resulting rows instead of to lazily wait for more instructions,</li>
 <li><code>take(n)</code>, asking for <code>n</code> first rows</li>
 <li><code>first()</code>, an alias for <code>take(1)</code></li>
-<li><code>show()</code> and <code>show(n)</code>, human-friendly alternatives<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></li>
+<li><code>show()</code> and <code>show(n)</code>, human-friendly alternatives<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
 <li><code>count()</code>, asking for the numbers of rows</li>
 <li>all the “write” methods (write on file, write to database), see <a href="https://spark.apache.org/docs/3.1.1/api/python/reference/pyspark.sql.html#input-and-output">here</a> for the list</li>
 </ol>
@@ -388,15 +286,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>This has also drawbacks.</strong> Since the computation is optimized for the end result, the intermediate stages are discarded by default. So if you need a DataFrame multiple times, you have to cache it in memory because if you don’t Spark will recompute it every single time.</p>
 <hr>
 </section>
-<section id="data-frame-basic-manipulations" class="level3">
-<h3 class="anchored" data-anchor-id="data-frame-basic-manipulations">✍ Data frame basic manipulations</h3>
+<section id="hands-on-2---data-frame-basic-manipulations" class="level3">
+<h3 class="anchored" data-anchor-id="hands-on-2---data-frame-basic-manipulations">✍Hands-on 2 - Data frame basic manipulations</h3>
 <ul>
 <li><p>How many rows have your two DataFrame ?</p></li>
 <li><p>Sample <code>df_tweet_big</code> and keep only 10% of it. Create a new DataFrame named <code>df_tweet_sampled</code>. If computations take too long on the full DataFrame, use this one instead or add a sample transformation in your expression.</p></li>
 <li><p>Define a DataFrame <code>tweet_author_hashtags</code> with only the <code>auteur</code> and <code>hashtags</code> columns</p></li>
 <li><p>Print (few lines of) a DataFrame with only the <code>auteur</code>, <code>mentions</code>, and <code>urls</code> columns. (<code>mentions</code> and <code>urls</code> are both nested columns in <code>entities</code>.)</p></li>
-<li><p>Filter your first DataFrame and keep only tweets with more than 1 like. Give a name for this new, transformed DataFrame. Print (few lines of) it. ## 🥈Basic DataFrame column manipulation</p></li>
+<li><p>Filter your first DataFrame and keep only tweets with more than 1 like. Give a name for this new, transformed DataFrame and print. Print (few lines of) it.</p></li>
 </ul>
+</section>
+</section>
+<section id="basic-dataframe-column-manipulation" class="level2">
+<h2 class="anchored" data-anchor-id="basic-dataframe-column-manipulation">🥈Basic DataFrame column manipulation</h2>
 <p>You can add/update/rename column of a DataFrame with spark :</p>
 <ul>
 <li>Drop : <code>df.drop(columnName : str )</code></li>
@@ -404,29 +306,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Add/update : <code>df.withColumn(columnName : str, columnExpression)</code></li>
 </ul>
 <p>For example</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>tweet_df_with_like_rt_ratio <span class="op">=</span> tweet_df<span class="op">\</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  .withColumn(        <span class="co"># computes new variable</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"like_rt_ratio"</span>, <span class="co"># like_rt_ratio "OVERCONFIDENCE"</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    (tweet_df.like_count <span class="op">/</span>tweet_df.retweet_count</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>   )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>tweet_df_with_like_rt_ratio <span class="op">=</span> tweet_df<span class="op">\</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  .withColumn(        <span class="co"># computes new variable</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"like_rt_ratio"</span>, <span class="co"># like_rt_ratio "OVERCONFIDENCE"</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    (tweet_df.like_count <span class="op">/</span>tweet_df.retweet_count</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>   )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>See <a href="https://spark.apache.org/docs/3.1.1/api/python/reference/pyspark.sql.html#functions">here</a> for the list of all functions available in an expression.</p>
-</section>
-<section id="basic-dataframe-column-manipulation" class="level3">
-<h3 class="anchored" data-anchor-id="basic-dataframe-column-manipulation">✍ Basic DataFrame column manipulation</h3>
+<section id="hands-on-3---basic-dataframe-column-manipulation" class="level3">
+<h3 class="anchored" data-anchor-id="hands-on-3---basic-dataframe-column-manipulation">✍Hands-on 3 - Basic DataFrame column manipulation</h3>
 <ul>
-<li>Define a DataFrame with a column names <code>interaction_count</code>. This column is the sum of <code>like_count</code>, <code>reply_count</code> and <code>retweet_count</code>.</li>
-<li>Update the DataFrame you imported at the beginning of this lab and drop the <code>other</code> column</li>
+<li><p>Define a DataFrame with a column names <code>interaction_count</code>. This column is the sum of <code>like_count</code>, <code>reply_count</code> and <code>retweet_count</code>.</p></li>
+<li><p>Update the DataFrame you imported at the beginning of this lab and drop the <code>other</code> column</p></li>
 </ul>
 </section>
 </section>
 <section id="advance-dataframe-column-manipulation" class="level2">
-<h2 class="anchored" data-anchor-id="advance-dataframe-column-manipulation">3. Advance DataFrame column manipulation</h2>
+<h2 class="anchored" data-anchor-id="advance-dataframe-column-manipulation">🥇Advance DataFrame column manipulation</h2>
 <section id="array-manipulation" class="level3">
-<h3 class="anchored" data-anchor-id="array-manipulation">Array manipulation</h3>
+<h3 class="anchored" data-anchor-id="array-manipulation">🥽Array manipulation</h3>
 <p>Some columns often contain arrays (lists) of values instead of just one value. This may seem surprising but this actually quite natural. For instance, you may create an array of words from a text, or generate a list of random numbers for each observation, etc.</p>
-<p>You may <strong>create array of values</strong> with: - <code>split(text : string, delimiter : string)</code>, turning a text into an array of strings</p>
-<p>You may <strong>use array of values</strong> with: - <code>size(array : Array)</code>, getting the number of elements</p>
+<p>You may <strong>create array of values</strong> with:</p>
 <ul>
+<li><code>split(text : string, delimiter : string)</code>, turning a text into an array of strings</li>
+</ul>
+<p>You may <strong>use array of values</strong> with:</p>
+<ul>
+<li><p><code>size(array : Array)</code>, getting the number of elements</p></li>
 <li><p><code>array_contains(inputArray : Array, value : any)</code>, checking if some value appears</p></li>
 <li><p><code>explode(array : Array)</code>, unnesting an array and duplicating other values. For instance it if use <code>explode()</code> over the hashtags value of this DataFrame:</p>
 <table class="table">
@@ -489,52 +394,52 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table></li>
 </ul>
 <p>All this function must be imported first :</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> split, explode, size, array_contains</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> split, explode, size, array_contains</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Do not forget, to create a new column, you should use <code>withColumn()</code>. For example :</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df.withColumn(<span class="st">"new column"</span>, explode(<span class="st">"array"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="array-manipulation-1" class="level4">
-<h4 class="anchored" data-anchor-id="array-manipulation-1">✍ Array manipulation</h4>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df.withColumn(<span class="st">"new column"</span>, explode(<span class="st">"array"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="hands-on-4---array-manipulation" class="level4">
+<h4 class="anchored" data-anchor-id="hands-on-4---array-manipulation">✍Hands-on 4 - Array manipulation</h4>
 <ul>
-<li>Keep all the tweets with hashtags and for each remaining line, split the hashtag text into an array of hashtags</li>
-<li>Create a new column with the number of words of the <code>contenu</code> column. (Use <code>split()</code> + <code>size()</code>)</li>
-<li>Count how many tweet contain the <code>Ukrraine</code> hashtag (use the <code>count()</code> action)</li>
+<li><p>Keep all the tweets with hashtags and for each remaining line, split the hashtag text into an array of hashtags</p></li>
+<li><p>Create a new column with the number of words of the <code>contenu</code> column. (Use <code>split()</code> + <code>size()</code>)</p></li>
+<li><p>Count how many tweet contain the <code>Ukraine</code> hashtag (use the <code>count()</code> action)</p></li>
 </ul>
 </section>
 </section>
 <section id="user-defined-function" class="level3">
-<h3 class="anchored" data-anchor-id="user-defined-function">User defined function</h3>
+<h3 class="anchored" data-anchor-id="user-defined-function">🥼User defined function</h3>
 <p>For more very specific column manipulation you will need Spark’s <code>udf()</code> function (<em>User Defined Function</em>). It can be useful if you Spark does not provide a feature you want. But Spark is a popular and active project, so before coding an udf, go check the documentation. For instance for natural language processing, Spark already has some <a href="https://spark.apache.org/docs/3.1.1/api/python/reference/api/pyspark.ml.feature.Tokenizer.html#pyspark.ml.feature.Tokenizer">functions</a>. Last things, python udf can lead to performance issues (see https://stackoverflow.com/a/38297050) and learning a little bit of scala or java can be a good idea.</p>
 <p>For example :</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># !!!! DOES NOT WORK !!!!</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> to_lower_case(string):</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> string.lower()</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>df.withColumn(<span class="st">"tweet_lower_case"</span>, to_lower_case(df.contenu))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># !!!! DOES NOT WORK !!!!</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> to_lower_case(string):</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> string.lower()</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>df.withColumn(<span class="st">"tweet_lower_case"</span>, to_lower_case(df.contenu))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>will just crash. Keep in mind that Spark is a distributed system, and that Python is only installed on the central node, as a convenience to let you execute instructions on the executor nodes. But by default, pure Python functions can only be executed where Python is installed! We need <code>udf()</code> to enable Spark to send Python instructions to the worker nodes.</p>
 <p>Let us see how it is done :</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># imports</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> udf</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> explode</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.types <span class="im">import</span> StringType</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># pure python functions</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> to_lower_case(string):</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> string.lower()</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co"># user definid function</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>to_lower_case_udf <span class="op">=</span> udf(</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">lambda</span> x: to_lower_case(x), StringType()</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>) <span class="co">#we use a lambda function to create the udf.</span></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co"># df manipulation</span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  .select(<span class="st">"auteur"</span>,<span class="st">"hashtags"</span>)<span class="op">\</span></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  .<span class="bu">filter</span>(<span class="st">"size(hashtags)!=0"</span>)<span class="op">\</span></span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  .withColumn(<span class="st">"hashtag"</span>, explode(<span class="st">"hashtags"</span>))<span class="op">\</span></span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  .withColumn(<span class="st">"hashtag"</span>, to_lower_case_udf(<span class="st">"hashtag"</span>)).show(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># imports</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> udf</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> explode</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.types <span class="im">import</span> StringType</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># pure python functions</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> to_lower_case(string):</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> string.lower()</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># user definid function</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>to_lower_case_udf <span class="op">=</span> udf(</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">lambda</span> x: to_lower_case(x), StringType()</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>) <span class="co">#we use a lambda function to create the udf.</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co"># df manipulation</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>df_tweet_small<span class="op">\</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  .select(<span class="st">"auteur"</span>,<span class="st">"hashtags"</span>)<span class="op">\</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  .<span class="bu">filter</span>(<span class="st">"size(hashtags)!=0"</span>)<span class="op">\</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  .withColumn(<span class="st">"hashtag"</span>, explode(<span class="st">"hashtags"</span>))<span class="op">\</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>  .withColumn(<span class="st">"hashtag"</span>, to_lower_case_udf(<span class="st">"hashtag"</span>)).show(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
-<section id="user-defined-function-1" class="level4">
-<h4 class="anchored" data-anchor-id="user-defined-function-1">✍ User defined function</h4>
+<section id="hands-on-5---user-defined-function" class="level4">
+<h4 class="anchored" data-anchor-id="hands-on-5---user-defined-function">✍Hands-on 5 - User defined function</h4>
 <ul>
 <li>Create an user defined function that counts how many words a tweet contains. (your function will return an <code>IntegerType</code> and not a <code>StringType</code>)</li>
 </ul>
@@ -542,85 +447,69 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </section>
 <section id="aggregation-functions" class="level2">
-<h2 class="anchored" data-anchor-id="aggregation-functions">4. Aggregation functions</h2>
+<h2 class="anchored" data-anchor-id="aggregation-functions">🔩Aggregation functions</h2>
 <p>Spark offer a variety of aggregation functions :</p>
 <ul>
 <li><p><code>count(column : string)</code> will count every not null value of the specify column. You cant use <code>count(1)</code> of <code>count("*")</code> to count every line (even row with only null values)</p></li>
 <li><p><code>countDisctinct(column : string)</code> and <code>approx_count_distinct(column : string, percent_error: float)</code>. If the exact number is irrelevant, <code>approx_count_distinct()</code>should be preferred.</p>
 <p>Counting distinct elements cannot be done in parallel, and need a lot data transfer. But if you only need an approximation, there is a algorithm, named hyper-log-log (more info <a href="https://databricks.com/fr/blog/2016/05/19/approximate-algorithms-in-apache-spark-hyperloglog-and-quantiles.html">here</a>) that can be parallelized.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> count, countDistinct, approx_count_distinct</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>df.select(count(<span class="st">"col1"</span>)).show()</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>df.select(countDistinct(<span class="st">"col1"</span>)).show()</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>df.select(approx_count_distinct(<span class="st">"col1"</span>), <span class="fl">0.1</span>).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> count, countDistinct, approx_count_distinct</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>df.select(count(<span class="st">"col1"</span>)).show()</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>df.select(countDistinct(<span class="st">"col1"</span>)).show()</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>df.select(approx_count_distinct(<span class="st">"col1"</span>), <span class="fl">0.1</span>).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>You have access to all other common functions <code>min()</code>, <code>max()</code>, <code>first()</code>, <code>last()</code>, <code>sum()</code>, <code>sumDistinct()</code>, <code>avg()</code> etc (you should import them first <code>from pyspark.sql.functions import min, max, avg, first, last, sum, sumDistinct</code>)</p></li>
 </ul>
 <hr>
-<section id="aggregation-functions-1" class="level3">
-<h3 class="anchored" data-anchor-id="aggregation-functions-1">✍ Aggregation functions</h3>
+<section id="hands-on-6---aggregation-functions" class="level3">
+<h3 class="anchored" data-anchor-id="hands-on-6---aggregation-functions">✍Hands-on 6 - Aggregation functions</h3>
 <ul>
-<li>What are the min, max, average of <code>interaction_count</code></li>
-<li>How many tweets have hashtags ? Distinct hashtags ? Try the approximative count with 0.1 and 0.01as maximum estimation error allowed.</li>
+<li><p>What are the min, max, average of <code>interaction_count</code></p></li>
+<li><p>How many tweets have hashtags ? Distinct hashtags ? Try the approximative count with 0.1 and 0.01as maximum estimation error allowed.</p></li>
 </ul>
 </section>
 </section>
 <section id="grouping-functions" class="level2">
-<h2 class="anchored" data-anchor-id="grouping-functions">5. Grouping functions</h2>
+<h2 class="anchored" data-anchor-id="grouping-functions">Grouping functions</h2>
 <p>Like SQL you can group row by a criteria with Spark. Just use the <code>groupBy(column : string)</code> method. Then you can compute some aggregation over those groups.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df.groupBy(<span class="st">"col1"</span>).agg(</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  count(<span class="st">"col2"</span>).alias(<span class="st">"quantity"</span>) <span class="co"># alias is use to specify the name of the new column</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>).show() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The <code>agg()</code> method can take multiples argument to compute multiple aggregation at once.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df.groupBy(<span class="st">"col1"</span>).agg(</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    count(<span class="st">"col2"</span>).alias(<span class="st">"quantity"</span>), <span class="bu">min</span>(<span class="st">"col2"</span>).alias(<span class="st">"min"</span>), avg(<span class="st">"col3"</span>).alias(<span class="st">"avg3"</span>) ).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  count(<span class="st">"col2"</span>).alias(<span class="st">"quantity"</span>) <span class="co"># alias is use to specify the name of the new column</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>).show() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The <code>agg()</code> method can take multiples argument to compute multiple aggregation at once.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df.groupBy(<span class="st">"col1"</span>).agg(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    count(<span class="st">"col2"</span>).alias(<span class="st">"quantity"</span>), <span class="bu">min</span>(<span class="st">"col2"</span>).alias(<span class="st">"min"</span>), avg(<span class="st">"col3"</span>).alias(<span class="st">"avg3"</span>) ).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Aggregation and grouping transformations work differently than the previous method like <code>filter()</code>, <code>select()</code>, <code>withColumn()</code> etc. Those transformations cannot be run over each partitions in parallel, and need to transfer data between partitions and executors. They are called “wide transformations”</p>
-<p><img src="img/spark_exemple2_pipeline.png" style="zoom:50%;"></p>
+<p><img src="https://raw.githubusercontent.com/HealerMikado/panorama_big_data_2021/main/labs/lab%202%20-%20first%20steps%20with%20Spark/img/spark_exemple2_pipeline.png" style="zoom:30%;"></p>
 <hr>
-<section id="grouping-functions-1" class="level3">
-<h3 class="anchored" data-anchor-id="grouping-functions-1">✍ Grouping functions</h3>
+<section id="hands-on-7---grouping-functions" class="level3">
+<h3 class="anchored" data-anchor-id="hands-on-7---grouping-functions">✍Hands-on 7 - Grouping functions</h3>
 <ul>
 <li><p>Compute a daframe with the min, max and average retweet of each <code>auteur</code>. Then order it by the max number of retweet in descending order by . To do that you can use the following syntax</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> desc</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>df.orderBy(desc(<span class="st">"col"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> desc</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>df.orderBy(desc(<span class="st">"col"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
 </section>
 </section>
 <section id="spark-sql" class="level2">
-<h2 class="anchored" data-anchor-id="spark-sql">6. Spark SQL</h2>
+<h2 class="anchored" data-anchor-id="spark-sql">🔌Spark SQL</h2>
 <p>Spark understand SQL statement. It’s not a hack nor a workaround to use SQL in Spark, it’s one a the more powerful feature in Spark. To use SQL in you need :</p>
 <ol type="1">
-<li><p>Register a view pointing to your DataFrame. In SQL statement you will refer to your DataFrame with its view name</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>my_df.createOrReplaceTempView(viewName : <span class="bu">str</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Register a view pointing to your DataFrame</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>my_df.createOrReplaceTempView(viewName : <span class="bu">str</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>Use the sql function</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>spark.sql(<span class="st">"""</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="st">You sql statment</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>You could manipulate every registered DataFrame by their view name with plain SQL.</p>
-<p>For instance</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df_tweet.createOrReplaceTempView(<span class="st">"small_tweet_df"</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>spark.sql(<span class="st">"""</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT *</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="st">FROM small_tweet_df</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>spark.sql(<span class="st">"""</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="st">You sql statment</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You could manipulate every registered DataFrame by their view name with plain SQL.</p></li>
 </ol>
 <p>In fact you can do most of this tutorial without any knowledge in PySpark nor Spark. Lot of things can be done in Sparkk only by only knowing SQL and how to use it in Spark.</p>
-<section id="spark-sql-1" class="level3">
-<h3 class="anchored" data-anchor-id="spark-sql-1">✍ Spark SQL</h3>
+<section id="hands-on-8---spark-sql" class="level3">
+<h3 class="anchored" data-anchor-id="hands-on-8---spark-sql">✍Hands-on 8 - Spark SQL</h3>
 <ul>
-<li>How many tweets have hashtags ? Distinct hashtags ?</li>
-<li>Compute a DataFrame with the min, max and average retweet of each <code>auteur</code> using Spark SQL</li>
+<li><p>How many tweets have hashtags ? Distinct hashtags ?</p></li>
+<li><p>Compute a dataframe with the min, max and average retweet of each <code>auteur</code> using Spark SQL</p></li>
 </ul>
-</section>
-<section id="turn-off-your-cluster" class="level3">
-<h3 class="anchored" data-anchor-id="turn-off-your-cluster">Turn off your cluster</h3>
-<p>To turn off your cluster go to the EMR page. Then select your cluster and click on <code>Résilier</code></p>
-<p><img src="img/emr_select_resilier.png" class="img-fluid"></p>
-<p>A dialog box will pop up and select one again <code>Résilier</code></p>
-<p><img src="img/résilier.png" class="img-fluid"></p>
-<p>Then your cluster will be shutting down.</p>
-<p><img src="img/the end.png" class="img-fluid"></p>
-<hr>
-<p><span class="emoji" data-emoji="warning">⚠️</span> <strong>DO NOT FORGET TO TURN YOUR CLUSTER OFF!</strong></p>
+<p><strong>DO NOT FORGET TO TURN YOUR CLUSTER OFF!</strong></p>
 
 
 </section>
@@ -630,8 +519,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>In mathematics and data science, the “partition” of set <span class="math inline">\(E\)</span> is usually any collection of subsets whose union makes <span class="math inline">\(E\)</span> and whose 2-by-2 intersections are empty. But in Spark a “partition” refers to <strong>one</strong> block, not the set of blocks. And even if we consider the set, when replication is enforced, intersections between blocks are not necessarily empty. However, the union of all the blocks do produce the full original set. ## 🥉Data frame basic manipulations<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p><code>first()</code> is exactly <code>take(1)</code> (<a href="https://stackoverflow.com/questions/37495039/difference-between-spark-rdds-take1-and-first">ref</a>) and show prints the result instead of returning it as a list of rows (<a href="https://stackoverflow.com/questions/53884994/what-is-the-difference-between-dataframe-show-and-dataframe-take-in-spark-t">ref</a>)<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p><code>first()</code> is exactly <code>take(1)</code> (<a href="https://stackoverflow.com/questions/37495039/difference-between-spark-rdds-take1-and-first">ref</a>) and show prints the result instead of returning it as a list of rows (<a href="https://stackoverflow.com/questions/53884994/what-is-the-difference-between-dataframe-show-and-dataframe-take-in-spark-t">ref</a>)<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

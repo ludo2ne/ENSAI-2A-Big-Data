@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Big Data - Introduction to Big Data</title>
+<title>Big Data – teindre-son-cluster</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +23,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,7 +72,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Big Data</span>
     </a>
   </div>
@@ -83,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="../../../index.html" rel="" target="">
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -92,19 +92,19 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-labs">    
         <li>
-    <a class="dropdown-item" href="./docs/lab/lab0/lab0.html" rel="" target="">
+    <a class="dropdown-item" href="../../../docs/lab/lab0/lab0.html" rel="" target="">
  <span class="dropdown-text">Lab 0</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lab/lab1/lab1.html" rel="" target="">
+    <a class="dropdown-item" href="../../../docs/lab/lab1/lab1.html" rel="" target="">
  <span class="dropdown-text">Lab 1</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lab/lab2/lab2.html" rel="" target="">
+    <a class="dropdown-item" href="../../../docs/lab/lab2/lab2.html" rel="" target="">
  <span class="dropdown-text">Lab 2</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lab/lab3/lab3.html" rel="" target="">
+    <a class="dropdown-item" href="../../../docs/lab/lab3/lab3.html" rel="" target="">
  <span class="dropdown-text">Lab 3</span></a>
   </li>  
     </ul>
@@ -140,133 +140,26 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Introduction to Big Data</h1>
-</div>
 
 
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-</header>
-
-<section id="section" class="level1">
-<h1><span class="emoji" data-emoji="construction">🚧</span></h1>
-<p>Lessons and Labs created by <a href="https://github.com/HealerMikado/panorama_big_data_2021" target="_blank">Rémi Pépin</a> and <a href="https://github.com/katossky/panorama-bigdata" target="_blank">Arthur Katossky</a></p>
-</section>
-<section id="objectives" class="level1">
-<h1><span class="emoji" data-emoji="dart">🎯</span> Objectives</h1>
-<ul>
-<li>Understand the basics of computation in the real world, the bottlenecks and how to solve them</li>
-<li>Understand the basics of cloud computing and how to use AWS (or SSP Cloud)</li>
-<li>Get familiar with big data technologies and the most common paradigm</li>
-<li>Learn how to use Spark for data exploration on data at rest or streamed data, and how to use some basics ML algorithm on big data</li>
-</ul>
-</section>
-<section id="organisation" class="level1">
-<h1><span class="emoji" data-emoji="calendar">📆</span> Organisation</h1>
-<ul>
-<li>Lessons : 7h30</li>
-<li>Labs : 10h30 + 3h (graded lab)</li>
-<li>Presentations : 3h</li>
-</ul>
-</section>
-<section id="lessons" class="level1">
-<h1><span class="emoji" data-emoji="arrow_forward">▶️</span> Lessons</h1>
-<section id="what-is-big-data" class="level3">
-<h3 class="anchored" data-anchor-id="what-is-big-data"><span class="emoji" data-emoji="small_orange_diamond">🔸</span> 1.1 What is Big Data</h3>
-<ul>
-<li>What is considered big ?</li>
-<li>Volume, Velocity, Variety, Veracity, Value, Variability</li>
-</ul>
-</section>
-<section id="computer-science-survival-kit" class="level3">
-<h3 class="anchored" data-anchor-id="computer-science-survival-kit"><span class="emoji" data-emoji="small_orange_diamond">🔸</span> 1.2 Computer science survival kit</h3>
-<ul>
-<li>Processors, Memory, Storage, Network</li>
-</ul>
-</section>
-<section id="high-performance-computing-without-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="high-performance-computing-without-distribution"><span class="emoji" data-emoji="small_orange_diamond">🔸</span> 1.3 High-performance computing without distribution</h3>
-<ul>
-<li>Profile code, Analyse code</li>
-<li>Store or process data in chunks, Take advantage of sparcity</li>
-<li>Go low-level</li>
-<li>Use cache</li>
-</ul>
-</section>
-<section id="what-if" class="level3">
-<h3 class="anchored" data-anchor-id="what-if"><span class="emoji" data-emoji="small_orange_diamond">🔸</span> 1.4 What if ?</h3>
-<ul>
-<li>What if data is too big to fit in memory ?</li>
-<li>What if your file is too big for your local file system ?</li>
-<li>What if data is too big to fit on disk ?</li>
-<li>What if computation takes ages ?</li>
-<li>What if computation / storage is too expensive ?</li>
-</ul>
-</section>
-<section id="social-issues" class="level3">
-<h3 class="anchored" data-anchor-id="social-issues"><span class="emoji" data-emoji="small_orange_diamond">🔸</span> 1.5 Social issues</h3>
-<ul>
-<li>Ethical issues, Environmental issues, Political issues</li>
-</ul>
-<hr>
-</section>
-<section id="how-to-store-big-data" class="level3">
-<h3 class="anchored" data-anchor-id="how-to-store-big-data"><span class="emoji" data-emoji="small_orange_diamond">🔸</span> 2.1 How to store big data</h3>
-<ul>
-<li>File system, Database, Distribution</li>
-<li>The CAP theorem</li>
-</ul>
-</section>
-<section id="hadoop-file-system-hdfs" class="level3">
-<h3 class="anchored" data-anchor-id="hadoop-file-system-hdfs"><span class="emoji" data-emoji="small_orange_diamond">🔸</span> 2.2 Hadoop file system (HDFS)</h3>
-<ul>
-<li>Hadoop Ecosystem, How to use HDFS</li>
-</ul>
-</section>
-<section id="hadoop-mapreduce" class="level3">
-<h3 class="anchored" data-anchor-id="hadoop-mapreduce"><span class="emoji" data-emoji="small_orange_diamond">🔸</span> 2.3 Hadoop MapReduce</h3>
-<ul>
-<li>Key Concepts</li>
-</ul>
-</section>
-<section id="spark" class="level3">
-<h3 class="anchored" data-anchor-id="spark"><span class="emoji" data-emoji="small_orange_diamond">🔸</span> 2.4 Spark</h3>
-<ul>
-<li>Key Concepts</li>
-<li>Importing/Exporting data</li>
-<li>How to run Spark ?</li>
-</ul>
-<hr>
-</section>
-<section id="cloud-computing" class="level3">
-<h3 class="anchored" data-anchor-id="cloud-computing"><span class="emoji" data-emoji="small_orange_diamond">🔸</span> 3 Cloud Computing</h3>
-<ul>
-<li>Traditional IT, Virtualization, Containerization</li>
-<li>Why cloud computing ?</li>
-<li>categories of cloud services</li>
-</ul>
-</section>
-</section>
-<section id="labs" class="level1">
-<h1><span class="emoji" data-emoji="arrow_forward">▶️</span> Labs</h1>
-<ul>
-<li><a href="./docs/lab/lab0/lab0.html">Lab 0</a> : Discover Amazon Web Service (AWS)</li>
-<li><a href="./docs/lab/lab1/lab1.html">Lab 1</a> : First steps with Spark</li>
-<li>Lab 2</li>
-<li><a href="./docs/lab/lab3/lab3.html">Lab 3</a> : Stream processing with Spark</li>
-</ul>
+<ol type="1">
+<li>Se connecter à la console AWS en passant par la <a href="https://aws.amazon.com/fr/education/awseducate/">plateforme aws educate</a> (voir fiche <a href="https://foad-moodle.ensai.fr/mod/resource/view.php?id=7633">Moodle</a>) et chercher le service EMR</li>
+</ol>
+<p><img src="C:\Users\VEDA\Documents\Ensai\Ensai-cours\2A\panorama_big_data_2021\repo%20git\labs\lab%202%20-%20first%20steps%20with%20Spark\img\accueil_console_emr.png" class="img-fluid"></p>
+<ol start="2" type="1">
+<li>Sélectionner son cluster et cliquer sur Résilier</li>
+</ol>
+<p><img src="C:\Users\VEDA\Documents\Ensai\Ensai-cours\2A\panorama_big_data_2021\repo%20git\labs\lab%202%20-%20first%20steps%20with%20Spark\img\emr_select_resilier.png" class="img-fluid"></p>
+<ol start="3" type="1">
+<li>Cliquer sur Résilier</li>
+</ol>
+<p><img src="C:\Users\VEDA\Documents\Ensai\Ensai-cours\2A\panorama_big_data_2021\repo%20git\labs\lab%202%20-%20first%20steps%20with%20Spark\img\résilier.png" class="img-fluid"></p>
+<ol start="4" type="1">
+<li>Une fois sur un écran semblable tout est bon</li>
+</ol>
+<p><img src="C:\Users\VEDA\Documents\Ensai\Ensai-cours\2A\panorama_big_data_2021\repo%20git\labs\lab%202%20-%20first%20steps%20with%20Spark\img\the%20end.png" class="img-fluid"></p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
