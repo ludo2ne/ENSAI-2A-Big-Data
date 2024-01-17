@@ -1,5 +1,8 @@
 project:
   type: website
+  render:
+    - "**/*.qmd"
+    - "**/*.ipynb"
 
 website:
   title: "Big Data"
@@ -12,7 +15,7 @@ website:
         menu: 
           - href: docs/lab/lab0/lab0.qmd
             text: "Lab 0"
-          - href: docs/lab/lab1/lab1.qmd
+          - href: docs/lab/lab1/lab1-SSPCloud.ipynb
             text: "Lab 1"
           - href: docs/lab/lab2/lab2.ipynb
             text: "Lab 2"
