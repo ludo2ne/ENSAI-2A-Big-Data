@@ -17,20 +17,22 @@ website:
             text: "Lab 0"
           - href: docs/lab/lab1/lab1-SSPCloud.ipynb
             text: "Lab 1"
-          - href: docs/lab/lab2/lab2.ipynb
+          - href: docs/lab/lab2/lab2-SSPCloud.ipynb
             text: "Lab 2"
           - href: docs/lab/lab3/lab3.qmd
             text: "Lab 3"
-    right: 
-      - href: "https://quarto.org/"
-        text: "Quarto"
-        target: "_blank"
-      - href: "https://quarto.org/docs/presentations/revealjs/"
-        text: "Revealjs"
-        target: "_blank"
+    right:
       - icon: github
         href: https://github.com/ludo2ne/ENSAI-2A-Big-Data
-        target: "_blank"
+        target: "_blank"        
+  page-footer:
+    right: |
+      Website built with <a href=https://quarto.org/ target="_blank">Quarto</a><br>
+      [Source code](https://github.com/ludo2ne/ENSAI-2A-Big-Data)
+  repo-url: https://github.com/ludo2ne/ENSAI-2A-Big-Data
+  repo-branch: main
+  issue-url: https://github.com/ludo2ne/ENSAI-2A-Big-Data/issues/new
+  repo-actions: [edit, issue]
 
 format:
   html:

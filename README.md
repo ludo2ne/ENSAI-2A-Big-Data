@@ -4,9 +4,18 @@ Lessons and Labs created by [Rémi Pépin](https://github.com/HealerMikado/panor
 
 # :construction: Todo
 
-* Notebooks : tester puis afficher sur le site le fichier .ipynb
-  * :warning: Attention : bien s'assurer de repartir de la dernière version 
+* Notebooks : 
+  * [ ] SSPLab and AWS
   * [ ] Lab0
   * [ ] Lab1
   * [ ] Lab2
   * [ ] Lab3
+
+## Edit a Lab
+
+Labs notebooks are in `docs/lab`.
+They are in format `.ipynb`, to edit them two main ways:
+* import in Jupyter, modify, export and update in this repository
+* install quarto and use : `quarto convert <filename.ipynb>`
+  * it convert an `.ipynb` file to a `.qmd` file easily readable
+  * once your done, use the same command applied to qmd file: `quarto convert <filename.qmd>` to get a `.ipynb` file

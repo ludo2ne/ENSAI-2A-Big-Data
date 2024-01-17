@@ -88,5 +88,5 @@ Lessons and Labs created by [Rémi Pépin](https://github.com/HealerMikado/panor
 
 * [Lab 0](docs/lab/lab0/lab0.qmd) : Discover Amazon Web Service (AWS)
 * [Lab 1](docs/lab/lab1/lab1-SSPCloud.ipynb) : First steps with Spark
-* Lab 2
+* [Lab 2](docs/lab/lab2/lab2-SSPCloud.ipynb) : Spark ML
 * [Lab 3](docs/lab/lab3/lab3.qmd) : Stream processing with Spark
