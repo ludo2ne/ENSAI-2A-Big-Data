@@ -96,9 +96,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
@@ -138,7 +135,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Lab 1</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../docs/lab/lab2/lab2.html" rel="" target="">
+    <a class="dropdown-item" href="../../../docs/lab/lab2/lab2-SSPCloud.html" rel="" target="">
  <span class="dropdown-text">Lab 2</span></a>
   </li>  
         <li>
@@ -149,14 +146,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="https://quarto.org/" rel="" target="_blank">
- <span class="menu-text">Quarto</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://quarto.org/docs/presentations/revealjs/" rel="" target="_blank">
- <span class="menu-text">Revealjs</span></a>
-  </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/ludo2ne/ENSAI-2A-Big-Data" rel="" target="_blank"><i class="bi bi-github" role="img">
 </i> 
@@ -212,7 +201,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#delete-the-jupyter-pyspark-service" id="toc-delete-the-jupyter-pyspark-service" class="nav-link" data-scroll-target="#delete-the-jupyter-pyspark-service">10. Delete the Jupyter-pyspark service</a></li>
   </ul>
-</nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.dev/ludo2ne/ENSAI-2A-Big-Data/blob/main/docs/lab/lab1/lab1-SSPCloud.ipynb" class="toc-action">Edit this page</a></p><p><a href="https://github.com/ludo2ne/ENSAI-2A-Big-Data/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
@@ -308,31 +297,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>         .getOrCreate()</span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="5">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>spark</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
-
-            <div>
-                <p><b>SparkSession - in-memory</b></p>
-                
-        <div>
-            <p><b>SparkContext</b></p>
-
-            <p><a href="http://jupyter-pyspark-180818-0.jupyter-pyspark-180818.user-ludo2ne.svc.cluster.local:4040">Spark UI</a></p>
-
-            <dl>
-              <dt>Version</dt>
-                <dd><code>v3.5.0</code></dd>
-              <dt>Master</dt>
-                <dd><code>k8s://https://kubernetes.default.svc:443</code></dd>
-              <dt>AppName</dt>
-                <dd><code>pyspark-shell</code></dd>
-            </dl>
-        </div>
-        
-            </div>
-        
-</div>
 </div>
 </section>
 <section id="first-steps-with-spark---data-importation" class="level2">
@@ -703,7 +669,6 @@ Many things can only be done in Spark if you know SQL and how to use it in Spark
 <li>File &gt; Save and Export Notebook &gt; HTML</li>
 </ul></li>
 <li>https://datalab.sspcloud.fr/my-services</li>
-<li></li>
 </ul>
 
 
@@ -1059,6 +1024,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">Website built with <a href="https://quarto.org/" target="_blank">Quarto</a><br> <a href="https://github.com/ludo2ne/ENSAI-2A-Big-Data">Source code</a></div>
+  </div>
+</footer>
 
 
 
