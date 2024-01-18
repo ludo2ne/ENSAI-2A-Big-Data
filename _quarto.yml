@@ -1,3 +1,4 @@
+
 project:
   type: website
   render:
@@ -13,6 +14,8 @@ website:
         text: Home
       - text: Labs
         menu: 
+          - href: docs/lab/lab-setup.qmd
+            text: "Lab setup"
           - href: docs/lab/lab0/lab0.qmd
             text: "Lab 0"
           - href: docs/lab/lab1/lab1-SSPCloud.ipynb
@@ -28,7 +31,7 @@ website:
   page-footer:
     right: |
       Website built with <a href=https://quarto.org/ target="_blank">Quarto</a><br>
-      [Source code](https://github.com/ludo2ne/ENSAI-2A-Big-Data)
+      <a href=https://github.com/ludo2ne/ENSAI-2A-Big-Data target="_blank">Source code</a>
   repo-url: https://github.com/ludo2ne/ENSAI-2A-Big-Data
   repo-branch: main
   issue-url: https://github.com/ludo2ne/ENSAI-2A-Big-Data/issues/new
