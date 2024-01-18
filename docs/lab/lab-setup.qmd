@@ -1,0 +1,44 @@
+---
+title: Lab setup
+description: Setup to be done before each lab
+format:
+  html:
+    toc: true
+    toc-location: left
+    toc-expand: 3
+execute:
+  eval: false
+---
+
+You can choose to use :
+
+- [ ] SSP Cloud (recommended for Attachés)
+- [ ] AWS (recommended for engineers)
+
+## Before starting the lab
+
+### SSPCloud
+
+- [ ] connect to [SSPCloud](https://datalab.sspcloud.fr/)
+  - if necessary, create an account with your ENSAI e-mail address
+- Go to `Mes services`
+  - [ ] Create a new service : `Jupyter-pyspark`
+  - Wait for a few seconds
+  - [ ] Clic on `Copier le mot de passe` and then `Ouvrir le service`
+  - [ ] On the next page, paste it in the appropriate place and `Log in`
+  - You are now in your Jupyter service
+- [ ] Import file named `lab_-SSPCloud.ipynb`
+  - [ ] open it and follow the instructions
+
+
+### AWS
+
+...
+
+## At this end of this lab
+
+- [ ] Export your notebook
+  - File > Export Notebook As ... > Export Notebook To HTML
+  - Right clic > Download the `.ipynb`file
+- [ ] **Delete your service** (SSPCloud)
+- [ ] **Turn your cluster off** (AWS)
