@@ -6,20 +6,19 @@ format:
     toc: true
     toc-location: left
     toc-expand: 3
-execute:
-  eval: false
+from: markdown+emoji
 ---
 
 You can choose to use :
 
 - [ ] SSP Cloud (recommended for Attachés)
-- [ ] AWS (recommended for engineers)
+- [ ] AWS (recommended for Engineers)
 
 ## Before starting the lab
 
 ### SSPCloud
 
-- [ ] connect to [SSPCloud](https://datalab.sspcloud.fr/)
+- [ ] connect to [SSPCloud](https://datalab.sspcloud.fr/){.external target="_blank"}
   - if necessary, create an account with your ENSAI e-mail address
 - Go to `Mes services`
   - [ ] Create a new service : `Jupyter-pyspark`
@@ -33,7 +32,7 @@ You can choose to use :
 
 ### AWS
 
-...
+:construction:
 
 ## At this end of this lab
 

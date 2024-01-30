@@ -1,15 +1,17 @@
 ---
 title: "Introduction to Big Data"
-format: html
+format:
+  html:
+    toc: true
+    toc-location: left
+    toc-expand: 3
 from: markdown+emoji
 ---
 
 
-# :construction: 
-
 Lessons and Labs created by [Rémi Pépin](https://github.com/HealerMikado/panorama_big_data_2021){target="_blank"} and [Arthur Katossky](https://github.com/katossky/panorama-bigdata){target="_blank"}
 
-# :dart: Objectives
+## Objectives
 
 - Understand the basics of computation in the real world, the bottlenecks and how to solve them
 - Understand the basics of cloud computing and how to use AWS (or SSP Cloud)
@@ -17,76 +19,76 @@ Lessons and Labs created by [Rémi Pépin](https://github.com/HealerMikado/panor
 - Learn how to use Spark for data exploration on data at rest or streamed data, and how to use some basics ML algorithm on big data
 
 
-# :calendar: Organisation 
+## Organisation
 
 - Lessons : 7h30
 - Labs : 10h30 + 3h (graded lab)
 - Presentations : 3h
 
-# :arrow_forward: Lessons
- 
-### :small_orange_diamond: 1.1 What is Big Data
+## Lessons
 
-* What is considered big ?
-* Volume, Velocity, Variety, Veracity, Value, Variability
+### 1.1 What is Big Data
 
-### :small_orange_diamond: 1.2 Computer science survival kit
+- What is considered big ?
+- Volume, Velocity, Variety, Veracity, Value, Variability
 
-* Processors, Memory, Storage, Network
+### 1.2 Computer science survival kit
 
-### :small_orange_diamond: 1.3 High-performance computing without distribution
+- Processors, Memory, Storage, Network
 
-* Profile code, Analyse code
-* Store or process data in chunks, Take advantage of sparcity
-* Go low-level
-* Use cache
+### 1.3 High-performance computing without distribution
 
-### :small_orange_diamond: 1.4 What if ?
+- Profile code, Analyse code
+- Store or process data in chunks, Take advantage of sparcity
+- Go low-level
+- Use cache
 
-* What if data is too big to fit in memory ?
-* What if your file is too big for your local file system ?
-* What if data is too big to fit on disk ?
-* What if computation takes ages ?
-* What if computation / storage is too expensive ?
+### 1.4 What if ?
 
-### :small_orange_diamond: 1.5 Social issues
+- What if data is too big to fit in memory ?
+- What if your file is too big for your local file system ?
+- What if data is too big to fit on disk ?
+- What if computation takes ages ?
+- What if computation / storage is too expensive ?
 
-* Ethical issues, Environmental issues, Political issues
+### 1.5 Social issues
 
----
-
-### :small_orange_diamond: 2.1 How to store big data
-
-* File system, Database, Distribution 
-* The CAP theorem
-
-### :small_orange_diamond: 2.2 Hadoop file system (HDFS)
-
-* Hadoop Ecosystem, How to use HDFS
-
-
-### :small_orange_diamond: 2.3 Hadoop MapReduce
-
-* Key Concepts
-
-### :small_orange_diamond: 2.4 Spark
-
-* Key Concepts
-* Importing/Exporting data
-* How to run Spark ?
+- Ethical issues, Environmental issues, Political issues
 
 ---
 
-### :small_orange_diamond: 3 Cloud Computing
+### 2.1 How to store big data
 
-* Traditional IT, Virtualization, Containerization
-* Why cloud computing ?
-* categories of cloud services
+- File system, Database, Distribution
+- The CAP theorem
+
+### 2.2 Hadoop file system (HDFS)
+
+- Hadoop Ecosystem, How to use HDFS
 
 
-# :arrow_forward: Labs
+### 2.3 Hadoop MapReduce
 
-* [Lab 0](docs/lab/lab0/lab0.qmd) : Discover Amazon Web Service (AWS)
-* [Lab 1](docs/lab/lab1/lab1-SSPCloud.ipynb) : First steps with Spark
-* [Lab 2](docs/lab/lab2/lab2-SSPCloud.ipynb) : Spark ML
-* [Lab 3](docs/lab/lab3/lab3.qmd) : Stream processing with Spark
+- Key Concepts
+
+### 2.4 Spark
+
+- Key Concepts
+- Importing/Exporting data
+- How to run Spark ?
+
+---
+
+### 3 Cloud Computing
+
+- Traditional IT, Virtualization, Containerization
+- Why cloud computing ?
+- categories of cloud services
+
+
+## Labs
+
+- [Lab 0](docs/lab/lab0/lab0.qmd) : Discover Amazon Web Service (AWS)
+- [Lab 1](docs/lab/lab1/lab1-SSPCloud.qmd) : First steps with Spark
+- [Lab 2](docs/lab/lab2/lab2-SSPCloud.ipynb) : Spark ML
+- [Lab 3](docs/lab/lab3/lab3.qmd) : Stream processing with Spark

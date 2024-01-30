@@ -6,11 +6,10 @@ format:
     toc: true
     toc-location: left
     toc-expand: 3
+  ipynb: default
 from: markdown+emoji
 ---
 
-
-- [Notebook](base_notebook_lab3.ipynb){target="_blank"}
 
 
 ## Outline
@@ -40,7 +39,7 @@ Because Spark Streaming need to write some data on the underlying HDFS cluster, 
 11. Again clik on `Connect`
 12. In the cloud shell copy/paste : `sudo usermod -a -G hdfsadmingroup livy`. It will give to the the user "livy" admin right.
 
-    
+
 
 
 ```python
@@ -59,7 +58,7 @@ from pyspark.sql.types import StructType,StructField, StringType, IntegerType, A
 
 **Explanation:**
 
-   - `spark._jsc.hadoopConfiguration().set("fs.s3.useRequesterPaysHeader","true")` : likes in lab2, you will be charged for the data transfer. without this configuration you can't access the data. 
+   - `spark._jsc.hadoopConfiguration().set("fs.s3.useRequesterPaysHeader","true")` : likes in lab2, you will be charged for the data transfer. without this configuration you can't access the data.
 
 - `spark.conf.set("spark.sql.shuffle.partitions", 5)` : set the number of partitions for the shuffle phase. A partition is in Spark the name of a bloc of data. By default Spark use 200 partitions to shuffle data. But in this lab, our mini-batch will be small, and to many partitions will lead to performance issues.
 
@@ -67,7 +66,7 @@ from pyspark.sql.types import StructType,StructField, StringType, IntegerType, A
 spark.conf.set("spark.sql.shuffle.partitions", 5)
   ````
 
-  > :thinking: The shuffle dispatches data according to their key between a *map* and a *reduce* phase. For instance, if you are counting how many records have each `g` group, the *map* phase involve counting each group member in each Spark partition : `{g1:5, g2:10, g4:1, g5:3}` for one partition, `{g1:1, g2:2, g3:23, g5:12}` for another. The *shuffle* phase dispatch those first results  and group them by key in the same partition, one partition gets `{g1:5, g1:1, g2:10, g2:2}`, the other gets : `{g4:1, g5:3, g3:23, g5:12}` Then each *reduce* can be done efficiently. 
+  > :thinking: The shuffle dispatches data according to their key between a *map* and a *reduce* phase. For instance, if you are counting how many records have each `g` group, the *map* phase involve counting each group member in each Spark partition : `{g1:5, g2:10, g4:1, g5:3}` for one partition, `{g1:1, g2:2, g3:23, g5:12}` for another. The *shuffle* phase dispatch those first results  and group them by key in the same partition, one partition gets `{g1:5, g1:1, g2:10, g2:2}`, the other gets : `{g4:1, g5:3, g3:23, g5:12}` Then each *reduce* can be done efficiently.
 
 - :package: Import all needed library
 
@@ -77,7 +76,7 @@ spark.conf.set("spark.sql.shuffle.partitions", 5)
   from pyspark.sql.types import StructType,StructField, StringType, IntegerType, ArrayType, TimestampType, BooleanType, LongType, DoubleType
   ````
 
-## 3. Stream processing 
+## 3. Stream processing
 
 Stream processing is the act to process data in real-time. When a new record is available, it is processed. There is no real beginning nor end to the process, and there is no "result". The result is updated in real time, hence multiple versions of the results exist. For instance, you want to count how many tweet about cat are posted in twitter every hour. Until the end of an hour, you do not have you final result. And even at this moment, your result can change. Maybe some technical problems created some latency and you will get some tweets later. And  you will need to update your previous count.
 
@@ -98,7 +97,7 @@ Stream processing was gradually incorporated in Spark. In 2012 Spark Streaming a
 
 *Figure 1 : data stream representation (source [structured streaming programming guide](https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html#basic-concepts))*
 
-Spark offer two ways to process stream, one **record at a time**, or processing **micro batching** (processing a small amount of line at once). 
+Spark offer two ways to process stream, one **record at a time**, or processing **micro batching** (processing a small amount of line at once).
 
 - **one record at a time**  every time a new record is available it's processed. This has a big advantage, it achieves **very low latency **. But there is a drawback, the system can not handle too much data at the same time (low throughput). It's the default mode. Because in this lab, you will process files with record, even if you will process one file at a time, you will process mini batch of records
 - as for **micro batching** it process new records every `t` seconds. Hence records are not process really in "real-time", but periodically, **the latency will be higher, and so the throughput**. Unless you really need low latency, make it you first choice option.
@@ -111,9 +110,9 @@ Spark offer two ways to process stream, one **record at a time**, or processing 
 
 > To understand why processing one record at a time has lower latency and throughput than batch processing, imagine a restaurant. Every time a client order something the chef cooks its order independently of the other current orders. So if two clients order pizza, the chief makes two small doughs, and cook them individually. If clients there is only a few clients, the chief can finish each order before a new client comes. The latency is the lowest possible when the chief is idle when a client come. Know imagine a restaurant were the chief process the orders by batch. He waits some minutes to gather all the orders than he mutualizes the cooking. If there are 5 pizza orders, he only does one big dough, divides it in five, add the toppings then cook all five at once. The latency is higher because the chief waits before cooking, but so the throughput because he can cook multiple things at once.
 
-## 5. The basics of Spark's Structured Streaming 
+## 5. The basics of Spark's Structured Streaming
 
-### 5.1. The different sources for stream processing in Spark 
+### 5.1. The different sources for stream processing in Spark
 
 In lab 2 you discovered Spark DataFrame, in this lab you will learn about [Structured Streaming](https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html). It's a stream processing framework built on the Spark SQL engine, and it uses the existing structured APIs in Spark. So one you define a way to read a stream, you will get a DataFrame. Like in lab2 ! **So except state otherwise, all transformations presented in lab2 are still relevant in this lab**.
 
@@ -135,7 +134,7 @@ my_first_stream = spark\
 The major difference with lab2, it is Spark cannot infer the schema of the stream. You have to pass it to Spark. There is two ways :
 
 - A reliable way : you define the schema by yourself and gave it to Spark
-- A quick way : you load one file of the folder in a DataFrame, extract the schema and use it. It works, but the schema can be incomplete. It's a better solution to create the schema by hand and use it. 
+- A quick way : you load one file of the folder in a DataFrame, extract the schema and use it. It works, but the schema can be incomplete. It's a better solution to create the schema by hand and use it.
 
 For Apache Kafka, or socket , it's a slightly more complex, *(not used today, it's jute for you personal knowledge)* :
 
@@ -148,7 +147,7 @@ my_first_stream = spark\
 .load()
 ```
 
-#### 5.1.1 Why is a folder a relevant source in stream processing ? 
+#### 5.1.1 Why is a folder a relevant source in stream processing ?
 
 Previously, in lab 1, you loaded all the files in a folder stored in S3 with Spark. And it worked pretty well. But this folder was static, in other words, Its content didn't change. But in some cases, new data are constantly written into a folder. For instance, in this lab you will process a stream of tweets. A python script is running in a EC2 machine reading tweets from the Twitter's web service and writing them in a S3 buckets. Every 2 seconds or so, a new file is added to the bucket with 1000 tweets. If you use DataFrame like in lab 1, your process cannot proceed those new files. You should relaunch your process every time. But with Structured Streaming Spark will dynamically load new files.
 
@@ -222,7 +221,7 @@ Like in lab 1, you will use tweets in this lab. The tweets are stored in jsonl f
 
   ```python
   from pyspark.sql.types import StructType,StructField, StringType, IntegerType, ArrayType, TimestampType, BooleanType, LongType, DoubleType
-  
+
   StructType([
   	StructField("data", StructType([
   		StructField("author_id",StringType(),True),
@@ -288,7 +287,7 @@ Like in lab 1, you will use tweets in this lab. The tweets are stored in jsonl f
   	]),True)
     ])
   ```
-  
+
 - Crate a stream to this s3 bucket : `s3://spark-lab-input-data-ensai20212022/stream_tweet/`. Name it  `tweet_stream`
 
   > :thinking: Nothing happen ? It's normal ! Do not forget, Spark use lazy evaluation. It doesn't use data if you don't define an action. For now Spark only know how to get the stream, that's all.
@@ -303,31 +302,31 @@ Like in lab 1, you will use tweets in this lab. The tweets are stored in jsonl f
   .queryName("stream_size")\
   .format("memory")\
   .start()
-  
+
   for _ in range(10): # we use an _ because the variable isn't used. You can use i if you prefere
       sleep(3)
       spark.sql("""
       	SELECT count(1) FROM stream_size
       """).show()
   stream_size_query.stop() #needed to close the query
-  
+
   ```
 
-### 5.2 How to output a stream ? 
+### 5.2 How to output a stream ?
 
 Remember, Spark has two types of methods to process DataFrame:
 
 -  Transformations which take a DataFrame has input and produce an other Dataframe
 -  And actions, which effectively run computation and produce something, like a file, or a output in you notebook/console.
 
-Stream processing looks the same as DataFrame processing. Hence, **you still have transformations**, the exact same one that can be apply on classic DataFrame (with some restriction, for example you can not sample a stream with the `sample()` transformation). The action part is a little different. Because a stream runs continuously, you cannot just print the data or run a count at the end of the process. **In fact actions will nor work on stream**. To tackle this issue, Spark proposes different [outputs sinks](https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html#output-sinks). An output sink is a possible output for your stream. The different output sink are (this part came from the official Spark [documentation)](https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html#output-sinks) : 
+Stream processing looks the same as DataFrame processing. Hence, **you still have transformations**, the exact same one that can be apply on classic DataFrame (with some restriction, for example you can not sample a stream with the `sample()` transformation). The action part is a little different. Because a stream runs continuously, you cannot just print the data or run a count at the end of the process. **In fact actions will nor work on stream**. To tackle this issue, Spark proposes different [outputs sinks](https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html#output-sinks). An output sink is a possible output for your stream. The different output sink are (this part came from the official Spark [documentation)](https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html#output-sinks) :
 
 - **File sink** - Stores the output to a file. The file can be stored locally (on the cluster), remotely (on S3). The file format can be json, csv etc
 
 ```python
 writeStream\
 .format('json')\
-.option("checkpointLocation", "output_folder/history") \ 
+.option("checkpointLocation", "output_folder/history") \
 .option("path", "output_folder")\
 .start()
 ```
@@ -381,7 +380,7 @@ To deal with this issue, Spark proposes 3 mode. **And you cannot use every mode 
 | **Console Sink**      | Append, Update, Complete |
 | **Memory Sink**       | Append, Complete         |
 
-### 5.3 How to output a stream : summary 
+### 5.3 How to output a stream : summary
 
 To sum up to output a stream you need
 
@@ -429,7 +428,7 @@ memory_sink = df\
   lang_query.stop() #needed to close the stream
   ````
 
-  After 30 seconds, 10 tables will appeared in your notebook. Each table represents the contain of `lang_count` at a certain time. The `.stop()` method close the stream. 
+  After 30 seconds, 10 tables will appeared in your notebook. Each table represents the contain of `lang_count` at a certain time. The `.stop()` method close the stream.
 
   In the rest of this tutorial, to will need two steps to print data :
 
@@ -448,12 +447,12 @@ memory_sink = df\
           .queryName("query_table")\
           .start()
       ````
-      
+
  - Cell 2
       ```python
       spark.sql("SELECT * FROM query_table").show()
       ```
-      
+
  - Cell 3
       ```python
       my_query.stop()
@@ -490,7 +489,7 @@ for stream in spark.streams.active:
 
 `spark.streams.active` returns an array with all the active stream, and the code loops over all the active stream and closes them.
 
-## 6. Stream processing basics 
+## 6. Stream processing basics
 
 ### ✍ Transformations on stream
 
@@ -498,26 +497,26 @@ for stream in spark.streams.active:
      - For this filter, you will use the `na.drop("any")` transformation. The `na.drop("any")` drop every line with a null value in at least one column. It's simpler than using a `filter()` transformation because you don't have to specify all the column. For more precise filter you can use `na.drop("any" or "all", subset=list of col)` (`all` will drop rows with only null value in all columns or in the specified list).
      - Use the SQL `COUNT(1)` function in the sql request to get the count
      - Because you don't perform aggregation the `outputMode()` must be `append`
-     
+
      You will notice no record are dropped.
-     
+
 - 🕵️‍♂️ Drop all records with unverified (`includes.users.verified == True`)user  then group the remaining  records by `hashtag`.
 
      - `includes.users` is an array with only one element. You will need to extract it.
      - `data.entities.hashtags` is an array too ! To group by tag (the hashtag content) you will need to explode it too.
 
-- :small_red_triangle_down: Find ukraine related tweet (or any other topic like cat, dog, spring, batman, dogecoin etc) : 
+- :small_red_triangle_down: Find ukraine related tweet (or any other topic like cat, dog, spring, batman, dogecoin etc) :
 
   - Define a new column, name `ukraine_related`. This column is equal to `True` if `data.text` contains "ukraine", else it's  equal to`False`.
-  
+
   -  Use the `withColumn()` transformation, and the `expr()` function to define the column. `expr()` takes as input an SQL expression. You do not need a full SQL statement (`SELECT ... FROM ... WHERE ...`) but just an SQL expression that return True or False if `data.text` contains "ukraine". To help you :
-  
+
     - `LOWER()` put in lower case a string
     - `input_string LIKE wanted_string` return `True`  if `input_string` is equal to `wanted_string`
     - You can use `%` as wildcards
-  
+
     [For more help](https://www.w3schools.com/sql/sql_like.asp)
-  
+
   - Only keep `data.text`, `data.lang`, `data.public_metrics` and `data.created_at`
 
 ### ✍ Aggregation and grouping on stream
@@ -548,11 +547,11 @@ for stream in spark.streams.active:
 
      A `null` value mean this dimension wasn't use for this row. For instance, the first row gives the averages when `hashtag==cat` independently of the `lang`. The before last row gives averages when `lang==en` independently of the `hashtag`. And the last row gives the averages for the full DataFrame.
 
-## 7. Event-time processing 
+## 7. Event-time processing
 
 Event-time processing consists in processing information with **respect to the time that it was created, not received**. It's a hot topic because sometime you will receive data in an order different from the creation order. For example, you are monitoring servers distributed across the globe. Your main datacentre is located in Paris. Something append in New York, and a few milliseconds after something append in Toulouse. Due to location, the event in Toulouse is likely to show up in your datacentre before the New York one. If you analyse data bases on the received time the order will be different than the event time. Computers and network are unreliable. Hence, when temporality is important, you must consider the creation time of the event and not it's received time.
 
-Hopefully, Spark will handle all this complexity for you ! If you have a timestamp column with the event creation spark can update data accordingly to the event time. 
+Hopefully, Spark will handle all this complexity for you ! If you have a timestamp column with the event creation spark can update data accordingly to the event time.
 
 For instance is you process some data with a time window, Spark will update the result based on the event-time not the received time. So previous windows can be updated in the future.
 
@@ -598,9 +597,9 @@ df_with_event_time.groupBy(
 
 - Count the number of event with a 10 seconds time window (use the `created_at` column)
 - Count the number of event by verified / unverified user with a 10 seconds time window (use the `Creation_Time` column)
-- Count the number of event with a 10 seconds time window sliding every 5 seconds 
+- Count the number of event with a 10 seconds time window sliding every 5 seconds
 
-### 7.1 ​Handling late data with watermarks 
+### 7.1 ​Handling late data with watermarks
 
 Processing accordingly to time-event is great, but currently there is one flaw. We never specified how late we expect to see data. This means, Spark will keep some data in memory forever. Because streams never end, Spark will keep in memory every time windows, to be able to update some previous results. But in some cases, you know that after some time, you don't expect new data, or very late data aren't relevant any more. In other words, after a certain amount of time you want to freeze old results.
 

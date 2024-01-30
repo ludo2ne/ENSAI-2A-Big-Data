@@ -3,7 +3,6 @@ project:
   type: website
   render:
     - "**/*.qmd"
-    - "**/*.ipynb"
 
 website:
   title: "Big Data"
@@ -13,12 +12,12 @@ website:
       - href: index.qmd
         text: Home
       - text: Labs
-        menu: 
+        menu:
           - href: docs/lab/lab-setup.qmd
             text: "Lab setup"
           - href: docs/lab/lab0/lab0.qmd
             text: "Lab 0"
-          - href: docs/lab/lab1/lab1-SSPCloud.ipynb
+          - href: docs/lab/lab1/lab1-SSPCloud.qmd
             text: "Lab 1"
           - href: docs/lab/lab2/lab2-SSPCloud.ipynb
             text: "Lab 2"
@@ -27,21 +26,16 @@ website:
     right:
       - icon: github
         href: https://github.com/ludo2ne/ENSAI-2A-Big-Data
-        target: "_blank"        
+        target: "_blank"
+  reader-mode: true
   page-footer:
     right: |
-      Website built with <a href=https://quarto.org/ target="_blank">Quarto</a><br>
-      <a href=https://github.com/ludo2ne/ENSAI-2A-Big-Data target="_blank">Source code</a>
-  repo-url: https://github.com/ludo2ne/ENSAI-2A-Big-Data
-  repo-branch: main
-  issue-url: https://github.com/ludo2ne/ENSAI-2A-Big-Data/issues/new
-  repo-actions: [edit, issue]
+      Website built with [Quarto](https://quarto.org/){.external target="_blank"}
+      [Code source](https://github.com/ludo2ne/ENSAI-2A-Big-Data){.external target="_blank"}
 
 format:
   html:
-    theme: 
+    theme:
       dark: solar
       light: cosmo
-
-
-
+    css: styles.css
