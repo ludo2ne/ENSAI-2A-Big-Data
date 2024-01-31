@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="description" content="Lab 1">
 
-<title>Big Data - First steps with Spark</title>
+<title>Big Data - First steps with Spark - Correction</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,7 +23,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -82,7 +82,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -91,25 +97,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
+<link rel="stylesheet" href="../../../styles.css">
 </head>
 
 <body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Big Data</span>
     </a>
@@ -121,32 +126,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../index.html" rel="" target="">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-labs" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-labs" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Labs</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-labs">    
         <li>
-    <a class="dropdown-item" href="../../../docs/lab/lab-setup.html" rel="" target="">
+    <a class="dropdown-item" href="../../../docs/lab/lab-setup.html">
  <span class="dropdown-text">Lab setup</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../docs/lab/lab0/lab0.html" rel="" target="">
+    <a class="dropdown-item" href="../../../docs/lab/lab0/lab0.html">
  <span class="dropdown-text">Lab 0</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../docs/lab/lab1/lab1-SSPCloud.html" rel="" target="">
+    <a class="dropdown-item" href="../../../docs/lab/lab1/lab1-SSPCloud.html">
  <span class="dropdown-text">Lab 1</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../docs/lab/lab2/lab2-SSPCloud.html" rel="" target="">
+    <a class="dropdown-item" href="../../../docs/lab/lab2/lab2-SSPCloud.ipynb">
  <span class="dropdown-text">Lab 2</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../docs/lab/lab3/lab3.html" rel="" target="">
+    <a class="dropdown-item" href="../../../docs/lab/lab3/lab3.html">
  <span class="dropdown-text">Lab 3</span></a>
   </li>  
     </ul>
@@ -154,63 +159,68 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/ludo2ne/ENSAI-2A-Big-Data" rel="" target="_blank"><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/ludo2ne/ENSAI-2A-Big-Data" target="_blank"> <i class="bi bi-github" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-</div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="3">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#before-you-start" id="toc-before-you-start" class="nav-link active" data-scroll-target="#before-you-start">1. Before you start</a></li>
-  <li><a href="#create-a-spark-session" id="toc-create-a-spark-session" class="nav-link" data-scroll-target="#create-a-spark-session">2. Create a Spark session</a></li>
-  <li><a href="#first-steps-with-spark---data-importation" id="toc-first-steps-with-spark---data-importation" class="nav-link" data-scroll-target="#first-steps-with-spark---data-importation">3. First steps with Spark - Data importation</a>
+  <li><a href="#before-you-start" id="toc-before-you-start" class="nav-link active" data-scroll-target="#before-you-start">Before you start</a></li>
+  <li><a href="#create-a-spark-session" id="toc-create-a-spark-session" class="nav-link" data-scroll-target="#create-a-spark-session"><span class="header-section-number">1</span> Create a Spark session</a></li>
+  <li><a href="#first-steps-with-spark---data-importation" id="toc-first-steps-with-spark---data-importation" class="nav-link" data-scroll-target="#first-steps-with-spark---data-importation"><span class="header-section-number">2</span> First steps with Spark - Data importation</a>
   <ul class="collapse">
-  <li><a href="#hands-on-1---data-importation" id="toc-hands-on-1---data-importation" class="nav-link" data-scroll-target="#hands-on-1---data-importation">✍Hands-on 1 - Data importation</a></li>
+  <li><a href="#hands-on-1---data-importation" id="toc-hands-on-1---data-importation" class="nav-link" data-scroll-target="#hands-on-1---data-importation"><span class="header-section-number">2.1</span> ✍Hands-on 1 - Data importation</a></li>
   </ul></li>
-  <li><a href="#data-frame-basic-manipulations" id="toc-data-frame-basic-manipulations" class="nav-link" data-scroll-target="#data-frame-basic-manipulations">4. Data frame basic manipulations</a>
+  <li><a href="#data-frame-basic-manipulations" id="toc-data-frame-basic-manipulations" class="nav-link" data-scroll-target="#data-frame-basic-manipulations"><span class="header-section-number">3</span> Data frame basic manipulations</a>
   <ul class="collapse">
-  <li><a href="#lazy-evaluation" id="toc-lazy-evaluation" class="nav-link" data-scroll-target="#lazy-evaluation">Lazy evaluation</a></li>
-  <li><a href="#hands-on-2---data-frame-basic-manipulations" id="toc-hands-on-2---data-frame-basic-manipulations" class="nav-link" data-scroll-target="#hands-on-2---data-frame-basic-manipulations">✍Hands-on 2 - Data frame basic manipulations</a></li>
+  <li><a href="#lazy-evaluation" id="toc-lazy-evaluation" class="nav-link" data-scroll-target="#lazy-evaluation"><span class="header-section-number">3.1</span> Lazy evaluation</a></li>
+  <li><a href="#hands-on-2---data-frame-basic-manipulations" id="toc-hands-on-2---data-frame-basic-manipulations" class="nav-link" data-scroll-target="#hands-on-2---data-frame-basic-manipulations"><span class="header-section-number">3.2</span> ✍Hands-on 2 - Data frame basic manipulations</a></li>
   </ul></li>
-  <li><a href="#basic-dataframe-column-manipulation" id="toc-basic-dataframe-column-manipulation" class="nav-link" data-scroll-target="#basic-dataframe-column-manipulation">5. Basic DataFrame column manipulation</a>
+  <li><a href="#basic-dataframe-column-manipulation" id="toc-basic-dataframe-column-manipulation" class="nav-link" data-scroll-target="#basic-dataframe-column-manipulation"><span class="header-section-number">4</span> Basic DataFrame column manipulation</a>
   <ul class="collapse">
-  <li><a href="#hands-on-3---basic-dataframe-column-manipulation" id="toc-hands-on-3---basic-dataframe-column-manipulation" class="nav-link" data-scroll-target="#hands-on-3---basic-dataframe-column-manipulation">✍Hands-on 3 - Basic DataFrame column manipulation</a></li>
+  <li><a href="#hands-on-3---basic-dataframe-column-manipulation" id="toc-hands-on-3---basic-dataframe-column-manipulation" class="nav-link" data-scroll-target="#hands-on-3---basic-dataframe-column-manipulation"><span class="header-section-number">4.1</span> ✍Hands-on 3 - Basic DataFrame column manipulation</a></li>
   </ul></li>
-  <li><a href="#advance-dataframe-column-manipulation" id="toc-advance-dataframe-column-manipulation" class="nav-link" data-scroll-target="#advance-dataframe-column-manipulation">6. Advance DataFrame column manipulation</a>
+  <li><a href="#advance-dataframe-column-manipulation" id="toc-advance-dataframe-column-manipulation" class="nav-link" data-scroll-target="#advance-dataframe-column-manipulation"><span class="header-section-number">5</span> Advance DataFrame column manipulation</a>
   <ul class="collapse">
-  <li><a href="#array-manipulation" id="toc-array-manipulation" class="nav-link" data-scroll-target="#array-manipulation">Array manipulation</a></li>
-  <li><a href="#user-defined-function" id="toc-user-defined-function" class="nav-link" data-scroll-target="#user-defined-function">User defined function</a></li>
+  <li><a href="#array-manipulation" id="toc-array-manipulation" class="nav-link" data-scroll-target="#array-manipulation"><span class="header-section-number">5.1</span> Array manipulation</a></li>
+  <li><a href="#user-defined-function" id="toc-user-defined-function" class="nav-link" data-scroll-target="#user-defined-function"><span class="header-section-number">5.2</span> User defined function</a></li>
   </ul></li>
-  <li><a href="#aggregation-functions" id="toc-aggregation-functions" class="nav-link" data-scroll-target="#aggregation-functions">7. Aggregation functions</a>
+  <li><a href="#aggregation-functions" id="toc-aggregation-functions" class="nav-link" data-scroll-target="#aggregation-functions"><span class="header-section-number">6</span> Aggregation functions</a>
   <ul class="collapse">
-  <li><a href="#hands-on-6---aggregation-functions" id="toc-hands-on-6---aggregation-functions" class="nav-link" data-scroll-target="#hands-on-6---aggregation-functions">✍Hands-on 6 - Aggregation functions</a></li>
+  <li><a href="#hands-on-6---aggregation-functions" id="toc-hands-on-6---aggregation-functions" class="nav-link" data-scroll-target="#hands-on-6---aggregation-functions"><span class="header-section-number">6.1</span> ✍Hands-on 6 - Aggregation functions</a></li>
   </ul></li>
-  <li><a href="#grouping-functions" id="toc-grouping-functions" class="nav-link" data-scroll-target="#grouping-functions">8. Grouping functions</a>
+  <li><a href="#grouping-functions" id="toc-grouping-functions" class="nav-link" data-scroll-target="#grouping-functions"><span class="header-section-number">7</span> Grouping functions</a>
   <ul class="collapse">
-  <li><a href="#hands-on-7---grouping-functions" id="toc-hands-on-7---grouping-functions" class="nav-link" data-scroll-target="#hands-on-7---grouping-functions">✍Hands-on 7 - Grouping functions</a></li>
+  <li><a href="#hands-on-7---grouping-functions" id="toc-hands-on-7---grouping-functions" class="nav-link" data-scroll-target="#hands-on-7---grouping-functions"><span class="header-section-number">7.1</span> ✍Hands-on 7 - Grouping functions</a></li>
   </ul></li>
-  <li><a href="#spark-sql" id="toc-spark-sql" class="nav-link" data-scroll-target="#spark-sql">9. Spark SQL</a>
+  <li><a href="#spark-sql" id="toc-spark-sql" class="nav-link" data-scroll-target="#spark-sql"><span class="header-section-number">8</span> Spark SQL</a>
   <ul class="collapse">
-  <li><a href="#hands-on-8---spark-sql" id="toc-hands-on-8---spark-sql" class="nav-link" data-scroll-target="#hands-on-8---spark-sql">✍Hands-on 8 - Spark SQL</a></li>
+  <li><a href="#hands-on-8---spark-sql" id="toc-hands-on-8---spark-sql" class="nav-link" data-scroll-target="#hands-on-8---spark-sql"><span class="header-section-number">8.1</span> ✍Hands-on 8 - Spark SQL</a></li>
   </ul></li>
-  <li><a href="#delete-the-jupyter-pyspark-service" id="toc-delete-the-jupyter-pyspark-service" class="nav-link" data-scroll-target="#delete-the-jupyter-pyspark-service">10. Delete the Jupyter-pyspark service</a></li>
+  <li><a href="#delete-the-jupyter-pyspark-service" id="toc-delete-the-jupyter-pyspark-service" class="nav-link" data-scroll-target="#delete-the-jupyter-pyspark-service"><span class="header-section-number">9</span> Delete the Jupyter-pyspark service</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.dev/ludo2ne/ENSAI-2A-Big-Data/blob/main/docs/lab/lab1/lab1-SSPCloud-correction.ipynb" class="toc-action">Edit this page</a></p><p><a href="https://github.com/ludo2ne/ENSAI-2A-Big-Data/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lab1-SSPCloud-correction.ipynb" download="lab1-SSPCloud-correction.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
@@ -219,7 +229,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">First steps with Spark</h1>
+<h1 class="title">First steps with Spark - Correction</h1>
 </div>
 
 <div>
@@ -237,54 +247,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
 
-<section id="before-you-start" class="level2">
-<h2 class="anchored" data-anchor-id="before-you-start">1. Before you start</h2>
-<ul>
-<li><input type="checkbox">connect to <a href="https://datalab.sspcloud.fr/">SSPCloud</a>
-<ul>
-<li>if necessary, create an account with your ENSAI e-mail address</li>
-</ul></li>
-<li>Go to <code>Mes services</code>
-<ul>
-<li><input type="checkbox">Create a new service : <code>Jupyter-pyspark</code></li>
-<li>Wait for a few seconds</li>
-<li><input type="checkbox">Clic on <code>Copier le mot de passe</code> and then <code>Ouvrir le service</code></li>
-<li><input type="checkbox">On the next page, paste it in the appropriate place and <code>Log in</code></li>
-<li>You are now in your Jupyter service</li>
-</ul></li>
-<li><input type="checkbox">Import file named <code>lab1-SSPCloud.ipynb</code>
+
+<section id="before-you-start" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="before-you-start">Before you start</h2>
 <ul class="task-list">
-<li><input type="checkbox">open it and follow the instructions</li>
-</ul></li>
-</ul>
-<section id="at-this-end-of-this-lab" class="level4">
-<h4 class="anchored" data-anchor-id="at-this-end-of-this-lab">At this end of this lab</h4>
-<ul class="task-list">
-<li><input type="checkbox">Export your notebook
-<ul>
-<li>File &gt; Export Notebook As … &gt; Export Notebook To HTML</li>
-</ul></li>
-<li><input type="checkbox">Delete your Jupyter service !</li>
+<li><label><input type="checkbox">Download this <a href="lab1-SSPCloud.ipynb" target="_blank">Jupyter Notebook</a></label></li>
+<li><label><input type="checkbox">Follow these <a href="../../../docs/lab/lab-setup.html" target="_blank">instructions</a></label></li>
 </ul>
 </section>
-</section>
-<section id="create-a-spark-session" class="level2">
-<h2 class="anchored" data-anchor-id="create-a-spark-session">2. Create a Spark session</h2>
+<section id="create-a-spark-session" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="create-a-spark-session"><span class="header-section-number">1</span> Create a Spark session</h2>
 <ul class="task-list">
-<li><input type="checkbox">Execute the following two cells to initialize a Spark session.</li>
+<li><label><input type="checkbox">Execute the following two cells to initialize a Spark session.</label></li>
 </ul>
-<div class="cell" data-tags="[]" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="4">
+<div id="4054e9c6" class="cell" data-tags="[]" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>spark <span class="op">=</span> (SparkSession </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>spark <span class="op">=</span> (SparkSession</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>         .builder</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>         <span class="co"># default url of the internally accessed Kubernetes API</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>         <span class="co"># (This Jupyter notebook service is itself a Kubernetes Pod)</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>         .master(<span class="st">"k8s://https://kubernetes.default.svc:443"</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Executors spark docker image: for simplicity reasons, this jupyter notebook is reused </span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Executors spark docker image: for simplicity reasons, this jupyter notebook is reused</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.kubernetes.container.image"</span>, os.environ[<span class="st">'IMAGE_NAME'</span>])</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Name of the Kubernetes namespace</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.kubernetes.namespace"</span>, os.environ[<span class="st">'KUBERNETES_NAMESPACE'</span>])</span>
@@ -297,44 +285,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.dynamicAllocation.initialExecutors"</span>,<span class="st">"1"</span>)</span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.dynamicAllocation.minExecutors"</span>,<span class="st">"1"</span>)</span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.dynamicAllocation.maxExecutors"</span>,<span class="st">"60"</span>)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Ratio match the number of pods to create for a given number of parallel tasks </span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Ratio match the number of pods to create for a given number of parallel tasks</span></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>         <span class="co"># (100 parallel, ratio of 1, one aims at 100 pods, with 0.5 it would be 50 pods)</span></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.dynamicAllocation.executorAllocationRatio"</span>,<span class="st">"1"</span>)</span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.dynamicAllocation.shuffleTracking.enabled"</span>,<span class="st">"true"</span>)</span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>         .getOrCreate()</span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="5">
+<div id="97fdddb0" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>spark</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
-
-            <div>
-                <p><b>SparkSession - in-memory</b></p>
-                
-        <div>
-            <p><b>SparkContext</b></p>
-
-            <p><a href="http://jupyter-pyspark-180818-0.jupyter-pyspark-180818.user-ludo2ne.svc.cluster.local:4040">Spark UI</a></p>
-
-            <dl>
-              <dt>Version</dt>
-                <dd><code>v3.5.0</code></dd>
-              <dt>Master</dt>
-                <dd><code>k8s://https://kubernetes.default.svc:443</code></dd>
-              <dt>AppName</dt>
-                <dd><code>pyspark-shell</code></dd>
-            </dl>
-        </div>
-        
-            </div>
-        
-</div>
 </div>
 </section>
-<section id="first-steps-with-spark---data-importation" class="level2">
-<h2 class="anchored" data-anchor-id="first-steps-with-spark---data-importation">3. First steps with Spark - Data importation</h2>
-<p>Spark’s main object class is the DataFrame, which is a distributed table.<br>
-It is analogous to R’s or Python (Pandas)’s data frames:</p>
+<section id="first-steps-with-spark---data-importation" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="first-steps-with-spark---data-importation"><span class="header-section-number">2</span> First steps with Spark - Data importation</h2>
+<p>Spark’s main object class is the DataFrame, which is a distributed table. It is analogous to R’s or Python (Pandas)’s data frames:</p>
 <ul>
 <li>one row represents an observation,</li>
 <li>one column represents a variable.</li>
@@ -355,13 +319,13 @@ It is analogous to R’s or Python (Pandas)’s data frames:</p>
 <p>In the future, you may consult the <a href="https://spark.apache.org/docs/latest/sql-data-sources.html">Data Source documentation</a> to have the complete description of Spark’s reading abilities.</p>
 <p>The data you will use in this lab are real data from the twitter <a href="https://developer.twitter.com/en/docs/twitter-api/tweets/sampled-stream/introduction">sampled stream API</a> and <a href="https://developer.twitter.com/en/docs/twitter-api/tweets/filtered-stream/introduction">filtered stream API</a>. The tweets folder contains more than 50 files and more than 2 million tweets. The tweets was collected between the 14/04/2021 and the 18/04/2021. The total collection time was less than 10 hours.</p>
 <hr>
-<section id="hands-on-1---data-importation" class="level3">
-<h3 class="anchored" data-anchor-id="hands-on-1---data-importation">✍Hands-on 1 - Data importation</h3>
+<section id="hands-on-1---data-importation" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="hands-on-1---data-importation"><span class="header-section-number">2.1</span> ✍Hands-on 1 - Data importation</h3>
 <ul class="task-list">
-<li><input type="checkbox">Load the json file stored here : <code>s3a://ludo2ne/diffusion/tweets.jsonl.gz</code>
+<li><label><input type="checkbox">Load the json file stored here : <code>s3a://ludo2ne/diffusion/tweets.jsonl.gz</code></label>
 <ul class="task-list">
-<li><input type="checkbox">Name you data frame <code>df_tweet</code></li>
-<li><input type="checkbox">Use function <code>cache()</code> on the data frame. Caching is a performance optimization technique that allows you to persist an intermediate or final result of a computation in memory, reducing the need to recompute the data when it is accessed multiple time</li>
+<li><label><input type="checkbox">Name you data frame <code>df_tweet</code></label></li>
+<li><label><input type="checkbox">Use function <code>cache()</code> on the data frame. Caching is a performance optimization technique that allows you to persist an intermediate or final result of a computation in memory, reducing the need to recompute the data when it is accessed multiple time</label></li>
 </ul>
 <small> ⚙️ This file is an a <code>JSONL</code> (JSON-line) format, which means that each line of it is a JSON object. A JSON object is just a Python dictionary or a JavaScript object and looks like this: <code>{ key1: value1, key2: ["array", "of", "many values]}</code>). This file has been compressed into a <code>GZ</code> archive, hence the <code>.jsonl.gz</code> ending. Also this file is not magically appearing in your S3 storage. It is hosted on one of your teacher’s bucket and has been made public, so that you can access it.</small></li>
 </ul>
@@ -374,50 +338,43 @@ It is analogous to R’s or Python (Pandas)’s data frames:</p>
 <li>In Jupyter, read it using <code>s3a://&lt;user_name&gt;/tweets.jsonl.gz</code></li>
 </ul></li>
 </ul>
-<div class="cell" data-tags="[]" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="6">
+<div id="cb33df29" class="cell" data-tags="[]" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># DataFrame creation</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df_tweet <span class="op">=</span> spark.read.json(<span class="st">"s3a://ludo2ne/diffusion/tweets.jsonl.gz"</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># caching</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>df_tweet.cache()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>                                                                                </code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>DataFrame[auteur: string, contenu: string, date_creation: string, entities: struct&lt;annotations:array&lt;struct&lt;end:bigint,normalized_text:string,probability:double,start:bigint,type:string&gt;&gt;,cashtags:array&lt;struct&lt;end:bigint,start:bigint,tag:string&gt;&gt;,hashtags:array&lt;struct&lt;end:bigint,start:bigint,tag:string&gt;&gt;,mentions:array&lt;struct&lt;end:bigint,id:string,start:bigint,username:string&gt;&gt;,urls:array&lt;struct&lt;description:string,display_url:string,end:bigint,expanded_url:string,images:array&lt;struct&lt;height:bigint,url:string,width:bigint&gt;&gt;,start:bigint,status:bigint,title:string,unwound_url:string,url:string&gt;&gt;&gt;, hashtags: array&lt;string&gt;, like_count: bigint, other: struct&lt;auteur_name:string&gt;, reply_count: bigint, retweet_count: bigint]</code></pre>
-</div>
 </div>
 </section>
 </section>
-<section id="data-frame-basic-manipulations" class="level2">
-<h2 class="anchored" data-anchor-id="data-frame-basic-manipulations">4. Data frame basic manipulations</h2>
-<p>If DataFrames are immutable, they can however be <strong><em>transformed</em></strong> in other DataFrames, in the sense that a modified copy is returned.<br>
-Such <strong>transformations</strong> include: filtering, sampling, dropping columns, selecting columns, adding new columns…</p>
+<section id="data-frame-basic-manipulations" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="data-frame-basic-manipulations"><span class="header-section-number">3</span> Data frame basic manipulations</h2>
+<p>If DataFrames are immutable, they can however be <strong><em>transformed</em></strong> in other DataFrames, in the sense that a modified copy is returned. Such <strong>transformations</strong> include: filtering, sampling, dropping columns, selecting columns, adding new columns…</p>
 <p>First, you can get information about the columns with:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df.columns       <span class="co"># get the column names</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df.schema        <span class="co"># get the column names and their respective type</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>df.printSchema() <span class="co"># same, but human-readable</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df.columns       <span class="co"># get the column names</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df.schema        <span class="co"># get the column names and their respective type</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>df.printSchema() <span class="co"># same, but human-readable</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You can select columns with the <code>select()</code> method. It takes as argument a list of column name. For example :</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df_with_less_columns <span class="op">=</span> df<span class="op">\</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  .select(<span class="st">"variable3"</span>,<span class="st">"variable_four"</span>,<span class="st">"variable-6"</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Yes, you do need the ugly \ at the end of the line,</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># if you want to chain methods between lines in Python</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_with_less_columns <span class="op">=</span> df<span class="op">\</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  .select(<span class="st">"variable3"</span>,<span class="st">"variable_four"</span>,<span class="st">"variable-6"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Yes, you do need the ugly \ at the end of the line,</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># if you want to chain methods between lines in Python</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You can get nested columns easily with :</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df.select(<span class="st">"parentField.nestedField"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df.select(<span class="st">"parentField.nestedField"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>To filter data you could use the <code>filter()</code> method. It take as input an expression that gets evaluated for each observation and should return a boolean. Sampling is performed with the <code>sample()</code> method. For example :</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df_with_less_rows <span class="op">=</span> df<span class="op">\</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  .sample(fraction<span class="op">=</span><span class="fl">0.001</span>)<span class="op">\</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  .<span class="bu">filter</span>(df.variable1<span class="op">==</span><span class="st">"value"</span>)<span class="op">\</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  .show(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df_with_less_rows <span class="op">=</span> df<span class="op">\</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  .sample(fraction<span class="op">=</span><span class="fl">0.001</span>)<span class="op">\</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  .<span class="bu">filter</span>(df.variable1<span class="op">==</span><span class="st">"value"</span>)<span class="op">\</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  .show(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>As said before your data are distributed over multiple nodes (executors) and data inside a node are split into partitions. Then each transformations will be run in parallel. They are called <em>narrow transformation</em> For example, to sample a DataFrame, Spark sample every partitions in parallel because sample all partition produce the sample DataFrame. For some transformations, like <code>groupBy()</code> it’s impossible, and it’s cannot be run in parallel.</p>
 <p><img src="img/spark_exemple2_pipeline.png" style="zoom:50%;"></p>
 <!-- take() collect() limit() first() show() -->
 <!-- lien vers la doc https://spark.apache.org/docs/3.1.1/api/python/reference/pyspark.sql.html#dataframe-apis -->
-<section id="lazy-evaluation" class="level3">
-<h3 class="anchored" data-anchor-id="lazy-evaluation">Lazy evaluation</h3>
+<section id="lazy-evaluation" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="lazy-evaluation"><span class="header-section-number">3.1</span> Lazy evaluation</h3>
 <p>This is because Spark has what is known as <strong>lazy evaluation</strong>, in the sense that it will wait as much as it can before performing the actual computation. Said otherwise, when you run an instruction such as:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>tweet_author_hashtags <span class="op">=</span> df_tweet_big.select(<span class="st">"auteur"</span>,<span class="st">"hashtags"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>tweet_author_hashtags <span class="op">=</span> df_tweet_big.select(<span class="st">"auteur"</span>,<span class="st">"hashtags"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>… you are not executing anything! Rather, you are building an <strong>execution plan</strong>, to be realised later.</p>
 <p>Spark is quite extreme in its laziness, since only a handful of methods called <strong>actions</strong>, by opposition to <strong>transformations</strong>, will trigger an execution. The most notable are:</p>
 <ol type="1">
@@ -432,221 +389,82 @@ Such <strong>transformations</strong> include: filtering, sampling, dropping col
 <p><strong>This has also drawbacks.</strong> Since the computation is optimized for the end result, the intermediate stages are discarded by default. So if you need a DataFrame multiple times, you have to cache it in memory because if you don’t Spark will recompute it every single time.</p>
 <hr>
 </section>
-<section id="hands-on-2---data-frame-basic-manipulations" class="level3">
-<h3 class="anchored" data-anchor-id="hands-on-2---data-frame-basic-manipulations">✍Hands-on 2 - Data frame basic manipulations</h3>
+<section id="hands-on-2---data-frame-basic-manipulations" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="hands-on-2---data-frame-basic-manipulations"><span class="header-section-number">3.2</span> ✍Hands-on 2 - Data frame basic manipulations</h3>
 <ul class="task-list">
-<li><input type="checkbox">How many rows have your two DataFrame ?</li>
+<li><label><input type="checkbox">How many rows have your two DataFrame ?</label></li>
 </ul>
-<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df_tweet.count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>                                                                                </code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="4">
-<pre><code>100000</code></pre>
-</div>
+<div id="c179bff9" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df_tweet.count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
-<li><input type="checkbox">Display columns names and then the schema</li>
+<li><label><input type="checkbox">Display columns names and then the schema</label></li>
 </ul>
-<div class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df_tweet.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
-<pre><code>['auteur',
- 'contenu',
- 'date_creation',
- 'entities',
- 'hashtags',
- 'like_count',
- 'other',
- 'reply_count',
- 'retweet_count']</code></pre>
+<div id="fa517120" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df_tweet.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df_tweet.printSchema()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>root
- |-- auteur: string (nullable = true)
- |-- contenu: string (nullable = true)
- |-- date_creation: string (nullable = true)
- |-- entities: struct (nullable = true)
- |    |-- annotations: array (nullable = true)
- |    |    |-- element: struct (containsNull = true)
- |    |    |    |-- end: long (nullable = true)
- |    |    |    |-- normalized_text: string (nullable = true)
- |    |    |    |-- probability: double (nullable = true)
- |    |    |    |-- start: long (nullable = true)
- |    |    |    |-- type: string (nullable = true)
- |    |-- cashtags: array (nullable = true)
- |    |    |-- element: struct (containsNull = true)
- |    |    |    |-- end: long (nullable = true)
- |    |    |    |-- start: long (nullable = true)
- |    |    |    |-- tag: string (nullable = true)
- |    |-- hashtags: array (nullable = true)
- |    |    |-- element: struct (containsNull = true)
- |    |    |    |-- end: long (nullable = true)
- |    |    |    |-- start: long (nullable = true)
- |    |    |    |-- tag: string (nullable = true)
- |    |-- mentions: array (nullable = true)
- |    |    |-- element: struct (containsNull = true)
- |    |    |    |-- end: long (nullable = true)
- |    |    |    |-- id: string (nullable = true)
- |    |    |    |-- start: long (nullable = true)
- |    |    |    |-- username: string (nullable = true)
- |    |-- urls: array (nullable = true)
- |    |    |-- element: struct (containsNull = true)
- |    |    |    |-- description: string (nullable = true)
- |    |    |    |-- display_url: string (nullable = true)
- |    |    |    |-- end: long (nullable = true)
- |    |    |    |-- expanded_url: string (nullable = true)
- |    |    |    |-- images: array (nullable = true)
- |    |    |    |    |-- element: struct (containsNull = true)
- |    |    |    |    |    |-- height: long (nullable = true)
- |    |    |    |    |    |-- url: string (nullable = true)
- |    |    |    |    |    |-- width: long (nullable = true)
- |    |    |    |-- start: long (nullable = true)
- |    |    |    |-- status: long (nullable = true)
- |    |    |    |-- title: string (nullable = true)
- |    |    |    |-- unwound_url: string (nullable = true)
- |    |    |    |-- url: string (nullable = true)
- |-- hashtags: array (nullable = true)
- |    |-- element: string (containsNull = true)
- |-- like_count: long (nullable = true)
- |-- other: struct (nullable = true)
- |    |-- auteur_name: string (nullable = true)
- |-- reply_count: long (nullable = true)
- |-- retweet_count: long (nullable = true)
-</code></pre>
-</div>
+<div id="6beeb5bc" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df_tweet.printSchema()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
-<li><input type="checkbox">Display 10 rows of df_tweet</li>
+<li><label><input type="checkbox">Display 10 rows of df_tweet</label></li>
 </ul>
-<div class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df_tweet.show(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>[Stage 1:&gt;                                                          (0 + 1) / 1]                                                                                </code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>+---------------+-------------------------------+--------------------+--------------------+--------+----------+--------------------+-----------+-------------+
-|         auteur|                        contenu|       date_creation|            entities|hashtags|like_count|               other|reply_count|retweet_count|
-+---------------+-------------------------------+--------------------+--------------------+--------+----------+--------------------+-----------+-------------+
-|    xwendystian|           RT @karlarboledas...|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|            {W🚶‍♀️}|          0|          962|
-|    suoicilataR|           RT @sooky_co: SLA...|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|               {Rat}|          0|         3849|
-|        SatsuOW|           RT @kusujinn: 👻?...|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|             {Satsu}|          0|         9787|
-|   birashoboka7|           @Kitona_gold You ...|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|       {birashoboka}|          0|            0|
-|    TheRealCzia|           nagugulat ako don...|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|{Czia is looking ...|          0|            0|
-|      bbyindrii|           Keknya ni mata ha...|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|                {🎠}|          0|            0|
-|          9nns3|なんか深夜2~3時の気分だから寝る|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|              {ᒣᔰ🍐}|          0|            0|
-|banbanzai__1140|   @banbanzai_ マジで会いたい。|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|          {やまもん}|          0|            0|
-| Sampathreddyk6|           RT @ynakg2: When ...|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|     {Sampathreddyk}|          0|          838|
-|ElQueLosCritica|           Uy, el Centro cam...|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|       {Don Critico}|          0|            0|
-+---------------+-------------------------------+--------------------+--------------------+--------+----------+--------------------+-----------+-------------+
-only showing top 10 rows
-</code></pre>
-</div>
+<div id="e4e9b971" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df_tweet.show(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
-<li><input type="checkbox">Sample <code>df_tweet</code> and keep only 10% of it.
+<li><label><input type="checkbox">Sample <code>df_tweet</code> and keep only 10% of it.</label>
 <ul>
 <li>Create a new DataFrame named <code>df_tweet_sampled</code>.</li>
 <li>If computations take too long on the full DataFrame, use this one instead or add a sample transformation in your expression.</li>
 </ul></li>
 </ul>
-<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df_tweet_sampled <span class="op">=</span> df_tweet<span class="op">\</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  .sample(fraction<span class="op">=</span><span class="fl">0.1</span>)</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>df_tweet_sampled.count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="13">
-<pre><code>10145</code></pre>
-</div>
+<div id="74e2390b" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df_tweet_sampled <span class="op">=</span> df_tweet<span class="op">\</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  .sample(fraction<span class="op">=</span><span class="fl">0.1</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>df_tweet_sampled.count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
-<li><input type="checkbox">Define a DataFrame <code>tweet_author_hashtags</code> with only the <code>auteur</code> and <code>hashtags</code> columns
+<li><label><input type="checkbox">Define a DataFrame <code>tweet_author_hashtags</code> with only the <code>auteur</code> and <code>hashtags</code> columns</label>
 <ul class="task-list">
-<li><input type="checkbox">Then display 5 rows</li>
+<li><label><input type="checkbox">Then display 5 rows</label></li>
 </ul></li>
 </ul>
-<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>tweet_author_hashtags <span class="op">=</span> df_tweet.select(<span class="st">"auteur"</span>, <span class="st">"hashtags"</span>)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>tweet_author_hashtags.show(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>+------------+--------+
-|      auteur|hashtags|
-+------------+--------+
-| xwendystian|      []|
-| suoicilataR|      []|
-|     SatsuOW|      []|
-|birashoboka7|      []|
-| TheRealCzia|      []|
-+------------+--------+
-only showing top 5 rows
-</code></pre>
-</div>
+<div id="56c842b5" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>tweet_author_hashtags <span class="op">=</span> df_tweet.select(<span class="st">"auteur"</span>, <span class="st">"hashtags"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>tweet_author_hashtags.show(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
-<li><input type="checkbox">Print 5 lines of a <strong>df_tweet</strong> with only the <code>auteur</code>, <code>mentions</code>, and <code>urls</code> columns.
+<li><label><input type="checkbox">Print 5 lines of a <strong>df_tweet</strong> with only the <code>auteur</code>, <code>mentions</code>, and <code>urls</code> columns.</label>
 <ul>
 <li><code>mentions</code> and <code>urls</code> are both nested columns in <code>entities</code></li>
 </ul></li>
 </ul>
-<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  .select(<span class="st">"auteur"</span>, </span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>          <span class="st">"entities.mentions"</span>, </span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>          <span class="st">"entities.urls"</span>)<span class="op">\</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  .show(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>+------------+--------------------+--------------------+
-|      auteur|            mentions|                urls|
-+------------+--------------------+--------------------+
-| xwendystian|[{17, 11851291015...|                NULL|
-| suoicilataR|[{12, 14533927358...|[{NULL, pic.twitt...|
-|     SatsuOW|[{12, 11935477705...|[{NULL, pic.twitt...|
-|birashoboka7|[{12, 14860437391...|                NULL|
-| TheRealCzia|                NULL|                NULL|
-+------------+--------------------+--------------------+
-only showing top 5 rows
-</code></pre>
-</div>
+<div id="e258873a" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  .select(<span class="st">"auteur"</span>,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>          <span class="st">"entities.mentions"</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>          <span class="st">"entities.urls"</span>)<span class="op">\</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  .show(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
-<li><input type="checkbox">Filter <strong>df_tweet</strong> and keep only tweets with more than 1 like.
+<li><label><input type="checkbox">Filter <strong>df_tweet</strong> and keep only tweets with more than 1 like.</label>
 <ul class="task-list">
-<li><input type="checkbox">Display only <code>auteur</code>, <code>contenu</code> and <code>like_count</code></li>
-<li><input type="checkbox">Print 10 lines</li>
+<li><label><input type="checkbox">Display only <code>auteur</code>, <code>contenu</code> and <code>like_count</code></label></li>
+<li><label><input type="checkbox">Print 10 lines</label></li>
 </ul></li>
 </ul>
-<div class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  .<span class="bu">filter</span>(df_tweet.like_count <span class="op">&gt;=</span> <span class="dv">1</span>)<span class="op">\</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  .show(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>+---------------+------------------------------------+--------------------+--------------------+---------+----------+--------------------------------+-----------+-------------+
-|         auteur|                             contenu|       date_creation|            entities| hashtags|like_count|                           other|reply_count|retweet_count|
-+---------------+------------------------------------+--------------------+--------------------+---------+----------+--------------------------------+-----------+-------------+
-|      DZero_SYS|                @blueberry_lin 🖥...|2022-03-24T14:59:...|{NULL, NULL, NULL...|       []|         1|               {포켓워치 시스템}|          0|            0|
-|exusial_Penguin|            @Hano_Braves へぇ、い...|2022-03-24T14:59:...|{NULL, NULL, NULL...|       []|         1|                      {エクシア}|          0|            0|
-|      queend236|                @dayytonerr I try...|2022-03-24T14:59:...|{NULL, NULL, NULL...|       []|         1|            {ungrateful house...|          0|            0|
-|      ProBarron|                   ✋#Bitcoin forever|2022-03-24T14:59:...|{NULL, NULL, [{9,...|[Bitcoin]|         1|                        {Barron}|          0|            0|
-|enaha1648133622|                Acting is happy a...|2022-03-24T14:59:...|{NULL, NULL, NULL...|       []|         1|              {vineethmintu🌸🌹}|          1|            0|
-|rwyva1648133803|                Love does not alw...|2022-03-24T14:59:...|{NULL, NULL, NULL...|       []|         1|            {ﻜٕوِدًْٓ• ‏ﺧٕٓصٍمٍ}|          1|            0|
-|        nhoyvck|                   @jenoleeader meee|2022-03-24T14:59:...|{NULL, NULL, NULL...|       []|         1|                             {ً}|          0|            0|
-|  Takajyura9_36|ちーぼー、まりこPお疲れさまでした...|2022-03-24T14:59:...|{NULL, NULL, [{71...| [mp2000]|         1|                 {たかじゅら～☆}|          0|            0|
-|       Nexion17|                @pizdets17 Even T...|2022-03-24T14:59:...|{[{22, Trudeau, 0...|       []|         1|                    {Trader Nex}|          0|            0|
-|MyTomoya_030329|   뮈지? 제광기에 놀라서 두명이나...|2022-03-24T14:59:...|{NULL, NULL, NULL...|       []|         1|{브레이크다나❤️브레이크다나🧡...|          0|            0|
-+---------------+------------------------------------+--------------------+--------------------+---------+----------+--------------------------------+-----------+-------------+
-only showing top 10 rows
-</code></pre>
-</div>
+<div id="794ffdf4" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  .<span class="bu">filter</span>(df_tweet.like_count <span class="op">&gt;=</span> <span class="dv">1</span>)<span class="op">\</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  .show(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
-<section id="basic-dataframe-column-manipulation" class="level2">
-<h2 class="anchored" data-anchor-id="basic-dataframe-column-manipulation">5. Basic DataFrame column manipulation</h2>
+<section id="basic-dataframe-column-manipulation" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="basic-dataframe-column-manipulation"><span class="header-section-number">4</span> Basic DataFrame column manipulation</h2>
 <p>You can add/update/rename column of a DataFrame using <strong>spark</strong> :</p>
 <ul>
 <li>Drop : <code>df.drop(columnName : str )</code></li>
@@ -654,83 +472,48 @@ only showing top 10 rows
 <li>Add/update : <code>df.withColumn(columnName : str, columnExpression)</code></li>
 </ul>
 <p>For example</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  .withColumn(                                        <span class="co"># computes new variable</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"like_rt_ratio"</span>,                                  <span class="co"># like_rt_ratio "OVERCONFIDENCE"</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    df_tweet.like_count <span class="op">/</span>df_tweet.retweet_count)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>See <strong><a href="https://spark.apache.org/docs/3.1.1/api/python/reference/pyspark.sql.html#functions">here</a></strong> for the list of all functions available in an expression.</p>
-<section id="hands-on-3---basic-dataframe-column-manipulation" class="level3">
-<h3 class="anchored" data-anchor-id="hands-on-3---basic-dataframe-column-manipulation">✍Hands-on 3 - Basic DataFrame column manipulation</h3>
+<div id="288f61fa" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  .withColumn(                                        <span class="co"># computes new variable</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"like_rt_ratio"</span>,                                  <span class="co"># like_rt_ratio "OVERCONFIDENCE"</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    df_tweet.like_count <span class="op">/</span>df_tweet.retweet_count)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>See <a href="https://spark.apache.org/docs/3.1.1/api/python/reference/pyspark.sql.html#functions" class="external" target="_blank">here</a> for the list of all functions available in an expression.</p>
+<section id="hands-on-3---basic-dataframe-column-manipulation" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="hands-on-3---basic-dataframe-column-manipulation"><span class="header-section-number">4.1</span> ✍Hands-on 3 - Basic DataFrame column manipulation</h3>
 <ul class="task-list">
-<li><input type="checkbox">Define a DataFrame with a column names <code>interaction_count</code> named <code>df_tweet_interaction_count</code>
+<li><label><input type="checkbox">Define a DataFrame with a column names <code>interaction_count</code> named <code>df_tweet_interaction_count</code></label>
 <ul>
 <li>This column is the sum of <code>like_count</code>, <code>reply_count</code> and <code>retweet_count</code>.</li>
 </ul></li>
 </ul>
-<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>df_tweet_interaction_count <span class="op">=</span> df_tweet<span class="op">\</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  .drop(<span class="st">"other"</span>)<span class="op">\</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  .<span class="bu">filter</span>(df_tweet.like_count <span class="op">&gt;=</span> <span class="dv">1</span>)<span class="op">\</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  .<span class="bu">filter</span>(df_tweet.retweet_count <span class="op">&gt;=</span> <span class="dv">1</span>)<span class="op">\</span></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  .withColumn(</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"interaction_count"</span>,</span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    df_tweet.like_count <span class="op">+</span> df_tweet.reply_count <span class="op">+</span> df_tweet.retweet_count)</span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>df_tweet_interaction_count<span class="op">\</span></span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>  .show(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>+--------------+-------------------------------------+--------------------+---------------------------+--------------------------------+----------+-----------+-------------+-----------------+
-|        auteur|                              contenu|       date_creation|                   entities|                        hashtags|like_count|reply_count|retweet_count|interaction_count|
-+--------------+-------------------------------------+--------------------+---------------------------+--------------------------------+----------+-----------+-------------+-----------------+
-|      Unif1992|                 kalıplaşmış #beyo...|2022-03-24T14:59:...|       {NULL, NULL, [{20...|                       [beyoğlu]|         1|          0|            2|                3|
-|    moonknight|                 The wait is almos...|2022-03-24T15:00:...|       {[{40, Marvel Stu...|                    [MoonKnight]|        16|          0|            2|               18|
-|         B04Zw|                #PayPay\n#PayPayル...|2022-03-24T15:00:...|       {NULL, NULL, [{7,...|          [PayPay, PayPayルー...|         2|          0|            1|                3|
-|   SoulTide_JP|  #ソウルタイド リリース記念キャン...|2022-03-24T15:00:...|       {NULL, NULL, [{7,...|  [ソウルタイド, フォローRT, ...|         3|          0|           20|               23|
-|       strk1dz|                 happy 4th anniver...|2022-03-24T15:00:...|       {NULL, NULL, [{11...|[스키즈와_발맞춰걷는_4번째길,...|         2|          0|            1|                3|
-|  HALUKA_EIMIE| 大好きなおじょお誕生日おめでとう?...|2022-03-24T15:00:...|       {NULL, NULL, NULL...|                              []|         2|          0|            1|                3|
-|cubesugar03196|             樋口円香 https://t.co...|2022-03-24T15:00:...|       {NULL, NULL, NULL...|                              []|         2|          0|            1|                3|
-|  hokuoukizoku| 北欧貴族と猛禽妻の雪国狩り暮らし\...|2022-03-24T15:00:...|{[{45, あかねこ先生 78話...|                              []|         1|          0|            1|                2|
-|   iRis_a_himi|みんなありがとう！茜屋ちゃーんと元...|2022-03-24T15:01:...|       {NULL, NULL, NULL...|                              []|        17|          0|            3|               20|
-| tarun25812648|                 @ImRealScout Bro ...|2022-03-24T15:01:...|       {NULL, NULL, NULL...|                              []|         1|          0|            1|                2|
-+--------------+-------------------------------------+--------------------+---------------------------+--------------------------------+----------+-----------+-------------+-----------------+
-only showing top 10 rows
-</code></pre>
-</div>
+<div id="c81d131f" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df_tweet_interaction_count <span class="op">=</span> df_tweet<span class="op">\</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  .drop(<span class="st">"other"</span>)<span class="op">\</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  .<span class="bu">filter</span>(df_tweet.like_count <span class="op">&gt;=</span> <span class="dv">1</span>)<span class="op">\</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  .<span class="bu">filter</span>(df_tweet.retweet_count <span class="op">&gt;=</span> <span class="dv">1</span>)<span class="op">\</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  .withColumn(</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"interaction_count"</span>,</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    df_tweet.like_count <span class="op">+</span> df_tweet.reply_count <span class="op">+</span> df_tweet.retweet_count)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>df_tweet_interaction_count<span class="op">\</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  .show(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
-<li><input type="checkbox">Update the DataFrame you imported at the beginning of this lab and drop the <code>other</code> column</li>
+<li><label><input type="checkbox">Update the DataFrame you imported at the beginning of this lab and drop the <code>other</code> column</label></li>
 </ul>
-<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  .drop(<span class="st">"other"</span>)<span class="op">\</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  .show(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>+---------------+-------------------------------+--------------------+--------------------+--------+----------+-----------+-------------+
-|         auteur|                        contenu|       date_creation|            entities|hashtags|like_count|reply_count|retweet_count|
-+---------------+-------------------------------+--------------------+--------------------+--------+----------+-----------+-------------+
-|    xwendystian|           RT @karlarboledas...|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|          0|          962|
-|    suoicilataR|           RT @sooky_co: SLA...|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|          0|         3849|
-|        SatsuOW|           RT @kusujinn: 👻?...|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|          0|         9787|
-|   birashoboka7|           @Kitona_gold You ...|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|          0|            0|
-|    TheRealCzia|           nagugulat ako don...|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|          0|            0|
-|      bbyindrii|           Keknya ni mata ha...|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|          0|            0|
-|          9nns3|なんか深夜2~3時の気分だから寝る|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|          0|            0|
-|banbanzai__1140|   @banbanzai_ マジで会いたい。|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|          0|            0|
-| Sampathreddyk6|           RT @ynakg2: When ...|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|          0|          838|
-|ElQueLosCritica|           Uy, el Centro cam...|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|          0|            0|
-+---------------+-------------------------------+--------------------+--------------------+--------+----------+-----------+-------------+
-only showing top 10 rows
-</code></pre>
-</div>
+<div id="6b9110c9" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  .drop(<span class="st">"other"</span>)<span class="op">\</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  .show(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
-<section id="advance-dataframe-column-manipulation" class="level2">
-<h2 class="anchored" data-anchor-id="advance-dataframe-column-manipulation">6. Advance DataFrame column manipulation</h2>
-<section id="array-manipulation" class="level3">
-<h3 class="anchored" data-anchor-id="array-manipulation">Array manipulation</h3>
-<p>Some columns often contain arrays (lists) of values instead of just one value. This may seem surprising but this actually quite natural.<br>
-For instance, you may create an array of words from a text, or generate a list of random numbers for each observation, etc.</p>
+<section id="advance-dataframe-column-manipulation" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="advance-dataframe-column-manipulation"><span class="header-section-number">5</span> Advance DataFrame column manipulation</h2>
+<section id="array-manipulation" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="array-manipulation"><span class="header-section-number">5.1</span> Array manipulation</h3>
+<p>Some columns often contain arrays (lists) of values instead of just one value. This may seem surprising but this actually quite natural. For instance, you may create an array of words from a text, or generate a list of random numbers for each observation, etc.</p>
 <p>You may <strong>create array of values</strong> with:</p>
 <ul>
 <li><code>split(text : string, delimiter : string)</code>, turning a text into an array of strings</li>
@@ -800,323 +583,253 @@ For instance, you may create an array of words from a text, or generate a list o
 </table></li>
 </ul>
 <p>All this functions must be imported first :</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> split, explode, size, array_contains</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> split, explode, size, array_contains</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Do not forget, to create a new column, you should use <code>withColumn()</code>. For example :</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>df.withColumn(<span class="st">"new column"</span>, explode(<span class="st">"array"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df.withColumn(<span class="st">"new column"</span>, explode(<span class="st">"array"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="hands-on-4---array-manipulation" class="level4">
 <h4 class="anchored" data-anchor-id="hands-on-4---array-manipulation">✍Hands-on 4 - Array manipulation</h4>
 <ul class="task-list">
-<li><input type="checkbox">Keep all the tweets with hashtags and for each remaining line, split the hashtag text into an array of hashtags</li>
+<li><label><input type="checkbox">Keep all the tweets with hashtags and for each remaining line, split the hashtag text into an array of hashtags</label></li>
 </ul>
-<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> split, explode, size, array_contains</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  .<span class="bu">filter</span>(size(<span class="st">"hashtags"</span>) <span class="op">&gt;</span> <span class="dv">0</span>)<span class="op">\</span></span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  .withColumn(</span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"hashtag_exploded"</span>,</span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>    explode(<span class="st">"hashtags"</span>))<span class="op">\</span></span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>  .show(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>+------------+-----------------------+--------------------+----------------------------+---------------------+----------+--------------------+-----------+-------------+-----------------+
-|      auteur|                contenu|       date_creation|                    entities|             hashtags|like_count|               other|reply_count|retweet_count| hashtag_exploded|
-+------------+-----------------------+--------------------+----------------------------+---------------------+----------+--------------------+-----------+-------------+-----------------+
-|     GIimoto|RT @aabbeecc: 日本コ...|2022-03-24T14:59:...|{[{21, 日本コカ・コーラ, ...|[utamaru, コークオン]|         0|       {g.orchestra}|          0|            4|          utamaru|
-|     GIimoto|RT @aabbeecc: 日本コ...|2022-03-24T14:59:...|{[{21, 日本コカ・コーラ, ...|[utamaru, コークオン]|         0|       {g.orchestra}|          0|            4|       コークオン|
-|  MEWWhiskey|   📍เปิดหาร nct dre...|2022-03-24T14:59:...|        {NULL, NULL, [{14...| [ตลาดนัดnctdream,...|         0|{♡‧₊˚𝑱𝑱𝑴 .◜◡◝ ...|          0|            0|  ตลาดนัดnctdream|
-|  MEWWhiskey|   📍เปิดหาร nct dre...|2022-03-24T14:59:...|        {NULL, NULL, [{14...| [ตลาดนัดnctdream,...|         0|{♡‧₊˚𝑱𝑱𝑴 .◜◡◝ ...|          0|            0|       ตลาดนัดnct|
-|     1Giga23|   RT @blackboy: نيا...|2022-03-24T14:59:...|        {NULL, NULL, [{37...| [مليونية24مارس, م...|         0|         {Giga Rawi}|          0|           10|    مليونية24مارس|
-|     1Giga23|   RT @blackboy: نيا...|2022-03-24T14:59:...|        {NULL, NULL, [{37...| [مليونية24مارس, م...|         0|         {Giga Rawi}|          0|           10|مدن_السودان_تنتفض|
-|  XiynZeOrdo|   RT @AFP: #BREAKIN...|2022-03-24T14:59:...|        {[{83, Luhansk, 0...|           [BREAKING]|         0|{ORDOÄ 🇯🇲 🇺🇦 ...|          0|           30|         BREAKING|
-|    clyennie|   @NJARCHIVED House...|2022-03-24T14:59:...|        {NULL, NULL, [{55...|    [Fluffy_Kuma_Day]|         0|                {≈≈}|          0|            0|  Fluffy_Kuma_Day|
-|smithxgianna|   I can't wait to u...|2022-03-24T14:59:...|        {NULL, [{189, 185...| [Blockchain, NFT,...|         0|      {Gianna Smith}|          0|            0|       Blockchain|
-|smithxgianna|   I can't wait to u...|2022-03-24T14:59:...|        {NULL, [{189, 185...| [Blockchain, NFT,...|         0|      {Gianna Smith}|          0|            0|              NFT|
-+------------+-----------------------+--------------------+----------------------------+---------------------+----------+--------------------+-----------+-------------+-----------------+
-only showing top 10 rows
-</code></pre>
-</div>
+<div id="04dc3de7" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> split, explode, size, array_contains</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  .<span class="bu">filter</span>(size(<span class="st">"hashtags"</span>) <span class="op">&gt;</span> <span class="dv">0</span>)<span class="op">\</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  .withColumn(</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"hashtag_exploded"</span>,</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    explode(<span class="st">"hashtags"</span>))<span class="op">\</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  .show(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
-<li><input type="checkbox">Create a new column with the number of words of the <code>contenu</code> column. (Use <code>split()</code> + <code>size()</code>)</li>
+<li><label><input type="checkbox">Create a new column with the number of words of the <code>contenu</code> column. (Use <code>split()</code> + <code>size()</code>)</label></li>
 </ul>
-<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  .withColumn(<span class="st">"word_count"</span>, </span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>              size(split(<span class="st">"contenu"</span>, <span class="st">" "</span>)))<span class="op">\</span></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  .show(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>+------------+--------------------+--------------------+--------------------+--------+----------+--------------------+-----------+-------------+----------+
-|      auteur|             contenu|       date_creation|            entities|hashtags|like_count|               other|reply_count|retweet_count|word_count|
-+------------+--------------------+--------------------+--------------------+--------+----------+--------------------+-----------+-------------+----------+
-| xwendystian|RT @karlarboledas...|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|            {W🚶‍♀️}|          0|          962|         7|
-| suoicilataR|RT @sooky_co: SLA...|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|               {Rat}|          0|         3849|         7|
-|     SatsuOW|RT @kusujinn: 👻?...|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|             {Satsu}|          0|         9787|         4|
-|birashoboka7|@Kitona_gold You ...|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|       {birashoboka}|          0|            0|        20|
-| TheRealCzia|nagugulat ako don...|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|{Czia is looking ...|          0|            0|        16|
-+------------+--------------------+--------------------+--------------------+--------+----------+--------------------+-----------+-------------+----------+
-only showing top 5 rows
-</code></pre>
-</div>
+<div id="d368a533" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  .withColumn(<span class="st">"word_count"</span>,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>              size(split(<span class="st">"contenu"</span>, <span class="st">" "</span>)))<span class="op">\</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  .show(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
-<li><input type="checkbox">Count how many tweet contain the <code>Ukraine</code> hashtag (use the <code>count()</code> action)</li>
+<li><label><input type="checkbox">Count how many tweet contain the <code>Ukraine</code> hashtag (use the <code>count()</code> action)</label></li>
 </ul>
-<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  .<span class="bu">filter</span>(array_contains(<span class="st">"hashtags"</span>, <span class="st">"Ukraine"</span>))<span class="op">\</span></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  .count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
-<pre><code>35</code></pre>
-</div>
+<div id="98ac46d1" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  .<span class="bu">filter</span>(array_contains(<span class="st">"hashtags"</span>, <span class="st">"Ukraine"</span>))<span class="op">\</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  .count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
-<section id="user-defined-function" class="level3">
-<h3 class="anchored" data-anchor-id="user-defined-function">User defined function</h3>
+<section id="user-defined-function" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="user-defined-function"><span class="header-section-number">5.2</span> User defined function</h3>
 <p>For more very specific column manipulation you will need Spark’s <code>udf()</code> function (<em>User Defined Function</em>). It can be useful if Spark does not provide a feature you want. But Spark is a popular and active project, so before coding an udf, go check the documentation. For instance for natural language processing, Spark already has some <a href="https://spark.apache.org/docs/3.1.1/api/python/reference/api/pyspark.ml.feature.Tokenizer.html#pyspark.ml.feature.Tokenizer">functions</a>. Last things, python udf can lead to performance issues (see https://stackoverflow.com/a/38297050) and learning a little bit of scala or java can be a good idea.</p>
 <p>For example :</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># !!!! DOES NOT WORK !!!!</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> to_lower_case(string):</span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> string.lower()</span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>df.withColumn(<span class="st">"tweet_lower_case"</span>, to_lower_case(df.contenu))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># !!!! DOES NOT WORK !!!!</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> to_lower_case(string):</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> string.lower()</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>df.withColumn(<span class="st">"tweet_lower_case"</span>, to_lower_case(df.contenu))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>will just crash. Keep in mind that Spark is a distributed system, and that Python is only installed on the central node, as a convenience to let you execute instructions on the executor nodes. But by default, pure Python functions can only be executed where Python is installed! We need <code>udf()</code> to enable Spark to send Python instructions to the worker nodes.</p>
 <p>Let us see how it is done :</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># imports</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> udf</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> explode</span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.types <span class="im">import</span> StringType</span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="co"># pure python functions</span></span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> to_lower_case(string):</span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> string.lower()</span>
-<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a><span class="co"># user defined function(we use a lambda function to create the udf)</span></span>
-<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>to_lower_case_udf <span class="op">=</span> udf(</span>
-<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">lambda</span> x: to_lower_case(x), StringType()</span>
-<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a><span class="co"># df manipulation</span></span>
-<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>df_tweet_small<span class="op">\</span></span>
-<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a>  .select(<span class="st">"auteur"</span>,<span class="st">"hashtags"</span>)<span class="op">\</span></span>
-<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a>  .<span class="bu">filter</span>(<span class="st">"size(hashtags)!=0"</span>)<span class="op">\</span></span>
-<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a>  .withColumn(<span class="st">"hashtag"</span>, explode(<span class="st">"hashtags"</span>))<span class="op">\</span></span>
-<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a>  .withColumn(<span class="st">"hashtag"</span>, to_lower_case_udf(<span class="st">"hashtag"</span>)).show(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># imports</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> udf</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> explode</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.types <span class="im">import</span> StringType</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co"># pure python functions</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> to_lower_case(string):</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> string.lower()</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="co"># user defined function(we use a lambda function to create the udf)</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>to_lower_case_udf <span class="op">=</span> udf(</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">lambda</span> x: to_lower_case(x), StringType()</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="co"># df manipulation</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>df_tweet_small<span class="op">\</span></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>  .select(<span class="st">"auteur"</span>,<span class="st">"hashtags"</span>)<span class="op">\</span></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>  .<span class="bu">filter</span>(<span class="st">"size(hashtags)!=0"</span>)<span class="op">\</span></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>  .withColumn(<span class="st">"hashtag"</span>, explode(<span class="st">"hashtags"</span>))<span class="op">\</span></span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>  .withColumn(<span class="st">"hashtag"</span>, to_lower_case_udf(<span class="st">"hashtag"</span>)).show(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
 <section id="hands-on-5---user-defined-function" class="level4">
 <h4 class="anchored" data-anchor-id="hands-on-5---user-defined-function">✍Hands-on 5 - User defined function</h4>
 <ul class="task-list">
-<li><input type="checkbox">Create an user defined function that counts how many words a tweet contains.
+<li><label><input type="checkbox">Create an user defined function that counts how many words a tweet contains.</label>
 <ul>
 <li>your function will return an <code>IntegerType</code> and not a <code>StringType</code></li>
 </ul></li>
 </ul>
-<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># imports</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> udf</span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.types <span class="im">import</span> IntegerType</span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="co"># pure python functions</span></span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> word_count(string):</span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">len</span>(string.split(<span class="st">" "</span>))</span>
-<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a><span class="co"># user definid function</span></span>
-<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>word_count_udf <span class="op">=</span> udf(</span>
-<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">lambda</span> x: word_count(x), IntegerType()</span>
-<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a><span class="co"># df manipulation</span></span>
-<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
-<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a>  .withColumn(<span class="st">"word_count"</span>, </span>
-<span id="cb45-17"><a href="#cb45-17" aria-hidden="true" tabindex="-1"></a>              word_count_udf(<span class="st">"contenu"</span>))<span class="op">\</span></span>
-<span id="cb45-18"><a href="#cb45-18" aria-hidden="true" tabindex="-1"></a>  .show(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>[Stage 19:&gt;                                                         (0 + 1) / 1]                                                                                </code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>+---------------+-------------------------------+--------------------+--------------------+--------+----------+--------------------+-----------+-------------+----------+
-|         auteur|                        contenu|       date_creation|            entities|hashtags|like_count|               other|reply_count|retweet_count|word_count|
-+---------------+-------------------------------+--------------------+--------------------+--------+----------+--------------------+-----------+-------------+----------+
-|    xwendystian|           RT @karlarboledas...|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|            {W🚶‍♀️}|          0|          962|         7|
-|    suoicilataR|           RT @sooky_co: SLA...|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|               {Rat}|          0|         3849|         7|
-|        SatsuOW|           RT @kusujinn: 👻?...|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|             {Satsu}|          0|         9787|         4|
-|   birashoboka7|           @Kitona_gold You ...|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|       {birashoboka}|          0|            0|        20|
-|    TheRealCzia|           nagugulat ako don...|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|{Czia is looking ...|          0|            0|        16|
-|      bbyindrii|           Keknya ni mata ha...|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|                {🎠}|          0|            0|        12|
-|          9nns3|なんか深夜2~3時の気分だから寝る|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|              {ᒣᔰ🍐}|          0|            0|         1|
-|banbanzai__1140|   @banbanzai_ マジで会いたい。|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|          {やまもん}|          0|            0|         2|
-| Sampathreddyk6|           RT @ynakg2: When ...|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|     {Sampathreddyk}|          0|          838|        25|
-|ElQueLosCritica|           Uy, el Centro cam...|2022-03-24T14:59:...|{NULL, NULL, NULL...|      []|         0|       {Don Critico}|          0|            0|         8|
-+---------------+-------------------------------+--------------------+--------------------+--------+----------+--------------------+-----------+-------------+----------+
-only showing top 10 rows
-</code></pre>
-</div>
+<div id="8e5b8a66" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># imports</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> udf</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.types <span class="im">import</span> IntegerType</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co"># pure python functions</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> word_count(string):</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">len</span>(string.split(<span class="st">" "</span>))</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co"># user definid function</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>word_count_udf <span class="op">=</span> udf(</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">lambda</span> x: word_count(x), IntegerType()</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="co"># df manipulation</span></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>  .withColumn(<span class="st">"word_count"</span>,</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>              word_count_udf(<span class="st">"contenu"</span>))<span class="op">\</span></span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>  .show(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
 </section>
-<section id="aggregation-functions" class="level2">
-<h2 class="anchored" data-anchor-id="aggregation-functions">7. Aggregation functions</h2>
+<section id="aggregation-functions" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="aggregation-functions"><span class="header-section-number">6</span> Aggregation functions</h2>
 <p>Spark offer a variety of aggregation functions :</p>
 <ul>
 <li><p><code>count(column : string)</code> will count every not null value of the specify column. You cant use <code>count(1)</code> of <code>count("*")</code> to count every line (even row with only null values)</p></li>
 <li><p><code>countDisctinct(column : string)</code> and <code>approx_count_distinct(column : string, percent_error: float)</code>. If the exact number is irrelevant, <code>approx_count_distinct()</code>should be preferred.</p>
 <p>Counting distinct elements cannot be done in parallel, and need a lot data transfer. But if you only need an approximation, there is a algorithm, named hyper-log-log (more info <a href="https://databricks.com/fr/blog/2016/05/19/approximate-algorithms-in-apache-spark-hyperloglog-and-quantiles.html">here</a>) that can be parallelized.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> count, countDistinct, approx_count_distinct</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>df.select(count(<span class="st">"col1"</span>)).show()</span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>df.select(countDistinct(<span class="st">"col1"</span>)).show()</span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>df.select(approx_count_distinct(<span class="st">"col1"</span>), <span class="fl">0.1</span>).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> count, countDistinct, approx_count_distinct</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>df.select(count(<span class="st">"col1"</span>)).show()</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>df.select(countDistinct(<span class="st">"col1"</span>)).show()</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>df.select(approx_count_distinct(<span class="st">"col1"</span>), <span class="fl">0.1</span>).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>You have access to all other common functions <code>min()</code>, <code>max()</code>, <code>first()</code>, <code>last()</code>, <code>sum()</code>, <code>sumDistinct()</code>, <code>avg()</code> etc (you should import them first <code>from pyspark.sql.functions import min, max, avg, first, last, sum, sumDistinct</code>)</p></li>
 </ul>
 <hr>
-<section id="hands-on-6---aggregation-functions" class="level3">
-<h3 class="anchored" data-anchor-id="hands-on-6---aggregation-functions">✍Hands-on 6 - Aggregation functions</h3>
+<section id="hands-on-6---aggregation-functions" class="level3" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="hands-on-6---aggregation-functions"><span class="header-section-number">6.1</span> ✍Hands-on 6 - Aggregation functions</h3>
 <ul class="task-list">
-<li><input type="checkbox">What are the min, max, average of <code>interaction_count</code> (use <code>df_tweet_interaction_count</code> created earlier)
+<li><label><input type="checkbox">What are the min, max, average of <code>interaction_count</code> (use <code>df_tweet_interaction_count</code> created earlier)</label>
 <ul>
 <li>don’t forget to import the required functions</li>
 </ul></li>
 </ul>
-<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> <span class="bu">min</span>, <span class="bu">max</span>, avg, first, last, <span class="bu">sum</span>, sumDistinct</span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>df_tweet_interaction_count<span class="op">\</span></span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  .select(<span class="bu">min</span>(<span class="st">"interaction_count"</span>),</span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>          <span class="bu">max</span>(<span class="st">"interaction_count"</span>),</span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>          avg(<span class="st">"interaction_count"</span>))<span class="op">\</span></span>
-<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>  .first()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="23">
-<pre><code>Row(min(interaction_count)=2, max(interaction_count)=3130, avg(interaction_count)=56.883720930232556)</code></pre>
-</div>
+<div id="dd08b276" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> <span class="bu">min</span>, <span class="bu">max</span>, avg, first, last, <span class="bu">sum</span>, sumDistinct</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>df_tweet_interaction_count<span class="op">\</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  .select(<span class="bu">min</span>(<span class="st">"interaction_count"</span>),</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>          <span class="bu">max</span>(<span class="st">"interaction_count"</span>),</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>          avg(<span class="st">"interaction_count"</span>))<span class="op">\</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  .first()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
-<li><input type="checkbox">How many tweets have hashtags ?
+<li><label><input type="checkbox">How many tweets have hashtags ?</label>
 <ul class="task-list">
-<li><input type="checkbox">Distinct hashtags ?</li>
-<li><input type="checkbox">Try the approximative count with 0.1 and 0.01 as maximum estimation error allowed.</li>
+<li><label><input type="checkbox">Distinct hashtags ?</label></li>
+<li><label><input type="checkbox">Try the approximative count with 0.1 and 0.01 as maximum estimation error allowed.</label></li>
 </ul></li>
 </ul>
-<div class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> count, countDistinct, approx_count_distinct</span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  .select(count(<span class="st">"hashtags"</span>), </span>
-<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>          countDistinct(<span class="st">"hashtags"</span>), </span>
-<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>          approx_count_distinct(<span class="st">"hashtags"</span>, <span class="fl">0.1</span>), </span>
-<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>          approx_count_distinct(<span class="st">"hashtags"</span>,<span class="fl">0.01</span>))<span class="op">\</span></span>
-<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>  .show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>[Stage 25:&gt;                                                         (0 + 1) / 1]                                                                                </code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>+---------------+------------------------+-------------------------------+-------------------------------+
-|count(hashtags)|count(DISTINCT hashtags)|approx_count_distinct(hashtags)|approx_count_distinct(hashtags)|
-+---------------+------------------------+-------------------------------+-------------------------------+
-|         100000|                    9320|                           7826|                           9342|
-+---------------+------------------------+-------------------------------+-------------------------------+
-</code></pre>
-</div>
+<div id="3e058e0f" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> count, countDistinct, approx_count_distinct</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  .select(count(<span class="st">"hashtags"</span>),</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>          countDistinct(<span class="st">"hashtags"</span>),</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>          approx_count_distinct(<span class="st">"hashtags"</span>, <span class="fl">0.1</span>),</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>          approx_count_distinct(<span class="st">"hashtags"</span>,<span class="fl">0.01</span>))<span class="op">\</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  .show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
-<section id="grouping-functions" class="level2">
-<h2 class="anchored" data-anchor-id="grouping-functions">8. Grouping functions</h2>
+<section id="grouping-functions" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="grouping-functions"><span class="header-section-number">7</span> Grouping functions</h2>
 <p>Like SQL you can group row by a criteria with Spark. Just use the <code>groupBy(column : string)</code> method. Then you can compute some aggregation over those groups.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>df<span class="op">\</span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  .groupBy(<span class="st">"col1"</span>)<span class="op">\</span></span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  .agg(count(<span class="st">"col2"</span>).alias(<span class="st">"quantity"</span>))\           <span class="co"># alias is use to specify the name of the new column</span></span>
-<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>  .show() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>df<span class="op">\</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  .groupBy(<span class="st">"col1"</span>)<span class="op">\</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  .agg(count(<span class="st">"col2"</span>).alias(<span class="st">"quantity"</span>))\           <span class="co"># alias is use to specify the name of the new column</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  .show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The <code>agg()</code> method can take multiples argument to compute multiple aggregation at once.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>df<span class="op">\</span></span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  .groupBy(<span class="st">"col1"</span>)<span class="op">\</span></span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  .agg(count(<span class="st">"col2"</span>).alias(<span class="st">"quantity"</span>), </span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>       <span class="bu">min</span>(<span class="st">"col2"</span>).alias(<span class="st">"min"</span>), </span>
-<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>       avg(<span class="st">"col3"</span>).alias(<span class="st">"avg3"</span>))<span class="op">\</span></span>
-<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>  .show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>df<span class="op">\</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  .groupBy(<span class="st">"col1"</span>)<span class="op">\</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  .agg(count(<span class="st">"col2"</span>).alias(<span class="st">"quantity"</span>),</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>       <span class="bu">min</span>(<span class="st">"col2"</span>).alias(<span class="st">"min"</span>),</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>       avg(<span class="st">"col3"</span>).alias(<span class="st">"avg3"</span>))<span class="op">\</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  .show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Aggregation and grouping transformations work differently than the previous method like <code>filter()</code>, <code>select()</code>, <code>withColumn()</code> etc. Those transformations cannot be run over each partitions in parallel, and need to transfer data between partitions and executors. They are called “wide transformations”</p>
 <p><img src="img/spark_exemple2_pipeline.png" style="zoom:50%;"></p>
-<section id="hands-on-7---grouping-functions" class="level3">
-<h3 class="anchored" data-anchor-id="hands-on-7---grouping-functions">✍Hands-on 7 - Grouping functions</h3>
+<section id="hands-on-7---grouping-functions" class="level3" data-number="7.1">
+<h3 data-number="7.1" class="anchored" data-anchor-id="hands-on-7---grouping-functions"><span class="header-section-number">7.1</span> ✍Hands-on 7 - Grouping functions</h3>
 <ul class="task-list">
-<li><input type="checkbox">Compute a daframe with the min, max and average retweet of each <code>auteur</code>.
+<li><label><input type="checkbox">Compute a daframe with the min, max and average retweet of each <code>auteur</code>.</label>
 <ul>
-<li><input type="checkbox">Then order it by the max number of retweet in descending order by .</li>
+<li><label><input type="checkbox">Then order it by the max number of retweet in descending order by .</label></li>
 <li>To do that you can use the following syntax</li>
 </ul>
-<div class="sourceCode" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> desc</span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>df.orderBy(desc(<span class="st">"col"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> desc</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>df.orderBy(desc(<span class="st">"col"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> desc</span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
-<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>  .groupBy(<span class="st">"auteur"</span>)<span class="op">\</span></span>
-<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>  .agg(<span class="bu">min</span>(<span class="st">"retweet_count"</span>).alias(<span class="st">"min_RT"</span>), </span>
-<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>       <span class="bu">max</span>(<span class="st">"retweet_count"</span>).alias(<span class="st">"max_RT"</span>), </span>
-<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>       avg(<span class="st">"retweet_count"</span>).alias(<span class="st">"avg_RT"</span>))<span class="op">\</span></span>
-<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>  .orderBy(desc(<span class="st">"max_RT"</span>))<span class="op">\</span></span>
-<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a>  .show(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="3c00e43d" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> desc</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  .groupBy(<span class="st">"auteur"</span>)<span class="op">\</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  .agg(<span class="bu">min</span>(<span class="st">"retweet_count"</span>).alias(<span class="st">"min_RT"</span>),</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>       <span class="bu">max</span>(<span class="st">"retweet_count"</span>).alias(<span class="st">"max_RT"</span>),</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>       avg(<span class="st">"retweet_count"</span>).alias(<span class="st">"avg_RT"</span>))<span class="op">\</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>  .orderBy(desc(<span class="st">"max_RT"</span>))<span class="op">\</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>  .show(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
-<section id="spark-sql" class="level2">
-<h2 class="anchored" data-anchor-id="spark-sql">9. Spark SQL</h2>
+<section id="spark-sql" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="spark-sql"><span class="header-section-number">8</span> Spark SQL</h2>
 <p>Spark understand SQL statement. It’s not a hack nor a workaround to use SQL in Spark, it’s one a the more powerful feature in Spark. To use SQL you will need :</p>
 <ol type="1">
 <li><p>Register a view pointing to your DataFrame</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>my_df.createOrReplaceTempView(viewName : <span class="bu">str</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>my_df.createOrReplaceTempView(viewName : <span class="bu">str</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>Use the sql function</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>spark.sql(<span class="st">"""</span></span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="st">Your SQL statement</span></span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>spark.sql(<span class="st">"""</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="st">Your SQL statement</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You could manipulate every registered DataFrame by their view name with plain SQL.</p></li>
 </ol>
-<p>In fact you can do most of this tutorial without any knowledge in PySpark nor Spark.<br>
-Many things can only be done in Spark if you know SQL and how to use it in Spark.</p>
-<section id="hands-on-8---spark-sql" class="level3">
-<h3 class="anchored" data-anchor-id="hands-on-8---spark-sql">✍Hands-on 8 - Spark SQL</h3>
+<p>In fact you can do most of this tutorial without any knowledge in PySpark nor Spark. Many things can only be done in Spark if you know SQL and how to use it in Spark.</p>
+<section id="hands-on-8---spark-sql" class="level3" data-number="8.1">
+<h3 data-number="8.1" class="anchored" data-anchor-id="hands-on-8---spark-sql"><span class="header-section-number">8.1</span> ✍Hands-on 8 - Spark SQL</h3>
 <ul class="task-list">
-<li><input type="checkbox">How many tweets have hashtags ?
+<li><label><input type="checkbox">How many tweets have hashtags ?</label>
 <ul class="task-list">
-<li><input type="checkbox">Distinct hashtags ?</li>
+<li><label><input type="checkbox">Distinct hashtags ?</label></li>
 </ul></li>
 </ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  .select(<span class="st">"contenu"</span>, <span class="st">"hashtags"</span>)<span class="op">\</span></span>
-<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>  .createOrReplaceTempView(<span class="st">"view_hashtag_content"</span>)</span>
-<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>spark.sql(<span class="st">"""</span></span>
-<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT COUNT(*), </span></span>
-<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a><span class="st">       COUNT(DISTINCT(contenu))</span></span>
-<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a><span class="st">  FROM view_hashtag_content</span></span>
-<span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a><span class="st"> WHERE size(hashtags) &gt; 0</span></span>
-<span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)<span class="op">\</span></span>
-<span id="cb60-11"><a href="#cb60-11" aria-hidden="true" tabindex="-1"></a>  .show(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="55c80d01" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  .select(<span class="st">"contenu"</span>, <span class="st">"hashtags"</span>)<span class="op">\</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  .createOrReplaceTempView(<span class="st">"view_hashtag_content"</span>)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>spark.sql(<span class="st">"""</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT COUNT(*),</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="st">       COUNT(DISTINCT(contenu))</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="st">  FROM view_hashtag_content</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="st"> WHERE size(hashtags) &gt; 0</span></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)<span class="op">\</span></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>  .show(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
-<li><input type="checkbox">Compute a dataframe with the min, max and average retweet of each <code>auteur</code> using Spark SQL</li>
+<li><label><input type="checkbox">Compute a dataframe with the min, max and average retweet of each <code>auteur</code> using Spark SQL</label></li>
 </ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>df_tweet.createOrReplaceTempView(<span class="st">"view_tweet"</span>)</span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>spark.sql(<span class="st">"""</span></span>
-<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT min(retweet_count), </span></span>
-<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a><span class="st">       max(retweet_count), </span></span>
-<span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a><span class="st">       avg(retweet_count)</span></span>
-<span id="cb61-7"><a href="#cb61-7" aria-hidden="true" tabindex="-1"></a><span class="st">  FROM view_tweet</span></span>
-<span id="cb61-8"><a href="#cb61-8" aria-hidden="true" tabindex="-1"></a><span class="st"> GROUP BY auteur</span></span>
-<span id="cb61-9"><a href="#cb61-9" aria-hidden="true" tabindex="-1"></a><span class="st"> ORDER BY MAX(retweet_count) DESC</span></span>
-<span id="cb61-10"><a href="#cb61-10" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)<span class="op">\</span></span>
-<span id="cb61-11"><a href="#cb61-11" aria-hidden="true" tabindex="-1"></a>  .show(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="413ca4a8" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>df_tweet.createOrReplaceTempView(<span class="st">"view_tweet"</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>spark.sql(<span class="st">"""</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT min(retweet_count),</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="st">       max(retweet_count),</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="st">       avg(retweet_count)</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="st">  FROM view_tweet</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="st"> GROUP BY auteur</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="st"> ORDER BY MAX(retweet_count) DESC</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)<span class="op">\</span></span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>  .show(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
-<section id="delete-the-jupyter-pyspark-service" class="level1">
-<h1>10. Delete the Jupyter-pyspark service</h1>
+<section id="delete-the-jupyter-pyspark-service" class="level2" data-number="9">
+<h2 data-number="9" class="anchored" data-anchor-id="delete-the-jupyter-pyspark-service"><span class="header-section-number">9</span> Delete the Jupyter-pyspark service</h2>
 <ul>
-<li><input type="checkbox">Export your notebook
+<li><label><input type="checkbox">Export your notebook</label>
 <ul>
 <li>Right clic and Download (.ipynb)</li>
 <li>File &gt; Save and Export Notebook &gt; HTML</li>
@@ -1169,6 +882,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -1237,13 +977,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'alternate';
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1322,10 +1064,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1335,8 +1076,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1349,6 +1099,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1392,6 +1261,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1417,6 +1287,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1485,9 +1381,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-center">
       &nbsp;
     </div>
-    <div class="nav-footer-right">Website built with <a href="https://quarto.org/" target="_blank">Quarto</a><br> <a href="https://github.com/ludo2ne/ENSAI-2A-Big-Data" target="_blank">Source code</a></div>
+    <div class="nav-footer-right">
+<p>Website built with <a href="https://quarto.org/" class="external" target="_blank">Quarto</a> <a href="https://github.com/ludo2ne/ENSAI-2A-Big-Data" class="external" target="_blank">Code source</a></p>
+</div>
   </div>
 </footer>
+
 
 
 
