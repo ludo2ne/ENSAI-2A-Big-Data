@@ -24,7 +24,7 @@ lightbox: true
 
 ## Outline {.unnumbered}
 
-In this tutorial, we are going to perform exploratory and explanatory analyses of a massive dataset consisting in hundreds of thousands of AirBnB listings, as made available by the Inside **[AirBnB project](http://insideairbnb.com/get-the-data.html)**.  
+In this tutorial, we are going to perform exploratory and explanatory analyses of a massive dataset consisting in hundreds of thousands of AirBnB listings, as made available by the Inside [AirBnB project](http://insideairbnb.com/get-the-data.html){.external target="_blank"}.  
 Rémi Pépin has loaded a lot these listings on AWS at this address: `s3a://remipepin/diffusion/ensai/airbnb`
 
 ## How to distribute elementary statistical tasks?
@@ -33,13 +33,15 @@ Rémi Pépin has loaded a lot these listings on AWS at this address: `s3a://remi
 
 When your data is distributed, i.e is spread out across multiple hard disks / memories on different logical or physical machines, it is clearly not possible to load everything in memory to perform some computation. (No computer from the cluster would have enough storage space / memory space to load the full data set, and the exchange of information _between_ the nodes of the cluster would take considerable amounts of time.) What can you do then?
 
-A surprisingly satisfying situation is when your algorithm can be expressed in a **map-and-reduce model**. A **map** step, in computer science, is the equivalent a function in mathematics: from a given entry, return an output. Examples include counting the number of occurrences of a word in a text, squaring some number, subtracting some number, etc.  A **reduce** step takes two inputs and produces one input, and can be called recursively onto its own outputs, progressively yielding the final result through a pyramid of **accumulators** (see diagram here under). Popular reduce functions include (pairwise) concatenation of character strings, (pairwise) product, (pairwise) minimum and (pairwise) maximum. But **pairwise addition** is probably the most used reduce function, with the aim goal of performing a complete addition:
+A surprisingly satisfying situation is when your algorithm can be expressed in a `map-and-reduce model`. A `map` step, in computer science, is the equivalent a function in mathematics: from a given entry, return an output. Examples include counting the number of occurrences of a word in a text, squaring some number, subtracting some number, etc.  A `reduce` step takes two inputs and produces one input, and can be called recursively onto its own outputs, progressively yielding the final result through a pyramid of `accumulators` (see diagram here under). Popular reduce functions include (pairwise) concatenation of character strings, (pairwise) product, (pairwise) minimum and (pairwise) maximum. But `pairwise addition` is probably the most used reduce function, with the aim goal of performing a complete addition:
 
 Hadoop's MapReduce is the name of what was to become today Apache Spark. The persons behind this framework were among the first to advocate for the map-and-reduce mode in order to achieve efficient parallelisation. Unfortunately, the similarity of the names causes a lot of confusion between the map-and-reduce theoretical model and the concrete Hadoop implementation. I will use "map-and-reduce" to help distinguish the algorithmic concept from the MapReduce program, but this is _not_ standard in the literature.
 
 ![](img/reduce.png){.lightbox}
 
-**Why is the map-and-reduce scheme so interesting?**  Well, say you have $n$ entries and $k$ worker nodes at your disposal. The map operation can always be performed locally on each node, since the transformation does not depend on the rest of the data set. This is an **embarrassingly parallel problem** and we roughly divide the execution time by $k$. Then, most of the reduce steps can also happen on the worker nodes, until the local data has been completely summarized. This also an $k$_fold acceleration! Then, there remains only $k$ reduce steps, and since $k \ll n$, this is usually quite negligible, even though the (potentially high) networking costs happen at this step. There is still some cost of task coordination and data exchange, but this usually small compared to the costs of parallelisation.
+**Why is the map-and-reduce scheme so interesting?**  
+
+Well, say you have $n$ entries and $k$ worker nodes at your disposal. The map operation can always be performed locally on each node, since the transformation does not depend on the rest of the data set. This is an **embarrassingly parallel problem** and we roughly divide the execution time by $k$. Then, most of the reduce steps can also happen on the worker nodes, until the local data has been completely summarized. This also an $k$_fold acceleration! Then, there remains only $k$ reduce steps, and since $k \ll n$, this is usually quite negligible, even though the (potentially high) networking costs happen at this step. There is still some cost of task coordination and data exchange, but this usually small compared to the costs of parallelisation.
 
 ![](img/map-end-reduce.png){.lightbox}
 
@@ -83,20 +85,35 @@ Each run is called a **pass** and some algorithms require several passes.
   - You may want to create a Python version of this algorithm, using the `map(function, vector)` and `reduce(function, vector)` functions or you may use lambda-functions
   - You have to import `reduce` from the `functools` module
 
+```{python}
+# Code Here
+
+```
 
 - [ ] Write **two** different map-and-reduce algorithm for computing the **_mean_ sum of squares**. _(One may include a final $O(1)$ step.)_
 
+```{python}
+# Code Here
 
+```
 
 - [ ] Is the median easy to write as a map-and-reduce algorithm? Why?
 
+```{python}
+# Code Here
+
+```
 
 - [ ] Given a (distributed) series of numbers, the variance can be straightforwardly expressed as a two-pass algorithm: (a) in a first pass, compute the mean, then (b) in a second pass, compute the mean of the errors to the mean. Can it be expressed as a one-pass only algorithm? Is it more expensive to compute variance *and* mean instead of the variance alone?
+
+```{python}
+# Code Here
+
+```
 
 ## Application on Airbnb Data
 
 ```{python}
-#| vscode: {languageId: plaintext}
 import os
 from pyspark.sql import SparkSession
 
@@ -127,7 +144,6 @@ spark = (SparkSession
 ```
 
 ```{python}
-#| tags: []
 from pyspark.sql.types import FloatType, IntegerType, DateType
 from pyspark.sql.functions import regexp_replace, col
 
@@ -150,10 +166,18 @@ listings.cache()
 
 - [ ] How many lines do the raw and the formatted datasets have?
 
+```{python}
+# Code Here
+
+```
 
 - [ ] How many columns are there?
   - [ ] Can you list all the available columns?
 
+```{python}
+# Code Here
+
+```
 
 **Spark SQL's `summary()` method**
 
@@ -167,7 +191,7 @@ listings.summary("count", "min", "max").show() # computes the selection of stati
 listings.summary().show() # computes every possible statistics
 ```
 
-This is a way to incite you to compute all the statistics you want at the same moment : it avoids an extra pass on the data set because all accumulators can be computed simultaneously. You can fin a list of all supported statistics [here](https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.sql.DataFrame.summary.html) in PySpark documentation: count, mean, standard-deviation, minimum, maximum, approximate median, approximate first and last quartiles. Null (missing) values will be ignored in numerical columns before calculation.
+This is a way to incite you to compute all the statistics you want at the same moment : it avoids an extra pass on the data set because all accumulators can be computed simultaneously. You can fin a list of all supported statistics [here](https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.sql.DataFrame.summary.html){.external target="_blank"} in PySpark documentation: count, mean, standard-deviation, minimum, maximum, approximate median, approximate first and last quartiles. Null (missing) values will be ignored in numerical columns before calculation.
 
 **Spark ML**
 
@@ -203,7 +227,7 @@ listings_vec = vectorizer.transform(listings)
 listings_vec.show(5) # The first 5 values of the features column are computed.
 ```
 
-**Step 2: summarization.** Now that we have a vector column, we can use a `Summarizer` object to declare all the statistics we want to compute, in a similar fashion than with the Spark SQL `summary()` method. The following statistics are known: mean\*, sum\*, variance\*, standard-deviation\*, count\*, number of non-zero entries, maximum\*, minimum\*, L2-norm, L1-norm, as can be read in [the documentation](https://spark.apache.org/docs/3.1.1/api/python/reference/api/pyspark.ml.stat.Summarizer.html). _(Stars (\*) denote statistics that could also be computed with the `summary()` method. Approximate quartiles are not computed.)_ Summarizers are created with the `Summarizer.metrics()` constructor. Here again, you are incited to declare all the summaries at once, so that they can all be computed in one pass:
+**Step 2: summarization.** Now that we have a vector column, we can use a `Summarizer` object to declare all the statistics we want to compute, in a similar fashion than with the Spark SQL `summary()` method. The following statistics are known: mean\*, sum\*, variance\*, standard-deviation\*, count\*, number of non-zero entries, maximum\*, minimum\*, L2-norm, L1-norm, as can be read in [the documentation](https://spark.apache.org/docs/3.1.1/api/python/reference/api/pyspark.ml.stat.Summarizer.html){.external target="_blank"}. _(Stars (\*) denote statistics that could also be computed with the `summary()` method. Approximate quartiles are not computed.)_ Summarizers are created with the `Summarizer.metrics()` constructor. Here again, you are incited to declare all the summaries at once, so that they can all be computed in one pass:
 
 ```python
 from pyspark.ml.stat    import Summarizer
@@ -230,23 +254,19 @@ This produces the output:
   print("Time:", t()-start)
   ```
 
+```{python}
+# Code Here
 
+```
 
 - [ ] Compute the average number of beds per property in Barcelona in four different ways:
   - Which method is the fastest?
+    1. directly with the Spark SQL mean function,
+    2. using `summary()`,
+    3. using a `Sumarizer` object
+    4. locally after you collected the bed columns.
+   _Despite the operation being very common, Spark does **not** provide a simple syntax to collect a column as a local array. A work-around is to use the Pandas package and the `asPanda()` method ([documentation](https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.sql.DataFrame.toPandas.html){.external target="_blank"}). First install Pandas with `!pip install pandas`. Then you can collect a local copy of a dataframe called `df` with: `df_local = df.toPandas()`. A Pandas data frame possesses a `mean()` method, that compute the mean of each column of the data frame: more details are in Pandas' [documentation](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.mean.html){.external target="_blank"}._
 
-1. directly with the Spark SQL mean function,
-2. using `summary()`,
-3. using a `Sumarizer` object
-4. locally after you collected the bed columns.
-
-   _Despite the operation being very common, Spark does **not** provide a simple syntax to collect a column as a local array. A work-around is to use the Pandas package and the `asPanda()` method ([documentation](https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.sql.DataFrame.toPandas.html)). First install Pandas with `!pip install pandas`. Then you can collect a local copy of a dataframe called `df` with: `df_local = df.toPandas()`. A Pandas data frame possesses a `mean()` method, that compute the mean of each column of the data frame: more details are in Pandas' [documentation]( https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.mean.html)._
-
-```{python}
-#| vscode: {languageId: json}
-# Spark SQL
-
-```
 
 ```{python}
 # summary()
@@ -268,8 +288,12 @@ The most simple model is often surprisingly difficult to beat!
 
 - [ ] Compute the mean price on the data set as a predictor for an AirBnB listing's price and the total sum of squares. (We will elaborate in the next section.)
 
+```{python}
+# Code here
 
-## 4. Regression with Spark ML
+```
+
+## Regression with Spark ML
 
 A better way to predict prices is to build a regression mode, which in Spark falls under the broad category of machine-learning problems. Regressions thus belong the the `ml` module, often called Spark ML, like the summarizer that we saw just before.
 
@@ -279,7 +303,7 @@ The `ml` module is built in a distinctive fashion than the rest of Spark. **Firs
 
 **Secondly**, we need to distinguish between two different types of object classes: transformers and estimators classes. **Transformers** are a class of objects representing any process that modifies the dataset, and returns the modified version. It has a **transform()** method. **Estimators** on the other hand are classes of objects representing any process that produces a transformer based on some computed parameters from the data set. It has a **`fit()`** method. It is easier with an example. In the following example, `regressor` is an estimator, and we compute the regression coefficients with the `fit()` method. This produces `model`, the regression model itself, which is of class transformer. Indeed, we can use its `transform()` method to add predictions to the initial dataset.
 
-```python
+```{.python}
 from pyspark.ml.feature import VectorAssembler
 from pyspark.ml.regression import LinearRegression
 
@@ -346,53 +370,72 @@ print(model_barc.stages[1].intercept)
 
 - [ ] Interpret the results of the general regression.
 
+```{python}
+# Code here
 
+```
 
 - [ ] Collect the model's $R^2$. How good is our model?
   - Models have a `summary` property, that you can explore with `dir(model.summary)`.
 
+```{python}
+# Code here
 
+```
 
 - [ ] Repeat the estimation separately for barcelona, brussels and rome.
   - [ ] Are the coefficients stable? _You will build a pipeline object._
 
+```{python}
+# Code here
 
+```
 
 - [ ] Are the `fit()` and `transform()` methods called eagerly or lazily?
   - [ ] Check the execution plan with the `explain()` method for lazy evaluations.
 
 ```{python}
-#| vscode: {languageId: json}
-# fit() is eager ; transform() is lazy
+# Code here
+
 ```
 
 ## Diving deeper
 
 You are in autonomy for this section. You will find helpful:
 
-- The general Spark documentation for the `ml` module: https://spark.apache.org/docs/latest/ml-guide.html
-- The PySpark documentation: https://spark.apache.org/docs/latest/api/python/index.html
+- [The general Spark documentation for the `ml` module](https://spark.apache.org/docs/latest/ml-guide.html){.external target="_blank"}
+- [The PySpark documentation](https://spark.apache.org/docs/latest/api/python/index.html){.external target="_blank"}
 
 ### ✍ Hands-on 5
 
 - [ ] Add a categorical variable to the regression.
 
+```{python}
+# Code here
+
+```
 
 - [ ] Compute the p-values of your model as well as confidence intervals for the predictions.
 
+```{python}
+# Code here
+
+```
 
 - [ ] Time the regression in different settings and report the results on [this shared spreadsheet](https://docs.google.com/spreadsheets/d/1KSCLMgiepoKKiDdRrwlQv_0XYn5ptzXRB7TP-TRXCAw/edit?usp=sharing). How does it scale with the number of listings ($n$) ? the number of regressors ($p$) ? the number of nodes in your cluster ($k$) ? _You will only try a couple of configurations that have not been tested by others. Remember that you can order and revoke nodes from your cluster at any time from the AWS's cluster view, in the hardware tab, on on the CORE line, "resize"._
 
+```{python}
+# Code here
+
+```
 
 - [ ] Down-sample your data set to $n=100000$, while still keeping a few variables. Save it on S3, then download it on your computer. Run the regression locally on your computer in R. In your opinion, is the extra precision (in term of $R^2$) is worth the extra computation time?
 
+```{python}
+# Code here
 
-## End of the Lab {.unnumbered}
+```
 
-- [ ] Export your notebook
-  - Right clic and Download (.ipynb)
-  - File > Save and Export Notebook > HTML
-- [ ] Delete the Jupyter-pyspark service
-  - https://datalab.sspcloud.fr/my-services
+{{< include ../lab-end.qmd >}}
 
 

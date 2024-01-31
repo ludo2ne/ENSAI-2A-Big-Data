@@ -2,10 +2,13 @@
 
 Lessons and Labs created by [Rémi Pépin](https://github.com/HealerMikado/panorama_big_data_2021) and [Arthur Katossky](https://github.com/katossky/panorama-bigdata)
 
-# :construction: Todo
+## :construction: Todo
 
-* Notebooks : 
-  * [ ] SSPLab and AWS
+* Try on SSPCloud
+  * [ ] Lab1
+  * [ ] Lab2
+  * [ ] Lab3
+* Try on AWS
   * [ ] Lab0
   * [ ] Lab1
   * [ ] Lab2
@@ -14,8 +17,7 @@ Lessons and Labs created by [Rémi Pépin](https://github.com/HealerMikado/panor
 ## Edit a Lab
 
 Labs notebooks are in `docs/lab`.
-They are in format `.ipynb`, to edit them two main ways:
-* import in Jupyter, modify, export and update in this repository
-* install quarto and use : `quarto convert <filename.ipynb>`
-  * it convert an `.ipynb` file to a `.qmd` file easily readable
-  * once your done, use the same command applied to qmd file: `quarto convert <filename.qmd>` to get a `.ipynb` file
+They are in format `.qmd` and them quarto format them into :
+
+* `.html` for the [documentation website](https://ludo2ne.github.io/ENSAI-2A-Big-Data/){target="_blank"}
+* `.ipynb` to use it in Jupyter

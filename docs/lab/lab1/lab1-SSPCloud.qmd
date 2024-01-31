@@ -80,8 +80,6 @@ The Kubernetes **API Server** allows to interact with Pods. It schedules executo
 - [ ] Execute the following two cells to initialize a Spark session.
 
 ```{python}
-#| tags: []
-#| vscode: {languageId: json}
 import os
 from pyspark.sql import SparkSession
 
@@ -165,8 +163,6 @@ It's possible to load multiple file in a unique DataFrame. It's useful when you 
   * In Jupyter, read it using `s3a://<user_name>/tweets.jsonl.gz`
 
 ```{python}
-#| tags: []
-#| vscode: {languageId: json}
 # DataFrame creation
 
 # caching
@@ -584,10 +580,5 @@ Many things can only be done in Spark if you know SQL and how to use it in Spark
 
 ```
 
-## End of the Lab {.unnumbered}
 
-- [ ] Export your notebook
-  - Right clic and Download (.ipynb)
-  - File > Save and Export Notebook > HTML
-- [ ] Delete the Jupyter-pyspark service
-  - https://datalab.sspcloud.fr/my-services
+{{< include ../lab-end.qmd >}}

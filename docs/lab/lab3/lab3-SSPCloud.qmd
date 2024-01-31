@@ -760,6 +760,4 @@ Be careful, the watermark field cannot be a nested field ([link](https://www.wai
 - https://databricks.com/blog/2015/07/30/diving-into-apache-spark-streamings-execution-model.html
 
 
-
-
 {{< include ../lab-end.qmd >}}

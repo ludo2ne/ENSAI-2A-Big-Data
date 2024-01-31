@@ -666,9 +666,5 @@ SELECT min(retweet_count),
   .show(5)
 ```
 
-## Delete the Jupyter-pyspark service
 
-* [ ] Export your notebook
-  - Right clic and Download (.ipynb)
-  - File > Save and Export Notebook > HTML
-* https://datalab.sspcloud.fr/my-services
+{{< include ../lab-end.qmd >}}

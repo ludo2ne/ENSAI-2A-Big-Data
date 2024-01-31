@@ -222,7 +222,7 @@ listings.summary("count", "min", "max").show() # computes the selection of stati
 listings.summary().show() # computes every possible statistics
 ```
 
-This is a way to incite you to compute all the statistics you want at the same moment : it avoids an extra pass on the data set because all accumulators can be computed simultaneously. You can fin a list of all supported statistics [here](https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.sql.DataFrame.summary.html) in PySpark documentation: count, mean, standard-deviation, minimum, maximum, approximate median, approximate first and last quartiles. Null (missing) values will be ignored in numerical columns before calculation.
+This is a way to incite you to compute all the statistics you want at the same moment : it avoids an extra pass on the data set because all accumulators can be computed simultaneously. You can fin a list of all supported statistics [here](https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.sql.DataFrame.summary.html){.external target="_blank"} in PySpark documentation: count, mean, standard-deviation, minimum, maximum, approximate median, approximate first and last quartiles. Null (missing) values will be ignored in numerical columns before calculation.
 
 **Spark ML**
 
@@ -258,7 +258,7 @@ listings_vec = vectorizer.transform(listings)
 listings_vec.show(5) # The first 5 values of the features column are computed.
 ```
 
-**Step 2: summarization.** Now that we have a vector column, we can use a `Summarizer` object to declare all the statistics we want to compute, in a similar fashion than with the Spark SQL `summary()` method. The following statistics are known: mean\*, sum\*, variance\*, standard-deviation\*, count\*, number of non-zero entries, maximum\*, minimum\*, L2-norm, L1-norm, as can be read in [the documentation](https://spark.apache.org/docs/3.1.1/api/python/reference/api/pyspark.ml.stat.Summarizer.html). _(Stars (\*) denote statistics that could also be computed with the `summary()` method. Approximate quartiles are not computed.)_ Summarizers are created with the `Summarizer.metrics()` constructor. Here again, you are incited to declare all the summaries at once, so that they can all be computed in one pass:
+**Step 2: summarization.** Now that we have a vector column, we can use a `Summarizer` object to declare all the statistics we want to compute, in a similar fashion than with the Spark SQL `summary()` method. The following statistics are known: mean\*, sum\*, variance\*, standard-deviation\*, count\*, number of non-zero entries, maximum\*, minimum\*, L2-norm, L1-norm, as can be read in [the documentation](https://spark.apache.org/docs/3.1.1/api/python/reference/api/pyspark.ml.stat.Summarizer.html){.external target="_blank"}. _(Stars (\*) denote statistics that could also be computed with the `summary()` method. Approximate quartiles are not computed.)_ Summarizers are created with the `Summarizer.metrics()` constructor. Here again, you are incited to declare all the summaries at once, so that they can all be computed in one pass:
 
 ```python
 from pyspark.ml.stat    import Summarizer
@@ -306,13 +306,11 @@ print ("Execution time for sumary():", t()-start, "s")
 
 - [ ] Compute the average number of beds per property in Barcelona in four different ways:
   - Which method is the fastest?
-
-1. directly with the Spark SQL mean function,
-2. using `summary()`,
-3. using a `Sumarizer` object
-4. locally after you collected the bed columns.
-
-   _Despite the operation being very common, Spark does **not** provide a simple syntax to collect a column as a local array. A work-around is to use the Pandas package and the `asPanda()` method ([documentation](https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.sql.DataFrame.toPandas.html)). First install Pandas with `!pip install pandas`. Then you can collect a local copy of a dataframe called `df` with: `df_local = df.toPandas()`. A Pandas data frame possesses a `mean()` method, that compute the mean of each column of the data frame: more details are in Pandas' [documentation]( https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.mean.html)._
+    1. directly with the Spark SQL mean function,
+    2. using `summary()`,
+    3. using a `Sumarizer` object
+    4. locally after you collected the bed columns.
+   _Despite the operation being very common, Spark does **not** provide a simple syntax to collect a column as a local array. A work-around is to use the Pandas package and the `asPanda()` method ([documentation](https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.sql.DataFrame.toPandas.html){.external target="_blank"}). First install Pandas with `!pip install pandas`. Then you can collect a local copy of a dataframe called `df` with: `df_local = df.toPandas()`. A Pandas data frame possesses a `mean()` method, that compute the mean of each column of the data frame: more details are in Pandas' [documentation]( https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.mean.html){.external target="_blank"}._
 
 
 ```{python}
@@ -400,7 +398,7 @@ The `ml` module is built in a distinctive fashion than the rest of Spark. **Firs
 
 **Secondly**, we need to distinguish between two different types of object classes: transformers and estimators classes. **Transformers** are a class of objects representing any process that modifies the dataset, and returns the modified version. It has a **transform()** method. **Estimators** on the other hand are classes of objects representing any process that produces a transformer based on some computed parameters from the data set. It has a **`fit()`** method. It is easier with an example. In the following example, `regressor` is an estimator, and we compute the regression coefficients with the `fit()` method. This produces `model`, the regression model itself, which is of class transformer. Indeed, we can use its `transform()` method to add predictions to the initial dataset.
 
-```python
+```{.python}
 from pyspark.ml.feature import VectorAssembler
 from pyspark.ml.regression import LinearRegression
 
@@ -548,28 +546,37 @@ for city, model in models.items():
 
 You are in autonomy for this section. You will find helpful:
 
-- The general Spark documentation for the `ml` module: https://spark.apache.org/docs/latest/ml-guide.html
-- The PySpark documentation: https://spark.apache.org/docs/latest/api/python/index.html
+- [The general Spark documentation for the `ml` module](https://spark.apache.org/docs/latest/ml-guide.html){.external target="_blank"}
+- [The PySpark documentation](https://spark.apache.org/docs/latest/api/python/index.html){.external target="_blank"}
 
 ### ✍ Hands-on 5
 
 - [ ] Add a categorical variable to the regression.
 
+```{python}
+# Code here
+
+```
 
 - [ ] Compute the p-values of your model as well as confidence intervals for the predictions.
 
+```{python}
+# Code here
+
+```
 
 - [ ] Time the regression in different settings and report the results on [this shared spreadsheet](https://docs.google.com/spreadsheets/d/1KSCLMgiepoKKiDdRrwlQv_0XYn5ptzXRB7TP-TRXCAw/edit?usp=sharing). How does it scale with the number of listings ($n$) ? the number of regressors ($p$) ? the number of nodes in your cluster ($k$) ? _You will only try a couple of configurations that have not been tested by others. Remember that you can order and revoke nodes from your cluster at any time from the AWS's cluster view, in the hardware tab, on on the CORE line, "resize"._
 
+```{python}
+# Code here
+
+```
 
 - [ ] Down-sample your data set to $n=100000$, while still keeping a few variables. Save it on S3, then download it on your computer. Run the regression locally on your computer in R. In your opinion, is the extra precision (in term of $R^2$) is worth the extra computation time?
 
-## End of the Lab {.unnumbered}
+```{python}
+# Code here
 
-- [ ] Export your notebook
-  - Right clic and Download (.ipynb)
-  - File > Save and Export Notebook > HTML
-- [ ] Delete the Jupyter-pyspark service
-  - https://datalab.sspcloud.fr/my-services
-  
+```
 
+{{< include ../lab-end.qmd >}}
