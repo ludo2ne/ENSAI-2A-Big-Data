@@ -13,12 +13,65 @@ number-depth: 3
 jupyter: python3
 execute:
   eval: false
+lightbox: true
 ---
 
 ## Before you start {.unnumbered}
 
-- [ ] Download this [Jupyter Notebook](lab1-SSPCloud.ipynb){target="_blank"}
+- [ ] Download this [Jupyter Notebook](lab1-SSPCloud-correction.ipynb){target="_blank"}
 - [ ] Follow these [instructions](../lab-setup.qmd){target="_blank"}
+
+
+## What is Spark ?
+
+Let's keep it simple. 
+
+The intuitive way: Spark distributes tasks to different Worker nodes (machine executing the tasks).  
+The Kubernetes way: Spark distributes tasks to different containers. The location of containers among the different worker nodes is then handled by Kubernetes. The more computation power you need, the more containers get created. It's a smooth way to save Worker nodes resources.
+With Kubernetes, we just speak in terms of Pods rathen than containers.
+
+Pretty handy right ? If you want to have a deeper look on how it's done, you can by clicking on the link bellow but you still have some work to do so don't waste your time ! You can keep it to the end.
+
+<details>    
+<summary>
+    <font size="3" color="#447099"><b>If you want more ! </b></font>
+</summary>
+
+#### Spark Context
+
+The **Spark Context** is an object that hides the complexity of the underlying infrastructure to perform computation from the Data Scientist.
+
+This Spark context is a JVM process that gives access to a Spark **driver** which schedules the tasks and spans tasks across Worker nodes through Executors.
+In brief, the Spark driver communicates with all the Worker nodes. 
+
+Each Worker node consists of one or more Executor(s) who are responsible for running the Task. Executors register themselves with Driver. The Driver has all the information about the Executors at all the time.
+
+This working combination of Driver and Workers is known as **Spark Application**.
+
+JVM: Java virtual machine that load, verifies and executes Java bytecode.
+
+![](img/spark_context.png)
+
+The Spark Application is launched with the help of the **Cluster Manager**. Spark is dependent on the **Cluster Manager** to launch the Executors and also the Driver (in Cluster mode). 
+
+Spark can be run with any of the 5 following **Cluster Manager** :
+
+- local : Driver use CPU threads on your local machine
+- Spark Standalone Mode : A basic resource manager provided by Spark
+- YARN : the historical resource manager commonly used in traditional Big Data infrastructures (Courdera or Hortonworks cluster for instance)
+- Mesos : the resource manager from Berkeley University
+- Kubernetes : the game changing containers orchestrator
+
+#### Spark on a Kubernetes cluster
+
+![](img/k8spark_cluster_mode.png)
+
+The Spark driver runs on a Kubernetes Pod and creates executors running within Kubernetes pods. In simple terms, Spark driver is in a Pod and it distributes tasks to different Pods. The location of Pods among the different worker nodes is then handled by Kubernetes. 
+
+The Kubernetes **Scheduler** checks if pods are assigned to nodes. For every Pod that the scheduler discovers, the scheduler is responsible of finding the best node for that Pod to run on.  
+The Kubernetes **API Server** allows to interact with Pods. It schedules executor Pods by creating or deleting Pods.
+
+</details>  
 
 ## Create a Spark session
 
@@ -159,10 +212,8 @@ df_with_less_rows = df\
 
 As said before your data are distributed over multiple nodes (executors) and data inside a node are split into partitions. Then each transformations will be run in parallel. They are called *narrow transformation* For example, to sample a DataFrame, Spark sample every partitions in parallel because sample all partition produce the sample DataFrame. For some transformations, like `groupBy()` it's impossible, and it's cannot be run in parallel.
 
-<img src="img/spark_exemple2_pipeline.png" style="zoom:50%;" />
+![](img/spark_exemple2_pipeline.png)
 
-<!-- take() collect() limit() first() show() -->
-<!-- lien vers la doc https://spark.apache.org/docs/3.1.1/api/python/reference/pyspark.sql.html#dataframe-apis -->
 
 ### Lazy evaluation
 
@@ -532,7 +583,7 @@ df\
 
 Aggregation and grouping transformations work differently than the previous method like `filter()`, `select()`, `withColumn()` etc. Those transformations cannot be run over each partitions in parallel, and need to transfer data between partitions and executors.  They are called "wide transformations"
 
-<img src="img/spark_exemple2_pipeline.png" style="zoom:50%;" />
+![](img/spark_exemple2_pipeline.png)
 
 ### ✍Hands-on 7 - Grouping functions
 

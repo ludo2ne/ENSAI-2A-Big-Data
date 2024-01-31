@@ -1,0 +1,7 @@
+## End of the Lab {.unnumbered}
+
+- [ ] Export your notebook
+  - Right clic and Download (.ipynb)
+  - File > Save and Export Notebook > HTML
+- [ ] Delete the Jupyter-pyspark service
+  - [SSPCloud > My services > Delete](https://datalab.sspcloud.fr/my-services){target="_blank"}

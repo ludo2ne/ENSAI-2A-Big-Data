@@ -7,9 +7,15 @@ format:
     toc-location: left
     toc-expand: 3
 from: markdown+emoji
+number-sections: true
+number-depth: 3
+jupyter: python3
+execute:
+  eval: false
+lightbox: true
 ---
 
-## Objectives
+## Objectives {.unnumbered}
 
 The lab's goal is to make you familiar with the AWS's interface. In this lab, you will :
 
@@ -25,28 +31,28 @@ The lab's goal is to make you familiar with the AWS's interface. In this lab, yo
   - `time [commande]` to compute some execution time
 - Shut down your EC2 instance
 
-## 1. Log on AWS 
+## Log on AWS 
 
-* [ ] Follow the instructions you get from the AWS academy's e-mail, then those of the [AWS Academy Learner Lab - Student Guide ](https://foad-moodle.ensai.fr/pluginfile.php/22636/mod_resource/content/0/AWS%20Academy%20Learner%20Lab%20-%20Student%20Guide.pdf) to access to the AWS console.
+- [ ] Follow the instructions you get from the AWS academy's e-mail, then those of the [AWS Academy Learner Lab - Student Guide ](https://foad-moodle.ensai.fr/pluginfile.php/22636/mod_resource/content/0/AWS%20Academy%20Learner%20Lab%20-%20Student%20Guide.pdf) to access to the AWS console.
 
 Your AWS account is located in North Virginia, **do not change that**.  
 Because your account is for academic purpose, your don't have access to all the AWS services.  
 Your account is managed by AWS academy, so you have to use the AWS academy portal to access to your AWS account.
 
 
-* [AWS Login](https://www.awsacademy.com/vforcesite/LMS_Login){target="_blank"}
-* Dashboard
-* Select `AWS Academy Learner Lab - Big Data`
-* Select `Modules` and then `Lancer l'atelier pour étudiants de l'AWS Academy`
-* `Start Lab`
-  * Wait 2 minutes
-  * When the dot next to AWS turns green, your lab environment is ready to use
-  * Click AWS
+- [AWS Login](https://www.awsacademy.com/vforcesite/LMS_Login){.external target="_blank"}
+- Dashboard
+- Select `AWS Academy Learner Lab - Big Data`
+- Select `Modules` and then `Lancer l'atelier pour étudiants de l'AWS Academy`
+- `Start Lab`
+  - Wait 2 minutes
+  - When the dot next to AWS turns green, your lab environment is ready to use
+  - Click AWS
 
 
-![](img/aws console.png)
+![](img/aws_console.png)
 
-## 2. Exploration
+## Exploration
 
 In the `Services` tab, you should find for instance :
 
@@ -56,7 +62,7 @@ In the `Services` tab, you should find for instance :
 - A section for _machine-learning_  
 - A section for data analysis
 
-## 3. Create a S3 bucket
+## Create a S3 bucket
 
 **Amazon Simple Storage Service** (S3) is the standard solution to store data on AWS. Amazon assured a 99,999999999 % durability for your data. This mean, is you store 10 000 000 files on S3, you can on average expect to incur a loss of a single file every 10 000 years. 
 
@@ -70,9 +76,9 @@ All AWS services can natively read from and write to S3, if they have some acces
 - [ ] Keep all the default value
 - [ ] Create your bucket
 
-## 4. Import some files to your bucket
+## Import some files to your bucket
 
-* [ ] Select your bucket to go to its dedicated page
+- [ ] Select your bucket to go to its dedicated page
 
   ![](img/s3_bucket.png)
 
@@ -86,9 +92,9 @@ All AWS services can natively read from and write to S3, if they have some acces
 
   ![](img/s3_file.png)
 
-## 5. SSH key creation
+## SSH key creation
 
-**SSH** (**S**ecure **SH**ell) protocol allow a secure remote connection to a machine. Moreover, with SSH you can control the remote machine. For more details, you can read this page [page web](https://doc.fedora-fr.org/wiki/SSH_:_Authentification_par_cl%C3%A9). But first you need a private key to authenticate yourself. 
+**SSH** (**S**ecure **SH**ell) protocol allow a secure remote connection to a machine. Moreover, with SSH you can control the remote machine. For more details, you can read this page [page web](https://doc.fedora-fr.org/wiki/SSH_:_Authentification_par_cl%C3%A9){.external target="_blank"}. But first you need a private key to authenticate yourself. 
 
 - [ ] In the search bar, search `paire de clés`
 - [ ] Click on `Créerune paire de clés`
@@ -103,7 +109,7 @@ All AWS services can natively read from and write to S3, if they have some acces
 
   Do not close this terminal
 
-## 6. Create your first virtual machine
+## Create your first virtual machine
 
 - [ ] In the search bar, search `EC2`
 
@@ -120,6 +126,7 @@ All AWS services can natively read from and write to S3, if they have some acces
   ![](img/ec2_machine.png)
 
 - [ ] On the next screen, select the AIM role `LabInstanceProfile`
+
   ![](img/ec2_iam.png)
 
 - [ ] Then click on `Vérifier et lancer`
@@ -130,7 +137,8 @@ All AWS services can natively read from and write to S3, if they have some acces
 
 - [ ] Et voilà! Your VM is launching. Click on `Affichez les instances` and wait a minute!  
 
-## 7. Connect to the EC2 instance
+
+## Connect to the EC2 instance
 
 - [ ] Once your VM is running, you can access to the its administration page by clinking on its `id d'instance`
 
@@ -160,9 +168,9 @@ You will find many information, but the most important it's its  `IPv4 publique`
 
   ![](img/putty_warning.png)
 
-- [ ] A terminal will open with  `login as:`. Type `ec2-user` then press `Enter`([documentation officielle](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/connection-prereqs.html))
+- [ ] A terminal will open with  `login as:`. Type `ec2-user` then press `Enter`([documentation officielle](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/connection-prereqs.html){.external target="_blank"})
 
-    ![](img/terminal ec2.png)
+    ![](img/terminal_ec2.png)
 
   
 
@@ -179,7 +187,7 @@ You will find many information, but the most important it's its  `IPv4 publique`
 
 Tada ! your are connected to your virtual machine. **Although, this terminal is on your computer, every command you type are executed on the remote machine**. This make it possible to run huge computation without altering your own performance.  But, this machine do not have any graphical interface (GUI), so you need so basics of shell command.
 
-## 8. Play with your VM
+## Play with your VM
 
 In this section you will learn some basics of shell, and reproduce the benchmark of language made in the first lesson. You will :
 
@@ -187,7 +195,7 @@ In this section you will learn some basics of shell, and reproduce the benchmark
 2. Install R and a python package on your machine
 3. Run the benchmark
 
-This benchmark compare the time to compute the max temperature for some year based on the USA weather data. Each file contains all the weather data for one year, and each record isa  weather observation. An observation looks like this :
+This benchmark compare the time to compute the max temperature for some year based on the USA weather data. Each file contains all the weather data for one year, and each record isa weather observation. An observation looks like this :
 
 ```
 0029029070999991901010106004+64333+023450FM-12+000599999V0202701N015919999999N0000001N9-00781+99999102001ADDGF108991999999999999999999
@@ -215,7 +223,7 @@ Here is some bash commands
 | aws s3 cp [s3://URI]           | Specific AWS command. Copy file from s3 to the current machine |
 | amazon-linux-extras  [package] | Like yum but for amazon machine.                             |
 
-###  Benchmark setup
+### Benchmark setup
 
 - [ ] Download the file stored on S3. Use the command `aws s3 cp [s3://object/uri] [output/folder]`.  The S3 URI is on S3 file page. For `output/folder` use the current directory with `.`. You should get a command and an output like this 
 
@@ -226,7 +234,7 @@ Here is some bash commands
 
 - [ ] With `ls` (*list*)  check you downloaded the file
 - [ ] Now you will unzip your file with `unzip [nom de votre fichier]`. Check the result with `ls`
-- [ ] For security reasons, you cannot execute your files. Do `chmod 764 get_data.sh awk.sh GetMaxTempC` to change that. For more details, the [chmod wikipedia page](https://fr.wikipedia.org/wiki/Chmod) provides more details..
+- [ ] For security reasons, you cannot execute your files. Do `chmod 764 get_data.sh awk.sh GetMaxTempC` to change that. For more details, the [chmod wikipedia page](https://fr.wikipedia.org/wiki/Chmod){.external target="_blank"} provides more details..
 - [ ] Now you will execute the `get_data.sh` script. Just type`./get_data.sh`.  This script download some data from the NOAA (~ météo france in the USA) server
 
 ### Install R, java, C compiler and a python package
@@ -236,7 +244,7 @@ Your VM doesn't have all the require packages for the benchmark.
 - [ ] **python-dev installation** : `python-devel` is require to create extension for python. To install it use  `yum`, a package manager for Linux. The exact command is`sudo yum install -y python3-devel.x86_64` (`sudo` to have super user right, `yum` to use the package manager, `install` to install a package, `-y` to validate the installation, and `python3-devel.x86_64` for the package name)
 - [ ] **Java and GCC installation** : in the same way, insatall java and GCC with `sudo yum install java gcc -y`
 - [ ] **Cython installation** : with `pip3`  install `Cython` and compile the Cython code:
-  - [ ] `cd cython_code` for*change directory*  and go in the `cython_code` directory
+  - [ ] `cd cython_code` for*change directory-  and go in the `cython_code` directory
   - [ ] `python3 setup.py` to run the compilation
   - [ ] `cd ../` to go back to the parent folder
 - [ ] **R installation** :  to install R, you will use the amazon custome package manager `amazon-linux-extras`,  with the following command : `sudo amazon-linux-extras install R4 -y`.  Just wait 1-2 minutes.
@@ -255,13 +263,14 @@ Now it's time to run the benchmark. To do so, you will use the `time` command. `
 - [ ] Close your terminal and go back to your EC2 instance page. Click on`Se connecter` then `Se connecter`
   ![](img/ec2_se_connecter.png)
   Vous allez arriver sur une page similaire à celle ci-dessous. Cliquez sur `Se connecter`
-  ![](img/ec2_se_connecter 2.png)
+  ![](img/ec2_se_connecter_2.png)
   After 30 second you can use a  *cloud shell*. You can do the same thing with your cloud shell  as the previous SSH shell. 
 - [ ] ![](img/cloud_shell.png)
 
 Type `ls` to check if your file are still there.
 
-## 9. Shut down your machine
+
+## Shut down your machine {.unnumbered}
 
 Because your EC2 instance is billed by time and not usage, once your work is done, shut down it. Although the cost is small, a small cost\*24\*7 for 1 week or running instance can cost 10\$. And for bigger machine in a company maybe 100\$ or 1000\$.
 
