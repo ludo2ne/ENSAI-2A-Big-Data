@@ -227,7 +227,7 @@ window.Quarto = {
   <li><a href="#hands-on-2" id="toc-hands-on-2" class="nav-link" data-scroll-target="#hands-on-2"><span class="header-section-number">2.1</span> ✍ Hands-on 2</a></li>
   <li><a href="#hands-on-3" id="toc-hands-on-3" class="nav-link" data-scroll-target="#hands-on-3"><span class="header-section-number">2.2</span> ✍ Hands-on 3</a></li>
   </ul></li>
-  <li><a href="#regression-with-spark-ml" id="toc-regression-with-spark-ml" class="nav-link" data-scroll-target="#regression-with-spark-ml"><span class="header-section-number">3</span> 4. Regression with Spark ML</a>
+  <li><a href="#regression-with-spark-ml" id="toc-regression-with-spark-ml" class="nav-link" data-scroll-target="#regression-with-spark-ml"><span class="header-section-number">3</span> Regression with Spark ML</a>
   <ul class="collapse">
   <li><a href="#hands-on-4" id="toc-hands-on-4" class="nav-link" data-scroll-target="#hands-on-4"><span class="header-section-number">3.1</span> ✍ Hands-on 4</a></li>
   </ul></li>
@@ -280,17 +280,18 @@ window.Quarto = {
 </section>
 <section id="outline" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="outline">Outline</h2>
-<p>In this tutorial, we are going to perform exploratory and explanatory analyses of a massive dataset consisting in hundreds of thousands of AirBnB listings, as made available by the Inside <strong><a href="http://insideairbnb.com/get-the-data.html">AirBnB project</a></strong>.<br>
+<p>In this tutorial, we are going to perform exploratory and explanatory analyses of a massive dataset consisting in hundreds of thousands of AirBnB listings, as made available by the Inside <a href="http://insideairbnb.com/get-the-data.html" class="external" target="_blank">AirBnB project</a>.<br>
 Rémi Pépin has loaded a lot these listings on AWS at this address: <code>s3a://remipepin/diffusion/ensai/airbnb</code></p>
 </section>
 <section id="how-to-distribute-elementary-statistical-tasks" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="how-to-distribute-elementary-statistical-tasks"><span class="header-section-number">1</span> How to distribute elementary statistical tasks?</h2>
 <p><strong>The map and reduce principle</strong></p>
 <p>When your data is distributed, i.e is spread out across multiple hard disks / memories on different logical or physical machines, it is clearly not possible to load everything in memory to perform some computation. (No computer from the cluster would have enough storage space / memory space to load the full data set, and the exchange of information <em>between</em> the nodes of the cluster would take considerable amounts of time.) What can you do then?</p>
-<p>A surprisingly satisfying situation is when your algorithm can be expressed in a <strong>map-and-reduce model</strong>. A <strong>map</strong> step, in computer science, is the equivalent a function in mathematics: from a given entry, return an output. Examples include counting the number of occurrences of a word in a text, squaring some number, subtracting some number, etc. A <strong>reduce</strong> step takes two inputs and produces one input, and can be called recursively onto its own outputs, progressively yielding the final result through a pyramid of <strong>accumulators</strong> (see diagram here under). Popular reduce functions include (pairwise) concatenation of character strings, (pairwise) product, (pairwise) minimum and (pairwise) maximum. But <strong>pairwise addition</strong> is probably the most used reduce function, with the aim goal of performing a complete addition:</p>
+<p>A surprisingly satisfying situation is when your algorithm can be expressed in a <code>map-and-reduce model</code>. A <code>map</code> step, in computer science, is the equivalent a function in mathematics: from a given entry, return an output. Examples include counting the number of occurrences of a word in a text, squaring some number, subtracting some number, etc. A <code>reduce</code> step takes two inputs and produces one input, and can be called recursively onto its own outputs, progressively yielding the final result through a pyramid of <code>accumulators</code> (see diagram here under). Popular reduce functions include (pairwise) concatenation of character strings, (pairwise) product, (pairwise) minimum and (pairwise) maximum. But <code>pairwise addition</code> is probably the most used reduce function, with the aim goal of performing a complete addition:</p>
 <p>Hadoop’s MapReduce is the name of what was to become today Apache Spark. The persons behind this framework were among the first to advocate for the map-and-reduce mode in order to achieve efficient parallelisation. Unfortunately, the similarity of the names causes a lot of confusion between the map-and-reduce theoretical model and the concrete Hadoop implementation. I will use “map-and-reduce” to help distinguish the algorithmic concept from the MapReduce program, but this is <em>not</em> standard in the literature.</p>
 <p><a href="img/reduce.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="img/reduce.png" class="img-fluid"></a></p>
-<p><strong>Why is the map-and-reduce scheme so interesting?</strong> Well, say you have <span class="math inline">\(n\)</span> entries and <span class="math inline">\(k\)</span> worker nodes at your disposal. The map operation can always be performed locally on each node, since the transformation does not depend on the rest of the data set. This is an <strong>embarrassingly parallel problem</strong> and we roughly divide the execution time by <span class="math inline">\(k\)</span>. Then, most of the reduce steps can also happen on the worker nodes, until the local data has been completely summarized. This also an <span class="math inline">\(k\)</span>_fold acceleration! Then, there remains only <span class="math inline">\(k\)</span> reduce steps, and since <span class="math inline">\(k \ll n\)</span>, this is usually quite negligible, even though the (potentially high) networking costs happen at this step. There is still some cost of task coordination and data exchange, but this usually small compared to the costs of parallelisation.</p>
+<p><strong>Why is the map-and-reduce scheme so interesting?</strong></p>
+<p>Well, say you have <span class="math inline">\(n\)</span> entries and <span class="math inline">\(k\)</span> worker nodes at your disposal. The map operation can always be performed locally on each node, since the transformation does not depend on the rest of the data set. This is an <strong>embarrassingly parallel problem</strong> and we roughly divide the execution time by <span class="math inline">\(k\)</span>. Then, most of the reduce steps can also happen on the worker nodes, until the local data has been completely summarized. This also an <span class="math inline">\(k\)</span>_fold acceleration! Then, there remains only <span class="math inline">\(k\)</span> reduce steps, and since <span class="math inline">\(k \ll n\)</span>, this is usually quite negligible, even though the (potentially high) networking costs happen at this step. There is still some cost of task coordination and data exchange, but this usually small compared to the costs of parallelisation.</p>
 <p><a href="img/map-end-reduce.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="img/map-end-reduce.png" class="img-fluid"></a></p>
 <p><strong>The reduce step</strong></p>
 <p><strong>A reduce function is an associative function</strong> <span class="math inline">\(f: E \times E \mapsto E\)</span>, where associativity means <span class="math inline">\(\forall (a,b,c) \in E^3, f(a,f(b,c))=f(f(a,b),c)\)</span>. This is required because the distribution of data blocks across the nodes is random, and that we want to minimize data transmission between the nodes.</p>
@@ -314,81 +315,107 @@ Rémi Pépin has loaded a lot these listings on AWS at this address: <code>s3a:/
 <section id="hands-on-1" class="level3" data-number="1.1">
 <h3 data-number="1.1" class="anchored" data-anchor-id="hands-on-1"><span class="header-section-number">1.1</span> ✍ Hands-on 1</h3>
 <ul>
-<li><p>You are given <code>errors</code>, a distributed vector of prediction errors <code>errors = [1, 2, 5, 10, 3, 4, 6, 8, 9]</code></p></li>
-<li><p><label><input type="checkbox">Write a map-and-reduce algorithm for computing the <strong>total sum of squares</strong>.</label></p>
+<li>You are given <code>errors</code>, a distributed vector of prediction errors <code>errors = [1, 2, 5, 10, 3, 4, 6, 8, 9]</code></li>
+<li><label><input type="checkbox">Write a map-and-reduce algorithm for computing the <strong>total sum of squares</strong>.</label>
 <ul>
 <li>You may want to create a Python version of this algorithm, using the <code>map(function, vector)</code> and <code>reduce(function, vector)</code> functions or you may use lambda-functions</li>
 <li>You have to import <code>reduce</code> from the <code>functools</code> module</li>
 </ul></li>
-<li><p><label><input type="checkbox">Write <strong>two</strong> different map-and-reduce algorithm for computing the <strong><em>mean</em> sum of squares</strong>. <em>(One may include a final <span class="math inline">\(O(1)\)</span> step.)</em></label></p></li>
-<li><p><label><input type="checkbox">Is the median easy to write as a map-and-reduce algorithm? Why?</label></p></li>
-<li><p><label><input type="checkbox">Given a (distributed) series of numbers, the variance can be straightforwardly expressed as a two-pass algorithm: (a) in a first pass, compute the mean, then (b) in a second pass, compute the mean of the errors to the mean. Can it be expressed as a one-pass only algorithm? Is it more expensive to compute variance <em>and</em> mean instead of the variance alone?</label></p></li>
 </ul>
+<div id="be462665" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul class="task-list">
+<li><label><input type="checkbox">Write <strong>two</strong> different map-and-reduce algorithm for computing the <strong><em>mean</em> sum of squares</strong>. <em>(One may include a final <span class="math inline">\(O(1)\)</span> step.)</em></label></li>
+</ul>
+<div id="851d5660" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul class="task-list">
+<li><label><input type="checkbox">Is the median easy to write as a map-and-reduce algorithm? Why?</label></li>
+</ul>
+<div id="593c4d3a" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul class="task-list">
+<li><label><input type="checkbox">Given a (distributed) series of numbers, the variance can be straightforwardly expressed as a two-pass algorithm: (a) in a first pass, compute the mean, then (b) in a second pass, compute the mean of the errors to the mean. Can it be expressed as a one-pass only algorithm? Is it more expensive to compute variance <em>and</em> mean instead of the variance alone?</label></li>
+</ul>
+<div id="92e04801" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 </section>
 <section id="application-on-airbnb-data" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="application-on-airbnb-data"><span class="header-section-number">2</span> Application on Airbnb Data</h2>
-<div id="562ea95b" class="cell" data-vscode="{&quot;languageId&quot;:&quot;plaintext&quot;}" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>spark <span class="op">=</span> (SparkSession </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>         .builder</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>         <span class="co"># default url of the internally accessed Kubernetes API</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>         <span class="co"># (This Jupyter notebook service is itself a Kubernetes Pod)</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>         .master(<span class="st">"k8s://https://kubernetes.default.svc:443"</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Executors spark docker image: for simplicity reasons, this jupyter notebook is reused </span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.kubernetes.container.image"</span>, os.environ[<span class="st">'IMAGE_NAME'</span>])</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Name of the Kubernetes namespace</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.kubernetes.namespace"</span>, os.environ[<span class="st">'KUBERNETES_NAMESPACE'</span>])</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Allocated memory to the JVM</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Stay careful, by default, the Kubernetes pods has a higher limit which depends on other parameters.</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.executor.memory"</span>, <span class="st">"4g"</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.kubernetes.driver.pod.name"</span>, os.environ[<span class="st">'KUBERNETES_POD_NAME'</span>])</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>         <span class="co"># dynamic allocation configuration</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.dynamicAllocation.enabled"</span>,<span class="st">"true"</span>)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.dynamicAllocation.initialExecutors"</span>,<span class="st">"0"</span>)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.dynamicAllocation.minExecutors"</span>,<span class="st">"1"</span>)</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.dynamicAllocation.maxExecutors"</span>,<span class="st">"5"</span>)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Ratio match the number of pods to create for a given number of parallel tasks </span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>         <span class="co"># (100 parallel, ratio of 1, one aims at 100 pods, with 0.5 it would be 50 pods)</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.dynamicAllocation.executorAllocationRatio"</span>,<span class="st">"1"</span>)</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.dynamicAllocation.shuffleTracking.enabled"</span>,<span class="st">"true"</span>)</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>         .getOrCreate()</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="74cb5a9e" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>spark <span class="op">=</span> (SparkSession </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>         .builder</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>         <span class="co"># default url of the internally accessed Kubernetes API</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>         <span class="co"># (This Jupyter notebook service is itself a Kubernetes Pod)</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>         .master(<span class="st">"k8s://https://kubernetes.default.svc:443"</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Executors spark docker image: for simplicity reasons, this jupyter notebook is reused </span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.kubernetes.container.image"</span>, os.environ[<span class="st">'IMAGE_NAME'</span>])</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Name of the Kubernetes namespace</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.kubernetes.namespace"</span>, os.environ[<span class="st">'KUBERNETES_NAMESPACE'</span>])</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Allocated memory to the JVM</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Stay careful, by default, the Kubernetes pods has a higher limit which depends on other parameters.</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.executor.memory"</span>, <span class="st">"4g"</span>)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.kubernetes.driver.pod.name"</span>, os.environ[<span class="st">'KUBERNETES_POD_NAME'</span>])</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>         <span class="co"># dynamic allocation configuration</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.dynamicAllocation.enabled"</span>,<span class="st">"true"</span>)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.dynamicAllocation.initialExecutors"</span>,<span class="st">"0"</span>)</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.dynamicAllocation.minExecutors"</span>,<span class="st">"1"</span>)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.dynamicAllocation.maxExecutors"</span>,<span class="st">"5"</span>)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Ratio match the number of pods to create for a given number of parallel tasks </span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>         <span class="co"># (100 parallel, ratio of 1, one aims at 100 pods, with 0.5 it would be 50 pods)</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.dynamicAllocation.executorAllocationRatio"</span>,<span class="st">"1"</span>)</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.dynamicAllocation.shuffleTracking.enabled"</span>,<span class="st">"true"</span>)</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>         .getOrCreate()</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="952070ef" class="cell" data-tags="[]" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.types <span class="im">import</span> FloatType, IntegerType, DateType</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> regexp_replace, col</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>listings_raw <span class="op">=</span> spark.read.csv(<span class="st">"s3a://remipepin/diffusion/ensai/airbnb"</span>, header<span class="op">=</span><span class="va">True</span>, multiLine<span class="op">=</span><span class="va">True</span>, escape<span class="op">=</span><span class="st">'"'</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>listings <span class="op">=</span> (listings_raw</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  .withColumn(<span class="st">"beds"</span>,     listings_raw[<span class="st">"beds"</span>    ].cast(IntegerType()))</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  .withColumn(<span class="st">"bedrooms"</span>, listings_raw[<span class="st">"bedrooms"</span>].cast(IntegerType()))</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  .withColumn(<span class="st">"time"</span>, listings_raw[<span class="st">"last_scraped"</span>].cast(DateType()))</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  .withColumn(<span class="st">"price"</span>, regexp_replace(<span class="st">'price'</span>, <span class="st">'[$</span><span class="ch">\\</span><span class="st">,]'</span>, <span class="st">''</span>).cast(FloatType()))</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  .select(<span class="st">"id"</span>, <span class="st">"beds"</span>, <span class="st">"bedrooms"</span>, <span class="st">"price"</span>, <span class="st">"city"</span>, <span class="st">"time"</span>)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  .dropna() <span class="co"># remove lines with missing values</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>listings_raw.cache()</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>listings.cache()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="d00a3018" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.types <span class="im">import</span> FloatType, IntegerType, DateType</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> regexp_replace, col</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>listings_raw <span class="op">=</span> spark.read.csv(<span class="st">"s3a://remipepin/diffusion/ensai/airbnb"</span>, header<span class="op">=</span><span class="va">True</span>, multiLine<span class="op">=</span><span class="va">True</span>, escape<span class="op">=</span><span class="st">'"'</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>listings <span class="op">=</span> (listings_raw</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  .withColumn(<span class="st">"beds"</span>,     listings_raw[<span class="st">"beds"</span>    ].cast(IntegerType()))</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  .withColumn(<span class="st">"bedrooms"</span>, listings_raw[<span class="st">"bedrooms"</span>].cast(IntegerType()))</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  .withColumn(<span class="st">"time"</span>, listings_raw[<span class="st">"last_scraped"</span>].cast(DateType()))</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  .withColumn(<span class="st">"price"</span>, regexp_replace(<span class="st">'price'</span>, <span class="st">'[$</span><span class="ch">\\</span><span class="st">,]'</span>, <span class="st">''</span>).cast(FloatType()))</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  .select(<span class="st">"id"</span>, <span class="st">"beds"</span>, <span class="st">"bedrooms"</span>, <span class="st">"price"</span>, <span class="st">"city"</span>, <span class="st">"time"</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  .dropna() <span class="co"># remove lines with missing values</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>listings_raw.cache()</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>listings.cache()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="hands-on-2" class="level3" data-number="2.1">
 <h3 data-number="2.1" class="anchored" data-anchor-id="hands-on-2"><span class="header-section-number">2.1</span> ✍ Hands-on 2</h3>
 <ul class="task-list">
-<li><p><label><input type="checkbox">How many lines do the raw and the formatted datasets have?</label></p></li>
-<li><p><label><input type="checkbox">How many columns are there?</label></p>
+<li><label><input type="checkbox">How many lines do the raw and the formatted datasets have?</label></li>
+</ul>
+<div id="b39c6fd9" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul class="task-list">
+<li><label><input type="checkbox">How many columns are there?</label>
 <ul class="task-list">
 <li><label><input type="checkbox">Can you list all the available columns?</label></li>
 </ul></li>
 </ul>
+<div id="b4ee2fa6" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p><strong>Spark SQL’s <code>summary()</code> method</strong></p>
 <p>In Spark SQL, <strong>elementary univariate summary statistics can also be obtained through the <code>summary()</code> method</strong>. The <code>summary()</code> method takes either the names of the statistics to compute, or nothing, in which case it computes every possible statistics:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>listings.summary(<span class="st">"count"</span>, <span class="st">"min"</span>, <span class="st">"max"</span>).show() <span class="co"># computes the selection of statistics</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>listings.summary().show() <span class="co"># computes every possible statistics</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This is a way to incite you to compute all the statistics you want at the same moment : it avoids an extra pass on the data set because all accumulators can be computed simultaneously. You can fin a list of all supported statistics <a href="https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.sql.DataFrame.summary.html">here</a> in PySpark documentation: count, mean, standard-deviation, minimum, maximum, approximate median, approximate first and last quartiles. Null (missing) values will be ignored in numerical columns before calculation.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>listings.summary(<span class="st">"count"</span>, <span class="st">"min"</span>, <span class="st">"max"</span>).show() <span class="co"># computes the selection of statistics</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>listings.summary().show() <span class="co"># computes every possible statistics</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This is a way to incite you to compute all the statistics you want at the same moment : it avoids an extra pass on the data set because all accumulators can be computed simultaneously. You can fin a list of all supported statistics <a href="https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.sql.DataFrame.summary.html" class="external" target="_blank">here</a> in PySpark documentation: count, mean, standard-deviation, minimum, maximum, approximate median, approximate first and last quartiles. Null (missing) values will be ignored in numerical columns before calculation.</p>
 <p><strong>Spark ML</strong></p>
 <p>Spark ML is a Spark module that allow us to execute parallelised versions of most popular machine-learning algorithms, such as linear or logistic regression. However, we can also use Spark ML to compute elementaty univariate summary statistics. However the philosophy is quite different, and is worth explaining.</p>
 <p>The syntax of Spark ML may feel artificially convoluted ; this not only an impression, it <em>is</em> convoluted. However, there are grounds for this situation :</p>
@@ -399,30 +426,30 @@ Rémi Pépin has loaded a lot these listings on AWS at this address: <code>s3a:/
 <p><strong>Step 1: vectorisation.</strong> A little counter-intuitively, spark ML operates on a single column of your data frame, typically called <code>features</code>. (Features is the word used in the machine-learning community for “variables”, see “Vocabulary” section hereunder.) This <code>features</code> column has the <code>Vector</code> type: each element contains an array of floating-point numbers, representing a subst of the variables from your dataset. The key is that this <code>features</code> column is usually redundant with the rest of the data frame: it just ensures the proper conversion from any type we wish (string, integer…) to a standardized numeric format. Indeed, it is often derived from the other columns, as this image illustrates:</p>
 <p><a href="img/vector-format.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="img/vector-format.png" class="img-fluid"></a></p>
 <p>Unfortunately for us, the construction the <code>features</code> column is not performed automatically under the hood by Spark, like when doing statistics in R. On the contrary, we have to construct the column explicitly. The <code>VectorAssembler()</code> constructor is here for that:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml.feature <span class="im">import</span> VectorAssembler</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>vectorizer <span class="op">=</span> VectorAssembler(</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    inputCols     <span class="op">=</span> [<span class="st">"price"</span>, <span class="st">"beds"</span>, <span class="st">"bedrooms"</span>], <span class="co"># the columns we want to put in the features column</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    outputCol     <span class="op">=</span> <span class="st">"features"</span>,                    <span class="co"># the name of the column ("features")</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    handleInvalid <span class="op">=</span> <span class="st">'skip'</span>                         <span class="co"># skip rows with missing / invalid values</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>listings_vec <span class="op">=</span> vectorizer.transform(listings)</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Reminders:</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Spark data sets are immutable: a copy is returned, and the original is unchanged.</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Spark operations are lazy: listings_vec just contains the recipe for building vector column</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># but no item of the column is computed unless explicitly asked to.</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>listings_vec.show(<span class="dv">5</span>) <span class="co"># The first 5 values of the features column are computed.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><strong>Step 2: summarization.</strong> Now that we have a vector column, we can use a <code>Summarizer</code> object to declare all the statistics we want to compute, in a similar fashion than with the Spark SQL <code>summary()</code> method. The following statistics are known: mean*, sum*, variance*, standard-deviation*, count*, number of non-zero entries, maximum*, minimum*, L2-norm, L1-norm, as can be read in <a href="https://spark.apache.org/docs/3.1.1/api/python/reference/api/pyspark.ml.stat.Summarizer.html">the documentation</a>. <em>(Stars (*) denote statistics that could also be computed with the <code>summary()</code> method. Approximate quartiles are not computed.)</em> Summarizers are created with the <code>Summarizer.metrics()</code> constructor. Here again, you are incited to declare all the summaries at once, so that they can all be computed in one pass:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml.stat    <span class="im">import</span> Summarizer</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>summarizer <span class="op">=</span> Summarizer.metrics(<span class="st">"count"</span>, <span class="st">"min"</span>, <span class="st">"max"</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>listings_vec.select( summarizer.summary(listings_vec.features), ).show(truncate<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># By default, the output of columns is capped to a maximum width.</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># truncate=False prevents this behaviour.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml.feature <span class="im">import</span> VectorAssembler</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>vectorizer <span class="op">=</span> VectorAssembler(</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    inputCols     <span class="op">=</span> [<span class="st">"price"</span>, <span class="st">"beds"</span>, <span class="st">"bedrooms"</span>], <span class="co"># the columns we want to put in the features column</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    outputCol     <span class="op">=</span> <span class="st">"features"</span>,                    <span class="co"># the name of the column ("features")</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    handleInvalid <span class="op">=</span> <span class="st">'skip'</span>                         <span class="co"># skip rows with missing / invalid values</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>listings_vec <span class="op">=</span> vectorizer.transform(listings)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Reminders:</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Spark data sets are immutable: a copy is returned, and the original is unchanged.</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Spark operations are lazy: listings_vec just contains the recipe for building vector column</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co"># but no item of the column is computed unless explicitly asked to.</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>listings_vec.show(<span class="dv">5</span>) <span class="co"># The first 5 values of the features column are computed.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Step 2: summarization.</strong> Now that we have a vector column, we can use a <code>Summarizer</code> object to declare all the statistics we want to compute, in a similar fashion than with the Spark SQL <code>summary()</code> method. The following statistics are known: mean*, sum*, variance*, standard-deviation*, count*, number of non-zero entries, maximum*, minimum*, L2-norm, L1-norm, as can be read in <a href="https://spark.apache.org/docs/3.1.1/api/python/reference/api/pyspark.ml.stat.Summarizer.html" class="external" target="_blank">the documentation</a>. <em>(Stars (*) denote statistics that could also be computed with the <code>summary()</code> method. Approximate quartiles are not computed.)</em> Summarizers are created with the <code>Summarizer.metrics()</code> constructor. Here again, you are incited to declare all the summaries at once, so that they can all be computed in one pass:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml.stat    <span class="im">import</span> Summarizer</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>summarizer <span class="op">=</span> Summarizer.metrics(<span class="st">"count"</span>, <span class="st">"min"</span>, <span class="st">"max"</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>listings_vec.select( summarizer.summary(listings_vec.features), ).show(truncate<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># By default, the output of columns is capped to a maximum width.</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># truncate=False prevents this behaviour.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This produces the output:</p>
 <p><a href="img/summary.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="img/summary.png" class="img-fluid"></a></p>
 </section>
@@ -433,67 +460,71 @@ Rémi Pépin has loaded a lot these listings on AWS at this address: <code>s3a:/
 <ul>
 <li>You can measure time in Python with this simple template:</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> timeit <span class="im">import</span> default_timer <span class="im">as</span> t</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> t()</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># the thing you want to measure</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Time:"</span>, t()<span class="op">-</span>start)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> timeit <span class="im">import</span> default_timer <span class="im">as</span> t</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> t()</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># the thing you want to measure</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Time:"</span>, t()<span class="op">-</span>start)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul>
+<div id="a392d024" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul class="task-list">
 <li><label><input type="checkbox">Compute the average number of beds per property in Barcelona in four different ways:</label>
 <ul>
-<li>Which method is the fastest?</li>
+<li>Which method is the fastest?
+<ol type="1">
+<li>directly with the Spark SQL mean function,</li>
+<li>using <code>summary()</code>,</li>
+<li>using a <code>Sumarizer</code> object</li>
+<li>locally after you collected the bed columns. <em>Despite the operation being very common, Spark does <strong>not</strong> provide a simple syntax to collect a column as a local array. A work-around is to use the Pandas package and the <code>asPanda()</code> method (<a href="https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.sql.DataFrame.toPandas.html" class="external" target="_blank">documentation</a>). First install Pandas with <code>!pip install pandas</code>. Then you can collect a local copy of a dataframe called <code>df</code> with: <code>df_local = df.toPandas()</code>. A Pandas data frame possesses a <code>mean()</code> method, that compute the mean of each column of the data frame: more details are in Pandas’ <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.mean.html" class="external" target="_blank">documentation</a>.</em></li>
+</ol></li>
 </ul></li>
 </ul>
-<ol type="1">
-<li><p>directly with the Spark SQL mean function,</p></li>
-<li><p>using <code>summary()</code>,</p></li>
-<li><p>using a <code>Sumarizer</code> object</p></li>
-<li><p>locally after you collected the bed columns.</p>
-<p><em>Despite the operation being very common, Spark does <strong>not</strong> provide a simple syntax to collect a column as a local array. A work-around is to use the Pandas package and the <code>asPanda()</code> method (<a href="https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.sql.DataFrame.toPandas.html">documentation</a>). First install Pandas with <code>!pip install pandas</code>. Then you can collect a local copy of a dataframe called <code>df</code> with: <code>df_local = df.toPandas()</code>. A Pandas data frame possesses a <code>mean()</code> method, that compute the mean of each column of the data frame: more details are in Pandas’ <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.mean.html">documentation</a>.</em></p></li>
-</ol>
-<div id="998c4198" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Spark SQL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="a1502f25" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># summary()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="7208641a" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># summary()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fc0b96fc" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sumarizer</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="7dfbd043" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sumarizer</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="25a57950" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># locally after you collected the bed columns</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># !pip install pandas</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="aafa15ba" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># locally after you collected the bed columns</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># !pip install pandas</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The most simple model is often surprisingly difficult to beat!</p>
 <ul class="task-list">
 <li><label><input type="checkbox">Compute the mean price on the data set as a predictor for an AirBnB listing’s price and the total sum of squares. (We will elaborate in the next section.)</label></li>
 </ul>
+<div id="c30248aa" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 </section>
 <section id="regression-with-spark-ml" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="regression-with-spark-ml"><span class="header-section-number">3</span> 4. Regression with Spark ML</h2>
+<h2 data-number="3" class="anchored" data-anchor-id="regression-with-spark-ml"><span class="header-section-number">3</span> Regression with Spark ML</h2>
 <p>A better way to predict prices is to build a regression mode, which in Spark falls under the broad category of machine-learning problems. Regressions thus belong the the <code>ml</code> module, often called Spark ML, like the summarizer that we saw just before.</p>
 <p>There is an old module called <code>mllib</code> that is also called “Spark ML”. That can cause confusion.</p>
 <p>The <code>ml</code> module is built in a distinctive fashion than the rest of Spark. <strong>Firstly</strong> we have seen with <code>Summarizer</code> that we can not readily use the columns and that instead <strong>columns have to be first converted to a <code>Vector</code> format</strong> with the <code>VectorAssembler</code> function.</p>
 <p><strong>Secondly</strong>, we need to distinguish between two different types of object classes: transformers and estimators classes. <strong>Transformers</strong> are a class of objects representing any process that modifies the dataset, and returns the modified version. It has a <strong>transform()</strong> method. <strong>Estimators</strong> on the other hand are classes of objects representing any process that produces a transformer based on some computed parameters from the data set. It has a <strong><code>fit()</code></strong> method. It is easier with an example. In the following example, <code>regressor</code> is an estimator, and we compute the regression coefficients with the <code>fit()</code> method. This produces <code>model</code>, the regression model itself, which is of class transformer. Indeed, we can use its <code>transform()</code> method to add predictions to the initial dataset.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml.feature <span class="im">import</span> VectorAssembler</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml.regression <span class="im">import</span> LinearRegression</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>vectorizer <span class="op">=</span> VectorAssembler( <span class="co"># copy-pasted from previous section...</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    inputCols     <span class="op">=</span> [<span class="st">"beds"</span>, <span class="st">"bedrooms"</span>], <span class="co"># ... but without price</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    outputCol     <span class="op">=</span> <span class="st">"features"</span>,</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    handleInvalid <span class="op">=</span> <span class="st">'skip'</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>listings_vec <span class="op">=</span> vectorizer.transform(listings)</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>regressor <span class="op">=</span> LinearRegression(featuresCol<span class="op">=</span><span class="st">"features"</span>, labelCol<span class="op">=</span><span class="st">"price"</span>)</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>model     <span class="op">=</span> regressor.fit(listings_vec)</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>model.coefficients</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>model.intercept</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>listings_pred <span class="op">=</span> model.transform(listings_vec)</span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>listings_pred.show() <span class="co"># model and predictions from the regression</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml.feature <span class="im">import</span> VectorAssembler</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml.regression <span class="im">import</span> LinearRegression</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>vectorizer <span class="op">=</span> VectorAssembler( <span class="co"># copy-pasted from previous section...</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    inputCols     <span class="op">=</span> [<span class="st">"beds"</span>, <span class="st">"bedrooms"</span>], <span class="co"># ... but without price</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    outputCol     <span class="op">=</span> <span class="st">"features"</span>,</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    handleInvalid <span class="op">=</span> <span class="st">'skip'</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>listings_vec <span class="op">=</span> vectorizer.transform(listings)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>regressor <span class="op">=</span> LinearRegression(featuresCol<span class="op">=</span><span class="st">"features"</span>, labelCol<span class="op">=</span><span class="st">"price"</span>)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>model     <span class="op">=</span> regressor.fit(listings_vec)</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>model.coefficients</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>model.intercept</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>listings_pred <span class="op">=</span> model.transform(listings_vec)</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>listings_pred.show() <span class="co"># model and predictions from the regression</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Vocabulary</strong></p>
 <p>The machine-learning community leaves at the border between computer science and mathematics. They borrow vocabulary from both sides, and it can sometimes be confusing when reading software documentation. Spark’s <code>lib</code> module uses conventions from this community :</p>
 <ul>
@@ -507,48 +538,63 @@ Rémi Pépin has loaded a lot these listings on AWS at this address: <code>s3a:/
 <li>repeat the same analysis for different regions / periods</li>
 <li>want to control predictions on a new, unseen test set, and ant to apply exactly the same process</li>
 </ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml.feature <span class="im">import</span> VectorAssembler</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml.regression <span class="im">import</span> LinearRegression</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml <span class="im">import</span> Pipeline</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>vectorizer <span class="op">=</span> VectorAssembler( <span class="co"># same vectorizer as before</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    inputCols     <span class="op">=</span> [<span class="st">"beds"</span>, <span class="st">"bedrooms"</span>],</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    outputCol     <span class="op">=</span> <span class="st">"features"</span>,</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    handleInvalid <span class="op">=</span> <span class="st">'skip'</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>regressor <span class="op">=</span> LinearRegression(featuresCol<span class="op">=</span><span class="st">"features"</span>, labelCol<span class="op">=</span><span class="st">"price"</span>) <span class="co"># same regressor</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>pipeline  <span class="op">=</span> Pipeline(stages <span class="op">=</span> [vectorizer, regressor]) <span class="co"># ... but now we pack them into a pipeline</span></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>listings_beij <span class="op">=</span> listings.<span class="bu">filter</span>(listings.city<span class="op">==</span><span class="st">"Beijing"</span>)</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>listings_barc <span class="op">=</span> listings.<span class="bu">filter</span>(listings.city<span class="op">==</span><span class="st">"Barcelona"</span>)</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>model_beij <span class="op">=</span> pipeline.fit(listings_beij) <span class="co"># vectorizer AND regressor are applied</span></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>model_barc <span class="op">=</span> pipeline.fit(listings_barc)</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model_beij.stages[<span class="dv">1</span>].coefficients) <span class="co"># model.stages[0] is the first step, model.stages[1] the second...</span></span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model_beij.stages[<span class="dv">1</span>].intercept)</span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model_barc.stages[<span class="dv">1</span>].coefficients)</span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model_barc.stages[<span class="dv">1</span>].intercept)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml.feature <span class="im">import</span> VectorAssembler</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml.regression <span class="im">import</span> LinearRegression</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml <span class="im">import</span> Pipeline</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>vectorizer <span class="op">=</span> VectorAssembler( <span class="co"># same vectorizer as before</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    inputCols     <span class="op">=</span> [<span class="st">"beds"</span>, <span class="st">"bedrooms"</span>],</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    outputCol     <span class="op">=</span> <span class="st">"features"</span>,</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    handleInvalid <span class="op">=</span> <span class="st">'skip'</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>regressor <span class="op">=</span> LinearRegression(featuresCol<span class="op">=</span><span class="st">"features"</span>, labelCol<span class="op">=</span><span class="st">"price"</span>) <span class="co"># same regressor</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>pipeline  <span class="op">=</span> Pipeline(stages <span class="op">=</span> [vectorizer, regressor]) <span class="co"># ... but now we pack them into a pipeline</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>listings_beij <span class="op">=</span> listings.<span class="bu">filter</span>(listings.city<span class="op">==</span><span class="st">"Beijing"</span>)</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>listings_barc <span class="op">=</span> listings.<span class="bu">filter</span>(listings.city<span class="op">==</span><span class="st">"Barcelona"</span>)</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>model_beij <span class="op">=</span> pipeline.fit(listings_beij) <span class="co"># vectorizer AND regressor are applied</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>model_barc <span class="op">=</span> pipeline.fit(listings_barc)</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model_beij.stages[<span class="dv">1</span>].coefficients) <span class="co"># model.stages[0] is the first step, model.stages[1] the second...</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model_beij.stages[<span class="dv">1</span>].intercept)</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model_barc.stages[<span class="dv">1</span>].coefficients)</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model_barc.stages[<span class="dv">1</span>].intercept)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="hands-on-4" class="level3" data-number="3.1">
 <h3 data-number="3.1" class="anchored" data-anchor-id="hands-on-4"><span class="header-section-number">3.1</span> ✍ Hands-on 4</h3>
 <ul class="task-list">
-<li><p><label><input type="checkbox">Interpret the results of the general regression.</label></p></li>
-<li><p><label><input type="checkbox">Collect the model’s <span class="math inline">\(R^2\)</span>. How good is our model?</label></p>
+<li><label><input type="checkbox">Interpret the results of the general regression.</label></li>
+</ul>
+<div id="d31bb960" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul class="task-list">
+<li><label><input type="checkbox">Collect the model’s <span class="math inline">\(R^2\)</span>. How good is our model?</label>
 <ul>
 <li>Models have a <code>summary</code> property, that you can explore with <code>dir(model.summary)</code>.</li>
 </ul></li>
-<li><p><label><input type="checkbox">Repeat the estimation separately for barcelona, brussels and rome.</label></p>
+</ul>
+<div id="e2bc5671" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul class="task-list">
+<li><label><input type="checkbox">Repeat the estimation separately for barcelona, brussels and rome.</label>
 <ul class="task-list">
 <li><label><input type="checkbox">Are the coefficients stable? <em>You will build a pipeline object.</em></label></li>
 </ul></li>
-<li><p><label><input type="checkbox">Are the <code>fit()</code> and <code>transform()</code> methods called eagerly or lazily?</label></p>
+</ul>
+<div id="c0265df2" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul class="task-list">
+<li><label><input type="checkbox">Are the <code>fit()</code> and <code>transform()</code> methods called eagerly or lazily?</label>
 <ul class="task-list">
 <li><label><input type="checkbox">Check the execution plan with the <code>explain()</code> method for lazy evaluations.</label></li>
 </ul></li>
 </ul>
-<div id="7c57696c" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fit() is eager ; transform() is lazy</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="9757fb21" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -556,17 +602,35 @@ Rémi Pépin has loaded a lot these listings on AWS at this address: <code>s3a:/
 <h2 data-number="4" class="anchored" data-anchor-id="diving-deeper"><span class="header-section-number">4</span> Diving deeper</h2>
 <p>You are in autonomy for this section. You will find helpful:</p>
 <ul>
-<li>The general Spark documentation for the <code>ml</code> module: https://spark.apache.org/docs/latest/ml-guide.html</li>
-<li>The PySpark documentation: https://spark.apache.org/docs/latest/api/python/index.html</li>
+<li><a href="https://spark.apache.org/docs/latest/ml-guide.html" class="external" target="_blank">The general Spark documentation for the <code>ml</code> module</a></li>
+<li><a href="https://spark.apache.org/docs/latest/api/python/index.html" class="external" target="_blank">The PySpark documentation</a></li>
 </ul>
 <section id="hands-on-5" class="level3" data-number="4.1">
 <h3 data-number="4.1" class="anchored" data-anchor-id="hands-on-5"><span class="header-section-number">4.1</span> ✍ Hands-on 5</h3>
 <ul class="task-list">
-<li><p><label><input type="checkbox">Add a categorical variable to the regression.</label></p></li>
-<li><p><label><input type="checkbox">Compute the p-values of your model as well as confidence intervals for the predictions.</label></p></li>
-<li><p><label><input type="checkbox">Time the regression in different settings and report the results on <a href="https://docs.google.com/spreadsheets/d/1KSCLMgiepoKKiDdRrwlQv_0XYn5ptzXRB7TP-TRXCAw/edit?usp=sharing">this shared spreadsheet</a>. How does it scale with the number of listings (<span class="math inline">\(n\)</span>) ? the number of regressors (<span class="math inline">\(p\)</span>) ? the number of nodes in your cluster (<span class="math inline">\(k\)</span>) ? <em>You will only try a couple of configurations that have not been tested by others. Remember that you can order and revoke nodes from your cluster at any time from the AWS’s cluster view, in the hardware tab, on on the CORE line, “resize”.</em></label></p></li>
-<li><p><label><input type="checkbox">Down-sample your data set to <span class="math inline">\(n=100000\)</span>, while still keeping a few variables. Save it on S3, then download it on your computer. Run the regression locally on your computer in R. In your opinion, is the extra precision (in term of <span class="math inline">\(R^2\)</span>) is worth the extra computation time?</label></p></li>
+<li><label><input type="checkbox">Add a categorical variable to the regression.</label></li>
 </ul>
+<div id="6f5ca89f" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul class="task-list">
+<li><label><input type="checkbox">Compute the p-values of your model as well as confidence intervals for the predictions.</label></li>
+</ul>
+<div id="2a713547" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul class="task-list">
+<li><label><input type="checkbox">Time the regression in different settings and report the results on <a href="https://docs.google.com/spreadsheets/d/1KSCLMgiepoKKiDdRrwlQv_0XYn5ptzXRB7TP-TRXCAw/edit?usp=sharing">this shared spreadsheet</a>. How does it scale with the number of listings (<span class="math inline">\(n\)</span>) ? the number of regressors (<span class="math inline">\(p\)</span>) ? the number of nodes in your cluster (<span class="math inline">\(k\)</span>) ? <em>You will only try a couple of configurations that have not been tested by others. Remember that you can order and revoke nodes from your cluster at any time from the AWS’s cluster view, in the hardware tab, on on the CORE line, “resize”.</em></label></li>
+</ul>
+<div id="a8a07cd8" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul class="task-list">
+<li><label><input type="checkbox">Down-sample your data set to <span class="math inline">\(n=100000\)</span>, while still keeping a few variables. Save it on S3, then download it on your computer. Run the regression locally on your computer in R. In your opinion, is the extra precision (in term of <span class="math inline">\(R^2\)</span>) is worth the extra computation time?</label></li>
+</ul>
+<div id="11727c2c" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 </section>
 <section id="end-of-the-lab" class="level2 unnumbered">
@@ -579,7 +643,7 @@ Rémi Pépin has loaded a lot these listings on AWS at this address: <code>s3a:/
 </ul></li>
 <li><label><input type="checkbox">Delete the Jupyter-pyspark service</label>
 <ul>
-<li>https://datalab.sspcloud.fr/my-services</li>
+<li><a href="https://datalab.sspcloud.fr/my-services" target="_blank">SSPCloud &gt; My services &gt; Delete</a></li>
 </ul></li>
 </ul>
 
@@ -1132,7 +1196,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","loop":false,"descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","openEffect":"zoom","selector":".lightbox","loop":false,"closeEffect":"zoom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
