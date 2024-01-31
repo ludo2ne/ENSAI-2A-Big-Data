@@ -76,6 +76,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -147,11 +150,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Lab 1</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../docs/lab/lab2/lab2-SSPCloud.ipynb">
+    <a class="dropdown-item" href="../../../docs/lab/lab2/lab2-SSPCloud.html">
  <span class="dropdown-text">Lab 2</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../docs/lab/lab3/lab3.html">
+    <a class="dropdown-item" href="../../../docs/lab/lab3/lab3-SSPCloud.html">
  <span class="dropdown-text">Lab 3</span></a>
   </li>  
     </ul>
@@ -185,38 +188,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#before-you-start" id="toc-before-you-start" class="nav-link active" data-scroll-target="#before-you-start">Before you start</a></li>
-  <li><a href="#create-a-spark-session" id="toc-create-a-spark-session" class="nav-link" data-scroll-target="#create-a-spark-session"><span class="header-section-number">1</span> Create a Spark session</a></li>
-  <li><a href="#first-steps-with-spark---data-importation" id="toc-first-steps-with-spark---data-importation" class="nav-link" data-scroll-target="#first-steps-with-spark---data-importation"><span class="header-section-number">2</span> First steps with Spark - Data importation</a>
+  <li><a href="#what-is-spark" id="toc-what-is-spark" class="nav-link" data-scroll-target="#what-is-spark"><span class="header-section-number">1</span> What is Spark ?</a></li>
+  <li><a href="#create-a-spark-session" id="toc-create-a-spark-session" class="nav-link" data-scroll-target="#create-a-spark-session"><span class="header-section-number">2</span> Create a Spark session</a></li>
+  <li><a href="#first-steps-with-spark---data-importation" id="toc-first-steps-with-spark---data-importation" class="nav-link" data-scroll-target="#first-steps-with-spark---data-importation"><span class="header-section-number">3</span> First steps with Spark - Data importation</a>
   <ul class="collapse">
-  <li><a href="#hands-on-1---data-importation" id="toc-hands-on-1---data-importation" class="nav-link" data-scroll-target="#hands-on-1---data-importation"><span class="header-section-number">2.1</span> ✍Hands-on 1 - Data importation</a></li>
+  <li><a href="#hands-on-1---data-importation" id="toc-hands-on-1---data-importation" class="nav-link" data-scroll-target="#hands-on-1---data-importation"><span class="header-section-number">3.1</span> ✍Hands-on 1 - Data importation</a></li>
   </ul></li>
-  <li><a href="#data-frame-basic-manipulations" id="toc-data-frame-basic-manipulations" class="nav-link" data-scroll-target="#data-frame-basic-manipulations"><span class="header-section-number">3</span> Data frame basic manipulations</a>
+  <li><a href="#data-frame-basic-manipulations" id="toc-data-frame-basic-manipulations" class="nav-link" data-scroll-target="#data-frame-basic-manipulations"><span class="header-section-number">4</span> Data frame basic manipulations</a>
   <ul class="collapse">
-  <li><a href="#lazy-evaluation" id="toc-lazy-evaluation" class="nav-link" data-scroll-target="#lazy-evaluation"><span class="header-section-number">3.1</span> Lazy evaluation</a></li>
-  <li><a href="#hands-on-2---data-frame-basic-manipulations" id="toc-hands-on-2---data-frame-basic-manipulations" class="nav-link" data-scroll-target="#hands-on-2---data-frame-basic-manipulations"><span class="header-section-number">3.2</span> ✍Hands-on 2 - Data frame basic manipulations</a></li>
+  <li><a href="#lazy-evaluation" id="toc-lazy-evaluation" class="nav-link" data-scroll-target="#lazy-evaluation"><span class="header-section-number">4.1</span> Lazy evaluation</a></li>
+  <li><a href="#hands-on-2---data-frame-basic-manipulations" id="toc-hands-on-2---data-frame-basic-manipulations" class="nav-link" data-scroll-target="#hands-on-2---data-frame-basic-manipulations"><span class="header-section-number">4.2</span> ✍Hands-on 2 - Data frame basic manipulations</a></li>
   </ul></li>
-  <li><a href="#basic-dataframe-column-manipulation" id="toc-basic-dataframe-column-manipulation" class="nav-link" data-scroll-target="#basic-dataframe-column-manipulation"><span class="header-section-number">4</span> Basic DataFrame column manipulation</a>
+  <li><a href="#basic-dataframe-column-manipulation" id="toc-basic-dataframe-column-manipulation" class="nav-link" data-scroll-target="#basic-dataframe-column-manipulation"><span class="header-section-number">5</span> Basic DataFrame column manipulation</a>
   <ul class="collapse">
-  <li><a href="#hands-on-3---basic-dataframe-column-manipulation" id="toc-hands-on-3---basic-dataframe-column-manipulation" class="nav-link" data-scroll-target="#hands-on-3---basic-dataframe-column-manipulation"><span class="header-section-number">4.1</span> ✍Hands-on 3 - Basic DataFrame column manipulation</a></li>
+  <li><a href="#hands-on-3---basic-dataframe-column-manipulation" id="toc-hands-on-3---basic-dataframe-column-manipulation" class="nav-link" data-scroll-target="#hands-on-3---basic-dataframe-column-manipulation"><span class="header-section-number">5.1</span> ✍Hands-on 3 - Basic DataFrame column manipulation</a></li>
   </ul></li>
-  <li><a href="#advance-dataframe-column-manipulation" id="toc-advance-dataframe-column-manipulation" class="nav-link" data-scroll-target="#advance-dataframe-column-manipulation"><span class="header-section-number">5</span> Advance DataFrame column manipulation</a>
+  <li><a href="#advance-dataframe-column-manipulation" id="toc-advance-dataframe-column-manipulation" class="nav-link" data-scroll-target="#advance-dataframe-column-manipulation"><span class="header-section-number">6</span> Advance DataFrame column manipulation</a>
   <ul class="collapse">
-  <li><a href="#array-manipulation" id="toc-array-manipulation" class="nav-link" data-scroll-target="#array-manipulation"><span class="header-section-number">5.1</span> Array manipulation</a></li>
-  <li><a href="#user-defined-function" id="toc-user-defined-function" class="nav-link" data-scroll-target="#user-defined-function"><span class="header-section-number">5.2</span> User defined function</a></li>
+  <li><a href="#array-manipulation" id="toc-array-manipulation" class="nav-link" data-scroll-target="#array-manipulation"><span class="header-section-number">6.1</span> Array manipulation</a></li>
+  <li><a href="#user-defined-function" id="toc-user-defined-function" class="nav-link" data-scroll-target="#user-defined-function"><span class="header-section-number">6.2</span> User defined function</a></li>
   </ul></li>
-  <li><a href="#aggregation-functions" id="toc-aggregation-functions" class="nav-link" data-scroll-target="#aggregation-functions"><span class="header-section-number">6</span> Aggregation functions</a>
+  <li><a href="#aggregation-functions" id="toc-aggregation-functions" class="nav-link" data-scroll-target="#aggregation-functions"><span class="header-section-number">7</span> Aggregation functions</a>
   <ul class="collapse">
-  <li><a href="#hands-on-6---aggregation-functions" id="toc-hands-on-6---aggregation-functions" class="nav-link" data-scroll-target="#hands-on-6---aggregation-functions"><span class="header-section-number">6.1</span> ✍Hands-on 6 - Aggregation functions</a></li>
+  <li><a href="#hands-on-6---aggregation-functions" id="toc-hands-on-6---aggregation-functions" class="nav-link" data-scroll-target="#hands-on-6---aggregation-functions"><span class="header-section-number">7.1</span> ✍Hands-on 6 - Aggregation functions</a></li>
   </ul></li>
-  <li><a href="#grouping-functions" id="toc-grouping-functions" class="nav-link" data-scroll-target="#grouping-functions"><span class="header-section-number">7</span> Grouping functions</a>
+  <li><a href="#grouping-functions" id="toc-grouping-functions" class="nav-link" data-scroll-target="#grouping-functions"><span class="header-section-number">8</span> Grouping functions</a>
   <ul class="collapse">
-  <li><a href="#hands-on-7---grouping-functions" id="toc-hands-on-7---grouping-functions" class="nav-link" data-scroll-target="#hands-on-7---grouping-functions"><span class="header-section-number">7.1</span> ✍Hands-on 7 - Grouping functions</a></li>
+  <li><a href="#hands-on-7---grouping-functions" id="toc-hands-on-7---grouping-functions" class="nav-link" data-scroll-target="#hands-on-7---grouping-functions"><span class="header-section-number">8.1</span> ✍Hands-on 7 - Grouping functions</a></li>
   </ul></li>
-  <li><a href="#spark-sql" id="toc-spark-sql" class="nav-link" data-scroll-target="#spark-sql"><span class="header-section-number">8</span> Spark SQL</a>
+  <li><a href="#spark-sql" id="toc-spark-sql" class="nav-link" data-scroll-target="#spark-sql"><span class="header-section-number">9</span> Spark SQL</a>
   <ul class="collapse">
-  <li><a href="#hands-on-8---spark-sql" id="toc-hands-on-8---spark-sql" class="nav-link" data-scroll-target="#hands-on-8---spark-sql"><span class="header-section-number">8.1</span> ✍Hands-on 8 - Spark SQL</a></li>
+  <li><a href="#hands-on-8---spark-sql" id="toc-hands-on-8---spark-sql" class="nav-link" data-scroll-target="#hands-on-8---spark-sql"><span class="header-section-number">9.1</span> ✍Hands-on 8 - Spark SQL</a></li>
   </ul></li>
-  <li><a href="#delete-the-jupyter-pyspark-service" id="toc-delete-the-jupyter-pyspark-service" class="nav-link" data-scroll-target="#delete-the-jupyter-pyspark-service"><span class="header-section-number">9</span> Delete the Jupyter-pyspark service</a></li>
+  <li><a href="#delete-the-jupyter-pyspark-service" id="toc-delete-the-jupyter-pyspark-service" class="nav-link" data-scroll-target="#delete-the-jupyter-pyspark-service"><span class="header-section-number">10</span> Delete the Jupyter-pyspark service</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lab1-SSPCloud-correction.ipynb" download="lab1-SSPCloud-correction.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
 </nav>
@@ -254,16 +258,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="before-you-start" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="before-you-start">Before you start</h2>
 <ul class="task-list">
-<li><label><input type="checkbox">Download this <a href="lab1-SSPCloud.ipynb" target="_blank">Jupyter Notebook</a></label></li>
+<li><label><input type="checkbox">Download this <a href="lab1-SSPCloud-correction.ipynb" target="_blank">Jupyter Notebook</a></label></li>
 <li><label><input type="checkbox">Follow these <a href="../../../docs/lab/lab-setup.html" target="_blank">instructions</a></label></li>
 </ul>
 </section>
-<section id="create-a-spark-session" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="create-a-spark-session"><span class="header-section-number">1</span> Create a Spark session</h2>
+<section id="what-is-spark" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="what-is-spark"><span class="header-section-number">1</span> What is Spark ?</h2>
+<p>Let’s keep it simple.</p>
+<p>The intuitive way: Spark distributes tasks to different Worker nodes (machine executing the tasks).<br>
+The Kubernetes way: Spark distributes tasks to different containers. The location of containers among the different worker nodes is then handled by Kubernetes. The more computation power you need, the more containers get created. It’s a smooth way to save Worker nodes resources. With Kubernetes, we just speak in terms of Pods rathen than containers.</p>
+<p>Pretty handy right ? If you want to have a deeper look on how it’s done, you can by clicking on the link bellow but you still have some work to do so don’t waste your time ! You can keep it to the end.</p>
+<details>
+<summary>
+<font size="3" color="#447099"><b>If you want more ! </b></font>
+</summary>
+<section id="spark-context" class="level4">
+<h4 class="anchored" data-anchor-id="spark-context">Spark Context</h4>
+<p>The <strong>Spark Context</strong> is an object that hides the complexity of the underlying infrastructure to perform computation from the Data Scientist.</p>
+<p>This Spark context is a JVM process that gives access to a Spark <strong>driver</strong> which schedules the tasks and spans tasks across Worker nodes through Executors. In brief, the Spark driver communicates with all the Worker nodes.</p>
+<p>Each Worker node consists of one or more Executor(s) who are responsible for running the Task. Executors register themselves with Driver. The Driver has all the information about the Executors at all the time.</p>
+<p>This working combination of Driver and Workers is known as <strong>Spark Application</strong>.</p>
+<p>JVM: Java virtual machine that load, verifies and executes Java bytecode.</p>
+<p><a href="img/spark_context.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="img/spark_context.png" class="img-fluid"></a></p>
+<p>The Spark Application is launched with the help of the <strong>Cluster Manager</strong>. Spark is dependent on the <strong>Cluster Manager</strong> to launch the Executors and also the Driver (in Cluster mode).</p>
+<p>Spark can be run with any of the 5 following <strong>Cluster Manager</strong> :</p>
+<ul>
+<li>local : Driver use CPU threads on your local machine</li>
+<li>Spark Standalone Mode : A basic resource manager provided by Spark</li>
+<li>YARN : the historical resource manager commonly used in traditional Big Data infrastructures (Courdera or Hortonworks cluster for instance)</li>
+<li>Mesos : the resource manager from Berkeley University</li>
+<li>Kubernetes : the game changing containers orchestrator</li>
+</ul>
+</section>
+<section id="spark-on-a-kubernetes-cluster" class="level4">
+<h4 class="anchored" data-anchor-id="spark-on-a-kubernetes-cluster">Spark on a Kubernetes cluster</h4>
+<p><a href="img/k8spark_cluster_mode.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="img/k8spark_cluster_mode.png" class="img-fluid"></a></p>
+<p>The Spark driver runs on a Kubernetes Pod and creates executors running within Kubernetes pods. In simple terms, Spark driver is in a Pod and it distributes tasks to different Pods. The location of Pods among the different worker nodes is then handled by Kubernetes.</p>
+<p>The Kubernetes <strong>Scheduler</strong> checks if pods are assigned to nodes. For every Pod that the scheduler discovers, the scheduler is responsible of finding the best node for that Pod to run on.<br>
+The Kubernetes <strong>API Server</strong> allows to interact with Pods. It schedules executor Pods by creating or deleting Pods.</p>
+</section></details>
+</section>
+
+<section id="create-a-spark-session" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="create-a-spark-session"><span class="header-section-number">2</span> Create a Spark session</h2>
 <ul class="task-list">
 <li><label><input type="checkbox">Execute the following two cells to initialize a Spark session.</label></li>
 </ul>
-<div id="4054e9c6" class="cell" data-tags="[]" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="1">
+<div id="a464ef83" class="cell" data-tags="[]" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -292,12 +333,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>         .getOrCreate()</span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="97fdddb0" class="cell" data-execution_count="2">
+<div id="eb39d512" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>spark</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="first-steps-with-spark---data-importation" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="first-steps-with-spark---data-importation"><span class="header-section-number">2</span> First steps with Spark - Data importation</h2>
+<section id="first-steps-with-spark---data-importation" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="first-steps-with-spark---data-importation"><span class="header-section-number">3</span> First steps with Spark - Data importation</h2>
 <p>Spark’s main object class is the DataFrame, which is a distributed table. It is analogous to R’s or Python (Pandas)’s data frames:</p>
 <ul>
 <li>one row represents an observation,</li>
@@ -319,8 +360,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In the future, you may consult the <a href="https://spark.apache.org/docs/latest/sql-data-sources.html">Data Source documentation</a> to have the complete description of Spark’s reading abilities.</p>
 <p>The data you will use in this lab are real data from the twitter <a href="https://developer.twitter.com/en/docs/twitter-api/tweets/sampled-stream/introduction">sampled stream API</a> and <a href="https://developer.twitter.com/en/docs/twitter-api/tweets/filtered-stream/introduction">filtered stream API</a>. The tweets folder contains more than 50 files and more than 2 million tweets. The tweets was collected between the 14/04/2021 and the 18/04/2021. The total collection time was less than 10 hours.</p>
 <hr>
-<section id="hands-on-1---data-importation" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="hands-on-1---data-importation"><span class="header-section-number">2.1</span> ✍Hands-on 1 - Data importation</h3>
+<section id="hands-on-1---data-importation" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="hands-on-1---data-importation"><span class="header-section-number">3.1</span> ✍Hands-on 1 - Data importation</h3>
 <ul class="task-list">
 <li><label><input type="checkbox">Load the json file stored here : <code>s3a://ludo2ne/diffusion/tweets.jsonl.gz</code></label>
 <ul class="task-list">
@@ -338,7 +379,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>In Jupyter, read it using <code>s3a://&lt;user_name&gt;/tweets.jsonl.gz</code></li>
 </ul></li>
 </ul>
-<div id="cb33df29" class="cell" data-tags="[]" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="3">
+<div id="444c44e2" class="cell" data-tags="[]" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># DataFrame creation</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df_tweet <span class="op">=</span> spark.read.json(<span class="st">"s3a://ludo2ne/diffusion/tweets.jsonl.gz"</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -347,8 +388,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="data-frame-basic-manipulations" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="data-frame-basic-manipulations"><span class="header-section-number">3</span> Data frame basic manipulations</h2>
+<section id="data-frame-basic-manipulations" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="data-frame-basic-manipulations"><span class="header-section-number">4</span> Data frame basic manipulations</h2>
 <p>If DataFrames are immutable, they can however be <strong><em>transformed</em></strong> in other DataFrames, in the sense that a modified copy is returned. Such <strong>transformations</strong> include: filtering, sampling, dropping columns, selecting columns, adding new columns…</p>
 <p>First, you can get information about the columns with:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df.columns       <span class="co"># get the column names</span></span>
@@ -368,11 +409,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  .<span class="bu">filter</span>(df.variable1<span class="op">==</span><span class="st">"value"</span>)<span class="op">\</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  .show(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>As said before your data are distributed over multiple nodes (executors) and data inside a node are split into partitions. Then each transformations will be run in parallel. They are called <em>narrow transformation</em> For example, to sample a DataFrame, Spark sample every partitions in parallel because sample all partition produce the sample DataFrame. For some transformations, like <code>groupBy()</code> it’s impossible, and it’s cannot be run in parallel.</p>
-<p><img src="img/spark_exemple2_pipeline.png" style="zoom:50%;"></p>
-<!-- take() collect() limit() first() show() -->
-<!-- lien vers la doc https://spark.apache.org/docs/3.1.1/api/python/reference/pyspark.sql.html#dataframe-apis -->
-<section id="lazy-evaluation" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="lazy-evaluation"><span class="header-section-number">3.1</span> Lazy evaluation</h3>
+<p><a href="img/spark_exemple2_pipeline.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="img/spark_exemple2_pipeline.png" class="img-fluid"></a></p>
+<section id="lazy-evaluation" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="lazy-evaluation"><span class="header-section-number">4.1</span> Lazy evaluation</h3>
 <p>This is because Spark has what is known as <strong>lazy evaluation</strong>, in the sense that it will wait as much as it can before performing the actual computation. Said otherwise, when you run an instruction such as:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>tweet_author_hashtags <span class="op">=</span> df_tweet_big.select(<span class="st">"auteur"</span>,<span class="st">"hashtags"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>… you are not executing anything! Rather, you are building an <strong>execution plan</strong>, to be realised later.</p>
@@ -389,27 +428,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>This has also drawbacks.</strong> Since the computation is optimized for the end result, the intermediate stages are discarded by default. So if you need a DataFrame multiple times, you have to cache it in memory because if you don’t Spark will recompute it every single time.</p>
 <hr>
 </section>
-<section id="hands-on-2---data-frame-basic-manipulations" class="level3" data-number="3.2">
-<h3 data-number="3.2" class="anchored" data-anchor-id="hands-on-2---data-frame-basic-manipulations"><span class="header-section-number">3.2</span> ✍Hands-on 2 - Data frame basic manipulations</h3>
+<section id="hands-on-2---data-frame-basic-manipulations" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="hands-on-2---data-frame-basic-manipulations"><span class="header-section-number">4.2</span> ✍Hands-on 2 - Data frame basic manipulations</h3>
 <ul class="task-list">
 <li><label><input type="checkbox">How many rows have your two DataFrame ?</label></li>
 </ul>
-<div id="c179bff9" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="4">
+<div id="9c9d3002" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df_tweet.count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Display columns names and then the schema</label></li>
 </ul>
-<div id="fa517120" class="cell" data-execution_count="5">
+<div id="157cbe7e" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df_tweet.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="6beeb5bc" class="cell" data-execution_count="6">
+<div id="8c5725d7" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df_tweet.printSchema()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Display 10 rows of df_tweet</label></li>
 </ul>
-<div id="e4e9b971" class="cell" data-execution_count="7">
+<div id="aabc064c" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df_tweet.show(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
@@ -419,7 +458,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>If computations take too long on the full DataFrame, use this one instead or add a sample transformation in your expression.</li>
 </ul></li>
 </ul>
-<div id="74e2390b" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="8">
+<div id="b0283e12" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df_tweet_sampled <span class="op">=</span> df_tweet<span class="op">\</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  .sample(fraction<span class="op">=</span><span class="fl">0.1</span>)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -431,7 +470,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><label><input type="checkbox">Then display 5 rows</label></li>
 </ul></li>
 </ul>
-<div id="56c842b5" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="9">
+<div id="eb438f3f" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>tweet_author_hashtags <span class="op">=</span> df_tweet.select(<span class="st">"auteur"</span>, <span class="st">"hashtags"</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>tweet_author_hashtags.show(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -442,7 +481,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>mentions</code> and <code>urls</code> are both nested columns in <code>entities</code></li>
 </ul></li>
 </ul>
-<div id="e258873a" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="10">
+<div id="e7c3771b" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  .select(<span class="st">"auteur"</span>,</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>          <span class="st">"entities.mentions"</span>,</span>
@@ -456,15 +495,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><label><input type="checkbox">Print 10 lines</label></li>
 </ul></li>
 </ul>
-<div id="794ffdf4" class="cell" data-execution_count="11">
+<div id="1faeaa73" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  .<span class="bu">filter</span>(df_tweet.like_count <span class="op">&gt;=</span> <span class="dv">1</span>)<span class="op">\</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  .show(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
-<section id="basic-dataframe-column-manipulation" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="basic-dataframe-column-manipulation"><span class="header-section-number">4</span> Basic DataFrame column manipulation</h2>
+<section id="basic-dataframe-column-manipulation" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="basic-dataframe-column-manipulation"><span class="header-section-number">5</span> Basic DataFrame column manipulation</h2>
 <p>You can add/update/rename column of a DataFrame using <strong>spark</strong> :</p>
 <ul>
 <li>Drop : <code>df.drop(columnName : str )</code></li>
@@ -472,22 +511,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Add/update : <code>df.withColumn(columnName : str, columnExpression)</code></li>
 </ul>
 <p>For example</p>
-<div id="288f61fa" class="cell" data-execution_count="12">
+<div id="d72f9532" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  .withColumn(                                        <span class="co"># computes new variable</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"like_rt_ratio"</span>,                                  <span class="co"># like_rt_ratio "OVERCONFIDENCE"</span></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    df_tweet.like_count <span class="op">/</span>df_tweet.retweet_count)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>See <a href="https://spark.apache.org/docs/3.1.1/api/python/reference/pyspark.sql.html#functions" class="external" target="_blank">here</a> for the list of all functions available in an expression.</p>
-<section id="hands-on-3---basic-dataframe-column-manipulation" class="level3" data-number="4.1">
-<h3 data-number="4.1" class="anchored" data-anchor-id="hands-on-3---basic-dataframe-column-manipulation"><span class="header-section-number">4.1</span> ✍Hands-on 3 - Basic DataFrame column manipulation</h3>
+<section id="hands-on-3---basic-dataframe-column-manipulation" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="hands-on-3---basic-dataframe-column-manipulation"><span class="header-section-number">5.1</span> ✍Hands-on 3 - Basic DataFrame column manipulation</h3>
 <ul class="task-list">
 <li><label><input type="checkbox">Define a DataFrame with a column names <code>interaction_count</code> named <code>df_tweet_interaction_count</code></label>
 <ul>
 <li>This column is the sum of <code>like_count</code>, <code>reply_count</code> and <code>retweet_count</code>.</li>
 </ul></li>
 </ul>
-<div id="c81d131f" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="13">
+<div id="58f3c749" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df_tweet_interaction_count <span class="op">=</span> df_tweet<span class="op">\</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  .drop(<span class="st">"other"</span>)<span class="op">\</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  .<span class="bu">filter</span>(df_tweet.like_count <span class="op">&gt;=</span> <span class="dv">1</span>)<span class="op">\</span></span>
@@ -502,17 +541,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul class="task-list">
 <li><label><input type="checkbox">Update the DataFrame you imported at the beginning of this lab and drop the <code>other</code> column</label></li>
 </ul>
-<div id="6b9110c9" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="14">
+<div id="1123de0a" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  .drop(<span class="st">"other"</span>)<span class="op">\</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  .show(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
-<section id="advance-dataframe-column-manipulation" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="advance-dataframe-column-manipulation"><span class="header-section-number">5</span> Advance DataFrame column manipulation</h2>
-<section id="array-manipulation" class="level3" data-number="5.1">
-<h3 data-number="5.1" class="anchored" data-anchor-id="array-manipulation"><span class="header-section-number">5.1</span> Array manipulation</h3>
+<section id="advance-dataframe-column-manipulation" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="advance-dataframe-column-manipulation"><span class="header-section-number">6</span> Advance DataFrame column manipulation</h2>
+<section id="array-manipulation" class="level3" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="array-manipulation"><span class="header-section-number">6.1</span> Array manipulation</h3>
 <p>Some columns often contain arrays (lists) of values instead of just one value. This may seem surprising but this actually quite natural. For instance, you may create an array of words from a text, or generate a list of random numbers for each observation, etc.</p>
 <p>You may <strong>create array of values</strong> with:</p>
 <ul>
@@ -591,7 +630,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul class="task-list">
 <li><label><input type="checkbox">Keep all the tweets with hashtags and for each remaining line, split the hashtag text into an array of hashtags</label></li>
 </ul>
-<div id="04dc3de7" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="15">
+<div id="534f1c67" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> split, explode, size, array_contains</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
@@ -604,7 +643,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul class="task-list">
 <li><label><input type="checkbox">Create a new column with the number of words of the <code>contenu</code> column. (Use <code>split()</code> + <code>size()</code>)</label></li>
 </ul>
-<div id="d368a533" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="16">
+<div id="32bb88a4" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  .withColumn(<span class="st">"word_count"</span>,</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>              size(split(<span class="st">"contenu"</span>, <span class="st">" "</span>)))<span class="op">\</span></span>
@@ -613,15 +652,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul class="task-list">
 <li><label><input type="checkbox">Count how many tweet contain the <code>Ukraine</code> hashtag (use the <code>count()</code> action)</label></li>
 </ul>
-<div id="98ac46d1" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="17">
+<div id="e0b8a831" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  .<span class="bu">filter</span>(array_contains(<span class="st">"hashtags"</span>, <span class="st">"Ukraine"</span>))<span class="op">\</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  .count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
-<section id="user-defined-function" class="level3" data-number="5.2">
-<h3 data-number="5.2" class="anchored" data-anchor-id="user-defined-function"><span class="header-section-number">5.2</span> User defined function</h3>
+<section id="user-defined-function" class="level3" data-number="6.2">
+<h3 data-number="6.2" class="anchored" data-anchor-id="user-defined-function"><span class="header-section-number">6.2</span> User defined function</h3>
 <p>For more very specific column manipulation you will need Spark’s <code>udf()</code> function (<em>User Defined Function</em>). It can be useful if Spark does not provide a feature you want. But Spark is a popular and active project, so before coding an udf, go check the documentation. For instance for natural language processing, Spark already has some <a href="https://spark.apache.org/docs/3.1.1/api/python/reference/api/pyspark.ml.feature.Tokenizer.html#pyspark.ml.feature.Tokenizer">functions</a>. Last things, python udf can lead to performance issues (see https://stackoverflow.com/a/38297050) and learning a little bit of scala or java can be a good idea.</p>
 <p>For example :</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># !!!! DOES NOT WORK !!!!</span></span>
@@ -660,7 +699,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>your function will return an <code>IntegerType</code> and not a <code>StringType</code></li>
 </ul></li>
 </ul>
-<div id="8e5b8a66" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="18">
+<div id="6c8b4064" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># imports</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> udf</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.types <span class="im">import</span> IntegerType</span>
@@ -683,8 +722,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </section>
 </section>
-<section id="aggregation-functions" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="aggregation-functions"><span class="header-section-number">6</span> Aggregation functions</h2>
+<section id="aggregation-functions" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="aggregation-functions"><span class="header-section-number">7</span> Aggregation functions</h2>
 <p>Spark offer a variety of aggregation functions :</p>
 <ul>
 <li><p><code>count(column : string)</code> will count every not null value of the specify column. You cant use <code>count(1)</code> of <code>count("*")</code> to count every line (even row with only null values)</p></li>
@@ -698,15 +737,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>You have access to all other common functions <code>min()</code>, <code>max()</code>, <code>first()</code>, <code>last()</code>, <code>sum()</code>, <code>sumDistinct()</code>, <code>avg()</code> etc (you should import them first <code>from pyspark.sql.functions import min, max, avg, first, last, sum, sumDistinct</code>)</p></li>
 </ul>
 <hr>
-<section id="hands-on-6---aggregation-functions" class="level3" data-number="6.1">
-<h3 data-number="6.1" class="anchored" data-anchor-id="hands-on-6---aggregation-functions"><span class="header-section-number">6.1</span> ✍Hands-on 6 - Aggregation functions</h3>
+<section id="hands-on-6---aggregation-functions" class="level3" data-number="7.1">
+<h3 data-number="7.1" class="anchored" data-anchor-id="hands-on-6---aggregation-functions"><span class="header-section-number">7.1</span> ✍Hands-on 6 - Aggregation functions</h3>
 <ul class="task-list">
 <li><label><input type="checkbox">What are the min, max, average of <code>interaction_count</code> (use <code>df_tweet_interaction_count</code> created earlier)</label>
 <ul>
 <li>don’t forget to import the required functions</li>
 </ul></li>
 </ul>
-<div id="dd08b276" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="19">
+<div id="705e6da1" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> <span class="bu">min</span>, <span class="bu">max</span>, avg, first, last, <span class="bu">sum</span>, sumDistinct</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>df_tweet_interaction_count<span class="op">\</span></span>
@@ -722,7 +761,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><label><input type="checkbox">Try the approximative count with 0.1 and 0.01 as maximum estimation error allowed.</label></li>
 </ul></li>
 </ul>
-<div id="3e058e0f" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="20">
+<div id="35abed10" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> count, countDistinct, approx_count_distinct</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
@@ -734,8 +773,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="grouping-functions" class="level2" data-number="7">
-<h2 data-number="7" class="anchored" data-anchor-id="grouping-functions"><span class="header-section-number">7</span> Grouping functions</h2>
+<section id="grouping-functions" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="grouping-functions"><span class="header-section-number">8</span> Grouping functions</h2>
 <p>Like SQL you can group row by a criteria with Spark. Just use the <code>groupBy(column : string)</code> method. Then you can compute some aggregation over those groups.</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>df<span class="op">\</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  .groupBy(<span class="st">"col1"</span>)<span class="op">\</span></span>
@@ -749,9 +788,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>       avg(<span class="st">"col3"</span>).alias(<span class="st">"avg3"</span>))<span class="op">\</span></span>
 <span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  .show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Aggregation and grouping transformations work differently than the previous method like <code>filter()</code>, <code>select()</code>, <code>withColumn()</code> etc. Those transformations cannot be run over each partitions in parallel, and need to transfer data between partitions and executors. They are called “wide transformations”</p>
-<p><img src="img/spark_exemple2_pipeline.png" style="zoom:50%;"></p>
-<section id="hands-on-7---grouping-functions" class="level3" data-number="7.1">
-<h3 data-number="7.1" class="anchored" data-anchor-id="hands-on-7---grouping-functions"><span class="header-section-number">7.1</span> ✍Hands-on 7 - Grouping functions</h3>
+<p><a href="img/spark_exemple2_pipeline.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="img/spark_exemple2_pipeline.png" class="img-fluid"></a></p>
+<section id="hands-on-7---grouping-functions" class="level3" data-number="8.1">
+<h3 data-number="8.1" class="anchored" data-anchor-id="hands-on-7---grouping-functions"><span class="header-section-number">8.1</span> ✍Hands-on 7 - Grouping functions</h3>
 <ul class="task-list">
 <li><label><input type="checkbox">Compute a daframe with the min, max and average retweet of each <code>auteur</code>.</label>
 <ul>
@@ -761,7 +800,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> desc</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>df.orderBy(desc(<span class="st">"col"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
-<div id="3c00e43d" class="cell" data-execution_count="21">
+<div id="8c819c30" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> desc</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
@@ -774,8 +813,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="spark-sql" class="level2" data-number="8">
-<h2 data-number="8" class="anchored" data-anchor-id="spark-sql"><span class="header-section-number">8</span> Spark SQL</h2>
+<section id="spark-sql" class="level2" data-number="9">
+<h2 data-number="9" class="anchored" data-anchor-id="spark-sql"><span class="header-section-number">9</span> Spark SQL</h2>
 <p>Spark understand SQL statement. It’s not a hack nor a workaround to use SQL in Spark, it’s one a the more powerful feature in Spark. To use SQL you will need :</p>
 <ol type="1">
 <li><p>Register a view pointing to your DataFrame</p>
@@ -787,15 +826,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>You could manipulate every registered DataFrame by their view name with plain SQL.</p></li>
 </ol>
 <p>In fact you can do most of this tutorial without any knowledge in PySpark nor Spark. Many things can only be done in Spark if you know SQL and how to use it in Spark.</p>
-<section id="hands-on-8---spark-sql" class="level3" data-number="8.1">
-<h3 data-number="8.1" class="anchored" data-anchor-id="hands-on-8---spark-sql"><span class="header-section-number">8.1</span> ✍Hands-on 8 - Spark SQL</h3>
+<section id="hands-on-8---spark-sql" class="level3" data-number="9.1">
+<h3 data-number="9.1" class="anchored" data-anchor-id="hands-on-8---spark-sql"><span class="header-section-number">9.1</span> ✍Hands-on 8 - Spark SQL</h3>
 <ul class="task-list">
 <li><label><input type="checkbox">How many tweets have hashtags ?</label>
 <ul class="task-list">
 <li><label><input type="checkbox">Distinct hashtags ?</label></li>
 </ul></li>
 </ul>
-<div id="55c80d01" class="cell" data-execution_count="22">
+<div id="0d9be86b" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  .select(<span class="st">"contenu"</span>, <span class="st">"hashtags"</span>)<span class="op">\</span></span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  .createOrReplaceTempView(<span class="st">"view_hashtag_content"</span>)</span>
@@ -811,7 +850,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul class="task-list">
 <li><label><input type="checkbox">Compute a dataframe with the min, max and average retweet of each <code>auteur</code> using Spark SQL</label></li>
 </ul>
-<div id="413ca4a8" class="cell" data-execution_count="23">
+<div id="5d8902a2" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>df_tweet.createOrReplaceTempView(<span class="st">"view_tweet"</span>)</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>spark.sql(<span class="st">"""</span></span>
@@ -826,8 +865,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="delete-the-jupyter-pyspark-service" class="level2" data-number="9">
-<h2 data-number="9" class="anchored" data-anchor-id="delete-the-jupyter-pyspark-service"><span class="header-section-number">9</span> Delete the Jupyter-pyspark service</h2>
+<section id="delete-the-jupyter-pyspark-service" class="level2" data-number="10">
+<h2 data-number="10" class="anchored" data-anchor-id="delete-the-jupyter-pyspark-service"><span class="header-section-number">10</span> Delete the Jupyter-pyspark service</h2>
 <ul>
 <li><label><input type="checkbox">Export your notebook</label>
 <ul>
@@ -1386,6 +1425,31 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","loop":false,"selector":".lightbox","descPosition":"bottom"});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
+
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
+
+};
+          </script>
 
 
 

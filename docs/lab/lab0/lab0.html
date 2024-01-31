@@ -42,6 +42,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -142,11 +145,11 @@ window.Quarto = {
  <span class="dropdown-text">Lab 1</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../docs/lab/lab2/lab2-SSPCloud.ipynb">
+    <a class="dropdown-item" href="../../../docs/lab/lab2/lab2-SSPCloud.html">
  <span class="dropdown-text">Lab 2</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../docs/lab/lab3/lab3.html">
+    <a class="dropdown-item" href="../../../docs/lab/lab3/lab3-SSPCloud.html">
  <span class="dropdown-text">Lab 3</span></a>
   </li>  
     </ul>
@@ -180,25 +183,25 @@ window.Quarto = {
    
   <ul>
   <li><a href="#objectives" id="toc-objectives" class="nav-link active" data-scroll-target="#objectives">Objectives</a></li>
-  <li><a href="#log-on-aws" id="toc-log-on-aws" class="nav-link" data-scroll-target="#log-on-aws">1. Log on AWS</a></li>
-  <li><a href="#exploration" id="toc-exploration" class="nav-link" data-scroll-target="#exploration">2. Exploration</a></li>
-  <li><a href="#create-a-s3-bucket" id="toc-create-a-s3-bucket" class="nav-link" data-scroll-target="#create-a-s3-bucket">3. Create a S3 bucket</a></li>
-  <li><a href="#import-some-files-to-your-bucket" id="toc-import-some-files-to-your-bucket" class="nav-link" data-scroll-target="#import-some-files-to-your-bucket">4. Import some files to your bucket</a></li>
-  <li><a href="#ssh-key-creation" id="toc-ssh-key-creation" class="nav-link" data-scroll-target="#ssh-key-creation">5. SSH key creation</a></li>
-  <li><a href="#create-your-first-virtual-machine" id="toc-create-your-first-virtual-machine" class="nav-link" data-scroll-target="#create-your-first-virtual-machine">6. Create your first virtual machine</a></li>
-  <li><a href="#connect-to-the-ec2-instance" id="toc-connect-to-the-ec2-instance" class="nav-link" data-scroll-target="#connect-to-the-ec2-instance">7. Connect to the EC2 instance</a>
+  <li><a href="#log-on-aws" id="toc-log-on-aws" class="nav-link" data-scroll-target="#log-on-aws"><span class="header-section-number">1</span> Log on AWS</a></li>
+  <li><a href="#exploration" id="toc-exploration" class="nav-link" data-scroll-target="#exploration"><span class="header-section-number">2</span> Exploration</a></li>
+  <li><a href="#create-a-s3-bucket" id="toc-create-a-s3-bucket" class="nav-link" data-scroll-target="#create-a-s3-bucket"><span class="header-section-number">3</span> Create a S3 bucket</a></li>
+  <li><a href="#import-some-files-to-your-bucket" id="toc-import-some-files-to-your-bucket" class="nav-link" data-scroll-target="#import-some-files-to-your-bucket"><span class="header-section-number">4</span> Import some files to your bucket</a></li>
+  <li><a href="#ssh-key-creation" id="toc-ssh-key-creation" class="nav-link" data-scroll-target="#ssh-key-creation"><span class="header-section-number">5</span> SSH key creation</a></li>
+  <li><a href="#create-your-first-virtual-machine" id="toc-create-your-first-virtual-machine" class="nav-link" data-scroll-target="#create-your-first-virtual-machine"><span class="header-section-number">6</span> Create your first virtual machine</a></li>
+  <li><a href="#connect-to-the-ec2-instance" id="toc-connect-to-the-ec2-instance" class="nav-link" data-scroll-target="#connect-to-the-ec2-instance"><span class="header-section-number">7</span> Connect to the EC2 instance</a>
   <ul class="collapse">
-  <li><a href="#windows-user" id="toc-windows-user" class="nav-link" data-scroll-target="#windows-user">Windows user</a></li>
-  <li><a href="#macoslinux-user" id="toc-macoslinux-user" class="nav-link" data-scroll-target="#macoslinux-user">macOS/Linux user</a></li>
+  <li><a href="#windows-user" id="toc-windows-user" class="nav-link" data-scroll-target="#windows-user"><span class="header-section-number">7.1</span> Windows user</a></li>
+  <li><a href="#macoslinux-user" id="toc-macoslinux-user" class="nav-link" data-scroll-target="#macoslinux-user"><span class="header-section-number">7.2</span> macOS/Linux user</a></li>
   </ul></li>
-  <li><a href="#play-with-your-vm" id="toc-play-with-your-vm" class="nav-link" data-scroll-target="#play-with-your-vm">8. Play with your VM</a>
+  <li><a href="#play-with-your-vm" id="toc-play-with-your-vm" class="nav-link" data-scroll-target="#play-with-your-vm"><span class="header-section-number">8</span> Play with your VM</a>
   <ul class="collapse">
-  <li><a href="#benchmark-setup" id="toc-benchmark-setup" class="nav-link" data-scroll-target="#benchmark-setup">Benchmark setup</a></li>
-  <li><a href="#install-r-java-c-compiler-and-a-python-package" id="toc-install-r-java-c-compiler-and-a-python-package" class="nav-link" data-scroll-target="#install-r-java-c-compiler-and-a-python-package">Install R, java, C compiler and a python package</a></li>
-  <li><a href="#benchmark" id="toc-benchmark" class="nav-link" data-scroll-target="#benchmark">Benchmark</a></li>
-  <li><a href="#a-shell-in-your-web-browser" id="toc-a-shell-in-your-web-browser" class="nav-link" data-scroll-target="#a-shell-in-your-web-browser">A shell in your web browser</a></li>
+  <li><a href="#benchmark-setup" id="toc-benchmark-setup" class="nav-link" data-scroll-target="#benchmark-setup"><span class="header-section-number">8.1</span> Benchmark setup</a></li>
+  <li><a href="#install-r-java-c-compiler-and-a-python-package" id="toc-install-r-java-c-compiler-and-a-python-package" class="nav-link" data-scroll-target="#install-r-java-c-compiler-and-a-python-package"><span class="header-section-number">8.2</span> Install R, java, C compiler and a python package</a></li>
+  <li><a href="#benchmark" id="toc-benchmark" class="nav-link" data-scroll-target="#benchmark"><span class="header-section-number">8.3</span> Benchmark</a></li>
+  <li><a href="#a-shell-in-your-web-browser" id="toc-a-shell-in-your-web-browser" class="nav-link" data-scroll-target="#a-shell-in-your-web-browser"><span class="header-section-number">8.4</span> A shell in your web browser</a></li>
   </ul></li>
-  <li><a href="#shut-down-your-machine" id="toc-shut-down-your-machine" class="nav-link" data-scroll-target="#shut-down-your-machine">9. Shut down your machine</a></li>
+  <li><a href="#shut-down-your-machine" id="toc-shut-down-your-machine" class="nav-link" data-scroll-target="#shut-down-your-machine">Shut down your machine</a></li>
   </ul>
 </nav>
 </nav>
@@ -233,8 +236,8 @@ window.Quarto = {
 </header>
 
 
-<section id="objectives" class="level2">
-<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
+<section id="objectives" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="objectives">Objectives</h2>
 <p>The lab’s goal is to make you familiar with the AWS’s interface. In this lab, you will :</p>
 <ul>
 <li>Create an account on AWS academy if you haven’t done yet</li>
@@ -252,8 +255,8 @@ window.Quarto = {
 <li>Shut down your EC2 instance</li>
 </ul>
 </section>
-<section id="log-on-aws" class="level2">
-<h2 class="anchored" data-anchor-id="log-on-aws">1. Log on AWS</h2>
+<section id="log-on-aws" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="log-on-aws"><span class="header-section-number">1</span> Log on AWS</h2>
 <ul class="task-list">
 <li><label><input type="checkbox">Follow the instructions you get from the AWS academy’s e-mail, then those of the <a href="https://foad-moodle.ensai.fr/pluginfile.php/22636/mod_resource/content/0/AWS%20Academy%20Learner%20Lab%20-%20Student%20Guide.pdf">AWS Academy Learner Lab - Student Guide</a> to access to the AWS console.</label></li>
 </ul>
@@ -261,7 +264,7 @@ window.Quarto = {
 Because your account is for academic purpose, your don’t have access to all the AWS services.<br>
 Your account is managed by AWS academy, so you have to use the AWS academy portal to access to your AWS account.</p>
 <ul>
-<li><a href="https://www.awsacademy.com/vforcesite/LMS_Login" target="_blank">AWS Login</a></li>
+<li><a href="https://www.awsacademy.com/vforcesite/LMS_Login" class="external" target="_blank">AWS Login</a></li>
 <li>Dashboard</li>
 <li>Select <code>AWS Academy Learner Lab - Big Data</code></li>
 <li>Select <code>Modules</code> and then <code>Lancer l'atelier pour étudiants de l'AWS Academy</code></li>
@@ -272,10 +275,10 @@ Your account is managed by AWS academy, so you have to use the AWS academy porta
 <li>Click AWS</li>
 </ul></li>
 </ul>
-<p><img src="img/aws console.png" class="img-fluid"></p>
+<p><a href="img/aws_console.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="img/aws_console.png" class="img-fluid"></a></p>
 </section>
-<section id="exploration" class="level2">
-<h2 class="anchored" data-anchor-id="exploration">2. Exploration</h2>
+<section id="exploration" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="exploration"><span class="header-section-number">2</span> Exploration</h2>
 <p>In the <code>Services</code> tab, you should find for instance :</p>
 <ul>
 <li>EC2 in computation</li>
@@ -286,8 +289,8 @@ Your account is managed by AWS academy, so you have to use the AWS academy porta
 <li>A section for data analysis</li>
 </ul>
 </section>
-<section id="create-a-s3-bucket" class="level2">
-<h2 class="anchored" data-anchor-id="create-a-s3-bucket">3. Create a S3 bucket</h2>
+<section id="create-a-s3-bucket" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="create-a-s3-bucket"><span class="header-section-number">3</span> Create a S3 bucket</h2>
 <p><strong>Amazon Simple Storage Service</strong> (S3) is the standard solution to store data on AWS. Amazon assured a 99,999999999 % durability for your data. This mean, is you store 10 000 000 files on S3, you can on average expect to incur a loss of a single file every 10 000 years.</p>
 <p>The storage is quite expensive (around ~0,02 $/Go/month), knowing that you pay for read operations (around ~0,09 \$/Go). 1 To cost around 240$ a year. For instance, a 1To SSD cost less than 100$ (for a smaller durability), and a cloud storage solution (like drop box) for private individual cost 10$/month for 2To (for the same durability). But the use case are different. S3 is for data access frequently by other AWS services. There is other storage solution (like S3 glacier) for archive, or databases.</p>
 <p>All AWS services can natively read from and write to S3, if they have some access right. So, every application you deploy on AWS can import/export data from/to S3. A file stored in S3 is called an “object”, and can be access by a unique URL. You can limit access right to a specific file.</p>
@@ -300,24 +303,24 @@ Your account is managed by AWS academy, so you have to use the AWS academy porta
 <li><label><input type="checkbox">Create your bucket</label></li>
 </ul>
 </section>
-<section id="import-some-files-to-your-bucket" class="level2">
-<h2 class="anchored" data-anchor-id="import-some-files-to-your-bucket">4. Import some files to your bucket</h2>
+<section id="import-some-files-to-your-bucket" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="import-some-files-to-your-bucket"><span class="header-section-number">4</span> Import some files to your bucket</h2>
 <ul class="task-list">
 <li><p><label><input type="checkbox">Select your bucket to go to its dedicated page</label></p>
-<p><img src="img/s3_bucket.png" class="img-fluid"></p></li>
+<p><a href="img/s3_bucket.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="img/s3_bucket.png" class="img-fluid"></a></p></li>
 <li><p><label><input type="checkbox">Click on <code>Charger</code>, and upload the file <a href="lab0_files.zip">Lab0_files.zip</a></label></p></li>
 </ul>
-<p><img src="img/s3_upload_file.png" class="img-fluid"></p>
+<p><a href="img/s3_upload_file.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="img/s3_upload_file.png" class="img-fluid"></a></p>
 <ul>
 <li><p><label><input type="checkbox">Once the upload finished, click on your file</label></p></li>
 <li><p>You will land on the file page, and found to link to access to your file. One is the URL of the file, the other is the S3 URI</p></li>
 <li><p><label><input type="checkbox">Copy in a text file your file URI, you will need it later</label></p>
-<p><img src="img/s3_file.png" class="img-fluid"></p></li>
+<p><a href="img/s3_file.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="img/s3_file.png" class="img-fluid"></a></p></li>
 </ul>
 </section>
-<section id="ssh-key-creation" class="level2">
-<h2 class="anchored" data-anchor-id="ssh-key-creation">5. SSH key creation</h2>
-<p><strong>SSH</strong> (<strong>S</strong>ecure <strong>SH</strong>ell) protocol allow a secure remote connection to a machine. Moreover, with SSH you can control the remote machine. For more details, you can read this page <a href="https://doc.fedora-fr.org/wiki/SSH_:_Authentification_par_cl%C3%A9">page web</a>. But first you need a private key to authenticate yourself.</p>
+<section id="ssh-key-creation" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="ssh-key-creation"><span class="header-section-number">5</span> SSH key creation</h2>
+<p><strong>SSH</strong> (<strong>S</strong>ecure <strong>SH</strong>ell) protocol allow a secure remote connection to a machine. Moreover, with SSH you can control the remote machine. For more details, you can read this page <a href="https://doc.fedora-fr.org/wiki/SSH_:_Authentification_par_cl%C3%A9" class="external" target="_blank">page web</a>. But first you need a private key to authenticate yourself.</p>
 <ul class="task-list">
 <li><p><label><input type="checkbox">In the search bar, search <code>paire de clés</code></label></p></li>
 <li><p><label><input type="checkbox">Click on <code>Créerune paire de clés</code></label></p></li>
@@ -329,49 +332,50 @@ chmod 400 labsuser.pem</code></pre>
 <p>Do not close this terminal</p></li>
 </ul>
 </section>
-<section id="create-your-first-virtual-machine" class="level2">
-<h2 class="anchored" data-anchor-id="create-your-first-virtual-machine">6. Create your first virtual machine</h2>
+<section id="create-your-first-virtual-machine" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="create-your-first-virtual-machine"><span class="header-section-number">6</span> Create your first virtual machine</h2>
 <ul class="task-list">
 <li><p><label><input type="checkbox">In the search bar, search <code>EC2</code></label></p>
-<p><img src="img/ec2_accueil.png" class="img-fluid"></p></li>
+<p><a href="img/ec2_accueil.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="img/ec2_accueil.png" class="img-fluid"></a></p></li>
 <li><p><label><input type="checkbox">Click on <code>Lancer une instance</code></label></p></li>
 <li><p><label><input type="checkbox">First, you must choose an image for your machine (called AMI pour Amazon Machine Image). This image contain an OS and some default applications. Choose the first : Amazon Linux 2 AMI (HVM) - Kernel 5.10.</label></p>
-<p><img src="img/ec2_ami.png" class="img-fluid"></p></li>
+<p><a href="img/ec2_ami.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="img/ec2_ami.png" class="img-fluid"></a></p></li>
 <li><p><label><input type="checkbox">Then you will select the hardware configuration. For instance, for a general usage machine you can choose a <code>t2.micro</code> for a cheap but weak machine (0.012$/hour, 1 core, 1Go Ram) or a more powerful and more expensive one like <code>t2.xlarge</code> (0.188$/hour, 8 core, 32Go Ram). Because you pay for how long your EC2 instance are up, turn off you machine at the end of the lab !</label></p>
-<p><img src="img/ec2_machine.png" class="img-fluid"></p></li>
-<li><p><label><input type="checkbox">On the next screen, select the AIM role <code>LabInstanceProfile</code> <img src="img/ec2_iam.png" class="img-fluid"></label></p></li>
+<p><a href="img/ec2_machine.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="img/ec2_machine.png" class="img-fluid"></a></p></li>
+<li><p><label><input type="checkbox">On the next screen, select the AIM role <code>LabInstanceProfile</code></label></p>
+<p><a href="img/ec2_iam.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="img/ec2_iam.png" class="img-fluid"></a></p></li>
 <li><p><label><input type="checkbox">Then click on <code>Vérifier et lancer</code></label></p></li>
 <li><p><label><input type="checkbox">Validate your instance</label></p></li>
 <li><p><label><input type="checkbox">Select the key pair</label></p></li>
 <li><p><label><input type="checkbox">Et voilà! Your VM is launching. Click on <code>Affichez les instances</code> and wait a minute!</label></p></li>
 </ul>
 </section>
-<section id="connect-to-the-ec2-instance" class="level2">
-<h2 class="anchored" data-anchor-id="connect-to-the-ec2-instance">7. Connect to the EC2 instance</h2>
+<section id="connect-to-the-ec2-instance" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="connect-to-the-ec2-instance"><span class="header-section-number">7</span> Connect to the EC2 instance</h2>
 <ul class="task-list">
 <li><p><label><input type="checkbox">Once your VM is running, you can access to the its administration page by clinking on its <code>id d'instance</code></label></p>
-<p><img src="img/ec2_accueil_instance.png" class="img-fluid"></p></li>
+<p><a href="img/ec2_accueil_instance.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img src="img/ec2_accueil_instance.png" class="img-fluid"></a></p></li>
 </ul>
 <p>You will find many information, but the most important it’s its <code>IPv4 publique</code> which is its’s IP address (Internet Protocol) used to access to your machine from outside AWS.</p>
-<section id="windows-user" class="level3">
-<h3 class="anchored" data-anchor-id="windows-user">Windows user</h3>
+<section id="windows-user" class="level3" data-number="7.1">
+<h3 data-number="7.1" class="anchored" data-anchor-id="windows-user"><span class="header-section-number">7.1</span> Windows user</h3>
 <ul class="task-list">
 <li><p><label><input type="checkbox">Run <code>PuTTY</code></label></p></li>
 <li><p><label><input type="checkbox">In Host Name type your <code>public IP</code></label></p></li>
 <li><p><label><input type="checkbox">In <code>Saved Session</code> enter <code>AWS EC2</code> and <code>Save</code></label></p>
-<p><img src="img/putty1.png" class="img-fluid"></p></li>
+<p><a href="img/putty1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img src="img/putty1.png" class="img-fluid"></a></p></li>
 <li><p><label><input type="checkbox">Then go to <code>SSH</code> and find your .ppk file.</label></p>
-<p><img src="img/putty2.png" class="img-fluid"></p></li>
+<p><a href="img/putty2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img src="img/putty2.png" class="img-fluid"></a></p></li>
 <li><p><label><input type="checkbox">Finally go back to the first screen, click on your session name, <code>Save</code> then <code>Open</code> the session.</label></p>
-<p><img src="img/putty3.png" class="img-fluid"></p></li>
+<p><a href="img/putty3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img src="img/putty3.png" class="img-fluid"></a></p></li>
 <li><p><label><input type="checkbox">A similar windows will pop up, click on <code>Oui</code></label></p>
-<p><img src="img/putty_warning.png" class="img-fluid"></p></li>
-<li><p><label><input type="checkbox">A terminal will open with <code>login as:</code>. Type <code>ec2-user</code> then press <code>Enter</code>(<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/connection-prereqs.html">documentation officielle</a>)</label></p>
-<p><img src="img/terminal ec2.png" class="img-fluid"></p></li>
+<p><a href="img/putty_warning.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img src="img/putty_warning.png" class="img-fluid"></a></p></li>
+<li><p><label><input type="checkbox">A terminal will open with <code>login as:</code>. Type <code>ec2-user</code> then press <code>Enter</code>(<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/connection-prereqs.html" class="external" target="_blank">documentation officielle</a>)</label></p>
+<p><a href="img/terminal_ec2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img src="img/terminal_ec2.png" class="img-fluid"></a></p></li>
 </ul>
 </section>
-<section id="macoslinux-user" class="level3">
-<h3 class="anchored" data-anchor-id="macoslinux-user">macOS/Linux user</h3>
+<section id="macoslinux-user" class="level3" data-number="7.2">
+<h3 data-number="7.2" class="anchored" data-anchor-id="macoslinux-user"><span class="header-section-number">7.2</span> macOS/Linux user</h3>
 <ul class="task-list">
 <li><p><label><input type="checkbox">In the previously open terminal type</label></p>
 <pre><code>ssh -i labsuser.pem ec2-user@[public-ip]</code></pre>
@@ -380,8 +384,8 @@ chmod 400 labsuser.pem</code></pre>
 <p>Tada ! your are connected to your virtual machine. <strong>Although, this terminal is on your computer, every command you type are executed on the remote machine</strong>. This make it possible to run huge computation without altering your own performance. But, this machine do not have any graphical interface (GUI), so you need so basics of shell command.</p>
 </section>
 </section>
-<section id="play-with-your-vm" class="level2">
-<h2 class="anchored" data-anchor-id="play-with-your-vm">8. Play with your VM</h2>
+<section id="play-with-your-vm" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="play-with-your-vm"><span class="header-section-number">8</span> Play with your VM</h2>
 <p>In this section you will learn some basics of shell, and reproduce the benchmark of language made in the first lesson. You will :</p>
 <ol type="1">
 <li>Get all the files for the benchmark</li>
@@ -452,35 +456,35 @@ chmod 400 labsuser.pem</code></pre>
 </tr>
 </tbody>
 </table>
-<section id="benchmark-setup" class="level3">
-<h3 class="anchored" data-anchor-id="benchmark-setup">Benchmark setup</h3>
+<section id="benchmark-setup" class="level3" data-number="8.1">
+<h3 data-number="8.1" class="anchored" data-anchor-id="benchmark-setup"><span class="header-section-number">8.1</span> Benchmark setup</h3>
 <ul class="task-list">
 <li><p><label><input type="checkbox">Download the file stored on S3. Use the command <code>aws s3 cp [s3://object/uri] [output/folder]</code>. The S3 URI is on S3 file page. For <code>output/folder</code> use the current directory with <code>.</code>. You should get a command and an output like this</label></p>
 <pre><code>[ec2-user@ip-172-31-85-99 ~]$ aws s3 cp s3://remi-pepin-21032022/fichiersTP0.zip .
 download: s3://remi-pepin-21032022/fichier TP.zip to ./fichier TP.zip</code></pre></li>
 <li><p><label><input type="checkbox">With <code>ls</code> (<em>list</em>) check you downloaded the file</label></p></li>
 <li><p><label><input type="checkbox">Now you will unzip your file with <code>unzip [nom de votre fichier]</code>. Check the result with <code>ls</code></label></p></li>
-<li><p><label><input type="checkbox">For security reasons, you cannot execute your files. Do <code>chmod 764 get_data.sh awk.sh GetMaxTempC</code> to change that. For more details, the <a href="https://fr.wikipedia.org/wiki/Chmod">chmod wikipedia page</a> provides more details..</label></p></li>
+<li><p><label><input type="checkbox">For security reasons, you cannot execute your files. Do <code>chmod 764 get_data.sh awk.sh GetMaxTempC</code> to change that. For more details, the <a href="https://fr.wikipedia.org/wiki/Chmod" class="external" target="_blank">chmod wikipedia page</a> provides more details..</label></p></li>
 <li><p><label><input type="checkbox">Now you will execute the <code>get_data.sh</code> script. Just type<code>./get_data.sh</code>. This script download some data from the NOAA (~ météo france in the USA) server</label></p></li>
 </ul>
 </section>
-<section id="install-r-java-c-compiler-and-a-python-package" class="level3">
-<h3 class="anchored" data-anchor-id="install-r-java-c-compiler-and-a-python-package">Install R, java, C compiler and a python package</h3>
+<section id="install-r-java-c-compiler-and-a-python-package" class="level3" data-number="8.2">
+<h3 data-number="8.2" class="anchored" data-anchor-id="install-r-java-c-compiler-and-a-python-package"><span class="header-section-number">8.2</span> Install R, java, C compiler and a python package</h3>
 <p>Your VM doesn’t have all the require packages for the benchmark.</p>
 <ul class="task-list">
 <li><label><input type="checkbox"><strong>python-dev installation</strong> : <code>python-devel</code> is require to create extension for python. To install it use <code>yum</code>, a package manager for Linux. The exact command is<code>sudo yum install -y python3-devel.x86_64</code> (<code>sudo</code> to have super user right, <code>yum</code> to use the package manager, <code>install</code> to install a package, <code>-y</code> to validate the installation, and <code>python3-devel.x86_64</code> for the package name)</label></li>
 <li><label><input type="checkbox"><strong>Java and GCC installation</strong> : in the same way, insatall java and GCC with <code>sudo yum install java gcc -y</code></label></li>
 <li><label><input type="checkbox"><strong>Cython installation</strong> : with <code>pip3</code> install <code>Cython</code> and compile the Cython code:</label>
 <ul class="task-list">
-<li><label><input type="checkbox"><code>cd cython_code</code> for<em>change directory</em> and go in the <code>cython_code</code> directory</label></li>
+<li><label><input type="checkbox"><code>cd cython_code</code> for*change directory- and go in the <code>cython_code</code> directory</label></li>
 <li><label><input type="checkbox"><code>python3 setup.py</code> to run the compilation</label></li>
 <li><label><input type="checkbox"><code>cd ../</code> to go back to the parent folder</label></li>
 </ul></li>
 <li><label><input type="checkbox"><strong>R installation</strong> : to install R, you will use the amazon custome package manager <code>amazon-linux-extras</code>, with the following command : <code>sudo amazon-linux-extras install R4 -y</code>. Just wait 1-2 minutes.</label></li>
 </ul>
 </section>
-<section id="benchmark" class="level3">
-<h3 class="anchored" data-anchor-id="benchmark">Benchmark</h3>
+<section id="benchmark" class="level3" data-number="8.3">
+<h3 data-number="8.3" class="anchored" data-anchor-id="benchmark"><span class="header-section-number">8.3</span> Benchmark</h3>
 <p>Now it’s time to run the benchmark. To do so, you will use the <code>time</code> command. <code>time</code> compute the execution time of the following command. For example : <code>time ./get_data.sh</code> . Write all the results, and compare then with the course. If results are different, try to understand why.</p>
 <ul class="task-list">
 <li><label><input type="checkbox">To run compiled C or bash : <code>time ./[file]</code></label></li>
@@ -489,20 +493,20 @@ download: s3://remi-pepin-21032022/fichier TP.zip to ./fichier TP.zip</code></pr
 <li><label><input type="checkbox">To run R script : <code>time Rscript [filename.R]</code></label></li>
 </ul>
 </section>
-<section id="a-shell-in-your-web-browser" class="level3">
-<h3 class="anchored" data-anchor-id="a-shell-in-your-web-browser">A shell in your web browser</h3>
+<section id="a-shell-in-your-web-browser" class="level3" data-number="8.4">
+<h3 data-number="8.4" class="anchored" data-anchor-id="a-shell-in-your-web-browser"><span class="header-section-number">8.4</span> A shell in your web browser</h3>
 <ul class="task-list">
-<li><label><input type="checkbox">Close your terminal and go back to your EC2 instance page. Click on<code>Se connecter</code> then <code>Se connecter</code> <img src="img/ec2_se_connecter.png" class="img-fluid"> Vous allez arriver sur une page similaire à celle ci-dessous. Cliquez sur <code>Se connecter</code> <img src="img/ec2_se_connecter 2.png" class="img-fluid"> After 30 second you can use a <em>cloud shell</em>. You can do the same thing with your cloud shell as the previous SSH shell.</label></li>
+<li><label><input type="checkbox">Close your terminal and go back to your EC2 instance page. Click on<code>Se connecter</code> then <code>Se connecter</code> <img src="img/ec2_se_connecter.png" class="img-fluid"> Vous allez arriver sur une page similaire à celle ci-dessous. Cliquez sur <code>Se connecter</code> <img src="img/ec2_se_connecter_2.png" class="img-fluid"> After 30 second you can use a <em>cloud shell</em>. You can do the same thing with your cloud shell as the previous SSH shell.</label></li>
 <li><label><input type="checkbox"><img src="img/cloud_shell.png" class="img-fluid"></label></li>
 </ul>
 <p>Type <code>ls</code> to check if your file are still there.</p>
 </section>
 </section>
-<section id="shut-down-your-machine" class="level2">
-<h2 class="anchored" data-anchor-id="shut-down-your-machine">9. Shut down your machine</h2>
+<section id="shut-down-your-machine" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="shut-down-your-machine">Shut down your machine</h2>
 <p>Because your EC2 instance is billed by time and not usage, once your work is done, shut down it. Although the cost is small, a small cost*24*7 for 1 week or running instance can cost 10$. And for bigger machine in a company maybe 100$ or 1000$.</p>
 <p>To shut down your machine, go to <code>EC2 &gt; Instances</code> and find all running instances. Click on <code>état de instance</code> then on <code>resilier l'instance</code>.</p>
-<p><img src="img/ec2_end.png" class="img-fluid"></p>
+<p><a href="img/ec2_end.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img src="img/ec2_end.png" class="img-fluid"></a></p>
 
 
 </section>
@@ -1053,6 +1057,31 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom"});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
+
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
+
+};
+          </script>
 
 
 
