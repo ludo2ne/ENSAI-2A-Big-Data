@@ -304,7 +304,7 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <ul class="task-list">
 <li><label><input type="checkbox">Execute the following two cells to initialize a Spark session.</label></li>
 </ul>
-<div id="48d7c296" class="cell" data-tags="[]" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="1">
+<div id="59525484" class="cell" data-tags="[]" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -333,7 +333,7 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>         .getOrCreate()</span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="5ca216f4" class="cell" data-execution_count="2">
+<div id="de4af767" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>spark</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -379,7 +379,7 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <li>In Jupyter, read it using <code>s3a://&lt;user_name&gt;/tweets.jsonl.gz</code></li>
 </ul></li>
 </ul>
-<div id="9aea79fb" class="cell" data-tags="[]" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="3">
+<div id="572b5ea1" class="cell" data-tags="[]" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># DataFrame creation</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df_tweet <span class="op">=</span> spark.read.json(<span class="st">"s3a://ludo2ne/diffusion/tweets.jsonl.gz"</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -433,22 +433,22 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <ul class="task-list">
 <li><label><input type="checkbox">How many rows have your two DataFrame ?</label></li>
 </ul>
-<div id="b39d8906" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="4">
+<div id="a9377bee" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df_tweet.count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Display columns names and then the schema</label></li>
 </ul>
-<div id="85a98ad4" class="cell" data-execution_count="5">
+<div id="9d17d945" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df_tweet.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="69444b9a" class="cell" data-execution_count="6">
+<div id="753c2da4" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df_tweet.printSchema()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Display 10 rows of df_tweet</label></li>
 </ul>
-<div id="99b3612e" class="cell" data-execution_count="7">
+<div id="a899233c" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df_tweet.show(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
@@ -458,7 +458,7 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <li>If computations take too long on the full DataFrame, use this one instead or add a sample transformation in your expression.</li>
 </ul></li>
 </ul>
-<div id="5f2168ca" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="8">
+<div id="a9013379" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df_tweet_sampled <span class="op">=</span> df_tweet<span class="op">\</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  .sample(fraction<span class="op">=</span><span class="fl">0.1</span>)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -470,7 +470,7 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <li><label><input type="checkbox">Then display 5 rows</label></li>
 </ul></li>
 </ul>
-<div id="66509f7d" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="9">
+<div id="aac40a61" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>tweet_author_hashtags <span class="op">=</span> df_tweet.select(<span class="st">"auteur"</span>, <span class="st">"hashtags"</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>tweet_author_hashtags.show(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -481,7 +481,7 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <li><code>mentions</code> and <code>urls</code> are both nested columns in <code>entities</code></li>
 </ul></li>
 </ul>
-<div id="04b3eaf9" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="10">
+<div id="0559d8f7" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  .select(<span class="st">"auteur"</span>,</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>          <span class="st">"entities.mentions"</span>,</span>
@@ -495,7 +495,7 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <li><label><input type="checkbox">Print 10 lines</label></li>
 </ul></li>
 </ul>
-<div id="48334e93" class="cell" data-execution_count="11">
+<div id="efbb48c3" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  .<span class="bu">filter</span>(df_tweet.like_count <span class="op">&gt;=</span> <span class="dv">1</span>)<span class="op">\</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  .show(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -511,7 +511,7 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <li>Add/update : <code>df.withColumn(columnName : str, columnExpression)</code></li>
 </ul>
 <p>For example</p>
-<div id="1ef4c1a1" class="cell" data-execution_count="12">
+<div id="738b66f2" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  .withColumn(                                        <span class="co"># computes new variable</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"like_rt_ratio"</span>,                                  <span class="co"># like_rt_ratio "OVERCONFIDENCE"</span></span>
@@ -526,7 +526,7 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <li>This column is the sum of <code>like_count</code>, <code>reply_count</code> and <code>retweet_count</code>.</li>
 </ul></li>
 </ul>
-<div id="1361c9e0" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="13">
+<div id="8ac9cdb6" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df_tweet_interaction_count <span class="op">=</span> df_tweet<span class="op">\</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  .drop(<span class="st">"other"</span>)<span class="op">\</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  .<span class="bu">filter</span>(df_tweet.like_count <span class="op">&gt;=</span> <span class="dv">1</span>)<span class="op">\</span></span>
@@ -541,7 +541,7 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <ul class="task-list">
 <li><label><input type="checkbox">Update the DataFrame you imported at the beginning of this lab and drop the <code>other</code> column</label></li>
 </ul>
-<div id="55ceb9d3" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="14">
+<div id="86329f0f" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  .drop(<span class="st">"other"</span>)<span class="op">\</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  .show(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -630,7 +630,7 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <ul class="task-list">
 <li><label><input type="checkbox">Keep all the tweets with hashtags and for each remaining line, split the hashtag text into an array of hashtags</label></li>
 </ul>
-<div id="7faf976e" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="15">
+<div id="d970bdab" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> split, explode, size, array_contains</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
@@ -643,7 +643,7 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <ul class="task-list">
 <li><label><input type="checkbox">Create a new column with the number of words of the <code>contenu</code> column. (Use <code>split()</code> + <code>size()</code>)</label></li>
 </ul>
-<div id="1bdaabc3" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="16">
+<div id="d4012d03" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  .withColumn(<span class="st">"word_count"</span>,</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>              size(split(<span class="st">"contenu"</span>, <span class="st">" "</span>)))<span class="op">\</span></span>
@@ -652,7 +652,7 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <ul class="task-list">
 <li><label><input type="checkbox">Count how many tweet contain the <code>Ukraine</code> hashtag (use the <code>count()</code> action)</label></li>
 </ul>
-<div id="f12ef3b2" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="17">
+<div id="d3ef297a" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  .<span class="bu">filter</span>(array_contains(<span class="st">"hashtags"</span>, <span class="st">"Ukraine"</span>))<span class="op">\</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  .count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -699,7 +699,7 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <li>your function will return an <code>IntegerType</code> and not a <code>StringType</code></li>
 </ul></li>
 </ul>
-<div id="30c4cb67" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="18">
+<div id="cc5d8a43" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># imports</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> udf</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.types <span class="im">import</span> IntegerType</span>
@@ -745,7 +745,7 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <li>don’t forget to import the required functions</li>
 </ul></li>
 </ul>
-<div id="793995fa" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="19">
+<div id="b41902aa" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> <span class="bu">min</span>, <span class="bu">max</span>, avg, first, last, <span class="bu">sum</span>, sumDistinct</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>df_tweet_interaction_count<span class="op">\</span></span>
@@ -761,7 +761,7 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <li><label><input type="checkbox">Try the approximative count with 0.1 and 0.01 as maximum estimation error allowed.</label></li>
 </ul></li>
 </ul>
-<div id="4d3dd6ed" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="20">
+<div id="d44c2c6c" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> count, countDistinct, approx_count_distinct</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
@@ -800,7 +800,7 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <div class="sourceCode" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> desc</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>df.orderBy(desc(<span class="st">"col"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
-<div id="9e3a1f03" class="cell" data-execution_count="21">
+<div id="3c23ae1d" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> desc</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
@@ -834,7 +834,7 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <li><label><input type="checkbox">Distinct hashtags ?</label></li>
 </ul></li>
 </ul>
-<div id="5cdd9bfc" class="cell" data-execution_count="22">
+<div id="6349deaf" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>df_tweet<span class="op">\</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  .select(<span class="st">"contenu"</span>, <span class="st">"hashtags"</span>)<span class="op">\</span></span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  .createOrReplaceTempView(<span class="st">"view_hashtag_content"</span>)</span>
@@ -850,7 +850,7 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <ul class="task-list">
 <li><label><input type="checkbox">Compute a dataframe with the min, max and average retweet of each <code>auteur</code> using Spark SQL</label></li>
 </ul>
-<div id="773012c1" class="cell" data-execution_count="23">
+<div id="ebdfdb39" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>df_tweet.createOrReplaceTempView(<span class="st">"view_tweet"</span>)</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>spark.sql(<span class="st">"""</span></span>
@@ -1424,11 +1424,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       &nbsp;
     </div>
     <div class="nav-footer-right">
-<p>Website built with <a href="https://quarto.org/" class="external" target="_blank">Quarto</a> <a href="https://github.com/ludo2ne/ENSAI-2A-Big-Data" class="external" target="_blank">Code source</a></p>
+<p>Website built with <a href="https://quarto.org/" class="external" target="_blank">Quarto</a> <br> <a href="https://github.com/ludo2ne/ENSAI-2A-Big-Data" class="external" target="_blank">Source code</a></p>
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"descPosition":"bottom","openEffect":"zoom","selector":".lightbox"});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":false,"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
