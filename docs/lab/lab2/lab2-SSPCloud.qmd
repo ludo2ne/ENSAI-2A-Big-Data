@@ -191,7 +191,7 @@ listings.summary("count", "min", "max").show() # computes the selection of stati
 listings.summary().show() # computes every possible statistics
 ```
 
-This is a way to incite you to compute all the statistics you want at the same moment : it avoids an extra pass on the data set because all accumulators can be computed simultaneously. You can fin a list of all supported statistics [here](https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.sql.DataFrame.summary.html){.external target="_blank"} in PySpark documentation: count, mean, standard-deviation, minimum, maximum, approximate median, approximate first and last quartiles. Null (missing) values will be ignored in numerical columns before calculation.
+This is a way to incite you to compute all the statistics you want at the same moment : it avoids an extra pass on the data set because all accumulators can be computed simultaneously. You can fin a list of all supported statistics [here](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/api/pyspark.sql.DataFrame.html){.external target="_blank"} in PySpark documentation: count, mean, standard-deviation, minimum, maximum, approximate median, approximate first and last quartiles. Null (missing) values will be ignored in numerical columns before calculation.
 
 **Spark ML**
 

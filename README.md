@@ -19,5 +19,5 @@ Lessons and Labs created by [Rémi Pépin](https://github.com/HealerMikado/panor
 Labs notebooks are in `docs/lab`.
 They are in format `.qmd` and them quarto format them into :
 
-* `.html` for the [documentation website](https://ludo2ne.github.io/ENSAI-2A-Big-Data/){target="_blank"}
+* `.html` for the [documentation website](https://ludo2ne.github.io/ENSAI-2A-Big-Data/)
 * `.ipynb` to use it in Jupyter
