@@ -1,6 +1,7 @@
 ---
 title: Spark ML
 description: Lab 2
+author: Rémi Pépin, Arthur Katossky, Ludovic Deneuville
 format:
   html:
     toc: true
@@ -18,14 +19,18 @@ lightbox: true
 
 ## Before you start {.unnumbered}
 
-- [ ] Download this [Jupyter Notebook](lab2-SSPCloud.ipynb){target="_blank"}
+- [ ] Download this [Jupyter Notebook](lab2.ipynb){target="_blank"}
 - [ ] Follow these [instructions](../lab-setup.qmd){target="_blank"}
-- [ ] [Solution](lab2-SSPCloud-correction.qmd){target="_blank"}
+- [ ] [Solution](lab2-correction.qmd){target="_blank"}
 
 ## Outline {.unnumbered}
 
-In this tutorial, we are going to perform exploratory and explanatory analyses of a massive dataset consisting in hundreds of thousands of AirBnB listings, as made available by the Inside [AirBnB project](http://insideairbnb.com/get-the-data.html){.external target="_blank"}.  
-Rémi Pépin has loaded a lot these listings on AWS at this address: `s3a://remipepin/diffusion/ensai/airbnb`
+In this tutorial, we are going to perform exploratory and explanatory analyses of a massive dataset consisting in hundreds of thousands of AirBnB listings, as made available by the Inside [AirBnB project](http://insideairbnb.com/get-the-data.html){.external target="_blank"}.
+
+Rémi Pépin has loaded a lot these listings on AWS at this address: 
+
+- `s3://spark‑lab‑input‑data‑ensai20222023/airbnbb/` on AWS
+- `s3a://remipepin/diffusion/ensai/airbnb` on SSPCloud
 
 ## How to distribute elementary statistical tasks?
 
@@ -111,43 +116,19 @@ Each run is called a **pass** and some algorithms require several passes.
 
 ```
 
+
+{{< include ../lab-create-spark-session.qmd >}}
+
+
 ## Application on Airbnb Data
-
-```{python}
-import os
-from pyspark.sql import SparkSession
-
-spark = (SparkSession 
-         .builder
-         # default url of the internally accessed Kubernetes API
-         # (This Jupyter notebook service is itself a Kubernetes Pod)
-         .master("k8s://https://kubernetes.default.svc:443")
-         # Executors spark docker image: for simplicity reasons, this jupyter notebook is reused 
-         .config("spark.kubernetes.container.image", os.environ['IMAGE_NAME'])
-         # Name of the Kubernetes namespace
-         .config("spark.kubernetes.namespace", os.environ['KUBERNETES_NAMESPACE'])
-         # Allocated memory to the JVM
-         # Stay careful, by default, the Kubernetes pods has a higher limit which depends on other parameters.
-         .config("spark.executor.memory", "4g")
-         .config("spark.kubernetes.driver.pod.name", os.environ['KUBERNETES_POD_NAME'])
-         # dynamic allocation configuration
-         .config("spark.dynamicAllocation.enabled","true")
-         .config("spark.dynamicAllocation.initialExecutors","0")
-         .config("spark.dynamicAllocation.minExecutors","1")
-         .config("spark.dynamicAllocation.maxExecutors","5")
-         # Ratio match the number of pods to create for a given number of parallel tasks 
-         # (100 parallel, ratio of 1, one aims at 100 pods, with 0.5 it would be 50 pods)
-         .config("spark.dynamicAllocation.executorAllocationRatio","1")
-         .config("spark.dynamicAllocation.shuffleTracking.enabled","true")
-         .getOrCreate()
-        )
-```
 
 ```{python}
 from pyspark.sql.types import FloatType, IntegerType, DateType
 from pyspark.sql.functions import regexp_replace, col
 
-listings_raw = spark.read.csv("s3a://remipepin/diffusion/ensai/airbnb", header=True, multiLine=True, escape='"')
+# Uncomment one of the following lines
+# listings_raw = spark.read.csv("s3a://remipepin/diffusion/ensai/airbnb", header=True, multiLine=True, escape='"')
+# listings_raw = spark.read.csv("s3://spark‑lab‑input‑data‑ensai20222023/airbnbb/", header=True, multiLine=True, escape='"')
 
 listings = (listings_raw
   .withColumn("beds",     listings_raw["beds"    ].cast(IntegerType()))

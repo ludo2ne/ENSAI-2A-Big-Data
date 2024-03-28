@@ -1,0 +1,134 @@
+---
+title: DuckDB
+description: Découverte de DuckDB
+author: Ludovic Deneuville
+format:
+  html:
+    toc: true
+    toc-location: left
+    toc-expand: 3
+from: markdown+emoji
+---
+
+:construction:
+
+::: {.callout}
+Inspiré de https://www.youtube.com/watch?v=ajo0VBXT6ho&ab_channel=ToulouseDataViz
+Eric Mauvière - Avec DuckDB, gavez-vous d'open data!
+
+https://github.com/icem7-open/conf-duckdb-tdvz-2024
+https://www.icem7.fr/
+:::
+
+
+
+## Shell
+
+- https://shell.duckdb.org/
+
+Exemple avec ces données
+- https://www.data.gouv.fr/fr/datasets/populations-legales-communales-2017-2021/
+
+```{sql}
+FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
+LIMIT 10;
+```
+
+
+```{sql}
+FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
+WHERE codgeo = '28088';
+```
+
+```{sql}
+FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
+WHERE annee_rp = 2021 
+AND LOWER(libgeo) NOT LIKE '%arrondissement%'
+ORDER BY ptot DESC
+LIMIT 20;
+```
+
+
+Bonus : 
+
+- bouton SAVE URL 
+- url un peu longue donc utiliser https://tinyurl.com/app pour raccourcir
+- diffuser l'url
+
+
+
+
+## Exécutable
+
+Télécharger duckdb.exe
+
+```{sql}
+FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
+SELECT SUM(pnum)
+GROUP BY annee_rp
+ORDER BY 1 DESC;
+```
+
+## DBeaver
+
+https://duckdb.org/docs/guides/sql_editors/dbeaver.html
+
+- Nouvelle connexion : DuckDB
+  - Path : `:memory:`
+- Ouvrir la connexion
+- Ouvrir un éditeur SQL
+
+
+
+```{sql}
+ FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
+SELECT codreg,
+       SUM(pmun) pop
+ WHERE annee_rp = 2021
+ GROUP BY ALL
+ ORDER BY ALL;
+ ```
+
+- Ajouter une ligne de total
+
+```{sql}
+FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
+SELECT codreg,
+       SUM(pmun) pop
+ WHERE annee_rp = 2021
+ GROUP BY GROUPING SETS((codreg),())
+ ORDER BY ALL; 
+```
+
+Jointure avec les noms de régions
+
+```{sql}
+FROM read_json_auto('https://geo.api.gouv.fr/regions');
+
+FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
+JOIN read_json_auto('https://geo.api.gouv.fr/regions') ON (codreg=code)
+SELECT codreg,
+       nom,
+       SUM(pmun) pop
+ WHERE annee_rp = 2021
+ GROUP BY GROUPING SETS((codreg, nom),())
+ ORDER BY ALL;
+```
+
+Remplacer les NULL de la dernière ligne
+
+```{sql}
+WITH popreg AS(
+    FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
+    JOIN read_json_auto('https://geo.api.gouv.fr/regions') ON (codreg = code)
+    SELECT codreg,
+           nom,
+           SUM(pmun) pop
+     WHERE annee_rp = 2021
+     GROUP BY GROUPING SETS((codreg, nom),())
+     ORDER BY ALL
+ )
+FROM popreg
+SELECT * REPLACE(IFNULL(codreg, 'FR') AS codreg, IFNULL(nom, 'France') AS nom);
+```
+

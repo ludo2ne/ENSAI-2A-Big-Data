@@ -1,0 +1,61 @@
+---
+execute:
+  eval: false
+---
+
+## Create a Spark session
+
+- [ ] Depending on the **chosen platform**, initialize the Spark session
+
+### Only on SSPCloud
+
+```{python}
+import os
+from pyspark.sql import SparkSession
+
+spark = (SparkSession
+         .builder
+         # default url of the internally accessed Kubernetes API
+         # (This Jupyter notebook service is itself a Kubernetes Pod)
+         .master("k8s://https://kubernetes.default.svc:443")
+         # Executors spark docker image: for simplicity reasons, this jupyter notebook is reused
+         .config("spark.kubernetes.container.image", os.environ['IMAGE_NAME'])
+         # Name of the Kubernetes namespace
+         .config("spark.kubernetes.namespace", os.environ['KUBERNETES_NAMESPACE'])
+         # Allocated memory to the JVM
+         # Stay careful, by default, the Kubernetes pods has a higher limit which depends on other parameters.
+         .config("spark.executor.memory", "4g")
+         .config("spark.kubernetes.driver.pod.name", os.environ['KUBERNETES_POD_NAME'])
+         # dynamic allocation configuration
+         .config("spark.dynamicAllocation.enabled","true")
+         .config("spark.dynamicAllocation.initialExecutors","1")
+         .config("spark.dynamicAllocation.minExecutors","1")
+         .config("spark.dynamicAllocation.maxExecutors","60")
+         # Ratio match the number of pods to create for a given number of parallel tasks
+         # (100 parallel, ratio of 1, one aims at 100 pods, with 0.5 it would be 50 pods)
+         .config("spark.dynamicAllocation.executorAllocationRatio","1")
+         .config("spark.dynamicAllocation.shuffleTracking.enabled","true")
+         .getOrCreate()
+        )
+```
+
+
+### Only on AWS
+
+```{python}
+#| execution: {iopub.execute_input: '2023-04-30T09:07:18.788943Z', iopub.status.busy: '2023-04-30T09:07:18.788720Z', iopub.status.idle: '2023-04-30T09:07:18.853566Z', shell.execute_reply: '2023-04-30T09:07:18.853007Z', shell.execute_reply.started: '2023-04-30T09:07:18.788920Z'}
+#| tags: []
+#| vscode: {languageId: json}
+#Spark session
+spark
+
+# Configuraion
+spark._jsc.hadoopConfiguration().set("fs.s3.useRequesterPaysHeader","true")
+```
+
+
+### Check spark session
+
+```{python}
+spark
+```

@@ -1,6 +1,7 @@
 ---
 title: First steps with Spark
 description: Lab 1
+author: Rémi Pépin, Arthur Katossky, Ludovic Deneuville
 format:
   html:
     toc: true
@@ -18,9 +19,9 @@ lightbox: true
 
 ## Before you start {.unnumbered}
 
-- [ ] Download this [Jupyter Notebook](lab1-SSPCloud.ipynb){target="_blank"}
+- [ ] Download this [Jupyter Notebook](lab1.ipynb){target="_blank"}
 - [ ] Follow these [instructions](../lab-setup.qmd){target="_blank"}
-- [ ] [Solution](lab1-SSPCloud-correction.qmd){target="_blank"}
+- [ ] [Solution](lab1-correction.qmd){target="_blank"}
 
 
 ## What is Spark ?
@@ -75,43 +76,9 @@ The Kubernetes **API Server** allows to interact with Pods. It schedules executo
 </details>
 
 
-## Create a Spark session
 
-- [ ] Execute the following two cells to initialize a Spark session.
+{{< include ../lab-create-spark-session.qmd >}}
 
-```{python}
-import os
-from pyspark.sql import SparkSession
-
-spark = (SparkSession
-         .builder
-         # default url of the internally accessed Kubernetes API
-         # (This Jupyter notebook service is itself a Kubernetes Pod)
-         .master("k8s://https://kubernetes.default.svc:443")
-         # Executors spark docker image: for simplicity reasons, this jupyter notebook is reused
-         .config("spark.kubernetes.container.image", os.environ['IMAGE_NAME'])
-         # Name of the Kubernetes namespace
-         .config("spark.kubernetes.namespace", os.environ['KUBERNETES_NAMESPACE'])
-         # Allocated memory to the JVM
-         # Stay careful, by default, the Kubernetes pods has a higher limit which depends on other parameters.
-         .config("spark.executor.memory", "4g")
-         .config("spark.kubernetes.driver.pod.name", os.environ['KUBERNETES_POD_NAME'])
-         # dynamic allocation configuration
-         .config("spark.dynamicAllocation.enabled","true")
-         .config("spark.dynamicAllocation.initialExecutors","1")
-         .config("spark.dynamicAllocation.minExecutors","1")
-         .config("spark.dynamicAllocation.maxExecutors","60")
-         # Ratio match the number of pods to create for a given number of parallel tasks
-         # (100 parallel, ratio of 1, one aims at 100 pods, with 0.5 it would be 50 pods)
-         .config("spark.dynamicAllocation.executorAllocationRatio","1")
-         .config("spark.dynamicAllocation.shuffleTracking.enabled","true")
-         .getOrCreate()
-        )
-```
-
-```{python}
-spark
-```
 
 ## First steps with Spark - Data importation
 
@@ -149,18 +116,20 @@ The data you will use in this lab are real data from the twitter [sampled stream
 
 ### ✍Hands-on 1  - Data importation
 
-- [ ] Load the json file stored here : `s3a://ludo2ne/diffusion/tweets.jsonl.gz`
-  - [ ] Name you data frame `df_tweet`
-  - [ ] Use function `cache()` on the data frame. Caching is a performance optimization technique that allows you to persist an intermediate or final result of a computation in memory, reducing the need to recompute the data when it is accessed multiple time
+- [ ] Load the json file stored here : 
+  - `s3a://ludo2ne/diffusion/tweets.jsonl.gz` for SSPCloud
+  - `s3://spark-lab-input-data-ensai20222023/tweets/tweets20220324-155940.jsonl.gz` for AWS
+- [ ] Name you data frame `df_tweet`
+- [ ] Use function `cache()` on the data frame. Caching is a performance optimization technique that allows you to persist an intermediate or final result of a computation in memory, reducing the need to recompute the data when it is accessed multiple time
 
-  <small> ⚙️ This file is an a `JSONL` (JSON-line) format, which means that each line of it is a JSON object. A JSON object is just a Python dictionary or a JavaScript object and looks like this: `{ key1: value1, key2: ["array", "of", "many values]}`). This file has been compressed into a `GZ` archive, hence the `.jsonl.gz` ending. Also this file is not magically appearing in your S3 storage. It is hosted on one of your teacher's bucket and has been made public, so that you can access it.</small>
+  <small> ⚙️ This file is an a `JSONL` (JSON-line) format, which means that each line of it is a JSON object. A JSON object is just a Python dictionary or a JavaScript object and looks like this: `{ key1: value1, key2: ["array", "of", "many values]}`. This file has been compressed into a `GZ` archive, hence the `.jsonl.gz` ending. Also this file is not magically appearing in your S3 storage. It is hosted on one of your teacher's bucket and has been made public, so that you can access it.</small>
 
 It's possible to load multiple file in a unique DataFrame. It's useful when you have daily files and want to process them all. It's the same syntax as the previous one, just specify a folder.
 
-* If you meet some issue to load this file, you can load and use your own file :
-  * In Onyxia, `mes fichiers`
-  * Load file `tweets.jsonl.gz`
-  * In Jupyter, read it using `s3a://<user_name>/tweets.jsonl.gz`
+- SSPCloud users : if you meet some issue to load this file, you can load and use your own file :
+  - In Onyxia, `mes fichiers`
+  - Load file `tweets.jsonl.gz`
+  - In Jupyter, read it using `s3a://<user_name>/tweets.jsonl.gz`
 
 ```{python}
 # DataFrame creation

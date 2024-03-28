@@ -1,6 +1,7 @@
 ---
 title: Lab setup
 description: Setup to be done before each lab
+author: Rémi Pépin, Arthur Katossky, Ludovic Deneuville
 format:
   html:
     toc: true
@@ -32,7 +33,10 @@ You can choose to use :
 
 ### AWS
 
-:construction:
+For the first time, it will take some time to create your Spark cluster.
+
+Follow these [instructions](aws-cluster-spark.qmd) to create a Spark cluster on AWS
+
 
 ## At this end of this lab
 

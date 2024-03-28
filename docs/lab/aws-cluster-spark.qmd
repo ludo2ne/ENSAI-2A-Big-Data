@@ -1,0 +1,95 @@
+---
+title: Create a Spark cluster on AWS
+author: Ludovic Deneuville
+format:
+  html:
+    toc: true
+    toc-location: left
+    toc-expand: 3
+from: markdown+emoji
+number-sections: true
+number-depth: 3
+lightbox: true
+---
+
+::: {.callout-important}
+We strongly recommend using the Google Chrome browser!
+:::
+
+## Chrome Setup
+
+- [ ] Open Chrome
+- [ ] In the top right, click on the 3 dots, then select Settings.
+- [ ] Click on Privacy and security, then Site settings, then Pop-ups and redirects.
+- [ ] Websites can show pop-ups and use redirects
+
+## Run the AWS Learner Lab
+
+- Log in [AWS academy](https://awsacademy.instructure.com/login/canvas)
+  - use your ENSAI mail
+- Go to the `Dashboard`
+	- Select course *AWS Academy Learner Lab [78065]*
+	- Click on `Learner Lab`
+  - Click on *Start Lab* :arrow_forward:
+  - Wait for 2 minutes until the circle next to AWS turns green
+  - Click on `AWS`
+
+Now, you enter the lab.
+
+
+## Create a Studio
+
+- In the search bar, search for the EMR service
+- Click on `Studios`, then *Create Studio*
+- Setup options :arrow_right: select *Custom*
+- Studio settings
+  - Service role to let Studio access your AWS resources : `LabRole`
+- Networking and security
+  - VPC : select the default VPC
+  - Subnets : choose one and note its name for later
+  - Click on `Create Studio`
+
+---
+
+- Create a workspace
+  - choisir le studio créé juste avant 
+  - Accepter les cookies
+  - Donner un titre
+  - Creer (Even if you get a redirection error at this point continue)
+- Retour sur la page EMR
+
+
+## Create a Cluster
+
+- Click on `Clusters`, then `Create cluster`
+- Go to the *Cluster Configuration* section
+  - For *Primary*, *Core* and *Task 1 of 1*, choose EC2 instance type : `m4.large`
+- Networking section
+  - Use the same subnet as before
+- Security configuration and EC2 key pair section
+  - Amazon EC2 key pair for SSH to the cluster : vockey
+- Identity and Access Management (IAM) roles section
+  - Service role : EMR_DefaultRole
+  - Instance profile : EMR_EC2_DefaultRole
+- *Create Cluster*
+
+The cluster creation takes some time (10 min). 
+
+Go back to EMR > Cluster and wait until the cluster status is *Waiting* (refresh :arrows_counterclockwise:)
+
+
+## Associate the cluster with a workspace
+
+- Click on `Workspaces (Notebooks)`
+- Select the workspace
+  - click on Actions > Stop
+  - Refresh until the status turn to *Idle*
+- Select the workspace, then click on `Attach cluster`
+  - Check *Launch in Jupyter`
+  - EMR cluster : your cluster
+  - Attach cluster and launch
+
+A new tab will open. Save the URL, for example by bookmarking it.
+
+Now you can load the lab notebooks (*lab_-AWS.ipynb* file) and then open it.
+Once it's open, verify that the kernel is set to PySpark on the top right.

@@ -17,12 +17,21 @@ website:
             text: "Lab setup"
           - href: docs/lab/lab0/lab0.qmd
             text: "Lab 0"
-          - href: docs/lab/lab1/lab1-SSPCloud.qmd
+          - href: docs/lab/lab1/lab1.qmd
             text: "Lab 1"
-          - href: docs/lab/lab2/lab2-SSPCloud.qmd
+          - href: docs/lab/lab2/lab2.qmd
             text: "Lab 2"
           - href: docs/lab/lab3/lab3-SSPCloud.qmd
             text: "Lab 3"
+      - text: AWS
+        menu:
+          - href: docs/lab/aws-cluster-spark.qmd
+            text: "Create a Spark cluster"
+            
+      - text: Other resources
+        menu:
+          - href: docs/duckdb.qmd
+            text: "DuckDB"
     right:
       - icon: github
         href: https://github.com/ludo2ne/ENSAI-2A-Big-Data

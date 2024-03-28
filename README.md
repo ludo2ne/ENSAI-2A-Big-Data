@@ -4,20 +4,16 @@ Lessons and Labs created by [Rémi Pépin](https://github.com/HealerMikado/panor
 
 ## :construction: Todo
 
-* Try on SSPCloud
-  * [ ] Lab1
-  * [ ] Lab2
-  * [ ] Lab3
-* Try on AWS
-  * [ ] Lab0
-  * [ ] Lab1
-  * [ ] Lab2
-  * [ ] Lab3
+- [ ] Complete the AWS setup (stop cluster at the end of the lab, then how to restart it ?)
+- [ ] Labs 0 :arrow_right: include Spark cluster creation
+- [ ] Labs 3 :arrow_right: adapt for AWS
+- [ ] Check and try all labs on AWS and SPPCloud
 
 ## Edit a Lab
 
 Labs notebooks are in `docs/lab`.
-They are in format `.qmd` and them quarto format them into :
 
-* `.html` for the [documentation website](https://ludo2ne.github.io/ENSAI-2A-Big-Data/)
-* `.ipynb` to use it in Jupyter
+All files are in format `.qmd` and then Quarto convert them into :
+
+- `.html` for the [documentation website](https://ludo2ne.github.io/ENSAI-2A-Big-Data/)
+- `.ipynb` to use it in Jupyter

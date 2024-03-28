@@ -1,6 +1,7 @@
 ---
 title: "Discover Amazon Web Service (AWS)"
 description: "Lab 0"
+author: Rémi Pépin, Arthur Katossky, Ludovic Deneuville
 format:
   html:
     toc: true
@@ -94,10 +95,10 @@ All AWS services can natively read from and write to S3, if they have some acces
 
 ## SSH key creation
 
-**SSH** (**S**ecure **SH**ell) protocol allow a secure remote connection to a machine. Moreover, with SSH you can control the remote machine. For more details, you can read this page [page web](https://doc.fedora-fr.org/wiki/SSH_:_Authentification_par_cl%C3%A9){.external target="_blank"}. But first you need a private key to authenticate yourself. 
+**SSH** (**S**ecure **SH**ell) protocol allow a secure remote connection to a machine. Moreover, with SSH you can control the remote machine. For more details, you can read this [page](https://doc.fedora-fr.org/wiki/SSH_:_Authentification_par_cl%C3%A9){.external target="_blank"}. But first you need a private key to authenticate yourself. 
 
 - [ ] In the search bar, search `paire de clés`
-- [ ] Click on `Créerune paire de clés`
+- [ ] Click on `Créer une paire de clés`
 - [ ] Give it a name (par ex: `labsuser`), select the ppk format if you use windows, and pem if you use Linux / macOs, then click on `créer`
 - [ ] This will download your key, do not lost it ! 
 - [ ] If you are on Linux / macOs open a terminal and type :
@@ -112,30 +113,18 @@ All AWS services can natively read from and write to S3, if they have some acces
 ## Create your first virtual machine
 
 - [ ] In the search bar, search `EC2`
-
-  ![](img/ec2_accueil.png)
-
 - [ ] Click on `Lancer une instance`
-
-- [ ] First, you must choose an image for your machine (called AMI pour Amazon Machine Image). This image contain an OS and some default applications. Choose the first : Amazon Linux 2 AMI (HVM) - Kernel 5.10.
-
-  ![](img/ec2_ami.png)
-
-- [ ]  Then you will select the hardware configuration. For instance, for a general usage machine you can choose a `t2.micro` for a cheap but weak machine (0.012\$/hour, 1 core, 1Go Ram) or a more powerful and more expensive one like `t2.xlarge`  (0.188\$/hour, 8 core, 32Go Ram). Because you pay for how long your EC2 instance are up, turn off you machine at the end of the lab !
-
-  ![](img/ec2_machine.png)
-
-- [ ] On the next screen, select the AIM role `LabInstanceProfile`
-
-  ![](img/ec2_iam.png)
-
-- [ ] Then click on `Vérifier et lancer`
-
-- [ ] Validate your instance
-
+  - First, you must choose an image for your machine (called AMI pour Amazon Machine Image). This image contain an OS and some default applications. 
+  - [ ] Choose `Amazon Linux 2 AMI (HVM) - Kernel 5.10`
+  - Then you will select the hardware configuration. For instance, for a general usage machine you can choose a `t2.micro` for a cheap but weak machine (0.012\$/hour, 1 core, 1Go Ram) or a more powerful and more expensive one like `t2.xlarge`  (0.188\$/hour, 8 core, 32Go Ram). Because you pay for how long your EC2 instance are up, turn off you machine at the end of the lab !
 - [ ] Select the key pair
+- [ ] Clic on `Détails avancés`
+  - [ ] Profil d'instance IAM : select `LabInstanceProfile`
+- [ ] Then click on `Lancer l'instance`
 
-- [ ] Et voilà! Your VM is launching. Click on `Affichez les instances` and wait a minute!  
+Congrats! Your VM is launching. 
+
+- [ ] Click on `Affichez les instances` and wait a minute!  
 
 
 ## Connect to the EC2 instance
@@ -149,27 +138,19 @@ You will find many information, but the most important it's its  `IPv4 publique`
 ###  Windows user
 
 - [ ] Run `PuTTY`
-
 - [ ] In Host Name type your `public IP`
-
 - [ ] In `Saved Session` enter `AWS EC2` and `Save`
-
   ![](img/putty1.png)
-
-- [ ] Then go to  `SSH` and find your .ppk file.
-
+- [ ] Then go to  `SSH > Auth > Credentials`
+  - [ ] Private key file for authentification : *your .ppk file*
   ![](img/putty2.png)
-
 - [ ] Finally go back to the first screen, click on your session name,  `Save` then `Open` the session.
-
     ![](img/putty3.png)
-
 - [ ] A similar windows will pop up, click on `Oui`
-
   ![](img/putty_warning.png)
-
-- [ ] A terminal will open with  `login as:`. Type `ec2-user` then press `Enter`([documentation officielle](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/connection-prereqs.html){.external target="_blank"})
-
+- A terminal will open 
+  - [ ] Login as: `ec2-user` 
+  - [ ] then press `Enter`([documentation](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/connection-prereqs.html){.external target="_blank"})
     ![](img/terminal_ec2.png)
 
   
@@ -226,12 +207,10 @@ Here is some bash commands
 ### Benchmark setup
 
 - [ ] Download the file stored on S3. Use the command `aws s3 cp [s3://object/uri] [output/folder]`.  The S3 URI is on S3 file page. For `output/folder` use the current directory with `.`. You should get a command and an output like this 
-
   ```
   [ec2-user@ip-172-31-85-99 ~]$ aws s3 cp s3://remi-pepin-21032022/fichiersTP0.zip .
   download: s3://remi-pepin-21032022/fichier TP.zip to ./fichier TP.zip
   ```
-
 - [ ] With `ls` (*list*)  check you downloaded the file
 - [ ] Now you will unzip your file with `unzip [nom de votre fichier]`. Check the result with `ls`
 - [ ] For security reasons, you cannot execute your files. Do `chmod 764 get_data.sh awk.sh GetMaxTempC` to change that. For more details, the [chmod wikipedia page](https://fr.wikipedia.org/wiki/Chmod){.external target="_blank"} provides more details..
@@ -274,6 +253,9 @@ Type `ls` to check if your file are still there.
 
 Because your EC2 instance is billed by time and not usage, once your work is done, shut down it. Although the cost is small, a small cost\*24\*7 for 1 week or running instance can cost 10\$. And for bigger machine in a company maybe 100\$ or 1000\$.
 
-To shut down your machine, go to  `EC2 > Instances` and find all running instances. Click on `état de instance` then on `resilier l'instance`.
+To shut down your machine :
+- [ ] go to  `EC2 > Instances` and find all running instances
+- [ ] Click on `état de instance` 
+- [ ] then on `resilier l'instance`
 
 ![](img/ec2_end.png)

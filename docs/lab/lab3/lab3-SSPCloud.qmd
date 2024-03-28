@@ -1,6 +1,7 @@
 ---
 title: Stream processing with Spark
 description: Lab 3
+author: Rémi Pépin, Arthur Katossky, Ludovic Deneuville
 format:
   html:
     toc: true
