@@ -49,15 +49,6 @@ Now, you enter the lab.
   - Subnets : choose one and note its name for later
   - Click on `Create Studio`
 
----
-
-- Create a workspace
-  - choisir le studio créé juste avant 
-  - Accepter les cookies
-  - Donner un titre
-  - Creer (Even if you get a redirection error at this point continue)
-- Retour sur la page EMR
-
 
 ## Create a Cluster
 
