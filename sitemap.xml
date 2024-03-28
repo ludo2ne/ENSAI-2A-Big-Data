@@ -2,38 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ludo2ne.github.io/ENSAI-2A-Big-Data/index.html</loc>
-    <lastmod>2024-02-01T15:02:41.774Z</lastmod>
+    <lastmod>2024-03-28T15:55:57.256Z</lastmod>
   </url>
   <url>
-    <loc>https://ludo2ne.github.io/ENSAI-2A-Big-Data/docs/lab/lab2/lab2-SSPCloud.html</loc>
-    <lastmod>2024-02-01T15:02:41.766Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ludo2ne.github.io/ENSAI-2A-Big-Data/docs/lab/lab1/lab1-SSPCloud.html</loc>
-    <lastmod>2024-02-01T15:02:41.762Z</lastmod>
+    <loc>https://ludo2ne.github.io/ENSAI-2A-Big-Data/docs/lab/lab2/lab2.html</loc>
+    <lastmod>2024-03-28T15:55:57.248Z</lastmod>
   </url>
   <url>
     <loc>https://ludo2ne.github.io/ENSAI-2A-Big-Data/docs/lab/lab0/lab0.html</loc>
-    <lastmod>2024-02-01T15:02:41.722Z</lastmod>
+    <lastmod>2024-03-28T15:55:57.200Z</lastmod>
   </url>
   <url>
     <loc>https://ludo2ne.github.io/ENSAI-2A-Big-Data/docs/lab/lab-end.html</loc>
-    <lastmod>2024-02-01T15:02:41.710Z</lastmod>
+    <lastmod>2024-03-28T15:55:57.184Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ludo2ne.github.io/ENSAI-2A-Big-Data/docs/lab/aws-cluster-spark.html</loc>
+    <lastmod>2024-03-28T15:55:57.184Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ludo2ne.github.io/ENSAI-2A-Big-Data/docs/duckdb.html</loc>
+    <lastmod>2024-03-28T15:55:57.184Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ludo2ne.github.io/ENSAI-2A-Big-Data/docs/lab/lab-create-spark-session.html</loc>
+    <lastmod>2024-03-28T15:55:57.184Z</lastmod>
   </url>
   <url>
     <loc>https://ludo2ne.github.io/ENSAI-2A-Big-Data/docs/lab/lab-setup.html</loc>
-    <lastmod>2024-02-01T15:02:41.710Z</lastmod>
+    <lastmod>2024-03-28T15:55:57.184Z</lastmod>
   </url>
   <url>
-    <loc>https://ludo2ne.github.io/ENSAI-2A-Big-Data/docs/lab/lab1/lab1-SSPCloud-correction.html</loc>
-    <lastmod>2024-02-01T15:02:41.762Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ludo2ne.github.io/ENSAI-2A-Big-Data/docs/lab/lab2/lab2-SSPCloud-correction.html</loc>
-    <lastmod>2024-02-01T15:02:41.766Z</lastmod>
+    <loc>https://ludo2ne.github.io/ENSAI-2A-Big-Data/docs/lab/lab1/lab1.html</loc>
+    <lastmod>2024-03-28T15:55:57.244Z</lastmod>
   </url>
   <url>
     <loc>https://ludo2ne.github.io/ENSAI-2A-Big-Data/docs/lab/lab3/lab3-SSPCloud.html</loc>
-    <lastmod>2024-02-01T15:02:41.774Z</lastmod>
+    <lastmod>2024-03-28T15:55:57.256Z</lastmod>
   </url>
 </urlset>

@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Ludovic Deneuville">
+<meta name="description" content="Découverte de DuckDB">
 
-<title>Big Data - Introduction to Big Data</title>
+<title>Big Data - DuckDB</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +25,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,7 +72,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="floating nav-fixed">
@@ -80,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Big Data</span>
     </a>
   </div>
@@ -91,7 +93,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -100,23 +102,23 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-labs">    
         <li>
-    <a class="dropdown-item" href="./docs/lab/lab-setup.html">
+    <a class="dropdown-item" href="../docs/lab/lab-setup.html">
  <span class="dropdown-text">Lab setup</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lab/lab0/lab0.html">
+    <a class="dropdown-item" href="../docs/lab/lab0/lab0.html">
  <span class="dropdown-text">Lab 0</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lab/lab1/lab1.html">
+    <a class="dropdown-item" href="../docs/lab/lab1/lab1.html">
  <span class="dropdown-text">Lab 1</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lab/lab2/lab2.html">
+    <a class="dropdown-item" href="../docs/lab/lab2/lab2.html">
  <span class="dropdown-text">Lab 2</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lab/lab3/lab3-SSPCloud.html">
+    <a class="dropdown-item" href="../docs/lab/lab3/lab3-SSPCloud.html">
  <span class="dropdown-text">Lab 3</span></a>
   </li>  
     </ul>
@@ -127,7 +129,7 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-aws">    
         <li>
-    <a class="dropdown-item" href="./docs/lab/aws-cluster-spark.html">
+    <a class="dropdown-item" href="../docs/lab/aws-cluster-spark.html">
  <span class="dropdown-text">Create a Spark cluster</span></a>
   </li>  
     </ul>
@@ -138,7 +140,7 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-other-resources">    
         <li>
-    <a class="dropdown-item" href="./docs/duckdb.html">
+    <a class="dropdown-item" href="../docs/duckdb.html">
  <span class="dropdown-text">DuckDB</span></a>
   </li>  
     </ul>
@@ -171,22 +173,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#objectives" id="toc-objectives" class="nav-link active" data-scroll-target="#objectives">Objectives</a></li>
-  <li><a href="#organisation" id="toc-organisation" class="nav-link" data-scroll-target="#organisation">Organisation</a></li>
-  <li><a href="#lessons" id="toc-lessons" class="nav-link" data-scroll-target="#lessons">Lessons</a>
-  <ul class="collapse">
-  <li><a href="#what-is-big-data" id="toc-what-is-big-data" class="nav-link" data-scroll-target="#what-is-big-data">1.1 What is Big Data</a></li>
-  <li><a href="#computer-science-survival-kit" id="toc-computer-science-survival-kit" class="nav-link" data-scroll-target="#computer-science-survival-kit">1.2 Computer science survival kit</a></li>
-  <li><a href="#high-performance-computing-without-distribution" id="toc-high-performance-computing-without-distribution" class="nav-link" data-scroll-target="#high-performance-computing-without-distribution">1.3 High-performance computing without distribution</a></li>
-  <li><a href="#what-if" id="toc-what-if" class="nav-link" data-scroll-target="#what-if">1.4 What if ?</a></li>
-  <li><a href="#social-issues" id="toc-social-issues" class="nav-link" data-scroll-target="#social-issues">1.5 Social issues</a></li>
-  <li><a href="#how-to-store-big-data" id="toc-how-to-store-big-data" class="nav-link" data-scroll-target="#how-to-store-big-data">2.1 How to store big data</a></li>
-  <li><a href="#hadoop-file-system-hdfs" id="toc-hadoop-file-system-hdfs" class="nav-link" data-scroll-target="#hadoop-file-system-hdfs">2.2 Hadoop file system (HDFS)</a></li>
-  <li><a href="#hadoop-mapreduce" id="toc-hadoop-mapreduce" class="nav-link" data-scroll-target="#hadoop-mapreduce">2.3 Hadoop MapReduce</a></li>
-  <li><a href="#spark" id="toc-spark" class="nav-link" data-scroll-target="#spark">2.4 Spark</a></li>
-  <li><a href="#cloud-computing" id="toc-cloud-computing" class="nav-link" data-scroll-target="#cloud-computing">3 Cloud Computing</a></li>
-  </ul></li>
-  <li><a href="#labs" id="toc-labs" class="nav-link" data-scroll-target="#labs">Labs</a></li>
+  <li><a href="#shell" id="toc-shell" class="nav-link active" data-scroll-target="#shell">Shell</a></li>
+  <li><a href="#exécutable" id="toc-exécutable" class="nav-link" data-scroll-target="#exécutable">Exécutable</a></li>
+  <li><a href="#dbeaver" id="toc-dbeaver" class="nav-link" data-scroll-target="#dbeaver">DBeaver</a></li>
   </ul>
 </nav>
 </nav>
@@ -199,13 +188,24 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Introduction to Big Data</h1>
+<h1 class="title">DuckDB</h1>
 </div>
 
+<div>
+  <div class="description">
+    Découverte de DuckDB
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Ludovic Deneuville </p>
+          </div>
+  </div>
     
   
     
@@ -216,110 +216,98 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Lessons and Labs created by <a href="https://github.com/HealerMikado/panorama_big_data_2021" target="_blank">Rémi Pépin</a> and <a href="https://github.com/katossky/panorama-bigdata" target="_blank">Arthur Katossky</a></p>
-<section id="objectives" class="level2">
-<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
+<p><span class="emoji" data-emoji="construction">🚧</span></p>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Inspiré de https://www.youtube.com/watch?v=ajo0VBXT6ho&amp;ab_channel=ToulouseDataViz Eric Mauvière - Avec DuckDB, gavez-vous d’open data!</p>
+<p>https://github.com/icem7-open/conf-duckdb-tdvz-2024 https://www.icem7.fr/</p>
+</div>
+</div>
+</div>
+<section id="shell" class="level2">
+<h2 class="anchored" data-anchor-id="shell">Shell</h2>
 <ul>
-<li>Understand the basics of computation in the real world, the bottlenecks and how to solve them</li>
-<li>Understand the basics of cloud computing and how to use AWS (or SSP Cloud)</li>
-<li>Get familiar with big data technologies and the most common paradigm</li>
-<li>Learn how to use Spark for data exploration on data at rest or streamed data, and how to use some basics ML algorithm on big data</li>
+<li>https://shell.duckdb.org/</li>
+</ul>
+<p>Exemple avec ces données - https://www.data.gouv.fr/fr/datasets/populations-legales-communales-2017-2021/</p>
+<pre class="{sql}"><code>FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
+LIMIT 10;</code></pre>
+<pre class="{sql}"><code>FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
+WHERE codgeo = '28088';</code></pre>
+<pre class="{sql}"><code>FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
+WHERE annee_rp = 2021 
+AND LOWER(libgeo) NOT LIKE '%arrondissement%'
+ORDER BY ptot DESC
+LIMIT 20;</code></pre>
+<p>Bonus :</p>
+<ul>
+<li>bouton SAVE URL</li>
+<li>url un peu longue donc utiliser https://tinyurl.com/app pour raccourcir</li>
+<li>diffuser l’url</li>
 </ul>
 </section>
-<section id="organisation" class="level2">
-<h2 class="anchored" data-anchor-id="organisation">Organisation</h2>
-<ul>
-<li>Lessons : 7h30</li>
-<li>Labs : 10h30 + 3h (graded lab)</li>
-<li>Presentations : 3h</li>
-</ul>
+<section id="exécutable" class="level2">
+<h2 class="anchored" data-anchor-id="exécutable">Exécutable</h2>
+<p>Télécharger duckdb.exe</p>
+<pre class="{sql}"><code>FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
+SELECT SUM(pnum)
+GROUP BY annee_rp
+ORDER BY 1 DESC;</code></pre>
 </section>
-<section id="lessons" class="level2">
-<h2 class="anchored" data-anchor-id="lessons">Lessons</h2>
-<section id="what-is-big-data" class="level3">
-<h3 class="anchored" data-anchor-id="what-is-big-data">1.1 What is Big Data</h3>
+<section id="dbeaver" class="level2">
+<h2 class="anchored" data-anchor-id="dbeaver">DBeaver</h2>
+<p>https://duckdb.org/docs/guides/sql_editors/dbeaver.html</p>
 <ul>
-<li>What is considered big ?</li>
-<li>Volume, Velocity, Variety, Veracity, Value, Variability</li>
-</ul>
-</section>
-<section id="computer-science-survival-kit" class="level3">
-<h3 class="anchored" data-anchor-id="computer-science-survival-kit">1.2 Computer science survival kit</h3>
+<li>Nouvelle connexion : DuckDB
 <ul>
-<li>Processors, Memory, Storage, Network</li>
+<li>Path : <code>:memory:</code></li>
+</ul></li>
+<li>Ouvrir la connexion</li>
+<li>Ouvrir un éditeur SQL</li>
 </ul>
-</section>
-<section id="high-performance-computing-without-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="high-performance-computing-without-distribution">1.3 High-performance computing without distribution</h3>
+<pre class="{sql}"><code> FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
+SELECT codreg,
+       SUM(pmun) pop
+ WHERE annee_rp = 2021
+ GROUP BY ALL
+ ORDER BY ALL;</code></pre>
 <ul>
-<li>Profile code, Analyse code</li>
-<li>Store or process data in chunks, Take advantage of sparcity</li>
-<li>Go low-level</li>
-<li>Use cache</li>
+<li>Ajouter une ligne de total</li>
 </ul>
-</section>
-<section id="what-if" class="level3">
-<h3 class="anchored" data-anchor-id="what-if">1.4 What if ?</h3>
-<ul>
-<li>What if data is too big to fit in memory ?</li>
-<li>What if your file is too big for your local file system ?</li>
-<li>What if data is too big to fit on disk ?</li>
-<li>What if computation takes ages ?</li>
-<li>What if computation / storage is too expensive ?</li>
-</ul>
-</section>
-<section id="social-issues" class="level3">
-<h3 class="anchored" data-anchor-id="social-issues">1.5 Social issues</h3>
-<ul>
-<li>Ethical issues, Environmental issues, Political issues</li>
-</ul>
-<hr>
-</section>
-<section id="how-to-store-big-data" class="level3">
-<h3 class="anchored" data-anchor-id="how-to-store-big-data">2.1 How to store big data</h3>
-<ul>
-<li>File system, Database, Distribution</li>
-<li>The CAP theorem</li>
-</ul>
-</section>
-<section id="hadoop-file-system-hdfs" class="level3">
-<h3 class="anchored" data-anchor-id="hadoop-file-system-hdfs">2.2 Hadoop file system (HDFS)</h3>
-<ul>
-<li>Hadoop Ecosystem, How to use HDFS</li>
-</ul>
-</section>
-<section id="hadoop-mapreduce" class="level3">
-<h3 class="anchored" data-anchor-id="hadoop-mapreduce">2.3 Hadoop MapReduce</h3>
-<ul>
-<li>Key Concepts</li>
-</ul>
-</section>
-<section id="spark" class="level3">
-<h3 class="anchored" data-anchor-id="spark">2.4 Spark</h3>
-<ul>
-<li>Key Concepts</li>
-<li>Importing/Exporting data</li>
-<li>How to run Spark ?</li>
-</ul>
-<hr>
-</section>
-<section id="cloud-computing" class="level3">
-<h3 class="anchored" data-anchor-id="cloud-computing">3 Cloud Computing</h3>
-<ul>
-<li>Traditional IT, Virtualization, Containerization</li>
-<li>Why cloud computing ?</li>
-<li>categories of cloud services</li>
-</ul>
-</section>
-</section>
-<section id="labs" class="level2">
-<h2 class="anchored" data-anchor-id="labs">Labs</h2>
-<ul>
-<li><a href="./docs/lab/lab0/lab0.html">Lab 0</a> : Discover Amazon Web Service (AWS)</li>
-<li><a href="./docs/lab/lab1/lab1.html">Lab 1</a> : First steps with Spark</li>
-<li><a href="./docs/lab/lab2/lab2.html">Lab 2</a> : Spark ML</li>
-<li><a href="./docs/lab/lab3/lab3-SSPCloud.html">Lab 3</a> : Stream processing with Spark</li>
-</ul>
+<pre class="{sql}"><code>FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
+SELECT codreg,
+       SUM(pmun) pop
+ WHERE annee_rp = 2021
+ GROUP BY GROUPING SETS((codreg),())
+ ORDER BY ALL; </code></pre>
+<p>Jointure avec les noms de régions</p>
+<pre class="{sql}"><code>FROM read_json_auto('https://geo.api.gouv.fr/regions');
+
+FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
+JOIN read_json_auto('https://geo.api.gouv.fr/regions') ON (codreg=code)
+SELECT codreg,
+       nom,
+       SUM(pmun) pop
+ WHERE annee_rp = 2021
+ GROUP BY GROUPING SETS((codreg, nom),())
+ ORDER BY ALL;</code></pre>
+<p>Remplacer les NULL de la dernière ligne</p>
+<pre class="{sql}"><code>WITH popreg AS(
+    FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
+    JOIN read_json_auto('https://geo.api.gouv.fr/regions') ON (codreg = code)
+    SELECT codreg,
+           nom,
+           SUM(pmun) pop
+     WHERE annee_rp = 2021
+     GROUP BY GROUPING SETS((codreg, nom),())
+     ORDER BY ALL
+ )
+FROM popreg
+SELECT * REPLACE(IFNULL(codreg, 'FR') AS codreg, IFNULL(nom, 'France') AS nom);</code></pre>
 
 
 </section>
