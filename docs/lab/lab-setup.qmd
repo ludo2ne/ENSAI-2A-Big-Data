@@ -21,21 +21,21 @@ You can choose to use :
 
 - [ ] connect to [SSPCloud](https://datalab.sspcloud.fr/){.external target="_blank"}
   - if necessary, create an account with your ENSAI e-mail address
-- Go to `Mes services`
-  - [ ] Create a new service : `Jupyter-pyspark`
+- [ ] Go to `Mes services`
+- [ ] Create a new service : `Jupyter-pyspark`
   - Wait for a few seconds
-  - [ ] Clic on `Copier le mot de passe` and then `Ouvrir le service`
-  - [ ] On the next page, paste it in the appropriate place and `Log in`
+- [ ] Click on `Copier le mot de passe` and then `Ouvrir le service`
+- [ ] On the next page, paste it in the appropriate place and `Log in`
   - You are now in your Jupyter service
-- [ ] Import file named `lab_-SSPCloud.ipynb`
-  - [ ] open it and follow the instructions
+- [ ] Import file named `lab_.ipynb`
+  - open it and follow the instructions
 
 
 ### AWS
 
 For the first time, it will take some time to create your Spark cluster.
 
-Follow these [instructions](aws-cluster-spark.qmd) to create a Spark cluster on AWS
+Follow these [instructions](aws-cluster-spark.qmd) to create a Spark cluster on AWS.
 
 
 ## At this end of this lab

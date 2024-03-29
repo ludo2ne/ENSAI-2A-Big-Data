@@ -12,35 +12,38 @@ from: markdown+emoji
 
 :construction:
 
-::: {.callout}
-Inspiré de https://www.youtube.com/watch?v=ajo0VBXT6ho&ab_channel=ToulouseDataViz
-Eric Mauvière - Avec DuckDB, gavez-vous d'open data!
+::: {.callout-tip}
+Inspiré de la vidéo d'Eric Mauvière - Avec DuckDB, gavez-vous d'open data!
 
-https://github.com/icem7-open/conf-duckdb-tdvz-2024
-https://www.icem7.fr/
+{{< video https://www.youtube.com/watch?v=ajo0VBXT6ho&ab_channel=ToulouseDataViz >}}
+
+
+- <https://github.com/icem7-open/conf-duckdb-tdvz-2024>{target="_blank"}
+- <https://www.icem7.fr/>{target="_blank"}
 :::
 
 
 
 ## Shell
 
-- https://shell.duckdb.org/
+- <https://shell.duckdb.org/>{target="_blank"}
 
-Exemple avec ces données
-- https://www.data.gouv.fr/fr/datasets/populations-legales-communales-2017-2021/
+Exemple avec ces données :
 
-```{sql}
+- <https://www.data.gouv.fr/fr/datasets/populations-legales-communales-2017-2021/>{target="_blank"}
+
+```{.sql}
 FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
 LIMIT 10;
 ```
 
 
-```{sql}
+```{.sql}
 FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
 WHERE codgeo = '28088';
 ```
 
-```{sql}
+```{.sql}
 FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
 WHERE annee_rp = 2021 
 AND LOWER(libgeo) NOT LIKE '%arrondissement%'
@@ -52,7 +55,7 @@ LIMIT 20;
 Bonus : 
 
 - bouton SAVE URL 
-- url un peu longue donc utiliser https://tinyurl.com/app pour raccourcir
+- url un peu longue donc utiliser <https://tinyurl.com/app>{target="_blank"} pour raccourcir
 - diffuser l'url
 
 
@@ -62,7 +65,7 @@ Bonus :
 
 Télécharger duckdb.exe
 
-```{sql}
+```{.sql}
 FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
 SELECT SUM(pnum)
 GROUP BY annee_rp
@@ -71,7 +74,7 @@ ORDER BY 1 DESC;
 
 ## DBeaver
 
-https://duckdb.org/docs/guides/sql_editors/dbeaver.html
+<https://duckdb.org/docs/guides/sql_editors/dbeaver.html>{target="_blank"}
 
 - Nouvelle connexion : DuckDB
   - Path : `:memory:`
@@ -80,7 +83,7 @@ https://duckdb.org/docs/guides/sql_editors/dbeaver.html
 
 
 
-```{sql}
+```{.sql}
  FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
 SELECT codreg,
        SUM(pmun) pop
@@ -91,7 +94,7 @@ SELECT codreg,
 
 - Ajouter une ligne de total
 
-```{sql}
+```{.sql}
 FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
 SELECT codreg,
        SUM(pmun) pop
@@ -102,7 +105,7 @@ SELECT codreg,
 
 Jointure avec les noms de régions
 
-```{sql}
+```{.sql}
 FROM read_json_auto('https://geo.api.gouv.fr/regions');
 
 FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
@@ -117,7 +120,7 @@ SELECT codreg,
 
 Remplacer les NULL de la dernière ligne
 
-```{sql}
+```{.sql}
 WITH popreg AS(
     FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
     JOIN read_json_auto('https://geo.api.gouv.fr/regions') ON (codreg = code)
