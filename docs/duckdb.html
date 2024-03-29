@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -145,6 +179,10 @@ ul.task-list li input[type="checkbox"] {
   </li>  
     </ul>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../docs/bibliography.html"> 
+<span class="menu-text">Bibliography</span></a>
+  </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
@@ -217,50 +255,60 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p><span class="emoji" data-emoji="construction">🚧</span></p>
-<div class="callout callout-style-simple callout-none no-icon">
-<div class="callout-body d-flex">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
-<div class="callout-body-container">
-<p>Inspiré de https://www.youtube.com/watch?v=ajo0VBXT6ho&amp;ab_channel=ToulouseDataViz Eric Mauvière - Avec DuckDB, gavez-vous d’open data!</p>
-<p>https://github.com/icem7-open/conf-duckdb-tdvz-2024 https://www.icem7.fr/</p>
+<div class="callout-title-container flex-fill">
+Tip
 </div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Inspiré de la vidéo d’Eric Mauvière - Avec DuckDB, gavez-vous d’open data!</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/ajo0VBXT6ho" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<ul>
+<li><a href="https://github.com/icem7-open/conf-duckdb-tdvz-2024" target="_blank">https://github.com/icem7-open/conf-duckdb-tdvz-2024</a></li>
+<li><a href="https://www.icem7.fr/" target="_blank">https://www.icem7.fr/</a></li>
+</ul>
 </div>
 </div>
 <section id="shell" class="level2">
 <h2 class="anchored" data-anchor-id="shell">Shell</h2>
 <ul>
-<li>https://shell.duckdb.org/</li>
+<li><a href="https://shell.duckdb.org/" target="_blank">https://shell.duckdb.org/</a></li>
 </ul>
-<p>Exemple avec ces données - https://www.data.gouv.fr/fr/datasets/populations-legales-communales-2017-2021/</p>
-<pre class="{sql}"><code>FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
-LIMIT 10;</code></pre>
-<pre class="{sql}"><code>FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
-WHERE codgeo = '28088';</code></pre>
-<pre class="{sql}"><code>FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
-WHERE annee_rp = 2021 
-AND LOWER(libgeo) NOT LIKE '%arrondissement%'
-ORDER BY ptot DESC
-LIMIT 20;</code></pre>
+<p>Exemple avec ces données :</p>
+<ul>
+<li><a href="https://www.data.gouv.fr/fr/datasets/populations-legales-communales-2017-2021/" target="_blank">https://www.data.gouv.fr/fr/datasets/populations-legales-communales-2017-2021/</a></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="st">'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">10</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="st">'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> codgeo <span class="op">=</span> <span class="st">'28088'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="st">'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> annee_rp <span class="op">=</span> <span class="dv">2021</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">AND</span> <span class="fu">LOWER</span>(libgeo) <span class="kw">NOT</span> <span class="kw">LIKE</span> <span class="st">'%arrondissement%'</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> ptot <span class="kw">DESC</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">20</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Bonus :</p>
 <ul>
 <li>bouton SAVE URL</li>
-<li>url un peu longue donc utiliser https://tinyurl.com/app pour raccourcir</li>
+<li>url un peu longue donc utiliser <a href="https://tinyurl.com/app" target="_blank">https://tinyurl.com/app</a> pour raccourcir</li>
 <li>diffuser l’url</li>
 </ul>
 </section>
 <section id="exécutable" class="level2">
 <h2 class="anchored" data-anchor-id="exécutable">Exécutable</h2>
 <p>Télécharger duckdb.exe</p>
-<pre class="{sql}"><code>FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
-SELECT SUM(pnum)
-GROUP BY annee_rp
-ORDER BY 1 DESC;</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="st">'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">SUM</span>(pnum)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> annee_rp</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">1</span> <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="dbeaver" class="level2">
 <h2 class="anchored" data-anchor-id="dbeaver">DBeaver</h2>
-<p>https://duckdb.org/docs/guides/sql_editors/dbeaver.html</p>
+<p><a href="https://duckdb.org/docs/guides/sql_editors/dbeaver.html" target="_blank">https://duckdb.org/docs/guides/sql_editors/dbeaver.html</a></p>
 <ul>
 <li>Nouvelle connexion : DuckDB
 <ul>
@@ -269,45 +317,45 @@ ORDER BY 1 DESC;</code></pre>
 <li>Ouvrir la connexion</li>
 <li>Ouvrir un éditeur SQL</li>
 </ul>
-<pre class="{sql}"><code> FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
-SELECT codreg,
-       SUM(pmun) pop
- WHERE annee_rp = 2021
- GROUP BY ALL
- ORDER BY ALL;</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a> <span class="kw">FROM</span> <span class="st">'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> codreg,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">SUM</span>(pmun) pop</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> annee_rp <span class="op">=</span> <span class="dv">2021</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> <span class="kw">ALL</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="kw">ALL</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Ajouter une ligne de total</li>
 </ul>
-<pre class="{sql}"><code>FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
-SELECT codreg,
-       SUM(pmun) pop
- WHERE annee_rp = 2021
- GROUP BY GROUPING SETS((codreg),())
- ORDER BY ALL; </code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="st">'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> codreg,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">SUM</span>(pmun) pop</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> annee_rp <span class="op">=</span> <span class="dv">2021</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> <span class="fu">GROUPING</span> SETS((codreg),())</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="kw">ALL</span>; </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Jointure avec les noms de régions</p>
-<pre class="{sql}"><code>FROM read_json_auto('https://geo.api.gouv.fr/regions');
-
-FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
-JOIN read_json_auto('https://geo.api.gouv.fr/regions') ON (codreg=code)
-SELECT codreg,
-       nom,
-       SUM(pmun) pop
- WHERE annee_rp = 2021
- GROUP BY GROUPING SETS((codreg, nom),())
- ORDER BY ALL;</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> read_json_auto(<span class="st">'https://geo.api.gouv.fr/regions'</span>);</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="st">'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> read_json_auto(<span class="st">'https://geo.api.gouv.fr/regions'</span>) <span class="kw">ON</span> (codreg<span class="op">=</span>code)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> codreg,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>       nom,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>       <span class="fu">SUM</span>(pmun) pop</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> annee_rp <span class="op">=</span> <span class="dv">2021</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> <span class="fu">GROUPING</span> SETS((codreg, nom),())</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="kw">ALL</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Remplacer les NULL de la dernière ligne</p>
-<pre class="{sql}"><code>WITH popreg AS(
-    FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'
-    JOIN read_json_auto('https://geo.api.gouv.fr/regions') ON (codreg = code)
-    SELECT codreg,
-           nom,
-           SUM(pmun) pop
-     WHERE annee_rp = 2021
-     GROUP BY GROUPING SETS((codreg, nom),())
-     ORDER BY ALL
- )
-FROM popreg
-SELECT * REPLACE(IFNULL(codreg, 'FR') AS codreg, IFNULL(nom, 'France') AS nom);</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> popreg <span class="kw">AS</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> <span class="st">'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> read_json_auto(<span class="st">'https://geo.api.gouv.fr/regions'</span>) <span class="kw">ON</span> (codreg <span class="op">=</span> code)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> codreg,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>           nom,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>           <span class="fu">SUM</span>(pmun) pop</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>     <span class="kw">WHERE</span> annee_rp <span class="op">=</span> <span class="dv">2021</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>     <span class="kw">GROUP</span> <span class="kw">BY</span> <span class="fu">GROUPING</span> SETS((codreg, nom),())</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>     <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="kw">ALL</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a> )</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> popreg</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">REPLACE</span>(IFNULL(codreg, <span class="st">'FR'</span>) <span class="kw">AS</span> codreg, IFNULL(nom, <span class="st">'France'</span>) <span class="kw">AS</span> nom);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>

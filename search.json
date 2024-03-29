@@ -315,6 +315,13 @@
     "text": "5 Associate the cluster with a workspace\n\nClick on Workspaces (Notebooks)\nSelect the workspace\n\nclick on Actions &gt; Stop\nRefresh until the status turn to Idle\n\nSelect the workspace, then click on Attach cluster\n\nCheck *Launch in Jupyter`\nEMR cluster : your cluster\nAttach cluster and launch\n\n\nA new tab will open. Save the URL, for example by bookmarking it.\nNow you can load the lab notebooks (lab_-AWS.ipynb file) and then open it. Once it’s open, verify that the kernel is set to PySpark on the top right."
   },
   {
+    "objectID": "docs/bibliography.html",
+    "href": "docs/bibliography.html",
+    "title": "Bibliography",
+    "section": "",
+    "text": "Big Data Is Dead… Long Live Big Data, Aditya Parameswaran, 2023.03.06\nBig Data Is Dead, MotherDuck, 2023.02.07"
+  },
+  {
     "objectID": "docs/duckdb.html",
     "href": "docs/duckdb.html",
     "title": "DuckDB",
@@ -326,7 +333,7 @@
     "href": "docs/duckdb.html#shell",
     "title": "DuckDB",
     "section": "Shell",
-    "text": "Shell\n\nhttps://shell.duckdb.org/\n\nExemple avec ces données - https://www.data.gouv.fr/fr/datasets/populations-legales-communales-2017-2021/\nFROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'\nLIMIT 10;\nFROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'\nWHERE codgeo = '28088';\nFROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'\nWHERE annee_rp = 2021 \nAND LOWER(libgeo) NOT LIKE '%arrondissement%'\nORDER BY ptot DESC\nLIMIT 20;\nBonus :\n\nbouton SAVE URL\nurl un peu longue donc utiliser https://tinyurl.com/app pour raccourcir\ndiffuser l’url"
+    "text": "Shell\n\nhttps://shell.duckdb.org/\n\nExemple avec ces données :\n\nhttps://www.data.gouv.fr/fr/datasets/populations-legales-communales-2017-2021/\n\nFROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'\nLIMIT 10;\nFROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'\nWHERE codgeo = '28088';\nFROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'\nWHERE annee_rp = 2021 \nAND LOWER(libgeo) NOT LIKE '%arrondissement%'\nORDER BY ptot DESC\nLIMIT 20;\nBonus :\n\nbouton SAVE URL\nurl un peu longue donc utiliser https://tinyurl.com/app pour raccourcir\ndiffuser l’url"
   },
   {
     "objectID": "docs/duckdb.html#exécutable",
@@ -361,7 +368,7 @@
     "href": "docs/lab/lab-setup.html#before-starting-the-lab",
     "title": "Lab setup",
     "section": "Before starting the lab",
-    "text": "Before starting the lab\n\nSSPCloud\n\nconnect to SSPCloud\n\nif necessary, create an account with your ENSAI e-mail address\n\nGo to Mes services\n\nCreate a new service : Jupyter-pyspark\nWait for a few seconds\nClic on Copier le mot de passe and then Ouvrir le service\nOn the next page, paste it in the appropriate place and Log in\nYou are now in your Jupyter service\n\nImport file named lab_-SSPCloud.ipynb\n\nopen it and follow the instructions\n\n\n\n\nAWS\nFor the first time, it will take some time to create your Spark cluster.\nFollow these instructions to create a Spark cluster on AWS"
+    "text": "Before starting the lab\n\nSSPCloud\n\nconnect to SSPCloud\n\nif necessary, create an account with your ENSAI e-mail address\n\nGo to Mes services\nCreate a new service : Jupyter-pyspark\n\nWait for a few seconds\n\nClick on Copier le mot de passe and then Ouvrir le service\nOn the next page, paste it in the appropriate place and Log in\n\nYou are now in your Jupyter service\n\nImport file named lab_.ipynb\n\nopen it and follow the instructions\n\n\n\n\nAWS\nFor the first time, it will take some time to create your Spark cluster.\nFollow these instructions to create a Spark cluster on AWS."
   },
   {
     "objectID": "docs/lab/lab-setup.html#at-this-end-of-this-lab",
