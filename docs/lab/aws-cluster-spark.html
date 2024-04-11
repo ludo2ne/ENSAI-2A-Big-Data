@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.552">
+<meta name="generator" content="quarto-1.4.553">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -179,7 +179,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#chrome-setup" id="toc-chrome-setup" class="nav-link active" data-scroll-target="#chrome-setup"><span class="header-section-number">1</span> Chrome Setup</a></li>
   <li><a href="#run-the-aws-learner-lab" id="toc-run-the-aws-learner-lab" class="nav-link" data-scroll-target="#run-the-aws-learner-lab"><span class="header-section-number">2</span> Run the AWS Learner Lab</a></li>
   <li><a href="#create-a-studio" id="toc-create-a-studio" class="nav-link" data-scroll-target="#create-a-studio"><span class="header-section-number">3</span> Create a Studio</a></li>
-  <li><a href="#create-a-cluster" id="toc-create-a-cluster" class="nav-link" data-scroll-target="#create-a-cluster"><span class="header-section-number">4</span> Create a Cluster</a></li>
+  <li><a href="#create-a-cluster" id="toc-create-a-cluster" class="nav-link" data-scroll-target="#create-a-cluster"><span class="header-section-number">4</span> Create a Cluster</a>
+  <ul class="collapse">
+  <li><a href="#clone-the-cluster" id="toc-clone-the-cluster" class="nav-link" data-scroll-target="#clone-the-cluster"><span class="header-section-number">4.1</span> Clone the Cluster</a></li>
+  </ul></li>
   <li><a href="#associate-the-cluster-with-a-workspace" id="toc-associate-the-cluster-with-a-workspace" class="nav-link" data-scroll-target="#associate-the-cluster-with-a-workspace"><span class="header-section-number">5</span> Associate the cluster with a workspace</a></li>
   </ul>
 </nav>
@@ -258,6 +261,19 @@ Important
 </section>
 <section id="create-a-studio" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="create-a-studio"><span class="header-section-number">3</span> Create a Studio</h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Only the first time</p>
+</div>
+</div>
 <ul>
 <li>In the search bar, search for the EMR service</li>
 <li>Click on <code>Studios</code>, then <em>Create Studio</em></li>
@@ -276,6 +292,19 @@ Important
 </section>
 <section id="create-a-cluster" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="create-a-cluster"><span class="header-section-number">4</span> Create a Cluster</h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Only the first time</p>
+</div>
+</div>
 <ul>
 <li>Click on <code>Clusters</code>, then <code>Create cluster</code></li>
 <li>Go to the <em>Cluster Configuration</em> section
@@ -299,6 +328,27 @@ Important
 </ul>
 <p>The cluster creation takes some time (10 min).</p>
 <p>Go back to EMR &gt; Cluster and wait until the cluster status is <em>Waiting</em> (refresh <span class="emoji" data-emoji="arrows_counterclockwise">🔄</span>)</p>
+<section id="clone-the-cluster" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="clone-the-cluster"><span class="header-section-number">4.1</span> Clone the Cluster</h3>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Starting from the second time.</p>
+</div>
+</div>
+<ul>
+<li>Go to <em>EMR service</em> and then <em>Clusters</em></li>
+<li>Select the old cluster and clone it</li>
+<li>The cluster creation takes some time (10 min)</li>
+</ul>
+</section>
 </section>
 <section id="associate-the-cluster-with-a-workspace" class="level2" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="associate-the-cluster-with-a-workspace"><span class="header-section-number">5</span> Associate the cluster with a workspace</h2>
@@ -311,7 +361,7 @@ Important
 </ul></li>
 <li>Select the workspace, then click on <code>Attach cluster</code>
 <ul>
-<li>Check *Launch in Jupyter`</li>
+<li>Check <em>Launch in Jupyter</em></li>
 <li>EMR cluster : your cluster</li>
 <li>Attach cluster and launch</li>
 </ul></li>

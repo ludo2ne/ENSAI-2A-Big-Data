@@ -298,21 +298,21 @@
     "href": "docs/lab/aws-cluster-spark.html#create-a-studio",
     "title": "Create a Spark cluster on AWS",
     "section": "3 Create a Studio",
-    "text": "3 Create a Studio\n\nIn the search bar, search for the EMR service\nClick on Studios, then Create Studio\nSetup options ➡️ select Custom\nStudio settings\n\nService role to let Studio access your AWS resources : LabRole\n\nNetworking and security\n\nVPC : select the default VPC\nSubnets : choose one and note its name for later\nClick on Create Studio"
+    "text": "3 Create a Studio\n\n\n\n\n\n\nImportant\n\n\n\nOnly the first time\n\n\n\nIn the search bar, search for the EMR service\nClick on Studios, then Create Studio\nSetup options ➡️ select Custom\nStudio settings\n\nService role to let Studio access your AWS resources : LabRole\n\nNetworking and security\n\nVPC : select the default VPC\nSubnets : choose one and note its name for later\nClick on Create Studio"
   },
   {
     "objectID": "docs/lab/aws-cluster-spark.html#create-a-cluster",
     "href": "docs/lab/aws-cluster-spark.html#create-a-cluster",
     "title": "Create a Spark cluster on AWS",
     "section": "4 Create a Cluster",
-    "text": "4 Create a Cluster\n\nClick on Clusters, then Create cluster\nGo to the Cluster Configuration section\n\nFor Primary, Core and Task 1 of 1, choose EC2 instance type : m4.large\n\nNetworking section\n\nUse the same subnet as before\n\nSecurity configuration and EC2 key pair section\n\nAmazon EC2 key pair for SSH to the cluster : vockey\n\nIdentity and Access Management (IAM) roles section\n\nService role : EMR_DefaultRole\nInstance profile : EMR_EC2_DefaultRole\n\nCreate Cluster\n\nThe cluster creation takes some time (10 min).\nGo back to EMR &gt; Cluster and wait until the cluster status is Waiting (refresh 🔄)"
+    "text": "4 Create a Cluster\n\n\n\n\n\n\nImportant\n\n\n\nOnly the first time\n\n\n\nClick on Clusters, then Create cluster\nGo to the Cluster Configuration section\n\nFor Primary, Core and Task 1 of 1, choose EC2 instance type : m4.large\n\nNetworking section\n\nUse the same subnet as before\n\nSecurity configuration and EC2 key pair section\n\nAmazon EC2 key pair for SSH to the cluster : vockey\n\nIdentity and Access Management (IAM) roles section\n\nService role : EMR_DefaultRole\nInstance profile : EMR_EC2_DefaultRole\n\nCreate Cluster\n\nThe cluster creation takes some time (10 min).\nGo back to EMR &gt; Cluster and wait until the cluster status is Waiting (refresh 🔄)\n\n4.1 Clone the Cluster\n\n\n\n\n\n\nImportant\n\n\n\nStarting from the second time.\n\n\n\nGo to EMR service and then Clusters\nSelect the old cluster and clone it\nThe cluster creation takes some time (10 min)"
   },
   {
     "objectID": "docs/lab/aws-cluster-spark.html#associate-the-cluster-with-a-workspace",
     "href": "docs/lab/aws-cluster-spark.html#associate-the-cluster-with-a-workspace",
     "title": "Create a Spark cluster on AWS",
     "section": "5 Associate the cluster with a workspace",
-    "text": "5 Associate the cluster with a workspace\n\nClick on Workspaces (Notebooks)\nSelect the workspace\n\nclick on Actions &gt; Stop\nRefresh until the status turn to Idle\n\nSelect the workspace, then click on Attach cluster\n\nCheck *Launch in Jupyter`\nEMR cluster : your cluster\nAttach cluster and launch\n\n\nA new tab will open. Save the URL, for example by bookmarking it.\nNow you can load the lab notebooks (lab_-AWS.ipynb file) and then open it. Once it’s open, verify that the kernel is set to PySpark on the top right."
+    "text": "5 Associate the cluster with a workspace\n\nClick on Workspaces (Notebooks)\nSelect the workspace\n\nclick on Actions &gt; Stop\nRefresh until the status turn to Idle\n\nSelect the workspace, then click on Attach cluster\n\nCheck Launch in Jupyter\nEMR cluster : your cluster\nAttach cluster and launch\n\n\nA new tab will open. Save the URL, for example by bookmarking it.\nNow you can load the lab notebooks (lab_-AWS.ipynb file) and then open it. Once it’s open, verify that the kernel is set to PySpark on the top right."
   },
   {
     "objectID": "docs/bibliography.html",
