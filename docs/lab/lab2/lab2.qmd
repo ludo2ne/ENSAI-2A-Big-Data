@@ -21,7 +21,9 @@ lightbox: true
 
 - [ ] Download this [Jupyter Notebook](lab2.ipynb){target="_blank"}
 - [ ] Follow these [instructions](../lab-setup.qmd){target="_blank"}
-- [ ] [Solution](lab2-correction.qmd){target="_blank"}
+
+:bulb: If your Jupyter is in dark mode, some images may not display properly. You can switch to light mode in Settings > search for theme > Selected Theme: JupyterLab Light
+
 
 ## Outline {.unnumbered}
 
@@ -31,6 +33,12 @@ Rémi Pépin has loaded a lot these listings on AWS at this address:
 
 - `s3://spark‑lab‑input‑data‑ensai20222023/airbnbb/` on AWS
 - `s3a://remipepin/diffusion/ensai/airbnb` on SSPCloud
+
+
+
+{{< include ../lab-create-spark-session.qmd >}}
+
+
 
 ## How to distribute elementary statistical tasks?
 
@@ -42,13 +50,17 @@ A surprisingly satisfying situation is when your algorithm can be expressed in a
 
 Hadoop's MapReduce is the name of what was to become today Apache Spark. The persons behind this framework were among the first to advocate for the map-and-reduce mode in order to achieve efficient parallelisation. Unfortunately, the similarity of the names causes a lot of confusion between the map-and-reduce theoretical model and the concrete Hadoop implementation. I will use "map-and-reduce" to help distinguish the algorithmic concept from the MapReduce program, but this is _not_ standard in the literature.
 
-![](img/reduce.png){.lightbox}
+:::white-box
+![](img/reduce.png)
+:::
 
 **Why is the map-and-reduce scheme so interesting?**  
 
 Well, say you have $n$ entries and $k$ worker nodes at your disposal. The map operation can always be performed locally on each node, since the transformation does not depend on the rest of the data set. This is an **embarrassingly parallel problem** and we roughly divide the execution time by $k$. Then, most of the reduce steps can also happen on the worker nodes, until the local data has been completely summarized. This also an $k$_fold acceleration! Then, there remains only $k$ reduce steps, and since $k \ll n$, this is usually quite negligible, even though the (potentially high) networking costs happen at this step. There is still some cost of task coordination and data exchange, but this usually small compared to the costs of parallelisation.
 
-![](img/map-end-reduce.png){.lightbox}
+:::white-box
+![](img/map-end-reduce.png)
+:::
 
 **The reduce step**
 
@@ -60,7 +72,9 @@ The reduce function must not be defined on $E=\mathbb{R}$. For instance, in the 
 
 Imagine you want to count the frequency of the vocal E in English, given a collection of texts. It is faster to count the number of Es as well as the total number of characters than to accumulate directly the frequencies, as shown in this diagram:
 
-![](img/reduce-frequency.png){.lightbox}
+:::white-box
+![](img/reduce-frequency.png)
+:::
 
 **Online algorithms**
 
@@ -82,6 +96,7 @@ Each run is called a **pass** and some algorithms require several passes.
 
 - Not all statistical algorithms can be expressed according to the map-and-reduce algorithm, and when they can, it may require a significant re-writing compared to the standard algorithms.
 - There may be a trade-off between the number of passes, the speed of each map / reduce steps and the volume of data transferred between each reduce step.
+
 
 ### ✍ Hands-on 1
 
@@ -115,9 +130,6 @@ Each run is called a **pass** and some algorithms require several passes.
 # Code Here
 
 ```
-
-
-{{< include ../lab-create-spark-session.qmd >}}
 
 
 ## Application on Airbnb Data
@@ -185,7 +197,9 @@ The syntax of Spark ML may feel artificially convoluted ; this not only an impre
 
 **Step 1: vectorisation.** A little counter-intuitively, spark ML operates on a single column of your data frame, typically called `features`. (Features is the word used in the machine-learning community for "variables", see "Vocabulary" section hereunder.) This `features` column has the `Vector` type: each element contains an array of floating-point numbers, representing a subst of the variables from your dataset. The key is that this `features` column is usually redundant with the rest of the data frame: it just ensures the proper conversion from any type we wish (string, integer...) to a standardized numeric format. Indeed, it is often derived from the other columns, as this image illustrates:
 
-![](img/vector-format.png){.lightbox}
+:::white-box
+![](img/vector-format.png)
+:::
 
 Unfortunately for us, the construction the `features` column is not performed automatically under the hood by Spark, like when doing statistics in R. On the contrary, we have to construct the column explicitly. The `VectorAssembler()` constructor is here for that:
 
@@ -222,7 +236,9 @@ listings_vec.select( summarizer.summary(listings_vec.features), ).show(truncate=
 
 This produces the output:
 
-![](img/summary.png){.lightbox}
+:::white-box
+![](img/summary.png)
+:::
 
 ### ✍ Hands-on 3
 
@@ -420,3 +436,6 @@ You are in autonomy for this section. You will find helpful:
 {{< include ../lab-end.qmd >}}
 
 
+::: {.callout-note collapse="true" title="Solution"}
+[Solution](lab2-correction.qmd){target="_blank"}
+:::

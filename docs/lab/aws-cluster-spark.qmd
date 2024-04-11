@@ -86,7 +86,7 @@ Go back to EMR > Cluster and wait until the cluster status is *Waiting* (refresh
 
 ### Clone the Cluster
 
-::: {.callout-important}
+::: {.callout-caution}
 Starting from the second lab
 :::
 
@@ -113,4 +113,5 @@ To be done for each lab
 A new tab will open. Save the URL, for example by bookmarking it.
 
 Now you can load the lab notebooks (*lab_-AWS.ipynb* file) and then open it.
-Once it's open, verify that the kernel is set to PySpark on the top right.
+
+Once it's open, verify that the kernel is set to **PySpark** on the top right. If not : Kernel > Change Kernel > PySpark

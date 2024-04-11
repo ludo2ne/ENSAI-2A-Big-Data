@@ -1,7 +1,16 @@
 ## End of the Lab {.unnumbered}
 
 - [ ] Export your notebook
-  - Right clic and Download (.ipynb)
+  - Right click and Download (.ipynb)
   - File > Save and Export Notebook > HTML
+
+### SSPCloud {.unnumbered}
+
 - [ ] Delete the Jupyter-pyspark service
   - [SSPCloud > My services > Delete](https://datalab.sspcloud.fr/my-services){target="_blank"}
+
+### AWS {.unnumbered}
+
+- [ ] Terminate your cluster
+  - On *EMR* service page, click on *Clusters*
+  - Select the active cluster and click on `Terminate`

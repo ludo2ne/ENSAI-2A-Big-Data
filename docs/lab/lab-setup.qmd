@@ -44,4 +44,4 @@ Follow these [instructions](aws-cluster-spark.qmd) to create a Spark cluster on 
   - File > Export Notebook As ... > Export Notebook To HTML
   - Right clic > Download the `.ipynb`file
 - [ ] **Delete your service** (SSPCloud)
-- [ ] **Turn your cluster off** (AWS)
+- [ ] **Terminate your cluster** (AWS)

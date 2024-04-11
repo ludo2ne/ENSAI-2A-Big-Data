@@ -21,7 +21,7 @@ website:
             text: "Lab 1"
           - href: docs/lab/lab2/lab2.qmd
             text: "Lab 2"
-          - href: docs/lab/lab3/lab3-SSPCloud.qmd
+          - href: docs/lab/lab3/lab3.qmd
             text: "Lab 3"
       - text: AWS
         menu:

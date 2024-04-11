@@ -21,7 +21,6 @@ lightbox: true
 
 - [ ] Download this [Jupyter Notebook](lab1.ipynb){target="_blank"}
 - [ ] Follow these [instructions](../lab-setup.qmd){target="_blank"}
-- [ ] [Solution](lab1-correction.qmd){target="_blank"}
 
 
 ## What is Spark ?
@@ -114,7 +113,7 @@ The data you will use in this lab are real data from the twitter [sampled stream
 
 ---
 
-### ✍Hands-on 1  - Data importation
+### ✍Hands-on 1 - Data importation
 
 - [ ] Load the json file stored here : 
   - `s3a://ludo2ne/diffusion/tweets.jsonl.gz` for SSPCloud
@@ -551,3 +550,7 @@ Many things can only be done in Spark if you know SQL and how to use it in Spark
 
 
 {{< include ../lab-end.qmd >}}
+
+::: {.callout-note collapse="true" title="Solution"}
+[Solution](lab1-correction.qmd){target="_blank"}
+:::

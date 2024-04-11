@@ -33,6 +33,10 @@ Rémi Pépin has loaded a lot these listings on AWS at this address:
 - `s3://spark‑lab‑input‑data‑ensai20222023/airbnbb/` on AWS
 - `s3a://remipepin/diffusion/ensai/airbnb` on SSPCloud
 
+
+{{< include ../lab-create-spark-session.qmd >}}
+
+
 ## How to distribute elementary statistical tasks?
 
 **The map and reduce principle**
@@ -81,6 +85,7 @@ Each run is called a **pass** and some algorithms require several passes.
 
 - Not all statistical algorithms can be expressed according to the map-and-reduce algorithm, and when they can, it may require a significant re-writing compared to the standard algorithms.
 - There may be a trade-off between the number of passes, the speed of each map / reduce steps and the volume of data transferred between each reduce step.
+
 
 ### ✍ Hands-on 1
 
@@ -146,7 +151,6 @@ final_step : s2/n-s1^2/n
   
 When you compute the variance, the means is computed "for free"
 
-{{< include ../lab-create-spark-session.qmd >}}
 
 ## Application on Airbnb Data
 

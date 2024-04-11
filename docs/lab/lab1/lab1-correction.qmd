@@ -112,7 +112,7 @@ The data you will use in this lab are real data from the twitter [sampled stream
 
 ---
 
-### ✍Hands-on 1  - Data importation
+### ✍Hands-on 1 - Data importation
 
 - [ ] Load the json file stored here : 
   - `s3a://ludo2ne/diffusion/tweets.jsonl.gz` for SSPCloud

@@ -19,7 +19,7 @@ lightbox: true
 
 ## Before you start {.unnumbered}
 
-- [ ] Download this [Jupyter Notebook](lab3-SSPCloud.ipynb){target="_blank"}
+- [ ] Download this [Jupyter Notebook](lab3.ipynb){target="_blank"}
 - [ ] Follow these [instructions](../lab-setup.qmd){target="_blank"}
 
 
@@ -28,44 +28,8 @@ lightbox: true
 This tutorial will teach you the basic of **stream processing with Spark**. As soon as an application compute something with business value  (for instance customer activity), and new inputs arrive continuously, companies will want to compute this result continuously too. Spark makes possible to process stream with the **Structured Streaming API**. This lab will teach you the basics of this Spark's API. Because the Structured Streaming API is based on the DataFrame API most syntaxes of tutorial 1 are still relevant.
 
 
-## Notebook configuration
 
-Just run the following cell
-
-```{python}
-import os
-from pyspark.sql import SparkSession
-
-spark = (SparkSession 
-         .builder
-         # default url of the internally accessed Kubernetes API
-         # (This Jupyter notebook service is itself a Kubernetes Pod)
-         .master("k8s://https://kubernetes.default.svc:443")
-         # Executors spark docker image: for simplicity reasons, this jupyter notebook is reused 
-         .config("spark.kubernetes.container.image", os.environ['IMAGE_NAME'])
-         # Name of the Kubernetes namespace
-         .config("spark.kubernetes.namespace", os.environ['KUBERNETES_NAMESPACE'])
-         # Allocated memory to the JVM
-         # Stay careful, by default, the Kubernetes pods has a higher limit which depends on other parameters.
-         .config("spark.executor.memory", "4g")
-         .config("spark.kubernetes.driver.pod.name", os.environ['KUBERNETES_POD_NAME'])
-         # dynamic allocation configuration
-         .config("spark.dynamicAllocation.enabled","true")
-         .config("spark.dynamicAllocation.initialExecutors","1")
-         .config("spark.dynamicAllocation.minExecutors","1")
-         .config("spark.dynamicAllocation.maxExecutors","5")
-         # Ratio match the number of pods to create for a given number of parallel tasks 
-         # (100 parallel, ratio of 1, one aims at 100 pods, with 0.5 it would be 50 pods)
-         .config("spark.dynamicAllocation.executorAllocationRatio","1")
-         .config("spark.dynamicAllocation.shuffleTracking.enabled","true")
-         .getOrCreate()
-        )
-
-# Import all the needed library
-from time import sleep
-from pyspark.sql.functions import from_json, window, col, expr, size, explode, avg, min, max
-from pyspark.sql.types import StructType,StructField, StringType, IntegerType, ArrayType, TimestampType, BooleanType, LongType, DoubleType
-```
+{{< include ../lab-create-spark-session.qmd >}}
 
 **Explanation:**
 
@@ -78,13 +42,14 @@ from pyspark.sql.types import StructType,StructField, StringType, IntegerType, A
 
   > 🤔 The shuffle dispatches data according to their key between a *map* and a *reduce* phase. For instance, if you are counting how many records have each `g` group, the *map* phase involve counting each group member in each Spark partition : `{g1:5, g2:10, g4:1, g5:3}` for one partition, `{g1:1, g2:2, g3:23, g5:12}` for another. The *shuffle* phase dispatch those first results  and group them by key in the same partition, one partition gets `{g1:5, g1:1, g2:10, g2:2}`, the other gets : `{g4:1, g5:3, g3:23, g5:12}` Then each *reduce* can be done efficiently. 
 
-- Import all needed library
 
-  ````{.python}
-  from time import sleep
-  from pyspark.sql.functions import from_json, window, col, expr
-  from pyspark.sql.types import StructType,StructField, StringType, IntegerType, ArrayType, TimestampType, BooleanType, LongType, DoubleType
-  ````
+**Import all required libraries**.
+
+```{python}
+from time import sleep
+from pyspark.sql.functions import from_json, window, col, expr, size, explode, avg, min, max
+from pyspark.sql.types import StructType,StructField, StringType, IntegerType, ArrayType, TimestampType, BooleanType, LongType, DoubleType
+```
 
 
 ## Stream processing 
@@ -105,7 +70,9 @@ Unfortunately, stream processing has some issues. First because there is no end 
 
 Stream processing was gradually incorporated in Spark. In 2012 Spark Streaming and it's DStreams API  was added to Spark (it was before an external project). This made it possible use high-level operator like `map` and `reduce` to process stream of data. Because of its implementation, this API has some limitations, and its syntax was different from the DataFrame one. Thus, in 2016 a new API was added, the Structured Streaming API. This API is directly build built on DataFrame, unlike DStreams. **This has an advantage, you can process your stream like static data**. Of course there are some limitations, but the core syntaxes is the same. You will chain transformations, because each transformation takes a DataFrame as input and produces a DataFrame as output. The big change is there is no action at the end, but an **[output sink](#2.2 How to output a stream ?)**.
 
+:::white-box
 ![data stream](https://databricks.com/wp-content/uploads/2016/07/image01-1.png)
+:::
 
 *Figure 1 : data stream representation (source [structured streaming programming guide](https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html#basic-concepts))*
 
@@ -229,7 +196,7 @@ Like in lab 1, you will use tweets in this lab. The tweets are stored in jsonl f
 }
 ```
 
-- [ ] Define a variable with this schema (you will find a file *schema pyspark tweet* on moodle with the schema to copy /aste)
+- [ ] Define a variable with this schema (you will find a file *schema pyspark tweet* on moodle with the schema to copy / paste)
 
   ```{.python}
   from pyspark.sql.types import StructType,StructField, StringType, IntegerType, ArrayType, TimestampType, BooleanType, LongType, DoubleType
@@ -297,7 +264,7 @@ Like in lab 1, you will use tweets in this lab. The tweets are stored in jsonl f
   			StructField("verified", BooleanType(), True)
   		]),True),True)
   	]),True)
-    ])
+  ])
   ```
 
 ```{python}
@@ -305,9 +272,11 @@ Like in lab 1, you will use tweets in this lab. The tweets are stored in jsonl f
 
 ```
 
-- [ ] Create a stream to this s3 bucket : `s3a:/s3a://remipepin/diffusion/ensai/stream_twee/remipepin/diffusion/ensai/stream_tweet`. 
-  - Name it `tweet_stream`. 
-  - Use the option `option("maxFilePerTrigger", "1")` to process each new files one by one.
+- [ ] Create a stream to this s3 bucket : 
+  - `s3a://remipepin/diffusion/ensai/stream_tweet` for SSPCloud
+  - `s3://spark-lab-input-data-ensai20222023/stream_tweet/` for AWS
+  - Name it `tweet_stream`
+  - Use the option `option("maxFilePerTrigger", "1")` to process each new files one by one
 
 > 🤔 Nothing happen ? It's normal ! Do not forget, Spark use lazy evaluation. It doesn't use data if you don't define an action. For now Spark only know how to get the stream, that's all.
 
@@ -472,7 +441,7 @@ memory_sink = df\
 
 - After 30 seconds, 10 tables will appeared in your notebook. Each table represents the contain of `lang_count` at a certain time. The `.stop()` method close the stream. 
 
-  In the rest of this tutorial, to will need two steps to print data :
+  In the rest of this tutorial, you will need two steps to print data :
 
   1. Define a stream query with a memory sink
   2. Request this stream with the `spark.sql()` function
