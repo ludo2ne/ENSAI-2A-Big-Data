@@ -18,12 +18,20 @@ We strongly recommend using the Google Chrome browser!
 
 ## Chrome Setup
 
+::: {.callout-caution}
+Only the first lab
+:::
+
 - [ ] Open Chrome
 - [ ] In the top right, click on the 3 dots, then select Settings.
 - [ ] Click on Privacy and security, then Site settings, then Pop-ups and redirects.
 - [ ] Websites can show pop-ups and use redirects
 
 ## Run the AWS Learner Lab
+
+::: {.callout-caution}
+To be done for each lab
+:::
 
 - Log in [AWS academy](https://awsacademy.instructure.com/login/canvas)
   - use your ENSAI mail
@@ -39,8 +47,8 @@ Now, you enter the lab.
 
 ## Create a Studio
 
-::: {.callout-important}
-Only the first time
+::: {.callout-caution}
+Only the first lab
 :::
 
 - In the search bar, search for the EMR service
@@ -56,8 +64,8 @@ Only the first time
 
 ## Create a Cluster
 
-::: {.callout-important}
-Only the first time
+::: {.callout-caution}
+Only the first lab
 :::
 
 - Click on `Clusters`, then `Create cluster`
@@ -79,7 +87,7 @@ Go back to EMR > Cluster and wait until the cluster status is *Waiting* (refresh
 ### Clone the Cluster
 
 ::: {.callout-important}
-Starting from the second time.
+Starting from the second lab
 :::
 
 - Go to *EMR service* and then *Clusters*
@@ -88,6 +96,10 @@ Starting from the second time.
 
 
 ## Associate the cluster with a workspace
+
+::: {.callout-caution}
+To be done for each lab
+:::
 
 - Click on `Workspaces (Notebooks)`
 - Select the workspace
