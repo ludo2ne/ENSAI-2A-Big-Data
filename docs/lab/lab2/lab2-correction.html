@@ -184,7 +184,7 @@ window.Quarto = {
  <span class="dropdown-text">Lab 2</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../docs/lab/lab3/lab3-SSPCloud.html">
+    <a class="dropdown-item" href="../../../docs/lab/lab3/lab3.html">
  <span class="dropdown-text">Lab 3</span></a>
   </li>  
     </ul>
@@ -245,15 +245,15 @@ window.Quarto = {
   <ul>
   <li><a href="#before-you-start" id="toc-before-you-start" class="nav-link active" data-scroll-target="#before-you-start">Before you start</a></li>
   <li><a href="#outline" id="toc-outline" class="nav-link" data-scroll-target="#outline">Outline</a></li>
-  <li><a href="#how-to-distribute-elementary-statistical-tasks" id="toc-how-to-distribute-elementary-statistical-tasks" class="nav-link" data-scroll-target="#how-to-distribute-elementary-statistical-tasks"><span class="header-section-number">1</span> How to distribute elementary statistical tasks?</a>
+  <li><a href="#create-a-spark-session" id="toc-create-a-spark-session" class="nav-link" data-scroll-target="#create-a-spark-session"><span class="header-section-number">1</span> Create a Spark session</a>
   <ul class="collapse">
-  <li><a href="#hands-on-1" id="toc-hands-on-1" class="nav-link" data-scroll-target="#hands-on-1"><span class="header-section-number">1.1</span> ✍ Hands-on 1</a></li>
+  <li><a href="#only-on-sspcloud" id="toc-only-on-sspcloud" class="nav-link" data-scroll-target="#only-on-sspcloud"><span class="header-section-number">1.1</span> Only on SSPCloud</a></li>
+  <li><a href="#only-on-aws" id="toc-only-on-aws" class="nav-link" data-scroll-target="#only-on-aws"><span class="header-section-number">1.2</span> Only on AWS</a></li>
+  <li><a href="#check-spark-session" id="toc-check-spark-session" class="nav-link" data-scroll-target="#check-spark-session"><span class="header-section-number">1.3</span> Check spark session</a></li>
   </ul></li>
-  <li><a href="#create-a-spark-session" id="toc-create-a-spark-session" class="nav-link" data-scroll-target="#create-a-spark-session"><span class="header-section-number">2</span> Create a Spark session</a>
+  <li><a href="#how-to-distribute-elementary-statistical-tasks" id="toc-how-to-distribute-elementary-statistical-tasks" class="nav-link" data-scroll-target="#how-to-distribute-elementary-statistical-tasks"><span class="header-section-number">2</span> How to distribute elementary statistical tasks?</a>
   <ul class="collapse">
-  <li><a href="#only-on-sspcloud" id="toc-only-on-sspcloud" class="nav-link" data-scroll-target="#only-on-sspcloud"><span class="header-section-number">2.1</span> Only on SSPCloud</a></li>
-  <li><a href="#only-on-aws" id="toc-only-on-aws" class="nav-link" data-scroll-target="#only-on-aws"><span class="header-section-number">2.2</span> Only on AWS</a></li>
-  <li><a href="#check-spark-session" id="toc-check-spark-session" class="nav-link" data-scroll-target="#check-spark-session"><span class="header-section-number">2.3</span> Check spark session</a></li>
+  <li><a href="#hands-on-1" id="toc-hands-on-1" class="nav-link" data-scroll-target="#hands-on-1"><span class="header-section-number">2.1</span> ✍ Hands-on 1</a></li>
   </ul></li>
   <li><a href="#application-on-airbnb-data" id="toc-application-on-airbnb-data" class="nav-link" data-scroll-target="#application-on-airbnb-data"><span class="header-section-number">3</span> Application on Airbnb Data</a>
   <ul class="collapse">
@@ -268,7 +268,11 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#hands-on-5" id="toc-hands-on-5" class="nav-link" data-scroll-target="#hands-on-5"><span class="header-section-number">5.1</span> ✍ Hands-on 5</a></li>
   </ul></li>
-  <li><a href="#end-of-the-lab" id="toc-end-of-the-lab" class="nav-link" data-scroll-target="#end-of-the-lab">End of the Lab</a></li>
+  <li><a href="#end-of-the-lab" id="toc-end-of-the-lab" class="nav-link" data-scroll-target="#end-of-the-lab">End of the Lab</a>
+  <ul class="collapse">
+  <li><a href="#sspcloud" id="toc-sspcloud" class="nav-link" data-scroll-target="#sspcloud">SSPCloud</a></li>
+  <li><a href="#aws" id="toc-aws" class="nav-link" data-scroll-target="#aws">AWS</a></li>
+  </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lab2-correction.ipynb" download="lab2-correction.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
 </nav>
@@ -326,8 +330,62 @@ window.Quarto = {
 <li><code>s3a://remipepin/diffusion/ensai/airbnb</code> on SSPCloud</li>
 </ul>
 </section>
-<section id="how-to-distribute-elementary-statistical-tasks" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="how-to-distribute-elementary-statistical-tasks"><span class="header-section-number">1</span> How to distribute elementary statistical tasks?</h2>
+<section id="create-a-spark-session" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="create-a-spark-session"><span class="header-section-number">1</span> Create a Spark session</h2>
+<ul class="task-list">
+<li><label><input type="checkbox">Depending on the <strong>chosen platform</strong>, initialize the Spark session</label></li>
+</ul>
+<section id="only-on-sspcloud" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="only-on-sspcloud"><span class="header-section-number">1.1</span> Only on SSPCloud</h3>
+<div id="2aec7760" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>spark <span class="op">=</span> (SparkSession</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>         .builder</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>         <span class="co"># default url of the internally accessed Kubernetes API</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>         <span class="co"># (This Jupyter notebook service is itself a Kubernetes Pod)</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>         .master(<span class="st">"k8s://https://kubernetes.default.svc:443"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Executors spark docker image: for simplicity reasons, this jupyter notebook is reused</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.kubernetes.container.image"</span>, os.environ[<span class="st">'IMAGE_NAME'</span>])</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Name of the Kubernetes namespace</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.kubernetes.namespace"</span>, os.environ[<span class="st">'KUBERNETES_NAMESPACE'</span>])</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Allocated memory to the JVM</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Stay careful, by default, the Kubernetes pods has a higher limit which depends on other parameters.</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.executor.memory"</span>, <span class="st">"4g"</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.kubernetes.driver.pod.name"</span>, os.environ[<span class="st">'KUBERNETES_POD_NAME'</span>])</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>         <span class="co"># dynamic allocation configuration</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.dynamicAllocation.enabled"</span>,<span class="st">"true"</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.dynamicAllocation.initialExecutors"</span>,<span class="st">"1"</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.dynamicAllocation.minExecutors"</span>,<span class="st">"1"</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.dynamicAllocation.maxExecutors"</span>,<span class="st">"60"</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Ratio match the number of pods to create for a given number of parallel tasks</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>         <span class="co"># (100 parallel, ratio of 1, one aims at 100 pods, with 0.5 it would be 50 pods)</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.dynamicAllocation.executorAllocationRatio"</span>,<span class="st">"1"</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.dynamicAllocation.shuffleTracking.enabled"</span>,<span class="st">"true"</span>)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>         .getOrCreate()</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="only-on-aws" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="only-on-aws"><span class="header-section-number">1.2</span> Only on AWS</h3>
+<div id="28c6b858" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-04-30T09:07:18.788943Z&quot;,&quot;iopub.status.busy&quot;:&quot;2023-04-30T09:07:18.788720Z&quot;,&quot;iopub.status.idle&quot;:&quot;2023-04-30T09:07:18.853566Z&quot;,&quot;shell.execute_reply&quot;:&quot;2023-04-30T09:07:18.853007Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2023-04-30T09:07:18.788920Z&quot;}" data-tags="[]" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Spark session</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>spark</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Configuraion</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>spark._jsc.hadoopConfiguration().<span class="bu">set</span>(<span class="st">"fs.s3.useRequesterPaysHeader"</span>,<span class="st">"true"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="check-spark-session" class="level3" data-number="1.3">
+<h3 data-number="1.3" class="anchored" data-anchor-id="check-spark-session"><span class="header-section-number">1.3</span> Check spark session</h3>
+<div id="63d53b4a" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>spark</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="how-to-distribute-elementary-statistical-tasks" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="how-to-distribute-elementary-statistical-tasks"><span class="header-section-number">2</span> How to distribute elementary statistical tasks?</h2>
 <p><strong>The map and reduce principle</strong></p>
 <p>When your data is distributed, i.e is spread out across multiple hard disks / memories on different logical or physical machines, it is clearly not possible to load everything in memory to perform some computation. (No computer from the cluster would have enough storage space / memory space to load the full data set, and the exchange of information <em>between</em> the nodes of the cluster would take considerable amounts of time.) What can you do then?</p>
 <p>A surprisingly satisfying situation is when your algorithm can be expressed in a <strong>map-and-reduce model</strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. A <strong>map</strong> step, in computer science, is the equivalent a function in mathematics: from a given entry, return an output. Examples include counting the number of occurrences of a word in a text, squaring some number, subtracting some number, etc. A <strong>reduce</strong> step takes two inputs and produces one input, and can be called recursively onto its own outputs, progressively yielding the final result through a pyramid of <strong>accumulators</strong> (see diagram here under). Popular reduce functions include (pairwise) concatenation of character strings, (pairwise) product, (pairwise) minimum and (pairwise) maximum. But <strong>pairwise addition</strong> is probably the most used reduce function, with the aim goal of performing a complete addition:</p>
@@ -353,8 +411,8 @@ window.Quarto = {
 <li>Not all statistical algorithms can be expressed according to the map-and-reduce algorithm, and when they can, it may require a significant re-writing compared to the standard algorithms.</li>
 <li>There may be a trade-off between the number of passes, the speed of each map / reduce steps and the volume of data transferred between each reduce step.</li>
 </ul>
-<section id="hands-on-1" class="level3" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="hands-on-1"><span class="header-section-number">1.1</span> ✍ Hands-on 1</h3>
+<section id="hands-on-1" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="hands-on-1"><span class="header-section-number">2.1</span> ✍ Hands-on 1</h3>
 <ul>
 <li>You are given <code>errors</code>, a distributed vector of prediction errors <code>errors = [1, 2, 5, 10, 3, 4, 6, 8, 9]</code></li>
 <li><label><input type="checkbox">Write a map-and-reduce algorithm for computing the <strong>total sum of squares</strong>.</label>
@@ -363,39 +421,39 @@ window.Quarto = {
 <li>You have to import <code>reduce</code> from the <code>functools</code> module</li>
 </ul></li>
 </ul>
-<div id="cd5c2f39" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> <span class="bu">reduce</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>errors <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">9</span>]</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="bu">reduce</span>(<span class="kw">lambda</span> s1, s2: s1<span class="op">+</span>s2, <span class="bu">map</span>(<span class="kw">lambda</span> e: e<span class="op">**</span><span class="dv">2</span>, errors))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="63314836" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> <span class="bu">reduce</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>errors <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">9</span>]</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">reduce</span>(<span class="kw">lambda</span> s1, s2: s1<span class="op">+</span>s2, <span class="bu">map</span>(<span class="kw">lambda</span> e: e<span class="op">**</span><span class="dv">2</span>, errors))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Write <strong>two</strong> different map-and-reduce algorithm for computing the <strong><em>mean</em> sum of squares</strong>. <em>(One may include a final <span class="math inline">\(O(1)\)</span> step.)</em></label></li>
 </ul>
-<div id="fb7e0780" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>errors <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">9</span>]</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> weighted_mean(obj1, obj2):</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  w <span class="op">=</span> obj1[<span class="st">"w"</span>] <span class="op">+</span> obj2[<span class="st">"w"</span>]</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> ({</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>      <span class="st">"m"</span> : (obj1[<span class="st">"m"</span>] <span class="op">*</span> obj1[<span class="st">"w"</span>] <span class="op">+</span> obj2[<span class="st">"m"</span>] <span class="op">*</span> obj2[<span class="st">"w"</span>]) <span class="op">/</span> w,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>      <span class="st">"w"</span> : w</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>squared_errors <span class="op">=</span> <span class="bu">map</span>(<span class="kw">lambda</span> e: {<span class="st">"m"</span> : e<span class="op">**</span><span class="dv">2</span>, <span class="st">"w"</span> : <span class="dv">1</span>}, errors)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="bu">reduce</span>(weighted_mean, squared_errors )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="516df573" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>errors <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">9</span>]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> weighted_mean(obj1, obj2):</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  w <span class="op">=</span> obj1[<span class="st">"w"</span>] <span class="op">+</span> obj2[<span class="st">"w"</span>]</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> ({</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>      <span class="st">"m"</span> : (obj1[<span class="st">"m"</span>] <span class="op">*</span> obj1[<span class="st">"w"</span>] <span class="op">+</span> obj2[<span class="st">"m"</span>] <span class="op">*</span> obj2[<span class="st">"w"</span>]) <span class="op">/</span> w,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>      <span class="st">"w"</span> : w</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>squared_errors <span class="op">=</span> <span class="bu">map</span>(<span class="kw">lambda</span> e: {<span class="st">"m"</span> : e<span class="op">**</span><span class="dv">2</span>, <span class="st">"w"</span> : <span class="dv">1</span>}, errors)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="bu">reduce</span>(weighted_mean, squared_errors )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="84afe01b" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sum_and_n(obj1, obj2) :</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> {</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sum"</span> : obj1[<span class="st">"sum"</span>] <span class="op">+</span> obj2[<span class="st">"sum"</span>],</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"n"</span>   : obj1[<span class="st">"n"</span>] <span class="op">+</span> obj2[<span class="st">"n"</span>]</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>squared_errors <span class="op">=</span> <span class="bu">map</span>(<span class="kw">lambda</span> e: {<span class="st">"sum"</span> : e<span class="op">**</span><span class="dv">2</span>, <span class="st">"n"</span> : <span class="dv">1</span>}, errors)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>total_sum_and_n <span class="op">=</span> <span class="bu">reduce</span>(sum_and_n, squared_errors)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>total_sum_and_n[<span class="st">"sum"</span>] <span class="op">/</span> total_sum_and_n[<span class="st">"n"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="a7d0098a" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sum_and_n(obj1, obj2) :</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> {</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sum"</span> : obj1[<span class="st">"sum"</span>] <span class="op">+</span> obj2[<span class="st">"sum"</span>],</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"n"</span>   : obj1[<span class="st">"n"</span>] <span class="op">+</span> obj2[<span class="st">"n"</span>]</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>squared_errors <span class="op">=</span> <span class="bu">map</span>(<span class="kw">lambda</span> e: {<span class="st">"sum"</span> : e<span class="op">**</span><span class="dv">2</span>, <span class="st">"n"</span> : <span class="dv">1</span>}, errors)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>total_sum_and_n <span class="op">=</span> <span class="bu">reduce</span>(sum_and_n, squared_errors)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>total_sum_and_n[<span class="st">"sum"</span>] <span class="op">/</span> total_sum_and_n[<span class="st">"n"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Is the median easy to write as a map-and-reduce algorithm? Why?</label></li>
@@ -414,63 +472,9 @@ final_step : s2/n-s1^2/n</code></pre>
 <p>When you compute the variance, the means is computed “for free”</p>
 </section>
 </section>
-<section id="create-a-spark-session" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="create-a-spark-session"><span class="header-section-number">2</span> Create a Spark session</h2>
-<ul class="task-list">
-<li><label><input type="checkbox">Depending on the <strong>chosen platform</strong>, initialize the Spark session</label></li>
-</ul>
-<section id="only-on-sspcloud" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="only-on-sspcloud"><span class="header-section-number">2.1</span> Only on SSPCloud</h3>
-<div id="a703e250" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>spark <span class="op">=</span> (SparkSession</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>         .builder</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>         <span class="co"># default url of the internally accessed Kubernetes API</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>         <span class="co"># (This Jupyter notebook service is itself a Kubernetes Pod)</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>         .master(<span class="st">"k8s://https://kubernetes.default.svc:443"</span>)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Executors spark docker image: for simplicity reasons, this jupyter notebook is reused</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.kubernetes.container.image"</span>, os.environ[<span class="st">'IMAGE_NAME'</span>])</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Name of the Kubernetes namespace</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.kubernetes.namespace"</span>, os.environ[<span class="st">'KUBERNETES_NAMESPACE'</span>])</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Allocated memory to the JVM</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Stay careful, by default, the Kubernetes pods has a higher limit which depends on other parameters.</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.executor.memory"</span>, <span class="st">"4g"</span>)</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.kubernetes.driver.pod.name"</span>, os.environ[<span class="st">'KUBERNETES_POD_NAME'</span>])</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>         <span class="co"># dynamic allocation configuration</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.dynamicAllocation.enabled"</span>,<span class="st">"true"</span>)</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.dynamicAllocation.initialExecutors"</span>,<span class="st">"1"</span>)</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.dynamicAllocation.minExecutors"</span>,<span class="st">"1"</span>)</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.dynamicAllocation.maxExecutors"</span>,<span class="st">"60"</span>)</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Ratio match the number of pods to create for a given number of parallel tasks</span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>         <span class="co"># (100 parallel, ratio of 1, one aims at 100 pods, with 0.5 it would be 50 pods)</span></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.dynamicAllocation.executorAllocationRatio"</span>,<span class="st">"1"</span>)</span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>         .config(<span class="st">"spark.dynamicAllocation.shuffleTracking.enabled"</span>,<span class="st">"true"</span>)</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>         .getOrCreate()</span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="only-on-aws" class="level3" data-number="2.2">
-<h3 data-number="2.2" class="anchored" data-anchor-id="only-on-aws"><span class="header-section-number">2.2</span> Only on AWS</h3>
-<div id="eb2cb98a" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-04-30T09:07:18.788943Z&quot;,&quot;iopub.status.busy&quot;:&quot;2023-04-30T09:07:18.788720Z&quot;,&quot;iopub.status.idle&quot;:&quot;2023-04-30T09:07:18.853566Z&quot;,&quot;shell.execute_reply&quot;:&quot;2023-04-30T09:07:18.853007Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2023-04-30T09:07:18.788920Z&quot;}" data-tags="[]" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Spark session</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>spark</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Configuraion</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>spark._jsc.hadoopConfiguration().<span class="bu">set</span>(<span class="st">"fs.s3.useRequesterPaysHeader"</span>,<span class="st">"true"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="check-spark-session" class="level3" data-number="2.3">
-<h3 data-number="2.3" class="anchored" data-anchor-id="check-spark-session"><span class="header-section-number">2.3</span> Check spark session</h3>
-<div id="101e1b6b" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>spark</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-</section>
 <section id="application-on-airbnb-data" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="application-on-airbnb-data"><span class="header-section-number">3</span> Application on Airbnb Data</h2>
-<div id="7bc8f37e" class="cell" data-tags="[]" data-execution_count="7">
+<div id="c63a3283" class="cell" data-tags="[]" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.types <span class="im">import</span> FloatType, IntegerType, DateType</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> regexp_replace, col</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -495,7 +499,7 @@ final_step : s2/n-s1^2/n</code></pre>
 <ul class="task-list">
 <li><label><input type="checkbox">How many lines do the raw and the formatted datasets have?</label></li>
 </ul>
-<div id="abc1a4be" class="cell" data-execution_count="8">
+<div id="8c978896" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Observations before cleaning: </span><span class="sc">{</span>listings_raw<span class="sc">.</span>count()<span class="sc">}</span><span class="ss"> rows"</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Observations  after cleaning:  </span><span class="sc">{</span>listings<span class="sc">.</span>count()<span class="sc">}</span><span class="ss"> rows)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -505,7 +509,7 @@ final_step : s2/n-s1^2/n</code></pre>
 <li><label><input type="checkbox">Can you list all the available columns?</label></li>
 </ul></li>
 </ul>
-<div id="8a016378" class="cell" data-execution_count="9">
+<div id="eb5d2760" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"There are"</span>, <span class="bu">len</span>(listings_raw.columns), <span class="st">"columns:"</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>.join( [<span class="st">"- "</span><span class="op">+</span>column <span class="cf">for</span> column <span class="kw">in</span> listings_raw.columns] ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -562,13 +566,13 @@ final_step : s2/n-s1^2/n</code></pre>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># the thing you want to measure</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Time:"</span>, t()<span class="op">-</span>start)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
-<div id="d03a22eb" class="cell" data-tags="[]" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="10">
+<div id="c54ca530" class="cell" data-tags="[]" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> timeit <span class="im">import</span> default_timer <span class="im">as</span> t</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> t()</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>listings.summary(<span class="st">"count"</span>, <span class="st">"min"</span>, <span class="st">"max"</span>).show()</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="st">"Execution time for sumary(</span><span class="ch">\"</span><span class="st">count</span><span class="ch">\"</span><span class="st">...):"</span>, t()<span class="op">-</span>start, <span class="st">"s"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="2fa7b2f8" class="cell" data-execution_count="11">
+<div id="61a335e6" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> t()</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>listings.summary().show()</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="st">"Execution time for sumary():"</span>, t()<span class="op">-</span>start, <span class="st">"s"</span>)</span>
@@ -589,7 +593,7 @@ final_step : s2/n-s1^2/n</code></pre>
 </ol></li>
 </ul></li>
 </ul>
-<div id="1b6b3e6f" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="12">
+<div id="2ffb081e" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Spark SQL</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> mean</span>
@@ -600,7 +604,7 @@ final_step : s2/n-s1^2/n</code></pre>
 <span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="st">"Execution time:"</span>, t()<span class="op">-</span>start, <span class="st">"s"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="5354b41a" class="cell" data-execution_count="13">
+<div id="c24756b8" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># summary()</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> t()</span>
@@ -611,7 +615,7 @@ final_step : s2/n-s1^2/n</code></pre>
 <span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  .show()</span>
 <span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="st">"Execution time:"</span>, t()<span class="op">-</span>start, <span class="st">"s"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="09d37dd8" class="cell" data-execution_count="14">
+<div id="6f8a121c" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sumarizer</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml.feature <span class="im">import</span> VectorAssembler</span>
@@ -630,10 +634,10 @@ final_step : s2/n-s1^2/n</code></pre>
 <span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>  .show(truncate<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="st">"Execution time:"</span>, t()<span class="op">-</span>start, <span class="st">"s"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="8e32579d" class="cell" data-execution_count="15">
+<div id="07b1527d" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install pandas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="fea8be48" class="cell" data-execution_count="16">
+<div id="187a0e14" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># locally after you collected the bed columns</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> t()</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> listings<span class="op">\</span></span>
@@ -649,7 +653,7 @@ final_step : s2/n-s1^2/n</code></pre>
 <ul class="task-list">
 <li><label><input type="checkbox">Compute the mean price on the data set as a predictor for an AirBnB listing’s price and the total sum of squares. (We will elaborate in the next section.)</label></li>
 </ul>
-<div id="8ae88819" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="17">
+<div id="a9bf1018" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> mean</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>price_mean <span class="op">=</span> listings.select(mean(<span class="st">"price"</span>))        <span class="co"># this is a (remote) data frame</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>price_mean <span class="op">=</span> price_mean.first()                    <span class="co"># this is a (local) row</span></span>
@@ -724,7 +728,7 @@ final_step : s2/n-s1^2/n</code></pre>
 <ul class="task-list">
 <li><label><input type="checkbox">Interpret the results of the general regression.</label></li>
 </ul>
-<div id="e8322e17" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="18">
+<div id="7a7ae01b" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml.feature <span class="im">import</span> VectorAssembler</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml.regression <span class="im">import</span> LinearRegression</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -739,7 +743,7 @@ final_step : s2/n-s1^2/n</code></pre>
 <span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>regressor <span class="op">=</span> LinearRegression(featuresCol<span class="op">=</span><span class="st">"features"</span>, labelCol<span class="op">=</span><span class="st">"price"</span>)</span>
 <span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>model     <span class="op">=</span> regressor.fit(listings_vec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="02f36b13" class="cell" data-execution_count="19">
+<div id="4a862389" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Coefficients : </span><span class="sc">{</span>model<span class="sc">.</span>coefficients<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"intercept : </span><span class="sc">{</span>model<span class="sc">.</span>intercept<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -749,10 +753,10 @@ final_step : s2/n-s1^2/n</code></pre>
 <li>Models have a <code>summary</code> property, that you can explore with <code>dir(model.summary)</code>.</li>
 </ul></li>
 </ul>
-<div id="044bd397" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="20">
+<div id="32ddc3c8" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="bu">dir</span>(model.summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="185bef85" class="cell" data-execution_count="21">
+<div id="f9e510f2" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>model.summary.r2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
@@ -761,13 +765,13 @@ final_step : s2/n-s1^2/n</code></pre>
 <li><label><input type="checkbox">Are the coefficients stable? <em>You will build a pipeline object.</em></label></li>
 </ul></li>
 </ul>
-<div id="30a84026" class="cell" data-execution_count="22">
+<div id="6bf0f715" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>listings<span class="op">\</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  .select(<span class="st">"city"</span>)<span class="op">\</span></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  .distinct()<span class="op">\</span></span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  .show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="3f92de15" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="23">
+<div id="45899b57" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml.feature <span class="im">import</span> VectorAssembler</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml.regression <span class="im">import</span> LinearRegression</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml <span class="im">import</span> Pipeline</span>
@@ -796,7 +800,7 @@ final_step : s2/n-s1^2/n</code></pre>
 <li><label><input type="checkbox">Check the execution plan with the <code>explain()</code> method for lazy evaluations.</label></li>
 </ul></li>
 </ul>
-<div id="616d5bb4" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="24">
+<div id="641007fc" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fit() is eager ; transform() is lazy</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -813,25 +817,25 @@ final_step : s2/n-s1^2/n</code></pre>
 <ul class="task-list">
 <li><label><input type="checkbox">Add a categorical variable to the regression.</label></li>
 </ul>
-<div id="81bc2be0" class="cell" data-execution_count="25">
+<div id="7766a7b9" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Compute the p-values of your model as well as confidence intervals for the predictions.</label></li>
 </ul>
-<div id="30ee09cb" class="cell" data-execution_count="26">
+<div id="10826534" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Time the regression in different settings and report the results on <a href="https://docs.google.com/spreadsheets/d/1KSCLMgiepoKKiDdRrwlQv_0XYn5ptzXRB7TP-TRXCAw/edit?usp=sharing">this shared spreadsheet</a>. How does it scale with the number of listings (<span class="math inline">\(n\)</span>) ? the number of regressors (<span class="math inline">\(p\)</span>) ? the number of nodes in your cluster (<span class="math inline">\(k\)</span>) ? <em>You will only try a couple of configurations that have not been tested by others. Remember that you can order and revoke nodes from your cluster at any time from the AWS’s cluster view, in the hardware tab, on on the CORE line, “resize”.</em></label></li>
 </ul>
-<div id="87dbc63f" class="cell" data-execution_count="27">
+<div id="40b9be9f" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Down-sample your data set to <span class="math inline">\(n=100000\)</span>, while still keeping a few variables. Save it on S3, then download it on your computer. Run the regression locally on your computer in R. In your opinion, is the extra precision (in term of <span class="math inline">\(R^2\)</span>) is worth the extra computation time?</label></li>
 </ul>
-<div id="c9144adf" class="cell" data-execution_count="28">
+<div id="b3343ba4" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -841,16 +845,31 @@ final_step : s2/n-s1^2/n</code></pre>
 <ul class="task-list">
 <li><label><input type="checkbox">Export your notebook</label>
 <ul>
-<li>Right clic and Download (.ipynb)</li>
+<li>Right click and Download (.ipynb)</li>
 <li>File &gt; Save and Export Notebook &gt; HTML</li>
 </ul></li>
+</ul>
+<section id="sspcloud" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="sspcloud">SSPCloud</h3>
+<ul class="task-list">
 <li><label><input type="checkbox">Delete the Jupyter-pyspark service</label>
 <ul>
 <li><a href="https://datalab.sspcloud.fr/my-services" target="_blank">SSPCloud &gt; My services &gt; Delete</a></li>
 </ul></li>
 </ul>
+</section>
+<section id="aws" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="aws">AWS</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Terminate your cluster</label>
+<ul>
+<li>On <em>EMR</em> service page, click on <em>Clusters</em></li>
+<li>Select the active cluster and click on <code>Terminate</code></li>
+</ul></li>
+</ul>
 
 
+</section>
 </section>
 
 
@@ -1428,7 +1447,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","loop":false,"closeEffect":"zoom","descPosition":"bottom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
