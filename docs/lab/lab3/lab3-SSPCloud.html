@@ -294,7 +294,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="notebook-configuration" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="notebook-configuration"><span class="header-section-number">1</span> Notebook configuration</h2>
 <p>Just run the following cell</p>
-<div id="d3395c72" class="cell" data-execution_count="1">
+<div id="0520bfe9" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -359,7 +359,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Stream processing was gradually incorporated in Spark. In 2012 Spark Streaming and it’s DStreams API was added to Spark (it was before an external project). This made it possible use high-level operator like <code>map</code> and <code>reduce</code> to process stream of data. Because of its implementation, this API has some limitations, and its syntax was different from the DataFrame one. Thus, in 2016 a new API was added, the Structured Streaming API. This API is directly build built on DataFrame, unlike DStreams. <strong>This has an advantage, you can process your stream like static data</strong>. Of course there are some limitations, but the core syntaxes is the same. You will chain transformations, because each transformation takes a DataFrame as input and produces a DataFrame as output. The big change is there is no action at the end, but an <strong><a href="#2.2%20How%20to%20output%20a%20stream%20?">output sink</a></strong>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://databricks.com/wp-content/uploads/2016/07/image01-1.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1" title="data stream"><img src="https://databricks.com/wp-content/uploads/2016/07/image01-1.png" class="img-fluid figure-img" alt="data stream"></a></p>
+<p><a href="https://databricks.com/wp-content/uploads/2016/07/image01-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="data stream"><img src="https://databricks.com/wp-content/uploads/2016/07/image01-1.png" class="img-fluid figure-img" alt="data stream"></a></p>
 <figcaption>data stream</figcaption>
 </figure>
 </div>
@@ -541,7 +541,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>  ]),<span class="va">True</span>)</span>
 <span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a>  ])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
-<div id="16076552" class="cell" data-execution_count="2">
+<div id="2587d9c6" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
@@ -554,7 +554,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <blockquote class="blockquote">
 <p>🤔 Nothing happen ? It’s normal ! Do not forget, Spark use lazy evaluation. It doesn’t use data if you don’t define an action. For now Spark only know how to get the stream, that’s all.</p>
 </blockquote>
-<div id="e7981f59" class="cell" data-execution_count="3">
+<div id="1eb1198f" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>tweet_stream <span class="op">=</span> spark<span class="op">\</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>.readStream<span class="op">\</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>.schema(schema_tweet)<span class="op">\</span></span>
@@ -567,7 +567,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>It should print the type of <code>tweet_stream</code> and the associated schema. You can see you created a DataFrame like in lab2 !</li>
 </ul></li>
 </ul>
-<div id="50862653" class="cell" data-execution_count="4">
+<div id="46b0236d" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
@@ -585,7 +585,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>).show()</span>
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>stream_size_query.stop() <span class="co">#needed to close the query</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
-<div id="38c8da83" class="cell" data-execution_count="5">
+<div id="ebcc31f3" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -694,7 +694,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Name your DataFrame <code>lang_count</code></li>
 </ul></li>
 </ul>
-<div id="469c59d1" class="cell" data-execution_count="6">
+<div id="76a0d11e" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
@@ -706,7 +706,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Name you query <code>lang_count</code></li>
 </ul></li>
 </ul>
-<div id="4bb8f2a1" class="cell" data-execution_count="7">
+<div id="90faa13c" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
@@ -717,7 +717,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT * FROM lang_count"""</span>).show()</span>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>lang_query.stop() <span class="co">#needed to close the stream</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
-<div id="5dd6d691" class="cell" data-execution_count="8">
+<div id="2e8775a9" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
@@ -751,19 +751,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>You can count the size of <code>data.entities.hashtags</code> to check if it’s empty or not.</li>
 </ul></li>
 </ul>
-<div id="9f1f7b08" class="cell" data-execution_count="9">
+<div id="4d2b7e8b" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Group and count by the <code>has_hashtag</code> column</label></li>
 </ul>
-<div id="cd44f18e" class="cell" data-execution_count="10">
+<div id="5433bf42" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Print some results</label></li>
 </ul>
-<div id="40e264b0" class="cell" data-execution_count="11">
+<div id="e1dc4a8a" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -799,7 +799,7 @@ pyspark.sql.utils.IllegalArgumentException: 'Cannot start query with name has_ha
 </ul></li>
 </ul>
 <p>You will notice no record are dropped.</p>
-<div id="df1ed185" class="cell" data-execution_count="12">
+<div id="53ee7ec7" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
@@ -809,7 +809,7 @@ pyspark.sql.utils.IllegalArgumentException: 'Cannot start query with name has_ha
 <li><code>data.entities.hashtags</code> is an array too ! To group by tag (the hashtag content) you will need to explode it too.</li>
 </ul></li>
 </ul>
-<div id="e6b2fc11" class="cell" data-execution_count="13">
+<div id="2f21d42e" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
@@ -825,7 +825,7 @@ pyspark.sql.utils.IllegalArgumentException: 'Cannot start query with name has_ha
 <li>Only keep <code>data.text</code>, <code>data.lang</code>, <code>data.public_metrics</code> and <code>data.created_at</code></li>
 </ul></li>
 </ul>
-<div id="964b9ac0" class="cell" data-execution_count="14">
+<div id="137ea726" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -834,7 +834,7 @@ pyspark.sql.utils.IllegalArgumentException: 'Cannot start query with name has_ha
 <ul class="task-list">
 <li><label><input type="checkbox">Count the number of different hashtag.</label></li>
 </ul>
-<div id="66ea5462" class="cell" data-execution_count="15">
+<div id="bd7cfce7" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
@@ -843,7 +843,7 @@ pyspark.sql.utils.IllegalArgumentException: 'Cannot start query with name has_ha
 <li>Use the <code>groupBy()</code> and <code>agg()</code> transformations</li>
 </ul></li>
 </ul>
-<div id="480162d4" class="cell" data-execution_count="16">
+<div id="99b85052" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
@@ -919,7 +919,7 @@ pyspark.sql.utils.IllegalArgumentException: 'Cannot start query with name has_ha
 </table>
 <p>A <code>null</code> value mean this dimension wasn’t use for this row. For instance, the first row gives the averages when <code>hashtag==cat</code> independently of the <code>lang</code>. The before last row gives averages when <code>lang==en</code> independently of the <code>hashtag</code>. And the last row gives the averages for the full DataFrame.</p></li>
 </ul>
-<div id="3f53f859" class="cell" data-execution_count="17">
+<div id="d9dad0b4" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -961,19 +961,19 @@ pyspark.sql.utils.IllegalArgumentException: 'Cannot start query with name has_ha
 <ul class="task-list">
 <li><label><input type="checkbox">Count the number of event with a 10 seconds time window (use the <code>created_at</code> column)</label></li>
 </ul>
-<div id="994d4ead" class="cell" data-execution_count="18">
+<div id="3d93a4a5" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Count the number of event by verified / unverified user with a 10 seconds time window (use the <code>Creation_Time</code> column)</label></li>
 </ul>
-<div id="abacd062" class="cell" data-execution_count="19">
+<div id="931b1687" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Count the number of event with a 10 seconds time window sliding every 5 seconds</label></li>
 </ul>
-<div id="881b96b6" class="cell" data-execution_count="20">
+<div id="2e4354e9" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -1004,19 +1004,19 @@ pyspark.sql.utils.IllegalArgumentException: 'Cannot start query with name has_ha
 <ul class="task-list">
 <li><label><input type="checkbox">Count the number of event with a 10 seconds time window (use the <code>created_at</code> column) with a 5 seconds watermark</label></li>
 </ul>
-<div id="4df28231" class="cell" data-execution_count="21">
+<div id="5b055336" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Count the number of event by hashtag with a 30 seconds time window with a 1 minute watermark</label></li>
 </ul>
-<div id="56506c44" class="cell" data-execution_count="22">
+<div id="b1df13d6" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Count the number of events post by verified user with a 10 seconds time window sliding every 5 seconds with 25 seconds watermark. Write the the result in a file sorted in S3.</label></li>
 </ul>
-<div id="d3300adc" class="cell" data-execution_count="23">
+<div id="c37e4d98" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -1620,7 +1620,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","loop":false});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox","closeEffect":"zoom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
