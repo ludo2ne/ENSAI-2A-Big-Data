@@ -39,6 +39,10 @@ Now, you enter the lab.
 
 ## Create a Studio
 
+::: {.callout-important}
+Only the first time
+:::
+
 - In the search bar, search for the EMR service
 - Click on `Studios`, then *Create Studio*
 - Setup options :arrow_right: select *Custom*
@@ -51,6 +55,10 @@ Now, you enter the lab.
 
 
 ## Create a Cluster
+
+::: {.callout-important}
+Only the first time
+:::
 
 - Click on `Clusters`, then `Create cluster`
 - Go to the *Cluster Configuration* section
@@ -68,6 +76,16 @@ The cluster creation takes some time (10 min).
 
 Go back to EMR > Cluster and wait until the cluster status is *Waiting* (refresh :arrows_counterclockwise:)
 
+### Clone the Cluster
+
+::: {.callout-important}
+Starting from the second time.
+:::
+
+- Go to *EMR service* and then *Clusters*
+- Select the old cluster and clone it
+- The cluster creation takes some time (10 min)
+
 
 ## Associate the cluster with a workspace
 
@@ -76,7 +94,7 @@ Go back to EMR > Cluster and wait until the cluster status is *Waiting* (refresh
   - click on Actions > Stop
   - Refresh until the status turn to *Idle*
 - Select the workspace, then click on `Attach cluster`
-  - Check *Launch in Jupyter`
+  - Check *Launch in Jupyter*
   - EMR cluster : your cluster
   - Attach cluster and launch
 
