@@ -1032,11 +1032,11 @@ for _ in range(10):
 sliding_windows_tweet_count_query.stop()
 ```
 
-- [ ] Count the number of events post by verified user with a 10 seconds time window sliding every 5 seconds with 25 seconds watermark. Write the the result in a file sorted in S3.
+- [ ] Count the number of events post by verified user with a 10 seconds time window sliding every 5 seconds with 25 seconds watermark.
 
 ```{python}
 # Code Here
-sliding_windows_tweet_count = tweet_stream\
+sliding_windows_tweet_count2 = tweet_stream\
   .withColumn("verified", explode("includes.users.verified"))\
   .withColumn("timestamp", col("data.created_at"))\
   .withWatermark("timestamp", "25 seconds")\
@@ -1044,15 +1044,22 @@ sliding_windows_tweet_count = tweet_stream\
   .groupBy(window("timestamp", "10 seconds", "5 seconds"),"includes.users.username")\
   .count()
 
-sliding_windows_tweet_count_query = sliding_windows_tweet_count\
+sliding_windows_tweet_count_query2 = sliding_windows_tweet_count\
   .writeStream\
-  .queryName("sliding_windows_tweet_count")\
+  .queryName("sliding_windows_tweet_count2")\
   .format('json')\
-  .option("checkpointLocation", "s3a://rp-lab3-ensai-20202021/history") \
-  .option("path", "s3a://rp-lab3-ensai-20202021/")\
+  .format('memory')\
+  .outputMode("complete")\
   .start()
 
-sliding_windows_tweet_count_query.stop()
+for _ in range(10):
+    spark.sql("""
+    SELECT * 
+      FROM sliding_windows_tweet_count2 
+     ORDER BY window """).show(truncate=False)
+    sleep(5)
+
+sliding_windows_tweet_count_query2.stop()
 ```
 
 ## For more details

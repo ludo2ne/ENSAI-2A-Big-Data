@@ -9,6 +9,14 @@ execute:
 
 ### Only on SSPCloud
 
+
+See default configuration on the datalab :
+```{python}
+! cat /opt/spark/conf/spark-defaults.conf
+```
+
+To modify the config :
+
 ```{python}
 import os
 from pyspark.sql import SparkSession
@@ -33,6 +41,11 @@ spark = (SparkSession
          .config("spark.dynamicAllocation.maxExecutors","5")
          .getOrCreate()
         )
+```
+
+```{python}
+# See the current number of executors (one for now)
+!kubectl get pods -l spark-role=executor
 ```
 
 

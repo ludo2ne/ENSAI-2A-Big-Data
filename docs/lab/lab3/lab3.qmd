@@ -714,7 +714,7 @@ Be careful, the watermark field cannot be a nested field ([link](https://www.wai
 
 ```
 
-- [ ] Count the number of events post by verified user with a 10 seconds time window sliding every 5 seconds with 25 seconds watermark. Write the the result in a file sorted in S3.
+- [ ] Count the number of events post by verified user with a 10 seconds time window sliding every 5 seconds with 25 seconds watermark.
 
 ```{python}
 # Code Here
