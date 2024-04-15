@@ -229,6 +229,7 @@ window.Quarto = {
   <li><a href="#a-shell-in-your-web-browser" id="toc-a-shell-in-your-web-browser" class="nav-link" data-scroll-target="#a-shell-in-your-web-browser"><span class="header-section-number">8.4</span> A shell in your web browser</a></li>
   </ul></li>
   <li><a href="#shut-down-your-machine" id="toc-shut-down-your-machine" class="nav-link" data-scroll-target="#shut-down-your-machine">Shut down your machine</a></li>
+  <li><a href="#prepare-next-lab" id="toc-prepare-next-lab" class="nav-link" data-scroll-target="#prepare-next-lab">Prepare next Lab</a></li>
   </ul>
 </nav>
 </nav>
@@ -546,6 +547,10 @@ download: s3://remi-pepin-21032022/fichier TP.zip to ./fichier TP.zip</code></pr
 <p>Because your EC2 instance is billed by time and not usage, once your work is done, shut down it. Although the cost is small, a small cost*24*7 for 1 week or running instance can cost 10$. And for bigger machine in a company maybe 100$ or 1000$.</p>
 <p>To shut down your machine : - [ ] go to <code>EC2 &gt; Instances</code> and find all running instances - [ ] Click on <code>état de instance</code> - [ ] then on <code>resilier l'instance</code></p>
 <p><a href="img/ec2_end.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="img/ec2_end.png" class="img-fluid"></a></p>
+</section>
+<section id="prepare-next-lab" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="prepare-next-lab">Prepare next Lab</h2>
+<p>If you plan to continue on AWS (recommended for engineers), follow <a href="../../../docs/lab/aws-cluster-spark.html">these instructions</a> to prepare for the next lab.</p>
 
 
 </section>
@@ -1118,7 +1123,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":false,"openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom","selector":".lightbox"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom","loop":false});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
