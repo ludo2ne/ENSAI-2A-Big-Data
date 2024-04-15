@@ -21,7 +21,7 @@ lightbox: true
 
 ## Before you start {.unnumbered}
 
-- [ ] Download this [Jupyter Notebook](lab3.ipynb){target="_blank"}
+- [ ] Download this [Jupyter Notebook](lab3-correction.ipynb){target="_blank"}
 - [ ] Follow these [instructions](../lab-setup.qmd){target="_blank"}
 
 
@@ -107,9 +107,9 @@ Defining an input source is like loading a DataFrame but, you have to replace `s
 
 ```{.python}
 my_first_stream = spark\
-.readStream\
-.schema(schema_tweet)\
-.json("s3://my-awesome-bucket/my-awesome-folder")
+  .readStream\
+  .schema(schema_tweet)\
+  .json("s3://my-awesome-bucket/my-awesome-folder")
 ```
 
 The major difference with lab2, it is Spark cannot infer the schema of the stream. You have to pass it to Spark. There is two ways :
@@ -121,11 +121,11 @@ For Apache Kafka, or socket , it's a slightly more complex, *(not used today, it
 
 ```{.python}
 my_first_stream = spark\
-.readStream\
-.format("kafka")
-.option("kafka.bootstrat.servers", "host1:port1, host2:port2 etc")
-.option("subscribePattern", "topic name")
-.load()
+  .readStream\
+  .format("kafka")
+  .option("kafka.bootstrat.servers", "host1:port1, host2:port2 etc")
+  .option("subscribePattern", "topic name")
+  .load()
 ```
 
 #### Why is a folder a relevant source in stream processing ? 
@@ -349,10 +349,10 @@ StructField("includes", StructType([
 
 ```{python}
 tweet_stream = spark\
-.readStream\
-.schema(schema_tweet)\
-.option("maxFilePerTrigger", "1")\
-.json("s3a://remipepin/diffusion/ensai/stream_tweet")
+  .readStream\
+  .schema(schema_tweet)\
+  .option("maxFilePerTrigger", "1")\
+  .json("s3a://remipepin/diffusion/ensai/stream_tweet")
 ```
 
 - [ ] In a cell just execute `tweet_stream`. 
@@ -374,7 +374,8 @@ tweet_stream
   for _ in range(10): # we use an _ because the variable isn't used. You can use i if you prefere
       sleep(3)
       spark.sql("""
-      	SELECT count(1) FROM stream_size
+      	SELECT count(1) 
+          FROM stream_size
       """).show()
   stream_size_query.stop() #needed to close the query
   ```
@@ -387,16 +388,18 @@ for stream in spark.streams.active:
 ```{python}
 # Code Here
 stream_size_query= tweet_stream\
-.writeStream\
-.queryName("stream_size")\
-.format("memory")\
-.start()
+  .writeStream\
+  .queryName("stream_size")\
+  .format("memory")\
+  .start()
 
 for _ in range(10): # we use an _ because the variable isn't used. You can use i if you prefere
     sleep(3)
     spark.sql("""
-    	SELECT count(1) FROM stream_size
+    	SELECT count(1) 
+        FROM stream_size
     """).show()
+
 stream_size_query.stop() #needed to close the query
 ```
 
@@ -473,11 +476,11 @@ For instance for the memory sink
 
 ```{.python}
 memory_sink = df\
-.writeStream\
-.queryName("my_awesome_name")\
-.format('memory')\
-.outputMode("complete" or "append")\
-.start() #needed to start the stream
+  .writeStream\
+  .queryName("my_awesome_name")\
+  .format('memory')\
+  .outputMode("complete" or "append")\
+  .start() #needed to start the stream
 ```
 
 ![](img/stream_processing.png)
@@ -490,13 +493,13 @@ memory_sink = df\
 #### Lang count
 
 - [ ] Compute a DataFrame that group and count data by the `lang` column. 
-  - Name your DataFrame `lang_count`
+  - Name your DataFrame `lang_count_stream`
 
 ```{python}
 # Code Here
-lang_count = tweet_stream\
-.groupBy("data.lang")\
-.count()
+lang_count_stream = tweet_stream\
+  .groupBy("data.lang")\
+  .count()
 ```
 
 - [ ] Use this DataFrame to create a output stream with the following configuration :
@@ -507,7 +510,12 @@ lang_count = tweet_stream\
 
 ```{python}
 # Code Here
-
+lang_query = lang_count_stream\
+  .writeStream\
+  .queryName("lang_count")\
+  .format('memory')\
+  .outputMode("complete")\
+  .start()
 ```
 
 - [ ] Then run this code
@@ -516,7 +524,8 @@ lang_count = tweet_stream\
 for _ in range(10): # we use an _ because the variable isn't use. You can use i if you prefere
     sleep(3)
     spark.sql("""
-    SELECT * FROM groupedby_lang""").show()
+    SELECT * 
+      FROM lang_count""").show()
 lang_query.stop() #needed to close the stream
 ```
 
@@ -559,16 +568,16 @@ lang_query.stop() #needed to close the stream
 # Code Here
 from pyspark.sql.functions import size, col
 tweet_has_hashtag = tweet_stream\
-.withColumn("has_hashtag", size(tweet_stream.data.entities.hashtags)  > 0)\
-.select(col("has_hashtag"))
+  .withColumn("has_hashtag", size(tweet_stream.data.entities.hashtags) > 0)\
+  .select(col("has_hashtag"))
 ```
 
 - [ ] Group and count by the `has_hashtag` column
 
 ```{python}
 # Code Here
-count_tweet_hashtag= tweet_has_hashtag.groupBy(col("has_hashtag"))\
-.count()
+count_tweet_hashtag = tweet_has_hashtag.groupBy(col("has_hashtag"))\
+  .count()
 ```
 
 - [ ] Print some results
@@ -576,16 +585,18 @@ count_tweet_hashtag= tweet_has_hashtag.groupBy(col("has_hashtag"))\
 ```{python}
 # Code Here
 count_tweet_hashtag_query = count_tweet_hashtag\
-.writeStream\
-.queryName("has_hashtag")\
-.format('memory')\
-.outputMode("complete")\
-.start()
+  .writeStream\
+  .queryName("has_hashtag")\
+  .format('memory')\
+  .outputMode("complete")\
+  .start()
 
 for _ in range(10):
     spark.sql("""
-    SELECT * FROM has_hashtag""").show()
+    SELECT * 
+      FROM has_hashtag""").show()
     sleep(3)
+
 count_tweet_hashtag_query.stop()
 ```
 
@@ -627,49 +638,49 @@ You will notice no record are dropped.
 
 ```{python}
 # Code Here
-filtered_stream = tweet_stream\
-.na.drop("any")
-
+filtered_stream = tweet_stream.na.drop("any")
 
 count_filtered_tweet = filtered_stream\
-.writeStream\
-.queryName("count_filtered_tweet")\
-.format('memory')\
-.outputMode("append")\
-.start()
+  .writeStream\
+  .queryName("count_filtered_tweet")\
+  .format('memory')\
+  .outputMode("append")\
+  .start()
 
 for _ in range(10):
     spark.sql("""
-    SELECT COUNT(1) FROM count_filtered_tweet""").show()
+    SELECT COUNT(1) 
+      FROM count_filtered_tweet""").show()
     sleep(3)
 
 count_filtered_tweet.stop()
 ```
 
 
-- [ ] Drop all records with unverified (`includes.users.verified == True`)user  then group the remaining  records by `hashtag`.
+- [ ] Drop all records with unverified (`includes.users.verified == True`) user then group the remaining records by `hashtag`.
   - `includes.users` is an array with only one element. You will need to extract it.
   - `data.entities.hashtags` is an array too ! To group by tag (the hashtag content) you will need to explode it too.
 
 ```{python}
 # Code Here
 filtered_stream = tweet_stream\
-.withColumn("verified", explode("includes.users.verified"))\
-.filter("verified")\
-.withColumn("hashtag", explode("data.entities.hashtags"))\
-.groupBy("hashtag.tag")\
-.count()
+  .withColumn("verified", explode("includes.users.verified"))\
+  .filter("verified")\
+  .withColumn("hashtag", explode("data.entities.hashtags"))\
+  .groupBy("hashtag.tag")\
+  .count()
 
 count_filtered_tweet = filtered_stream\
-.writeStream\
-.queryName("count_filtered_tweet")\
-.format('memory')\
-.outputMode("complete")\
-.start()
+  .writeStream\
+  .queryName("count_filtered_tweet")\
+  .format('memory')\
+  .outputMode("complete")\
+  .start()
 
 for _ in range(10):
     spark.sql("""
-    SELECT *FROM count_filtered_tweet""").show()
+    SELECT * 
+      FROM count_filtered_tweet""").show()
     sleep(3)
 
 count_filtered_tweet.stop()
@@ -686,22 +697,23 @@ count_filtered_tweet.stop()
 
 ```{python}
 # Code Here
-ukraine_related = tweet_stream\
-.withColumn("covid_related", expr("LOWER(data.text) like '%ukraine%'"))\
-.select("data.text", "data.lang", "data.public_metrics", "data.created_at")
+ukraine_related_stream = tweet_stream\
+  .withColumn("ukraine_related", expr("LOWER(data.text) LIKE '%ukraine%'"))\
+  .select("data.text", "data.lang", "data.public_metrics", "data.created_at")
 
-covid_related_query = covid_related\
-.writeStream\
-.queryName("ukraine_related_query")\
-.format('memory')\
-.start()
+ukraine_related_query = ukraine_related_stream\
+  .writeStream\
+  .queryName("ukraine_related_query")\
+  .format('memory')\
+  .start()
 
 for _ in range(10):
     spark.sql("""
-    SELECT * FROM ukraine_related_query """).show()
+    SELECT * 
+      FROM ukraine_related_query""").show()
     sleep(3)
 
-count_filtered_tweet.stop()
+ukraine_related_query.stop()
 ```
 
 ### ✍Hand-on 4 : Aggregation and grouping on stream
@@ -711,18 +723,21 @@ count_filtered_tweet.stop()
 ```{python}
 # Code Here
 from pyspark.sql.functions import explode
-count_hashtags = tweet_stream\
-.withColumn("hashtag", explode("data.entities.hashtags.tag"))\
-.select("hashtag")
 
-count_hashtags_query = count_hashtags.writeStream\
-.queryName("count_hashtag")\
-.format('memory')\
-.start()
+count_hashtags = tweet_stream\
+  .withColumn("hashtag", explode("data.entities.hashtags.tag"))\
+  .select("hashtag")
+
+count_hashtags_query = count_hashtags\
+  .writeStream\
+  .queryName("count_hashtag")\
+  .format('memory')\
+  .start()
 
 for _ in range(10):
     spark.sql("""
-    SELECT COUNT(DISTINCT(hashtag)) FROM count_hashtag""").show()
+    SELECT COUNT(DISTINCT(hashtag)) 
+      FROM count_hashtag""").show()
     sleep(3)
 
 count_hashtags_query.stop()
@@ -735,25 +750,26 @@ count_hashtags_query.stop()
 # Code Here
 from pyspark.sql.functions import count, min, max, avg
 
-hashtags_metrics = tweet_stream\
-.withColumn("hashtag", explode("data.entities.hashtags.tag"))\
-.groupBy(col("hashtag"))\
-.agg(
-    count("*").alias("count")
-    , min("data.public_metrics.like_count").alias("min_like")
-    , max("data.public_metrics.like_count").alias("max_like")
-    , avg("data.public_metrics.like_count").alias("avg_like")
-)
+hashtags_metrics_stream = tweet_stream\
+  .withColumn("hashtag", explode("data.entities.hashtags.tag"))\
+  .groupBy(col("hashtag"))\
+  .agg(count("*").alias("count"),
+       min("data.public_metrics.like_count").alias("min_like"),
+       max("data.public_metrics.like_count").alias("max_like"),
+       avg("data.public_metrics.like_count").alias("avg_like"))
 
-hashtags_metrics_query = hashtags_metrics.writeStream\
-.queryName("hashtags_metrics")\
-.format('memory')\
-.outputMode("complete")\
-.start()
+hashtags_metrics_query = hashtags_metrics_stream\
+  .writeStream\
+  .queryName("hashtags_metrics")\
+  .format('memory')\
+  .outputMode("complete")\
+  .start()
 
 for _ in range(10):
     spark.sql("""
-    SELECT * FROM hashtags_metrics ORDER by count DESC""").show()
+    SELECT * 
+      FROM hashtags_metrics 
+     ORDER BY count DESC""").show()
     sleep(3)
 
 hashtags_metrics_query.stop()
@@ -780,24 +796,24 @@ hashtags_metrics_query.stop()
 
 ```{python}
 # Code Here
-adhesion_metrics = tweet_stream\
+adhesion_metrics_stream = tweet_stream\
 .withColumn("hashtag", explode("data.entities.hashtags.tag"))\
 .cube(tweet_stream.data.lang, "hashtag")\
-.agg(
-    avg(tweet_stream.data.public_metrics.like_count)
-    , avg(tweet_stream.data.public_metrics.retweet_count)
-    , avg(tweet_stream.data.public_metrics.quote_count)
-)
+.agg(avg(tweet_stream.data.public_metrics.like_count),
+     avg(tweet_stream.data.public_metrics.retweet_count),
+     avg(tweet_stream.data.public_metrics.quote_count))
 
-adhesion_metrics_query = adhesion_metrics.writeStream\
-.queryName("adhesion_metric")\
-.format('memory')\
-.outputMode("complete")\
-.start()
+adhesion_metrics_query = adhesion_metrics_stream\
+  .writeStream\
+  .queryName("adhesion_metric")\
+  .format('memory')\
+  .outputMode("complete")\
+  .start()
 
 for _ in range(10):
     spark.sql("""
-    SELECT * FROM adhesion_metric """).show()
+    SELECT * 
+      FROM adhesion_metric """).show()
     sleep(3)
 
 adhesion_metrics_query.stop()
@@ -856,18 +872,21 @@ df_with_event_time.groupBy(
 from pyspark.sql.functions import window, col
 
 # word count + classic time window
-sliding_windows_tweet_count = tweet_stream.groupBy(
-    window(tweet_stream.data.created_at, "10 seconds")).count()
+sliding_windows_tweet_count = tweet_stream\
+  .groupBy(window(tweet_stream.data.created_at, "10 seconds"))\
+  .count()
 
-sliding_windows_tweet_count_query = sliding_windows_tweet_count.writeStream\
-.queryName("sliding_windows_tweet_count")\
-.format('memory')\
-.outputMode("complete")\
-.start()
+sliding_windows_tweet_count_query = sliding_windows_tweet_count\
+  .writeStream\
+  .queryName("sliding_windows_tweet_count")\
+  .format('memory')\
+  .outputMode("complete")\
+  .start()
 
 for _ in range(10):
     spark.sql("""
-    SELECT * FROM sliding_windows_tweet_count """).show()
+    SELECT * 
+      FROM sliding_windows_tweet_count """).show()
     sleep(3)
 
 sliding_windows_tweet_count_query.stop()
@@ -878,18 +897,22 @@ sliding_windows_tweet_count_query.stop()
 ```{python}
 # Code Here
 sliding_windows_tweet_count = tweet_stream\
-.withColumn("verified", explode("includes.users.verified"))\
-.groupBy(window(tweet_stream.data.created_at, "10 seconds"),"verified").count()
+  .withColumn("verified", explode("includes.users.verified"))\
+  .groupBy(window(tweet_stream.data.created_at, "10 seconds"),"verified")\
+  .count()
 
-sliding_windows_tweet_count_query = sliding_windows_tweet_count.writeStream\
-.queryName("sliding_windows_tweet_count")\
-.format('memory')\
-.outputMode("complete")\
-.start()
+sliding_windows_tweet_count_query = sliding_windows_tweet_count\
+  .writeStream\
+  .queryName("sliding_windows_tweet_count")\
+  .format('memory')\
+  .outputMode("complete")\
+  .start()
 
 for _ in range(10):
     spark.sql("""
-    SELECT * FROM sliding_windows_tweet_count ORDER BY window """).show(truncate=False)
+    SELECT * 
+      FROM sliding_windows_tweet_count 
+     ORDER BY window """).show(truncate=False)
     sleep(3)
 
 sliding_windows_tweet_count_query.stop()
@@ -899,18 +922,22 @@ sliding_windows_tweet_count_query.stop()
 
 ```{python}
 # Code Here
-sliding_windows_tweet_count = tweet_stream.groupBy(
-    window(tweet_stream.data.created_at, "10 seconds", "5 seconds" )).count()
+sliding_windows_tweet_count = tweet_stream\
+  .groupBy(window(tweet_stream.data.created_at, "10 seconds", "5 seconds" ))\
+  .count()
 
-sliding_windows_tweet_count_query = sliding_windows_tweet_count.writeStream\
-.queryName("sliding_windows_tweet_count")\
-.format('memory')\
-.outputMode("complete")\
-.start()
+sliding_windows_tweet_count_query = sliding_windows_tweet_count\
+  .writeStream\
+  .queryName("sliding_windows_tweet_count")\
+  .format('memory')\
+  .outputMode("complete")\
+  .start()
 
 for _ in range(10):
     spark.sql("""
-    SELECT * FROM sliding_windows_tweet_count ORDER BY window """).show(truncate=False)
+    SELECT * 
+      FROM sliding_windows_tweet_count 
+     ORDER BY window """).show(truncate=False)
     sleep(3)
 
 sliding_windows_tweet_count_query.stop()
@@ -955,16 +982,17 @@ Be careful, the watermark field cannot be a nested field ([link](https://www.wai
 ```{python}
 # Code Here
 sliding_windows_tweet_count_with_watermark = tweet_stream\
-.withColumn("timestamp", col("data.created_at"))\
-.withWatermark("timestamp", "5 seconds")\
-.groupBy(window("timestamp", "10 seconds")).count()
+  .withColumn("timestamp", col("data.created_at"))\
+  .withWatermark("timestamp", "5 seconds")\
+  .groupBy(window("timestamp", "10 seconds"))\
+  .count()
                                                                      
 sliding_windows_tweet_count_with_watermark_query = sliding_windows_tweet_count_with_watermark\
-.writeStream\
-.queryName("sliding_windows_tweet_count_with_watermark")\
-.format('memory')\
-.outputMode("complete")\
-.start()
+  .writeStream\
+  .queryName("sliding_windows_tweet_count_with_watermark")\
+  .format('memory')\
+  .outputMode("complete")\
+  .start()
 
 for _ in range(10):
     spark.sql("""
@@ -981,18 +1009,18 @@ sliding_windows_tweet_count_with_watermark_query.stop()
 ```{python}
 # Code Here
 sliding_windows_tweet_count = tweet_stream\
-.withColumn("timestamp", col("data.created_at"))\
-.withWatermark("timestamp", "1 minute")\
-.withColumn("tag", explode("data.entities.hashtags.tag"))\
-.groupBy(window("timestamp", "30 seconds"),"tag")\
-.count()
+  .withColumn("timestamp", col("data.created_at"))\
+  .withWatermark("timestamp", "1 minute")\
+  .withColumn("tag", explode("data.entities.hashtags.tag"))\
+  .groupBy(window("timestamp", "30 seconds"),"tag")\
+  .count()
 
 sliding_windows_tweet_count_query = sliding_windows_tweet_count\
-.writeStream\
-.queryName("sliding_windows_tweet_count")\
-.format('memory')\
-.outputMode("complete")\
-.start()
+  .writeStream\
+  .queryName("sliding_windows_tweet_count")\
+  .format('memory')\
+  .outputMode("complete")\
+  .start()
 
 for _ in range(10):
     spark.sql("""
@@ -1009,20 +1037,20 @@ sliding_windows_tweet_count_query.stop()
 ```{python}
 # Code Here
 sliding_windows_tweet_count = tweet_stream\
-.withColumn("verified", explode("includes.users.verified"))\
-.withColumn("timestamp", col("data.created_at"))\
-.withWatermark("timestamp", "25 seconds")\
-.filter("verified")\
-.groupBy(window("timestamp", "10 seconds", "5 seconds"),"includes.users.username")\
-.count()
+  .withColumn("verified", explode("includes.users.verified"))\
+  .withColumn("timestamp", col("data.created_at"))\
+  .withWatermark("timestamp", "25 seconds")\
+  .filter("verified")\
+  .groupBy(window("timestamp", "10 seconds", "5 seconds"),"includes.users.username")\
+  .count()
 
 sliding_windows_tweet_count_query = sliding_windows_tweet_count\
-.writeStream\
-.queryName("sliding_windows_tweet_count")\
-.format('json')\
-.option("checkpointLocation", "s3a://rp-lab3-ensai-20202021/history") \
-.option("path", "s3a://rp-lab3-ensai-20202021/")\
-.start()
+  .writeStream\
+  .queryName("sliding_windows_tweet_count")\
+  .format('json')\
+  .option("checkpointLocation", "s3a://rp-lab3-ensai-20202021/history") \
+  .option("path", "s3a://rp-lab3-ensai-20202021/")\
+  .start()
 
 sliding_windows_tweet_count_query.stop()
 ```

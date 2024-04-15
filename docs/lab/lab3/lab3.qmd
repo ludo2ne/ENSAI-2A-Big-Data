@@ -731,3 +731,8 @@ Be careful, the watermark field cannot be a nested field ([link](https://www.wai
 
 
 {{< include ../lab-end.qmd >}}
+
+
+::: {.callout-note collapse="true" title="Solution"}
+[Solution](lab3-correction.qmd){target="_blank"}
+:::
