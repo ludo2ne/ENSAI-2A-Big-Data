@@ -30,11 +30,7 @@ spark = (SparkSession
          .config("spark.dynamicAllocation.enabled","true")
          .config("spark.dynamicAllocation.initialExecutors","1")
          .config("spark.dynamicAllocation.minExecutors","1")
-         .config("spark.dynamicAllocation.maxExecutors","60")
-         # Ratio match the number of pods to create for a given number of parallel tasks
-         # (100 parallel, ratio of 1, one aims at 100 pods, with 0.5 it would be 50 pods)
-         .config("spark.dynamicAllocation.executorAllocationRatio","1")
-         .config("spark.dynamicAllocation.shuffleTracking.enabled","true")
+         .config("spark.dynamicAllocation.maxExecutors","5")
          .getOrCreate()
         )
 ```

@@ -80,7 +80,7 @@ Only the first lab
   - Instance profile : EMR_EC2_DefaultRole
 - *Create Cluster*
 
-The cluster creation takes some time (10 min). 
+The cluster creation takes some time (10 min). You can advance the reading of the subject.
 
 Go back to EMR > Cluster and wait until the cluster status is *Waiting* (refresh :arrows_counterclockwise:)
 
@@ -112,6 +112,17 @@ To be done for each lab
 
 A new tab will open. Save the URL, for example by bookmarking it.
 
-Now you can load the lab notebooks (*lab_-AWS.ipynb* file) and then open it.
+Now you can load the lab notebooks (*lab_.ipynb* file) and then open it.
 
 Once it's open, verify that the kernel is set to **PySpark** on the top right. If not : Kernel > Change Kernel > PySpark
+
+
+## Summary {.unnumbered}
+
+|                | First Lab         | Other Labs         |
+|----------------|-------------------|--------------------|
+| Learner Lab    | launch            | launch             |
+| Studio         | create            | -                  |
+| Cluster        | create            | clone              |
+| Workspace      | attach cluster    | attach cluster     |
+| End of the lab | terminate cluster :exclamation: | terminate cluster :exclamation: | 

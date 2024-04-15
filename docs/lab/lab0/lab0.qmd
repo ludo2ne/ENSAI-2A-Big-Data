@@ -259,3 +259,8 @@ To shut down your machine :
 - [ ] then on `resilier l'instance`
 
 ![](img/ec2_end.png)
+
+
+## Prepare next Lab {.unnumbered}
+
+If you plan to continue on AWS (recommended for engineers), follow [these instructions](../aws-cluster-spark.qmd) to prepare for the next lab.
