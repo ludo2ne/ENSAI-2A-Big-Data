@@ -1,6 +1,6 @@
 ---
 title: Lab setup
-description: Setup to be done before each lab
+description: Setup to be done before each lab (except Lab 0)
 author: Rémi Pépin, Arthur Katossky, Ludovic Deneuville
 format:
   html:
@@ -42,6 +42,6 @@ Follow these [instructions](aws-cluster-spark.qmd) to create a Spark cluster on 
 
 - [ ] Export your notebook
   - File > Export Notebook As ... > Export Notebook To HTML
-  - Right clic > Download the `.ipynb`file
+  - Right clic > Download the `.ipynb` file
 - [ ] **Delete your service** (SSPCloud)
 - [ ] **Terminate your cluster** (AWS)
