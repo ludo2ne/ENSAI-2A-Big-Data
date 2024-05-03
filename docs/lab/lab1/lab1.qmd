@@ -120,10 +120,19 @@ The data you will use in this lab are real data from the twitter [sampled stream
 
 It's possible to load multiple file in a unique DataFrame. It's useful when you have daily files and want to process them all. It's the same syntax as the previous one, just specify a folder.
 
-- SSPCloud users : if you meet some issue to load this file, you can load and use your own file :
+#### if you meet some issue to load this file
+
+You can load and use your own file (available on Moodle):
+
+- SSPCloud users:
   - In Onyxia, `mes fichiers`
   - Load file `tweets.jsonl.gz`
   - In Jupyter, read it using `s3a://<user_name>/tweets.jsonl.gz`
+- AWS users:
+  - Search for `S3` service
+  - Open or create a bucket
+  - Load file `tweets.jsonl.gz`
+  - in jupyter, read it using : `s3://<bucket_name>/<file_name>.jsonl.gz`
 
 ```{python}
 # DataFrame creation

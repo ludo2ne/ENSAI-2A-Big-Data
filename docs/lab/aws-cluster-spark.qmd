@@ -92,7 +92,9 @@ Starting from the second lab
 
 - Go to *EMR service* and then *Clusters*
 - Select the old cluster and clone it
-- The cluster creation takes some time (10 min)
+- The cluster creation takes some time (10 min). You can advance the reading of the subject.
+- 
+Go back to EMR > Cluster and wait until the cluster status is *Waiting* (refresh :arrows_counterclockwise:)
 
 
 ## Associate the cluster with a workspace

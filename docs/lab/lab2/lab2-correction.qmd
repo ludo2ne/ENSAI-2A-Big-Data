@@ -31,7 +31,8 @@ In this tutorial, we are going to perform exploratory and explanatory analyses o
 Rémi Pépin has loaded a lot these listings on AWS at this address: 
 
 - `s3://spark‑lab‑input‑data‑ensai20222023/airbnbb/` on AWS
-- `s3a://remipepin/diffusion/ensai/airbnb` on SSPCloud
+- `s3a://ludo2ne/diffusion/ensai/airbnb.parquet` on SSPCloud
+
 
 
 {{< include ../lab-create-spark-session.qmd >}}
@@ -156,14 +157,15 @@ When you compute the variance, the means is computed "for free"
 
 
 ```{python}
-#| tags: []
 from pyspark.sql.types import FloatType, IntegerType, DateType
 from pyspark.sql.functions import regexp_replace, col
 
 # Uncomment one of the following lines
-# listings_raw = spark.read.csv("s3a://remipepin/diffusion/ensai/airbnb", header=True, multiLine=True, escape='"')
+# listings_raw = spark.read.parquet("s3a://ludo2ne/diffusion/ensai/airbnb.parquet")
 # listings_raw = spark.read.csv("s3://spark‑lab‑input‑data‑ensai20222023/airbnbb/", header=True, multiLine=True, escape='"')
+```
 
+```{python}
 listings = (listings_raw
   .withColumn("beds",     listings_raw["beds"    ].cast(IntegerType()))
   .withColumn("bedrooms", listings_raw["bedrooms"].cast(IntegerType()))
@@ -172,7 +174,9 @@ listings = (listings_raw
   .select("id", "beds", "bedrooms", "price", "city", "time")
   .dropna() # remove lines with missing values
 )
+```
 
+```{python}
 listings_raw.cache()
 listings.cache()
 ```
