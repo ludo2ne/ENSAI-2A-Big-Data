@@ -33,10 +33,7 @@ With Kubernetes, we just speak in terms of Pods rathen than containers.
 
 Pretty handy right ? If you want to have a deeper look on how it's done, you can by clicking on the link bellow but you still have some work to do so don't waste your time ! You can keep it to the end.
 
-<details>    
-<summary>
-    <font size="3" color="#447099"><b>If you want more ! </b></font>
-</summary>
+### If you want more
 
 #### Spark Context
 
@@ -71,8 +68,6 @@ The Spark driver runs on a Kubernetes Pod and creates executors running within K
 
 The Kubernetes **Scheduler** checks if pods are assigned to nodes. For every Pod that the scheduler discovers, the scheduler is responsible of finding the best node for that Pod to run on.  
 The Kubernetes **API Server** allows to interact with Pods. It schedules executor Pods by creating or deleting Pods.
-
-</details>  
 
 
 {{< include ../lab-create-spark-session.qmd >}}
@@ -210,7 +205,7 @@ Spark is quite extreme in its laziness, since only a handful of methods called *
 
 ### ✍Hands-on 2 - Data frame basic manipulations
 
-- [ ] How many rows have your two DataFrame ?
+- [ ] How many rows have your DataFrame ?
 
 ```{python}
 #| vscode: {languageId: json}
@@ -273,6 +268,7 @@ df_tweet\
 
 ```{python}
 df_tweet\
+  .select("auteur", "contenu", "like_count")\
   .filter(df_tweet.like_count >= 1)\
   .show(10)
 ```
@@ -303,8 +299,10 @@ See [here](https://spark.apache.org/docs/3.1.1/api/python/reference/pyspark.sql.
 
 ```{python}
 #| vscode: {languageId: json}
+
+#to get a clearer, cleaner result, I've added filters and deleted columns
 df_tweet_interaction_count = df_tweet\
-  .drop("other")\
+  .drop("other", "entities", "hashtags", "contenu")\      
   .filter(df_tweet.like_count >= 1)\
   .filter(df_tweet.retweet_count >= 1)\
   .withColumn(
@@ -378,10 +376,11 @@ from pyspark.sql.functions import split, explode, size, array_contains
 
 df_tweet\
   .filter(size("hashtags") > 0)\
+  .select("auteur", "hashtags")\
   .withColumn(
     "hashtag_exploded",
     explode("hashtags"))\
-  .show(10)
+  .show(20, False)
 ```
 
 - [ ] Create a new column with the number of words of the `contenu` column. (Use `split()` + `size()`)
@@ -389,9 +388,10 @@ df_tweet\
 ```{python}
 #| vscode: {languageId: json}
 df_tweet\
+  .select("auteur", "contenu")\
   .withColumn("word_count",
               size(split("contenu", " ")))\
-  .show(5)
+  .show(10, False)
 ```
 
 - [ ] Count how many tweet contain the `Ukraine` hashtag (use the `count()` action)
@@ -605,17 +605,21 @@ Many things can only be done in Spark if you know SQL and how to use it in Spark
   - [ ] Distinct hashtags ?
 
 ```{python}
+# Create a view
 df_tweet\
   .select("contenu", "hashtags")\
   .createOrReplaceTempView("view_hashtag_content")
+```
 
+```{python}
+# Run a SQL query
 spark.sql("""
 SELECT COUNT(*),
        COUNT(DISTINCT(contenu))
   FROM view_hashtag_content
  WHERE size(hashtags) > 0
 """)\
-  .show(5)
+  .show()
 ```
 
 - [ ] Compute a dataframe with the min, max and average retweet of each `auteur` using Spark SQL
@@ -624,14 +628,15 @@ SELECT COUNT(*),
 df_tweet.createOrReplaceTempView("view_tweet")
 
 spark.sql("""
-SELECT min(retweet_count),
+SELECT auteur,
+       min(retweet_count),
        max(retweet_count),
        avg(retweet_count)
   FROM view_tweet
  GROUP BY auteur
  ORDER BY MAX(retweet_count) DESC
 """)\
-  .show(5)
+  .show(10)
 ```
 
 

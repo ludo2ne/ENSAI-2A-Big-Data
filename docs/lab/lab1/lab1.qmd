@@ -25,7 +25,7 @@ lightbox: true
 
 ## What is Spark ?
 
-Let's keep it simple. 
+### Let's keep it simple. 
 
 The intuitive way: Spark distributes tasks to different Worker nodes (machine executing the tasks).  
 The Kubernetes way: Spark distributes tasks to different containers. The location of containers among the different worker nodes is then handled by Kubernetes. The more computation power you need, the more containers get created. It's a smooth way to save Worker nodes resources.
@@ -33,10 +33,7 @@ With Kubernetes, we just speak in terms of Pods rathen than containers.
 
 Pretty handy right ? If you want to have a deeper look on how it's done, you can by clicking on the link bellow but you still have some work to do so don't waste your time ! You can keep it to the end.
 
-<details>    
-<summary>
-    <font size="3" color="#447099"><b>If you want more ! </b></font>
-</summary>
+### If you want more !
 
 #### Spark Context
 
@@ -71,8 +68,6 @@ The Spark driver runs on a Kubernetes Pod and creates executors running within K
 
 The Kubernetes **Scheduler** checks if pods are assigned to nodes. For every Pod that the scheduler discovers, the scheduler is responsible of finding the best node for that Pod to run on.  
 The Kubernetes **API Server** allows to interact with Pods. It schedules executor Pods by creating or deleting Pods.
-
-</details>
 
 
 
@@ -207,7 +202,7 @@ Spark is quite extreme in its laziness, since only a handful of methods called *
 
 ### ✍Hands-on 2 - Data frame basic manipulations
 
-- [ ] How many rows have your two DataFrame ?
+- [ ] How many rows have your DataFrame ?
 
 ```{python}
 # Code Here
