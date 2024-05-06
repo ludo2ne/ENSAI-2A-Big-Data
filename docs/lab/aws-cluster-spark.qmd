@@ -60,6 +60,7 @@ Only the first lab
   - VPC : select the default VPC
   - Subnets : choose one and note its name for later
   - Click on `Create Studio`
+    - If Encryption key is required, then uncheck the *Encrypt Workspace files with your own AWS KMS key* box
 
 
 ## Create a Cluster
@@ -93,8 +94,7 @@ Starting from the second lab
 - Go to *EMR service* and then *Clusters*
 - Select the old cluster and clone it
 - The cluster creation takes some time (10 min). You can advance the reading of the subject.
-- 
-Go back to EMR > Cluster and wait until the cluster status is *Waiting* (refresh :arrows_counterclockwise:)
+- Go back to EMR > Cluster and wait until the cluster status is *Waiting* (refresh :arrows_counterclockwise:)
 
 
 ## Associate the cluster with a workspace

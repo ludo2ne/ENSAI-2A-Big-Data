@@ -62,7 +62,9 @@ Spark can be run with any of the 5 following **Cluster Manager** :
 
 #### Spark on a Kubernetes cluster
 
+:::white-box
 ![](img/k8spark_cluster_mode.png)
+:::
 
 The Spark driver runs on a Kubernetes Pod and creates executors running within Kubernetes pods. In simple terms, Spark driver is in a Pod and it distributes tasks to different Pods. The location of Pods among the different worker nodes is then handled by Kubernetes. 
 
@@ -112,7 +114,7 @@ The data you will use in this lab are real data from the twitter [sampled stream
 
 - [ ] Load the json file stored here : 
   - `s3a://ludo2ne/diffusion/tweets.jsonl.gz` for SSPCloud
-  - `s3://spark-lab-input-data-ensai20222023/tweets/tweets20220324-155940.jsonl.gz` for AWS
+  - `s3://spark-lab-input-data-ensai20222023/tweets/tweets20220324-155940.jsonl.gz` or `s3://ensai-labs-2023-2024-files/lab1/tweets20220324-155940.jsonl.gz` for AWS
 - [ ] Name you data frame `df_tweet`
 - [ ] Use function `cache()` on the data frame. Caching is a performance optimization technique that allows you to persist an intermediate or final result of a computation in memory, reducing the need to recompute the data when it is accessed multiple time
 
