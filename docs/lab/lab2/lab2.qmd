@@ -29,11 +29,10 @@ lightbox: true
 
 In this tutorial, we are going to perform exploratory and explanatory analyses of a massive dataset consisting in hundreds of thousands of AirBnB listings, as made available by the Inside [AirBnB project](http://insideairbnb.com/get-the-data.html){.external target="_blank"}.
 
-Rémi Pépin has loaded a lot these listings on AWS at this address: 
+You will find these listings at this address: 
 
-- `s3://spark‑lab‑input‑data‑ensai20222023/airbnbb/` on AWS
-- `s3a://ludo2ne/diffusion/ensai/airbnb.parquet` on SSPCloud
-
+- `s3://ensai-labs-2023-2024-files/lab2/airbnb/` on AWS
+- `s3a://ludo2ne/diffusion/ensai/airbnb/` on SSPCloud
 
 {{< include ../lab-create-spark-session.qmd >}}
 
@@ -79,7 +78,7 @@ Imagine you want to count the frequency of the vocal E in English, given a colle
 
 An **online algorithm** is an algorithm with an inner state that can be actualized at low cost for any new arrival of data. A good metaphor is track-keeping of the number of people on a bus: every time a person enters or leaves, you apply ±1 to the count, without the need to systematically recount everyone. Said otherwise, an online algorithm is any algorithm whose last result can be actualized from new data, at a smaller cost than an alternative algorithm that uses both old and new data from scratch.
 
-It turns out that **respecting the map-and-reduce model gives us online algorithms for free**, where the **inner state** of the algorithm is the output from the last reduce call. Indeed, writing $s_\text{old}$ and $s_\text{new}$ the old and new states (the old and new summary statistics), and $x_new$ the latest data point, we have:
+It turns out that **respecting the map-and-reduce model gives us online algorithms for free**, where the **inner state** of the algorithm is the output from the last reduce call. Indeed, writing $s_\text{old}$ and $s_\text{new}$ the old and new states (the old and new summary statistics), and $x_{new}$ the latest data point, we have:
 
 $$s_\text{new}=\text{reduce}(s_\text{old}, \text{map}(x_\text{new}))$$
 
@@ -138,8 +137,8 @@ from pyspark.sql.types import FloatType, IntegerType, DateType
 from pyspark.sql.functions import regexp_replace, col
 
 # Uncomment one of the following lines
-# listings_raw = spark.read.parquet("s3a://ludo2ne/diffusion/ensai/airbnb.parquet")
-# listings_raw = spark.read.csv("s3://spark‑lab‑input‑data‑ensai20222023/airbnbb/", header=True, multiLine=True, escape='"')
+# listings_raw = spark.read.csv("s3a://ludo2ne/diffusion/ensai/airbnb/", header=True, multiLine=True, escape='"') # or listings_raw = spark.read.parquet("s3a://ludo2ne/diffusion/ensai/airbnb.parquet")
+# listings_raw = spark.read.csv("s3://ensai-labs-2023-2024-files/lab2/airbnb/", header=True, multiLine=True, escape='"')
 ```
 
 ```{python}
@@ -259,6 +258,11 @@ This produces the output:
 
 ```
 
+```{python}
+# Code Here
+
+```
+
 - [ ] Compute the average number of beds per property in Barcelona in four different ways:
   - Which method is the fastest?
     1. directly with the Spark SQL mean function,
@@ -267,6 +271,10 @@ This produces the output:
     4. locally after you collected the bed columns.
    _Despite the operation being very common, Spark does **not** provide a simple syntax to collect a column as a local array. A work-around is to use the Pandas package and the `asPanda()` method ([documentation](https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.sql.DataFrame.toPandas.html){.external target="_blank"}). First install Pandas with `!pip install pandas`. Then you can collect a local copy of a dataframe called `df` with: `df_local = df.toPandas()`. A Pandas data frame possesses a `mean()` method, that compute the mean of each column of the data frame: more details are in Pandas' [documentation](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.mean.html){.external target="_blank"}._
 
+```{python}
+# Spark SQL mean function
+
+```
 
 ```{python}
 # summary()

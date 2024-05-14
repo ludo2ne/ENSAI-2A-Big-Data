@@ -28,11 +28,10 @@ lightbox: true
 
 In this tutorial, we are going to perform exploratory and explanatory analyses of a massive dataset consisting in hundreds of thousands of AirBnB listings, as made available by the Inside **[AirBnB project](http://insideairbnb.com/get-the-data.html)**.  
 
-Rémi Pépin has loaded a lot these listings on AWS at this address: 
+You will find these listings at this address: 
 
-- `s3://spark‑lab‑input‑data‑ensai20222023/airbnbb/` on AWS
-- `s3a://ludo2ne/diffusion/ensai/airbnb.parquet` on SSPCloud
-
+- `s3://ensai-labs-2023-2024-files/lab2/airbnb/` on AWS
+- `s3a://ludo2ne/diffusion/ensai/airbnb/` on SSPCloud
 
 
 {{< include ../lab-create-spark-session.qmd >}}
@@ -161,8 +160,8 @@ from pyspark.sql.types import FloatType, IntegerType, DateType
 from pyspark.sql.functions import regexp_replace, col
 
 # Uncomment one of the following lines
-# listings_raw = spark.read.parquet("s3a://ludo2ne/diffusion/ensai/airbnb.parquet")
-# listings_raw = spark.read.csv("s3://spark‑lab‑input‑data‑ensai20222023/airbnbb/", header=True, multiLine=True, escape='"')
+# listings_raw = spark.read.csv("s3a://ludo2ne/diffusion/ensai/airbnb/", header=True, multiLine=True, escape='"') # or listings_raw = spark.read.parquet("s3a://ludo2ne/diffusion/ensai/airbnb.parquet")
+# listings_raw = spark.read.csv("s3://ensai-labs-2023-2024-files/lab2/airbnb/", header=True, multiLine=True, escape='"')
 ```
 
 ```{python}
@@ -309,7 +308,10 @@ from pyspark.sql.functions import mean
 
 start = t()
 
-listings.filter(col("city")=="barcelona").select(mean('beds')).show()
+listings\
+    .filter(col("city")=="barcelona")\
+    .select(mean('beds'))\
+    .show()
 
 print ("Execution time:", t()-start, "s")
 ```
@@ -337,12 +339,16 @@ vectorizer = VectorAssembler(
     inputCols     = ["beds"],
     outputCol     = "features"
 )
+
 summarizer = Summarizer.metrics("mean")
+
 listings_vec = vectorizer\
   .transform(listings.filter(col("city")=="barcelona"))
+
 listings_vec\
   .select(summarizer.summary(listings_vec.features))\
   .show(truncate=False)
+
 print ("Execution time:", t()-start, "s")
 ```
 
@@ -378,7 +384,7 @@ price_mean
 
 ## Regression with Spark ML
 
-A better way to predict prices is to build a regression mode, which in Spark falls under the broad category of machine-learning problems. Regressions thus belong the the `ml` module, often called Spark ML, like the summarizer that we saw just before.
+A better way to predict prices is to build a regression mode, which in Spark falls under the broad category of machine-learning problems. Regressions thus belong the `ml` module, often called Spark ML, like the summarizer that we saw just before.
 
 There is an old module called `mllib` that is also called "Spark ML". That can cause confusion.
 

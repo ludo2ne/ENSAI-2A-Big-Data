@@ -340,7 +340,7 @@ StructField("includes", StructType([
 ```
 
 - [ ] Create a stream to this s3 bucket : 
-  - `s3a://remipepin/diffusion/ensai/stream_tweet` for SSPCloud
+  - `s3a://ludo2ne/diffusion/ensai/stream_tweet/stream` for SSPCloud
   - `s3://spark-lab-input-data-ensai20222023/stream_tweet/` for AWS
   - Name it `tweet_stream`
   - Use the option `option("maxFilePerTrigger", "1")` to process each new files one by one

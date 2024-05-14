@@ -302,7 +302,7 @@ See [here](https://spark.apache.org/docs/3.1.1/api/python/reference/pyspark.sql.
 
 #to get a clearer, cleaner result, I've added filters and deleted columns
 df_tweet_interaction_count = df_tweet\
-  .drop("other", "entities", "hashtags", "contenu")\      
+  .drop("other", "entities", "hashtags", "contenu")\
   .filter(df_tweet.like_count >= 1)\
   .filter(df_tweet.retweet_count >= 1)\
   .withColumn(

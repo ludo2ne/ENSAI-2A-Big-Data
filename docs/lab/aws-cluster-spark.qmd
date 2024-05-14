@@ -74,6 +74,10 @@ Only the first lab
   - For *Primary*, *Core* and *Task 1 of 1*, choose EC2 instance type : `m4.large`
 - Networking section
   - Use the same subnet as before
+- Bootstrap actions
+  - Add
+  - Script location : `s3://ensai-labs-2023-2024-files/install_packages.sh`
+    - this script contain instructions to install numpy and pandas : *sudo pip3 install numpy pandas*
 - Security configuration and EC2 key pair section
   - Amazon EC2 key pair for SSH to the cluster : vockey
 - Identity and Access Management (IAM) roles section
@@ -92,7 +96,17 @@ Starting from the second lab
 :::
 
 - Go to *EMR service* and then *Clusters*
-- Select the old cluster and clone it
+- Select the old cluster and click on *Clone*
+  - Before validate clone creation (:warning: TODO because i forgot it in section "Create a cluster")
+  - Go to section *Bootstrap actions*
+  - Add
+  - Script location : `s3://ensai-labs-2023-2024-files/install_packages.sh`
+    - this script contain instructions to install numpy and pandas on all nodes
+    - workaround : if you want, feel free to :
+      - create your own *sh* file, 
+      - paste this code : *sudo pip3 install numpy pandas*
+      - store the file in your own bucket
+      - Script location : *s3://<your_bucket>/<your_file.sh>
 - The cluster creation takes some time (10 min). You can advance the reading of the subject.
 - Go back to EMR > Cluster and wait until the cluster status is *Waiting* (refresh :arrows_counterclockwise:)
 
