@@ -341,7 +341,7 @@ StructField("includes", StructType([
 
 - [ ] Create a stream to this s3 bucket : 
   - `s3a://ludo2ne/diffusion/ensai/stream_tweet/stream` for SSPCloud
-  - `s3://spark-lab-input-data-ensai20222023/stream_tweet/` for AWS
+  - `s3://ensai-labs-2023-2024-files/lab3/destination/` for AWS
   - Name it `tweet_stream`
   - Use the option `option("maxFilePerTrigger", "1")` to process each new files one by one
 
@@ -352,7 +352,7 @@ tweet_stream = spark\
   .readStream\
   .schema(schema_tweet)\
   .option("maxFilePerTrigger", "1")\
-  .json("s3a://remipepin/diffusion/ensai/stream_tweet")
+  .json("s3a://ludo2ne/diffusion/ensai/stream_tweet/stream")
 ```
 
 - [ ] In a cell just execute `tweet_stream`. 

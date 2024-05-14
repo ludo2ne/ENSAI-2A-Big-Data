@@ -274,19 +274,16 @@ Like in lab 1, you will use tweets in this lab. The tweets are stored in jsonl f
 
 - [ ] Create a stream to this s3 bucket : 
   - `s3a://ludo2ne/diffusion/ensai/stream_tweet/stream` for SSPCloud
-  - `s3://spark-lab-input-data-ensai20222023/stream_tweet/` for AWS
+  - `s3://ensai-labs-2023-2024-files/lab3/destination/` for AWS
   - Name it `tweet_stream`
   - Use the option `option("maxFilePerTrigger", "1")` to process each new files one by one
 
-> 🤔 Nothing happen ? It's normal ! Do not forget, Spark use lazy evaluation. It doesn't use data if you don't define an action. For now Spark only know how to get the stream, that's all.
-
 ```{python}
-tweet_stream = spark\
-.readStream\
-.schema(schema_tweet)\
-.option("maxFilePerTrigger", "1")\
-.json("s3a://remipepin/diffusion/ensai/stream_tweet")
+# Code Here
+
 ```
+
+> 🤔 Nothing happen ? It's normal ! Do not forget, Spark use lazy evaluation. It doesn't use data if you don't define an action. For now Spark only know how to get the stream, that's all.
 
 - [ ] In a cell just execute `tweet_stream`. 
   - It should print the type of `tweet_stream` and the associated schema. You can see you created a DataFrame like in lab2 !
