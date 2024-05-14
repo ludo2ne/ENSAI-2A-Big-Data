@@ -345,6 +345,14 @@ Caution
 <ul>
 <li>Use the same subnet as before</li>
 </ul></li>
+<li>Bootstrap actions
+<ul>
+<li>Add</li>
+<li>Script location : <code>s3://ensai-labs-2023-2024-files/install_packages.sh</code>
+<ul>
+<li>this script contain instructions to install numpy and pandas : <em>sudo pip3 install numpy pandas</em></li>
+</ul></li>
+</ul></li>
 <li>Security configuration and EC2 key pair section
 <ul>
 <li>Amazon EC2 key pair for SSH to the cluster : vockey</li>
@@ -375,7 +383,23 @@ Caution
 </div>
 <ul>
 <li>Go to <em>EMR service</em> and then <em>Clusters</em></li>
-<li>Select the old cluster and clone it</li>
+<li>Select the old cluster and click on <em>Clone</em>
+<ul>
+<li>Before validate clone creation (<span class="emoji" data-emoji="warning">⚠️</span> TODO because i forgot it in section “Create a cluster”)</li>
+<li>Go to section <em>Bootstrap actions</em></li>
+<li>Add</li>
+<li>Script location : <code>s3://ensai-labs-2023-2024-files/install_packages.sh</code>
+<ul>
+<li>this script contain instructions to install numpy and pandas on all nodes</li>
+<li>workaround : if you want, feel free to :
+<ul>
+<li>create your own <em>sh</em> file,</li>
+<li>paste this code : <em>sudo pip3 install numpy pandas</em></li>
+<li>store the file in your own bucket</li>
+<li>Script location : *s3://<your_bucket>/&lt;your_file.sh&gt;</your_bucket></li>
+</ul></li>
+</ul></li>
+</ul></li>
 <li>The cluster creation takes some time (10 min). You can advance the reading of the subject.</li>
 <li>Go back to EMR &gt; Cluster and wait until the cluster status is <em>Waiting</em> (refresh <span class="emoji" data-emoji="arrows_counterclockwise">🔄</span>)</li>
 </ul>

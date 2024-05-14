@@ -324,10 +324,10 @@ window.Quarto = {
 <section id="outline" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="outline">Outline</h2>
 <p>In this tutorial, we are going to perform exploratory and explanatory analyses of a massive dataset consisting in hundreds of thousands of AirBnB listings, as made available by the Inside <strong><a href="http://insideairbnb.com/get-the-data.html">AirBnB project</a></strong>.</p>
-<p>Rémi Pépin has loaded a lot these listings on AWS at this address:</p>
+<p>You will find these listings at this address:</p>
 <ul>
-<li><code>s3://spark‑lab‑input‑data‑ensai20222023/airbnbb/</code> on AWS</li>
-<li><code>s3a://ludo2ne/diffusion/ensai/airbnb.parquet</code> on SSPCloud</li>
+<li><code>s3://ensai-labs-2023-2024-files/lab2/airbnb/</code> on AWS</li>
+<li><code>s3a://ludo2ne/diffusion/ensai/airbnb/</code> on SSPCloud</li>
 </ul>
 </section>
 <section id="create-a-spark-session" class="level2" data-number="1">
@@ -338,11 +338,11 @@ window.Quarto = {
 <section id="only-on-sspcloud" class="level3" data-number="1.1">
 <h3 data-number="1.1" class="anchored" data-anchor-id="only-on-sspcloud"><span class="header-section-number">1.1</span> Only on SSPCloud</h3>
 <p>See default configuration on the datalab :</p>
-<div id="ec70a8f9" class="cell" data-execution_count="1">
+<div id="57b20baf" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span> cat <span class="op">/</span>opt<span class="op">/</span>spark<span class="op">/</span>conf<span class="op">/</span>spark<span class="op">-</span>defaults.conf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To modify the config :</p>
-<div id="76e2358c" class="cell" data-execution_count="2">
+<div id="a647d347" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -367,14 +367,14 @@ window.Quarto = {
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>         .getOrCreate()</span>
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="ba7bc6ea" class="cell" data-execution_count="3">
+<div id="ba9143ee" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See the current number of executors (one for now)</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>kubectl get pods <span class="op">-</span>l spark<span class="op">-</span>role<span class="op">=</span>executor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="only-on-aws" class="level3" data-number="1.2">
 <h3 data-number="1.2" class="anchored" data-anchor-id="only-on-aws"><span class="header-section-number">1.2</span> Only on AWS</h3>
-<div id="9d340b2a" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-04-30T09:07:18.788943Z&quot;,&quot;iopub.status.busy&quot;:&quot;2023-04-30T09:07:18.788720Z&quot;,&quot;iopub.status.idle&quot;:&quot;2023-04-30T09:07:18.853566Z&quot;,&quot;shell.execute_reply&quot;:&quot;2023-04-30T09:07:18.853007Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2023-04-30T09:07:18.788920Z&quot;}" data-tags="[]" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="4">
+<div id="1beedf7f" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-04-30T09:07:18.788943Z&quot;,&quot;iopub.status.busy&quot;:&quot;2023-04-30T09:07:18.788720Z&quot;,&quot;iopub.status.idle&quot;:&quot;2023-04-30T09:07:18.853566Z&quot;,&quot;shell.execute_reply&quot;:&quot;2023-04-30T09:07:18.853007Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2023-04-30T09:07:18.788920Z&quot;}" data-tags="[]" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Spark session</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>spark</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -384,7 +384,7 @@ window.Quarto = {
 </section>
 <section id="check-spark-session" class="level3" data-number="1.3">
 <h3 data-number="1.3" class="anchored" data-anchor-id="check-spark-session"><span class="header-section-number">1.3</span> Check spark session</h3>
-<div id="df3eb8ad" class="cell" data-execution_count="5">
+<div id="43f9d22a" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>spark</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -426,7 +426,7 @@ window.Quarto = {
 <li>You have to import <code>reduce</code> from the <code>functools</code> module</li>
 </ul></li>
 </ul>
-<div id="569abe75" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="6">
+<div id="dc13b4f9" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> <span class="bu">reduce</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>errors <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">9</span>]</span>
@@ -436,7 +436,7 @@ window.Quarto = {
 <ul class="task-list">
 <li><label><input type="checkbox">Write <strong>two</strong> different map-and-reduce algorithm for computing the <strong><em>mean</em> sum of squares</strong>. <em>(One may include a final <span class="math inline">\(O(1)\)</span> step.)</em></label></li>
 </ul>
-<div id="386f6184" class="cell" data-execution_count="7">
+<div id="18bb22ea" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>errors <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">9</span>]</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> weighted_mean(obj1, obj2):</span>
@@ -449,7 +449,7 @@ window.Quarto = {
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>squared_errors <span class="op">=</span> <span class="bu">map</span>(<span class="kw">lambda</span> e: {<span class="st">"m"</span> : e<span class="op">**</span><span class="dv">2</span>, <span class="st">"w"</span> : <span class="dv">1</span>}, errors)</span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="bu">reduce</span>(weighted_mean, squared_errors )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="500261e2" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="8">
+<div id="13550614" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sum_and_n(obj1, obj2) :</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> {</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sum"</span> : obj1[<span class="st">"sum"</span>] <span class="op">+</span> obj2[<span class="st">"sum"</span>],</span>
@@ -479,15 +479,15 @@ final_step : s2/n-s1^2/n</code></pre>
 </section>
 <section id="application-on-airbnb-data" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="application-on-airbnb-data"><span class="header-section-number">3</span> Application on Airbnb Data</h2>
-<div id="5ad9ca9b" class="cell" data-execution_count="9">
+<div id="16fe029f" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.types <span class="im">import</span> FloatType, IntegerType, DateType</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> regexp_replace, col</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncomment one of the following lines</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># listings_raw = spark.read.parquet("s3a://ludo2ne/diffusion/ensai/airbnb.parquet")</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># listings_raw = spark.read.csv("s3://spark‑lab‑input‑data‑ensai20222023/airbnbb/", header=True, multiLine=True, escape='"')</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># listings_raw = spark.read.csv("s3a://ludo2ne/diffusion/ensai/airbnb/", header=True, multiLine=True, escape='"') # or listings_raw = spark.read.parquet("s3a://ludo2ne/diffusion/ensai/airbnb.parquet")</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># listings_raw = spark.read.csv("s3://ensai-labs-2023-2024-files/lab2/airbnb/", header=True, multiLine=True, escape='"')</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="1e464a6d" class="cell" data-execution_count="10">
+<div id="8776882d" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>listings <span class="op">=</span> (listings_raw</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  .withColumn(<span class="st">"beds"</span>,     listings_raw[<span class="st">"beds"</span>    ].cast(IntegerType()))</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  .withColumn(<span class="st">"bedrooms"</span>, listings_raw[<span class="st">"bedrooms"</span>].cast(IntegerType()))</span>
@@ -497,7 +497,7 @@ final_step : s2/n-s1^2/n</code></pre>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  .dropna() <span class="co"># remove lines with missing values</span></span>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="1d0e6354" class="cell" data-execution_count="11">
+<div id="80fdb73a" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>listings_raw.cache()</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>listings.cache()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -506,7 +506,7 @@ final_step : s2/n-s1^2/n</code></pre>
 <ul class="task-list">
 <li><label><input type="checkbox">How many lines do the raw and the formatted datasets have?</label></li>
 </ul>
-<div id="defab938" class="cell" data-execution_count="12">
+<div id="57a1ddcb" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Observations before cleaning: </span><span class="sc">{</span>listings_raw<span class="sc">.</span>count()<span class="sc">}</span><span class="ss"> rows"</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Observations  after cleaning:  </span><span class="sc">{</span>listings<span class="sc">.</span>count()<span class="sc">}</span><span class="ss"> rows)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -516,7 +516,7 @@ final_step : s2/n-s1^2/n</code></pre>
 <li><label><input type="checkbox">Can you list all the available columns?</label></li>
 </ul></li>
 </ul>
-<div id="ca66ae9c" class="cell" data-execution_count="13">
+<div id="b8482797" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"There are"</span>, <span class="bu">len</span>(listings_raw.columns), <span class="st">"columns:"</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>.join( [<span class="st">"- "</span><span class="op">+</span>column <span class="cf">for</span> column <span class="kw">in</span> listings_raw.columns] ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -573,13 +573,13 @@ final_step : s2/n-s1^2/n</code></pre>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># the thing you want to measure</span></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Time:"</span>, t()<span class="op">-</span>start)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
-<div id="ed07f6fb" class="cell" data-tags="[]" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="14">
+<div id="cf6b1837" class="cell" data-tags="[]" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> timeit <span class="im">import</span> default_timer <span class="im">as</span> t</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> t()</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>listings.summary(<span class="st">"count"</span>, <span class="st">"min"</span>, <span class="st">"max"</span>).show()</span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="st">"Execution time for sumary(</span><span class="ch">\"</span><span class="st">count</span><span class="ch">\"</span><span class="st">...):"</span>, t()<span class="op">-</span>start, <span class="st">"s"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="a80a575c" class="cell" data-execution_count="15">
+<div id="a0e7c55f" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> t()</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>listings.summary().show()</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="st">"Execution time for sumary():"</span>, t()<span class="op">-</span>start, <span class="st">"s"</span>)</span>
@@ -600,18 +600,21 @@ final_step : s2/n-s1^2/n</code></pre>
 </ol></li>
 </ul></li>
 </ul>
-<div id="06172452" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="16">
+<div id="ebaccc9e" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Spark SQL</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> mean</span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> t()</span>
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>listings.<span class="bu">filter</span>(col(<span class="st">"city"</span>)<span class="op">==</span><span class="st">"barcelona"</span>).select(mean(<span class="st">'beds'</span>)).show()</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="st">"Execution time:"</span>, t()<span class="op">-</span>start, <span class="st">"s"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>listings<span class="op">\</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>(col(<span class="st">"city"</span>)<span class="op">==</span><span class="st">"barcelona"</span>)<span class="op">\</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    .select(mean(<span class="st">'beds'</span>))<span class="op">\</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    .show()</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="st">"Execution time:"</span>, t()<span class="op">-</span>start, <span class="st">"s"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="fdc3d4d8" class="cell" data-execution_count="17">
+<div id="f473c79f" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># summary()</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> t()</span>
@@ -622,7 +625,7 @@ final_step : s2/n-s1^2/n</code></pre>
 <span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  .show()</span>
 <span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="st">"Execution time:"</span>, t()<span class="op">-</span>start, <span class="st">"s"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="b4667381" class="cell" data-execution_count="18">
+<div id="9e2d1f30" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sumarizer</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml.feature <span class="im">import</span> VectorAssembler</span>
@@ -633,18 +636,22 @@ final_step : s2/n-s1^2/n</code></pre>
 <span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    inputCols     <span class="op">=</span> [<span class="st">"beds"</span>],</span>
 <span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    outputCol     <span class="op">=</span> <span class="st">"features"</span></span>
 <span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>summarizer <span class="op">=</span> Summarizer.metrics(<span class="st">"mean"</span>)</span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>listings_vec <span class="op">=</span> vectorizer<span class="op">\</span></span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  .transform(listings.<span class="bu">filter</span>(col(<span class="st">"city"</span>)<span class="op">==</span><span class="st">"barcelona"</span>))</span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>listings_vec<span class="op">\</span></span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  .select(summarizer.summary(listings_vec.features))<span class="op">\</span></span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>  .show(truncate<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="st">"Execution time:"</span>, t()<span class="op">-</span>start, <span class="st">"s"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>summarizer <span class="op">=</span> Summarizer.metrics(<span class="st">"mean"</span>)</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>listings_vec <span class="op">=</span> vectorizer<span class="op">\</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  .transform(listings.<span class="bu">filter</span>(col(<span class="st">"city"</span>)<span class="op">==</span><span class="st">"barcelona"</span>))</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>listings_vec<span class="op">\</span></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>  .select(summarizer.summary(listings_vec.features))<span class="op">\</span></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>  .show(truncate<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="st">"Execution time:"</span>, t()<span class="op">-</span>start, <span class="st">"s"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="270f4d41" class="cell" data-execution_count="19">
+<div id="90c33387" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install pandas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="a45213e0" class="cell" data-execution_count="20">
+<div id="6d1ac0a4" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># locally after you collected the bed columns</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> t()</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> listings<span class="op">\</span></span>
@@ -660,7 +667,7 @@ final_step : s2/n-s1^2/n</code></pre>
 <ul class="task-list">
 <li><label><input type="checkbox">Compute the mean price on the data set as a predictor for an AirBnB listing’s price and the total sum of squares. (We will elaborate in the next section.)</label></li>
 </ul>
-<div id="cdc9f465" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="21">
+<div id="7a160992" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> mean</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>price_mean <span class="op">=</span> listings.select(mean(<span class="st">"price"</span>))        <span class="co"># this is a (remote) data frame</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>price_mean <span class="op">=</span> price_mean.first()                    <span class="co"># this is a (local) row</span></span>
@@ -671,7 +678,7 @@ final_step : s2/n-s1^2/n</code></pre>
 </section>
 <section id="regression-with-spark-ml" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="regression-with-spark-ml"><span class="header-section-number">4</span> Regression with Spark ML</h2>
-<p>A better way to predict prices is to build a regression mode, which in Spark falls under the broad category of machine-learning problems. Regressions thus belong the the <code>ml</code> module, often called Spark ML, like the summarizer that we saw just before.</p>
+<p>A better way to predict prices is to build a regression mode, which in Spark falls under the broad category of machine-learning problems. Regressions thus belong the <code>ml</code> module, often called Spark ML, like the summarizer that we saw just before.</p>
 <p>There is an old module called <code>mllib</code> that is also called “Spark ML”. That can cause confusion.</p>
 <p>The <code>ml</code> module is built in a distinctive fashion than the rest of Spark. <strong>Firstly</strong> we have seen with <code>Summarizer</code> that we can not readily use the columns and that instead <strong>columns have to be first converted to a <code>Vector</code> format</strong> with the <code>VectorAssembler</code> function.</p>
 <p><strong>Secondly</strong>, we need to distinguish between two different types of object classes: transformers and estimators classes. <strong>Transformers</strong> are a class of objects representing any process that modifies the dataset, and returns the modified version. It has a <strong>transform()</strong> method. <strong>Estimators</strong> on the other hand are classes of objects representing any process that produces a transformer based on some computed parameters from the data set. It has a <strong><code>fit()</code></strong> method. It is easier with an example. In the following example, <code>regressor</code> is an estimator, and we compute the regression coefficients with the <code>fit()</code> method. This produces <code>model</code>, the regression model itself, which is of class transformer. Indeed, we can use its <code>transform()</code> method to add predictions to the initial dataset.</p>
@@ -735,7 +742,7 @@ final_step : s2/n-s1^2/n</code></pre>
 <ul class="task-list">
 <li><label><input type="checkbox">Interpret the results of the general regression.</label></li>
 </ul>
-<div id="585057f2" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="22">
+<div id="2d1516d2" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml.feature <span class="im">import</span> VectorAssembler</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml.regression <span class="im">import</span> LinearRegression</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -750,7 +757,7 @@ final_step : s2/n-s1^2/n</code></pre>
 <span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>regressor <span class="op">=</span> LinearRegression(featuresCol<span class="op">=</span><span class="st">"features"</span>, labelCol<span class="op">=</span><span class="st">"price"</span>)</span>
 <span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>model     <span class="op">=</span> regressor.fit(listings_vec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="bc1cbe40" class="cell" data-execution_count="23">
+<div id="f838b6de" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Coefficients : </span><span class="sc">{</span>model<span class="sc">.</span>coefficients<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"intercept : </span><span class="sc">{</span>model<span class="sc">.</span>intercept<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -760,10 +767,10 @@ final_step : s2/n-s1^2/n</code></pre>
 <li>Models have a <code>summary</code> property, that you can explore with <code>dir(model.summary)</code>.</li>
 </ul></li>
 </ul>
-<div id="8e904781" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="24">
+<div id="c29be0c8" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="bu">dir</span>(model.summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="7c128761" class="cell" data-execution_count="25">
+<div id="fac5c7b4" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>model.summary.r2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
@@ -772,13 +779,13 @@ final_step : s2/n-s1^2/n</code></pre>
 <li><label><input type="checkbox">Are the coefficients stable? <em>You will build a pipeline object.</em></label></li>
 </ul></li>
 </ul>
-<div id="3b026c16" class="cell" data-execution_count="26">
+<div id="28412000" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>listings<span class="op">\</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  .select(<span class="st">"city"</span>)<span class="op">\</span></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  .distinct()<span class="op">\</span></span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  .show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="40b82555" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="27">
+<div id="2742c2d0" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml.feature <span class="im">import</span> VectorAssembler</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml.regression <span class="im">import</span> LinearRegression</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml <span class="im">import</span> Pipeline</span>
@@ -807,7 +814,7 @@ final_step : s2/n-s1^2/n</code></pre>
 <li><label><input type="checkbox">Check the execution plan with the <code>explain()</code> method for lazy evaluations.</label></li>
 </ul></li>
 </ul>
-<div id="0850f616" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="28">
+<div id="26d30c90" class="cell" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fit() is eager ; transform() is lazy</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -824,25 +831,25 @@ final_step : s2/n-s1^2/n</code></pre>
 <ul class="task-list">
 <li><label><input type="checkbox">Add a categorical variable to the regression.</label></li>
 </ul>
-<div id="4940897d" class="cell" data-execution_count="29">
+<div id="4677963f" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Compute the p-values of your model as well as confidence intervals for the predictions.</label></li>
 </ul>
-<div id="5b190280" class="cell" data-execution_count="30">
+<div id="4872d013" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Time the regression in different settings and report the results on <a href="https://docs.google.com/spreadsheets/d/1KSCLMgiepoKKiDdRrwlQv_0XYn5ptzXRB7TP-TRXCAw/edit?usp=sharing">this shared spreadsheet</a>. How does it scale with the number of listings (<span class="math inline">\(n\)</span>) ? the number of regressors (<span class="math inline">\(p\)</span>) ? the number of nodes in your cluster (<span class="math inline">\(k\)</span>) ? <em>You will only try a couple of configurations that have not been tested by others. Remember that you can order and revoke nodes from your cluster at any time from the AWS’s cluster view, in the hardware tab, on on the CORE line, “resize”.</em></label></li>
 </ul>
-<div id="918a3c1a" class="cell" data-execution_count="31">
+<div id="2752a0cd" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Down-sample your data set to <span class="math inline">\(n=100000\)</span>, while still keeping a few variables. Save it on S3, then download it on your computer. Run the regression locally on your computer in R. In your opinion, is the extra precision (in term of <span class="math inline">\(R^2\)</span>) is worth the extra computation time?</label></li>
 </ul>
-<div id="c93fd73d" class="cell" data-execution_count="32">
+<div id="bd35584a" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -1454,7 +1461,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","openEffect":"zoom","loop":false});
+<script>var lightboxQuarto = GLightbox({"loop":false,"openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","descPosition":"bottom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
