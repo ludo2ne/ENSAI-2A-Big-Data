@@ -38,7 +38,7 @@ spark = (SparkSession
          .config("spark.dynamicAllocation.enabled","true")
          .config("spark.dynamicAllocation.initialExecutors","1")
          .config("spark.dynamicAllocation.minExecutors","1")
-         .config("spark.dynamicAllocation.maxExecutors","5")
+         .config("spark.dynamicAllocation.maxExecutors","10")
          .getOrCreate()
         )
 ```
