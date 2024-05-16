@@ -75,7 +75,7 @@ def empty_destination_bucket():
         print("Erreur lors de la vidange du dossier destination :", e)
 
 # Copier les fichiers et vider le dossier destination 3 fois
-While True:
+while True:
     copy_files()
     empty_destination_bucket()
 ```
