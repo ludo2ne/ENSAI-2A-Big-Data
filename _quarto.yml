@@ -27,6 +27,8 @@ website:
         menu:
           - href: docs/lab/aws-cluster-spark.qmd
             text: "Create a Spark cluster"
+          - href: docs/lab/aws-stream-simulation.qmd
+            text: "Stream Simulation"
             
       - text: Other resources
         menu:

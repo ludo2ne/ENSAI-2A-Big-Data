@@ -1,0 +1,99 @@
+---
+title: Simulation de Streaming sur AWS
+author: Ludovic Deneuville
+format:
+  html:
+    toc: true
+    toc-location: left
+    toc-expand: 3
+from: markdown+emoji
+number-sections: true
+number-depth: 3
+lightbox: true
+---
+
+## Créer un bucket
+
+- [ ] Lancer le lab
+- [ ] Aller dans le service `S3`
+- [ ] Créer un bucket
+- [ ] Dans ce bucket créer 2 dossiers nommés `source` et `destination`
+- [ ] Dans le dossier *source*, importer les fichiers du dossier de la VM : *U:\Eleves\Informatique\Big Data\tweet_stream*
+- [ ] Créer un fichier *stream_simulation.py* contenant le code ci-dessous
+  - En remplaçant `bucket_name = 'ensai-labs-2023-2024-files'` par le nom de votre bucket
+  - Notez ensuite l'URI de votre fichier (ex : s3://ensai-labs-2023-2024-files/stream_simulation.py)
+
+```{.python}
+import boto3
+import time
+import os
+
+# Configuration des dossier source et destination
+bucket_name = 'ensai-labs-2023-2024-files'
+file_prefix = 'source/tweets'  # Préfixe commun des noms de fichier à copier
+file_extension = '.jsonl.gz'
+
+# Créer un client S3
+s3 = boto3.client('s3')
+
+# Fonction pour copier les fichiers avec l'extension .jsonl.gz
+def copy_files():
+    try:
+        # Liste les objets dans le dossier source
+        response = s3.list_objects_v2(Bucket=bucket_name, Prefix=file_prefix)
+        
+        if 'Contents' in response:
+            for obj in response['Contents']:
+                time.sleep(2)
+                key = obj['Key']
+                if key.endswith(file_extension):
+                    file_name = os.path.basename(key)
+                    # Copier le fichier du dossier source vers le dossier destination
+                    s3.copy_object(
+                        Bucket=bucket_name,
+                        CopySource={'Bucket': bucket_name, 'Key': key},
+                        Key=f"lab3/destination/{file_name}"
+                    )
+                    print(f"Fichier {file_name} copié avec succès.")
+    except Exception as e:
+        print("Erreur lors de la copie des fichiers :", e)
+        
+
+# Fonction pour vider le dossier destination lorsqu'il est plein
+def empty_destination_bucket():
+    try:
+        # Liste les objets dans le dossier destination
+        response = s3.list_objects_v2(Bucket=bucket_name, Prefix="destination/tweets")
+        if 'Contents' in response:
+            # Supprimer chaque objet du dossier destination
+            for obj in response['Contents']:
+                s3.delete_object(Bucket=bucket_name, Key=obj['Key'])
+            print("dossier destination vidé avec succès.")
+    except Exception as e:
+        print("Erreur lors de la vidange du dossier destination :", e)
+
+# Copier les fichiers et vider le dossier destination 3 fois
+While True:
+    copy_files()
+    empty_destination_bucket()
+```
+
+## Programme de transfert de fichiers
+
+Le but de ce programme est de simuler un flux de fichiers entre les dossiers `source` et `destination`
+
+- [ ] Aller dans le service `EC2`
+- [ ] Créer une machine virtuelle de la même manière qu'au [TP0](lab0/lab0.qmd#create-your-first-virtual-machine){target="_blank"}
+- [ ] Dans le menu de gauche, cliquez sur `Instances`
+- [ ] Ouvrez la VM en cliquant sur son *Instance ID*
+- [ ] Cliquez sur `Connect` et encore sur `Connect` pour ouvrir un terminal
+- [ ] Lancez les commandes suivantes 
+  - installez python : `sudo yum install -y python3-devel.x86_64`
+  - installez le package boto3 : `pip install boto3`
+  - copiez votre programme `aws s3 cp <S3_URI_programme_python>`
+    - ex : `aws s3 cp s3://ensai-labs-2023-2024-files/stream_simulation.py`
+  - lancez le programme : `python3 stream_simulation.py`
+    - ou lancer en arrière plan : `nohup python3 ec2_stream_simul.py &`
+
+Si tout se passe bien, les fichiers sont copiés toutes les 2 secondes du dossier source vers destination.  
+Ce dernier est vidé lorsque tous les fichiers sont copiés.
