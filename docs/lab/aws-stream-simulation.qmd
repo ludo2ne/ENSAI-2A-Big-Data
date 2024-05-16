@@ -18,7 +18,9 @@ lightbox: true
 - [ ] Aller dans le service `S3`
 - [ ] Créer un bucket
 - [ ] Dans ce bucket créer 2 dossiers nommés `source` et `destination`
-- [ ] Dans le dossier *source*, importer les fichiers du dossier de la VM : *U:\Eleves\Informatique\Big Data\tweet_stream*
+- [ ] Dans le dossier *source*, importer les fichiers 
+   - du dossier de la VM : *U:\Eleves\Informatique\Big Data\tweet_stream*
+   - ou télécharger puis dezipper depuis ce [lien](https://filesender.renater.fr/?s=download&token=a4d90a6c-ad02-4eeb-b044-f9b39a529f4c)
 - [ ] Créer un fichier *stream_simulation.py* contenant le code ci-dessous
   - En remplaçant `bucket_name = 'ensai-labs-2023-2024-files'` par le nom de votre bucket
   - Notez ensuite l'URI de votre fichier (ex : s3://ensai-labs-2023-2024-files/stream_simulation.py)
