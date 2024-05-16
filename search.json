@@ -294,41 +294,6 @@
     "text": "Depending on the chosen platform, initialize the Spark session\n\n\nOnly on SSPCloud\nSee default configuration on the datalab :\n\n! cat /opt/spark/conf/spark-defaults.conf\n\nTo modify the config :\n\nimport os\nfrom pyspark.sql import SparkSession\n\nspark = (SparkSession\n         .builder\n         # default url of the internally accessed Kubernetes API\n         # (This Jupyter notebook service is itself a Kubernetes Pod)\n         .master(\"k8s://https://kubernetes.default.svc:443\")\n         # Executors spark docker image: for simplicity reasons, this jupyter notebook is reused\n         .config(\"spark.kubernetes.container.image\", os.environ['IMAGE_NAME'])\n         # Name of the Kubernetes namespace\n         .config(\"spark.kubernetes.namespace\", os.environ['KUBERNETES_NAMESPACE'])\n         # Allocated memory to the JVM\n         # Stay careful, by default, the Kubernetes pods has a higher limit which depends on other parameters.\n         .config(\"spark.executor.memory\", \"4g\")\n         .config(\"spark.kubernetes.driver.pod.name\", os.environ['KUBERNETES_POD_NAME'])\n         # dynamic allocation configuration\n         .config(\"spark.dynamicAllocation.enabled\",\"true\")\n         .config(\"spark.dynamicAllocation.initialExecutors\",\"1\")\n         .config(\"spark.dynamicAllocation.minExecutors\",\"1\")\n         .config(\"spark.dynamicAllocation.maxExecutors\",\"10\")\n         .getOrCreate()\n        )\n\n\n# See the current number of executors (one for now)\n!kubectl get pods -l spark-role=executor\n\n\n\nOnly on AWS\n\n#Spark session\nspark\n\n# Configuraion\nspark._jsc.hadoopConfiguration().set(\"fs.s3.useRequesterPaysHeader\",\"true\")\n\n\n\nCheck spark session\n\nspark"
   },
   {
-    "objectID": "docs/duckdb.html",
-    "href": "docs/duckdb.html",
-    "title": "DuckDB",
-    "section": "",
-    "text": "🚧"
-  },
-  {
-    "objectID": "docs/duckdb.html#shell",
-    "href": "docs/duckdb.html#shell",
-    "title": "DuckDB",
-    "section": "Shell",
-    "text": "Shell\n\nhttps://shell.duckdb.org/\n\nExemple avec ces données :\n\nhttps://www.data.gouv.fr/fr/datasets/populations-legales-communales-2017-2021/\n\nFROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'\nLIMIT 10;\nFROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'\nWHERE codgeo = '28088';\nFROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'\nWHERE annee_rp = 2021 \nAND LOWER(libgeo) NOT LIKE '%arrondissement%'\nORDER BY ptot DESC\nLIMIT 20;\nBonus :\n\nbouton SAVE URL\nurl un peu longue donc utiliser https://tinyurl.com/app pour raccourcir\ndiffuser l’url"
-  },
-  {
-    "objectID": "docs/duckdb.html#exécutable",
-    "href": "docs/duckdb.html#exécutable",
-    "title": "DuckDB",
-    "section": "Exécutable",
-    "text": "Exécutable\nTélécharger duckdb.exe\nFROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'\nSELECT SUM(pnum)\nGROUP BY annee_rp\nORDER BY 1 DESC;"
-  },
-  {
-    "objectID": "docs/duckdb.html#dbeaver",
-    "href": "docs/duckdb.html#dbeaver",
-    "title": "DuckDB",
-    "section": "DBeaver",
-    "text": "DBeaver\nhttps://duckdb.org/docs/guides/sql_editors/dbeaver.html\n\nNouvelle connexion : DuckDB\n\nPath : :memory:\n\nOuvrir la connexion\nOuvrir un éditeur SQL\n\n FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'\nSELECT codreg,\n       SUM(pmun) pop\n WHERE annee_rp = 2021\n GROUP BY ALL\n ORDER BY ALL;\n\nAjouter une ligne de total\n\nFROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'\nSELECT codreg,\n       SUM(pmun) pop\n WHERE annee_rp = 2021\n GROUP BY GROUPING SETS((codreg),())\n ORDER BY ALL; \nJointure avec les noms de régions\nFROM read_json_auto('https://geo.api.gouv.fr/regions');\n\nFROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'\nJOIN read_json_auto('https://geo.api.gouv.fr/regions') ON (codreg=code)\nSELECT codreg,\n       nom,\n       SUM(pmun) pop\n WHERE annee_rp = 2021\n GROUP BY GROUPING SETS((codreg, nom),())\n ORDER BY ALL;\nRemplacer les NULL de la dernière ligne\nWITH popreg AS(\n    FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'\n    JOIN read_json_auto('https://geo.api.gouv.fr/regions') ON (codreg = code)\n    SELECT codreg,\n           nom,\n           SUM(pmun) pop\n     WHERE annee_rp = 2021\n     GROUP BY GROUPING SETS((codreg, nom),())\n     ORDER BY ALL\n )\nFROM popreg\nSELECT * REPLACE(IFNULL(codreg, 'FR') AS codreg, IFNULL(nom, 'France') AS nom);"
-  },
-  {
-    "objectID": "docs/bibliography.html",
-    "href": "docs/bibliography.html",
-    "title": "Bibliography",
-    "section": "",
-    "text": "Big Data Is Dead… Long Live Big Data, Aditya Parameswaran, 2023.03.06\nBig Data Is Dead, MotherDuck, 2023.02.07\nManipulation de données massives avec R, INSEE\nFormation BCEAO, INSEE"
-  },
-  {
     "objectID": "docs/lab/aws-cluster-spark.html",
     "href": "docs/lab/aws-cluster-spark.html",
     "title": "Create a Spark cluster on AWS",
@@ -376,6 +341,62 @@
     "title": "Create a Spark cluster on AWS",
     "section": "Summary",
     "text": "Summary\n\n\n\n\n\n\n\n\n\nFirst Lab\nOther Labs\n\n\n\n\nLearner Lab\nlaunch\nlaunch\n\n\nStudio\ncreate\n-\n\n\nCluster\ncreate\nclone\n\n\nWorkspace\nattach cluster\nattach cluster\n\n\nEnd of the lab\nterminate cluster ❗\nterminate cluster ❗"
+  },
+  {
+    "objectID": "docs/bibliography.html",
+    "href": "docs/bibliography.html",
+    "title": "Bibliography",
+    "section": "",
+    "text": "Big Data Is Dead… Long Live Big Data, Aditya Parameswaran, 2023.03.06\nBig Data Is Dead, MotherDuck, 2023.02.07\nManipulation de données massives avec R, INSEE\nFormation BCEAO, INSEE"
+  },
+  {
+    "objectID": "docs/duckdb.html",
+    "href": "docs/duckdb.html",
+    "title": "DuckDB",
+    "section": "",
+    "text": "🚧"
+  },
+  {
+    "objectID": "docs/duckdb.html#shell",
+    "href": "docs/duckdb.html#shell",
+    "title": "DuckDB",
+    "section": "Shell",
+    "text": "Shell\n\nhttps://shell.duckdb.org/\n\nExemple avec ces données :\n\nhttps://www.data.gouv.fr/fr/datasets/populations-legales-communales-2017-2021/\n\nFROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'\nLIMIT 10;\nFROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'\nWHERE codgeo = '28088';\nFROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'\nWHERE annee_rp = 2021 \nAND LOWER(libgeo) NOT LIKE '%arrondissement%'\nORDER BY ptot DESC\nLIMIT 20;\nBonus :\n\nbouton SAVE URL\nurl un peu longue donc utiliser https://tinyurl.com/app pour raccourcir\ndiffuser l’url"
+  },
+  {
+    "objectID": "docs/duckdb.html#exécutable",
+    "href": "docs/duckdb.html#exécutable",
+    "title": "DuckDB",
+    "section": "Exécutable",
+    "text": "Exécutable\nTélécharger duckdb.exe\nFROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'\nSELECT SUM(pnum)\nGROUP BY annee_rp\nORDER BY 1 DESC;"
+  },
+  {
+    "objectID": "docs/duckdb.html#dbeaver",
+    "href": "docs/duckdb.html#dbeaver",
+    "title": "DuckDB",
+    "section": "DBeaver",
+    "text": "DBeaver\nhttps://duckdb.org/docs/guides/sql_editors/dbeaver.html\n\nNouvelle connexion : DuckDB\n\nPath : :memory:\n\nOuvrir la connexion\nOuvrir un éditeur SQL\n\n FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'\nSELECT codreg,\n       SUM(pmun) pop\n WHERE annee_rp = 2021\n GROUP BY ALL\n ORDER BY ALL;\n\nAjouter une ligne de total\n\nFROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'\nSELECT codreg,\n       SUM(pmun) pop\n WHERE annee_rp = 2021\n GROUP BY GROUPING SETS((codreg),())\n ORDER BY ALL; \nJointure avec les noms de régions\nFROM read_json_auto('https://geo.api.gouv.fr/regions');\n\nFROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'\nJOIN read_json_auto('https://geo.api.gouv.fr/regions') ON (codreg=code)\nSELECT codreg,\n       nom,\n       SUM(pmun) pop\n WHERE annee_rp = 2021\n GROUP BY GROUPING SETS((codreg, nom),())\n ORDER BY ALL;\nRemplacer les NULL de la dernière ligne\nWITH popreg AS(\n    FROM 'https://static.data.gouv.fr/resources/populations-legales-communales-2017-2021/20240122-151058/poplegales2017-2021.parquet'\n    JOIN read_json_auto('https://geo.api.gouv.fr/regions') ON (codreg = code)\n    SELECT codreg,\n           nom,\n           SUM(pmun) pop\n     WHERE annee_rp = 2021\n     GROUP BY GROUPING SETS((codreg, nom),())\n     ORDER BY ALL\n )\nFROM popreg\nSELECT * REPLACE(IFNULL(codreg, 'FR') AS codreg, IFNULL(nom, 'France') AS nom);"
+  },
+  {
+    "objectID": "docs/lab/aws-stream-simulation.html",
+    "href": "docs/lab/aws-stream-simulation.html",
+    "title": "Simulation de Streaming sur AWS",
+    "section": "",
+    "text": "Lancer le lab\nAller dans le service S3\nCréer un bucket\nDans ce bucket créer 2 dossiers nommés source et destination\nDans le dossier source, importer les fichiers du dossier de la VM : *U:Data_stream*\nCréer un fichier stream_simulation.py contenant le code ci-dessous\n\nEn remplaçant bucket_name = 'ensai-labs-2023-2024-files' par le nom de votre bucket\nNotez ensuite l’URI de votre fichier (ex : s3://ensai-labs-2023-2024-files/stream_simulation.py)\n\n\nimport boto3\nimport time\nimport os\n\n# Configuration des dossier source et destination\nbucket_name = 'ensai-labs-2023-2024-files'\nfile_prefix = 'source/tweets'  # Préfixe commun des noms de fichier à copier\nfile_extension = '.jsonl.gz'\n\n# Créer un client S3\ns3 = boto3.client('s3')\n\n# Fonction pour copier les fichiers avec l'extension .jsonl.gz\ndef copy_files():\n    try:\n        # Liste les objets dans le dossier source\n        response = s3.list_objects_v2(Bucket=bucket_name, Prefix=file_prefix)\n        \n        if 'Contents' in response:\n            for obj in response['Contents']:\n                time.sleep(2)\n                key = obj['Key']\n                if key.endswith(file_extension):\n                    file_name = os.path.basename(key)\n                    # Copier le fichier du dossier source vers le dossier destination\n                    s3.copy_object(\n                        Bucket=bucket_name,\n                        CopySource={'Bucket': bucket_name, 'Key': key},\n                        Key=f\"lab3/destination/{file_name}\"\n                    )\n                    print(f\"Fichier {file_name} copié avec succès.\")\n    except Exception as e:\n        print(\"Erreur lors de la copie des fichiers :\", e)\n        \n\n# Fonction pour vider le dossier destination lorsqu'il est plein\ndef empty_destination_bucket():\n    try:\n        # Liste les objets dans le dossier destination\n        response = s3.list_objects_v2(Bucket=bucket_name, Prefix=\"destination/tweets\")\n        if 'Contents' in response:\n            # Supprimer chaque objet du dossier destination\n            for obj in response['Contents']:\n                s3.delete_object(Bucket=bucket_name, Key=obj['Key'])\n            print(\"dossier destination vidé avec succès.\")\n    except Exception as e:\n        print(\"Erreur lors de la vidange du dossier destination :\", e)\n\n# Copier les fichiers et vider le dossier destination 3 fois\nWhile True:\n    copy_files()\n    empty_destination_bucket()"
+  },
+  {
+    "objectID": "docs/lab/aws-stream-simulation.html#créer-un-bucket",
+    "href": "docs/lab/aws-stream-simulation.html#créer-un-bucket",
+    "title": "Simulation de Streaming sur AWS",
+    "section": "",
+    "text": "Lancer le lab\nAller dans le service S3\nCréer un bucket\nDans ce bucket créer 2 dossiers nommés source et destination\nDans le dossier source, importer les fichiers du dossier de la VM : *U:Data_stream*\nCréer un fichier stream_simulation.py contenant le code ci-dessous\n\nEn remplaçant bucket_name = 'ensai-labs-2023-2024-files' par le nom de votre bucket\nNotez ensuite l’URI de votre fichier (ex : s3://ensai-labs-2023-2024-files/stream_simulation.py)\n\n\nimport boto3\nimport time\nimport os\n\n# Configuration des dossier source et destination\nbucket_name = 'ensai-labs-2023-2024-files'\nfile_prefix = 'source/tweets'  # Préfixe commun des noms de fichier à copier\nfile_extension = '.jsonl.gz'\n\n# Créer un client S3\ns3 = boto3.client('s3')\n\n# Fonction pour copier les fichiers avec l'extension .jsonl.gz\ndef copy_files():\n    try:\n        # Liste les objets dans le dossier source\n        response = s3.list_objects_v2(Bucket=bucket_name, Prefix=file_prefix)\n        \n        if 'Contents' in response:\n            for obj in response['Contents']:\n                time.sleep(2)\n                key = obj['Key']\n                if key.endswith(file_extension):\n                    file_name = os.path.basename(key)\n                    # Copier le fichier du dossier source vers le dossier destination\n                    s3.copy_object(\n                        Bucket=bucket_name,\n                        CopySource={'Bucket': bucket_name, 'Key': key},\n                        Key=f\"lab3/destination/{file_name}\"\n                    )\n                    print(f\"Fichier {file_name} copié avec succès.\")\n    except Exception as e:\n        print(\"Erreur lors de la copie des fichiers :\", e)\n        \n\n# Fonction pour vider le dossier destination lorsqu'il est plein\ndef empty_destination_bucket():\n    try:\n        # Liste les objets dans le dossier destination\n        response = s3.list_objects_v2(Bucket=bucket_name, Prefix=\"destination/tweets\")\n        if 'Contents' in response:\n            # Supprimer chaque objet du dossier destination\n            for obj in response['Contents']:\n                s3.delete_object(Bucket=bucket_name, Key=obj['Key'])\n            print(\"dossier destination vidé avec succès.\")\n    except Exception as e:\n        print(\"Erreur lors de la vidange du dossier destination :\", e)\n\n# Copier les fichiers et vider le dossier destination 3 fois\nWhile True:\n    copy_files()\n    empty_destination_bucket()"
+  },
+  {
+    "objectID": "docs/lab/aws-stream-simulation.html#programme-de-transfert-de-fichiers",
+    "href": "docs/lab/aws-stream-simulation.html#programme-de-transfert-de-fichiers",
+    "title": "Simulation de Streaming sur AWS",
+    "section": "2 Programme de transfert de fichiers",
+    "text": "2 Programme de transfert de fichiers\nLe but de ce programme est de simuler un flux de fichiers entre les dossiers source et destination\n\nAller dans le service EC2\nCréer une machine virtuelle de la même manière qu’au TP0\nDans le menu de gauche, cliquez sur Instances\nOuvrez la VM en cliquant sur son Instance ID\nCliquez sur Connect et encore sur Connect pour ouvrir un terminal\nLancez les commandes suivantes\n\ninstallez python : sudo yum install -y python3-devel.x86_64\ninstallez le package boto3 : pip install boto3\ncopiez votre programme aws s3 cp &lt;S3_URI_programme_python&gt;\n\nex : aws s3 cp s3://ensai-labs-2023-2024-files/stream_simulation.py\n\nlancez le programme : python3 stream_simulation.py\n\nou lancer en arrière plan : nohup python3 ec2_stream_simul.py &\n\n\n\nSi tout se passe bien, les fichiers sont copiés toutes les 2 secondes du dossier source vers destination.\nCe dernier est vidé lorsque tous les fichiers sont copiés."
   },
   {
     "objectID": "docs/lab/lab-end.html",

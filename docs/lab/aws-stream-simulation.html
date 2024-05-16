@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Ludovic Deneuville">
 
-<title>Big Data - Introduction to Big Data</title>
+<title>Big Data - Simulation de Streaming sur AWS</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +21,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,7 +105,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="floating nav-fixed">
@@ -80,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Big Data</span>
     </a>
   </div>
@@ -91,7 +126,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -100,23 +135,23 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-labs">    
         <li>
-    <a class="dropdown-item" href="./docs/lab/lab-setup.html">
+    <a class="dropdown-item" href="../../docs/lab/lab-setup.html">
  <span class="dropdown-text">Lab setup</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lab/lab0/lab0.html">
+    <a class="dropdown-item" href="../../docs/lab/lab0/lab0.html">
  <span class="dropdown-text">Lab 0</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lab/lab1/lab1.html">
+    <a class="dropdown-item" href="../../docs/lab/lab1/lab1.html">
  <span class="dropdown-text">Lab 1</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lab/lab2/lab2.html">
+    <a class="dropdown-item" href="../../docs/lab/lab2/lab2.html">
  <span class="dropdown-text">Lab 2</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lab/lab3/lab3.html">
+    <a class="dropdown-item" href="../../docs/lab/lab3/lab3.html">
  <span class="dropdown-text">Lab 3</span></a>
   </li>  
     </ul>
@@ -127,11 +162,11 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-aws">    
         <li>
-    <a class="dropdown-item" href="./docs/lab/aws-cluster-spark.html">
+    <a class="dropdown-item" href="../../docs/lab/aws-cluster-spark.html">
  <span class="dropdown-text">Create a Spark cluster</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lab/aws-stream-simulation.html">
+    <a class="dropdown-item" href="../../docs/lab/aws-stream-simulation.html">
  <span class="dropdown-text">Stream Simulation</span></a>
   </li>  
     </ul>
@@ -142,13 +177,13 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-other-resources">    
         <li>
-    <a class="dropdown-item" href="./docs/duckdb.html">
+    <a class="dropdown-item" href="../../docs/duckdb.html">
  <span class="dropdown-text">DuckDB</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./docs/bibliography.html"> 
+    <a class="nav-link" href="../../docs/bibliography.html"> 
 <span class="menu-text">Bibliography</span></a>
   </li>  
 </ul>
@@ -179,22 +214,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#objectives" id="toc-objectives" class="nav-link active" data-scroll-target="#objectives">Objectives</a></li>
-  <li><a href="#organisation" id="toc-organisation" class="nav-link" data-scroll-target="#organisation">Organisation</a></li>
-  <li><a href="#lessons" id="toc-lessons" class="nav-link" data-scroll-target="#lessons">Lessons</a>
-  <ul class="collapse">
-  <li><a href="#what-is-big-data" id="toc-what-is-big-data" class="nav-link" data-scroll-target="#what-is-big-data">1.1 What is Big Data</a></li>
-  <li><a href="#computer-science-survival-kit" id="toc-computer-science-survival-kit" class="nav-link" data-scroll-target="#computer-science-survival-kit">1.2 Computer science survival kit</a></li>
-  <li><a href="#high-performance-computing-without-distribution" id="toc-high-performance-computing-without-distribution" class="nav-link" data-scroll-target="#high-performance-computing-without-distribution">1.3 High-performance computing without distribution</a></li>
-  <li><a href="#what-if" id="toc-what-if" class="nav-link" data-scroll-target="#what-if">1.4 What if ?</a></li>
-  <li><a href="#social-issues" id="toc-social-issues" class="nav-link" data-scroll-target="#social-issues">1.5 Social issues</a></li>
-  <li><a href="#how-to-store-big-data" id="toc-how-to-store-big-data" class="nav-link" data-scroll-target="#how-to-store-big-data">2.1 How to store big data</a></li>
-  <li><a href="#hadoop-file-system-hdfs" id="toc-hadoop-file-system-hdfs" class="nav-link" data-scroll-target="#hadoop-file-system-hdfs">2.2 Hadoop file system (HDFS)</a></li>
-  <li><a href="#hadoop-mapreduce" id="toc-hadoop-mapreduce" class="nav-link" data-scroll-target="#hadoop-mapreduce">2.3 Hadoop MapReduce</a></li>
-  <li><a href="#spark" id="toc-spark" class="nav-link" data-scroll-target="#spark">2.4 Spark</a></li>
-  <li><a href="#cloud-computing" id="toc-cloud-computing" class="nav-link" data-scroll-target="#cloud-computing">3 Cloud Computing</a></li>
-  </ul></li>
-  <li><a href="#labs" id="toc-labs" class="nav-link" data-scroll-target="#labs">Labs</a></li>
+  <li><a href="#créer-un-bucket" id="toc-créer-un-bucket" class="nav-link active" data-scroll-target="#créer-un-bucket"><span class="header-section-number">1</span> Créer un bucket</a></li>
+  <li><a href="#programme-de-transfert-de-fichiers" id="toc-programme-de-transfert-de-fichiers" class="nav-link" data-scroll-target="#programme-de-transfert-de-fichiers"><span class="header-section-number">2</span> Programme de transfert de fichiers</a></li>
   </ul>
 </nav>
 </nav>
@@ -207,13 +228,19 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Introduction to Big Data</h1>
+<h1 class="title">Simulation de Streaming sur AWS</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Ludovic Deneuville </p>
+          </div>
+  </div>
     
   
     
@@ -224,110 +251,98 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Lessons and Labs created by <a href="https://github.com/HealerMikado/panorama_big_data_2021" target="_blank">Rémi Pépin</a> and <a href="https://github.com/katossky/panorama-bigdata" target="_blank">Arthur Katossky</a></p>
-<section id="objectives" class="level2">
-<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
+<section id="créer-un-bucket" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="créer-un-bucket"><span class="header-section-number">1</span> Créer un bucket</h2>
+<ul class="task-list">
+<li><label><input type="checkbox">Lancer le lab</label></li>
+<li><label><input type="checkbox">Aller dans le service <code>S3</code></label></li>
+<li><label><input type="checkbox">Créer un bucket</label></li>
+<li><label><input type="checkbox">Dans ce bucket créer 2 dossiers nommés <code>source</code> et <code>destination</code></label></li>
+<li><label><input type="checkbox">Dans le dossier <em>source</em>, importer les fichiers du dossier de la VM : *U:Data_stream*</label></li>
+<li><label><input type="checkbox">Créer un fichier <em>stream_simulation.py</em> contenant le code ci-dessous</label>
 <ul>
-<li>Understand the basics of computation in the real world, the bottlenecks and how to solve them</li>
-<li>Understand the basics of cloud computing and how to use AWS (or SSP Cloud)</li>
-<li>Get familiar with big data technologies and the most common paradigm</li>
-<li>Learn how to use Spark for data exploration on data at rest or streamed data, and how to use some basics ML algorithm on big data</li>
+<li>En remplaçant <code>bucket_name = 'ensai-labs-2023-2024-files'</code> par le nom de votre bucket</li>
+<li>Notez ensuite l’URI de votre fichier (ex : s3://ensai-labs-2023-2024-files/stream_simulation.py)</li>
+</ul></li>
 </ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> boto3</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Configuration des dossier source et destination</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>bucket_name <span class="op">=</span> <span class="st">'ensai-labs-2023-2024-files'</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>file_prefix <span class="op">=</span> <span class="st">'source/tweets'</span>  <span class="co"># Préfixe commun des noms de fichier à copier</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>file_extension <span class="op">=</span> <span class="st">'.jsonl.gz'</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Créer un client S3</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>s3 <span class="op">=</span> boto3.client(<span class="st">'s3'</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Fonction pour copier les fichiers avec l'extension .jsonl.gz</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> copy_files():</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Liste les objets dans le dossier source</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        response <span class="op">=</span> s3.list_objects_v2(Bucket<span class="op">=</span>bucket_name, Prefix<span class="op">=</span>file_prefix)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">'Contents'</span> <span class="kw">in</span> response:</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> obj <span class="kw">in</span> response[<span class="st">'Contents'</span>]:</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>                time.sleep(<span class="dv">2</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>                key <span class="op">=</span> obj[<span class="st">'Key'</span>]</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> key.endswith(file_extension):</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>                    file_name <span class="op">=</span> os.path.basename(key)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># Copier le fichier du dossier source vers le dossier destination</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>                    s3.copy_object(</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>                        Bucket<span class="op">=</span>bucket_name,</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>                        CopySource<span class="op">=</span>{<span class="st">'Bucket'</span>: bucket_name, <span class="st">'Key'</span>: key},</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>                        Key<span class="op">=</span><span class="ss">f"lab3/destination/</span><span class="sc">{</span>file_name<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>                    )</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">print</span>(<span class="ss">f"Fichier </span><span class="sc">{</span>file_name<span class="sc">}</span><span class="ss"> copié avec succès."</span>)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Erreur lors de la copie des fichiers :"</span>, e)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Fonction pour vider le dossier destination lorsqu'il est plein</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> empty_destination_bucket():</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Liste les objets dans le dossier destination</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>        response <span class="op">=</span> s3.list_objects_v2(Bucket<span class="op">=</span>bucket_name, Prefix<span class="op">=</span><span class="st">"destination/tweets"</span>)</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">'Contents'</span> <span class="kw">in</span> response:</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Supprimer chaque objet du dossier destination</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> obj <span class="kw">in</span> response[<span class="st">'Contents'</span>]:</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>                s3.delete_object(Bucket<span class="op">=</span>bucket_name, Key<span class="op">=</span>obj[<span class="st">'Key'</span>])</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"dossier destination vidé avec succès."</span>)</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Erreur lors de la vidange du dossier destination :"</span>, e)</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Copier les fichiers et vider le dossier destination 3 fois</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>While <span class="va">True</span>:</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>    copy_files()</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    empty_destination_bucket()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="organisation" class="level2">
-<h2 class="anchored" data-anchor-id="organisation">Organisation</h2>
+<section id="programme-de-transfert-de-fichiers" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="programme-de-transfert-de-fichiers"><span class="header-section-number">2</span> Programme de transfert de fichiers</h2>
+<p>Le but de ce programme est de simuler un flux de fichiers entre les dossiers <code>source</code> et <code>destination</code></p>
+<ul class="task-list">
+<li><label><input type="checkbox">Aller dans le service <code>EC2</code></label></li>
+<li><label><input type="checkbox">Créer une machine virtuelle de la même manière qu’au <a href="../../docs/lab/lab0/lab0.html#create-your-first-virtual-machine" target="_blank">TP0</a></label></li>
+<li><label><input type="checkbox">Dans le menu de gauche, cliquez sur <code>Instances</code></label></li>
+<li><label><input type="checkbox">Ouvrez la VM en cliquant sur son <em>Instance ID</em></label></li>
+<li><label><input type="checkbox">Cliquez sur <code>Connect</code> et encore sur <code>Connect</code> pour ouvrir un terminal</label></li>
+<li><label><input type="checkbox">Lancez les commandes suivantes</label>
 <ul>
-<li>Lessons : 7h30</li>
-<li>Labs : 10h30 + 3h (graded lab)</li>
-<li>Presentations : 3h</li>
-</ul>
-</section>
-<section id="lessons" class="level2">
-<h2 class="anchored" data-anchor-id="lessons">Lessons</h2>
-<section id="what-is-big-data" class="level3">
-<h3 class="anchored" data-anchor-id="what-is-big-data">1.1 What is Big Data</h3>
+<li>installez python : <code>sudo yum install -y python3-devel.x86_64</code></li>
+<li>installez le package boto3 : <code>pip install boto3</code></li>
+<li>copiez votre programme <code>aws s3 cp &lt;S3_URI_programme_python&gt;</code>
 <ul>
-<li>What is considered big ?</li>
-<li>Volume, Velocity, Variety, Veracity, Value, Variability</li>
-</ul>
-</section>
-<section id="computer-science-survival-kit" class="level3">
-<h3 class="anchored" data-anchor-id="computer-science-survival-kit">1.2 Computer science survival kit</h3>
+<li>ex : <code>aws s3 cp s3://ensai-labs-2023-2024-files/stream_simulation.py</code></li>
+</ul></li>
+<li>lancez le programme : <code>python3 stream_simulation.py</code>
 <ul>
-<li>Processors, Memory, Storage, Network</li>
+<li>ou lancer en arrière plan : <code>nohup python3 ec2_stream_simul.py &amp;</code></li>
+</ul></li>
+</ul></li>
 </ul>
-</section>
-<section id="high-performance-computing-without-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="high-performance-computing-without-distribution">1.3 High-performance computing without distribution</h3>
-<ul>
-<li>Profile code, Analyse code</li>
-<li>Store or process data in chunks, Take advantage of sparcity</li>
-<li>Go low-level</li>
-<li>Use cache</li>
-</ul>
-</section>
-<section id="what-if" class="level3">
-<h3 class="anchored" data-anchor-id="what-if">1.4 What if ?</h3>
-<ul>
-<li>What if data is too big to fit in memory ?</li>
-<li>What if your file is too big for your local file system ?</li>
-<li>What if data is too big to fit on disk ?</li>
-<li>What if computation takes ages ?</li>
-<li>What if computation / storage is too expensive ?</li>
-</ul>
-</section>
-<section id="social-issues" class="level3">
-<h3 class="anchored" data-anchor-id="social-issues">1.5 Social issues</h3>
-<ul>
-<li>Ethical issues, Environmental issues, Political issues</li>
-</ul>
-<hr>
-</section>
-<section id="how-to-store-big-data" class="level3">
-<h3 class="anchored" data-anchor-id="how-to-store-big-data">2.1 How to store big data</h3>
-<ul>
-<li>File system, Database, Distribution</li>
-<li>The CAP theorem</li>
-</ul>
-</section>
-<section id="hadoop-file-system-hdfs" class="level3">
-<h3 class="anchored" data-anchor-id="hadoop-file-system-hdfs">2.2 Hadoop file system (HDFS)</h3>
-<ul>
-<li>Hadoop Ecosystem, How to use HDFS</li>
-</ul>
-</section>
-<section id="hadoop-mapreduce" class="level3">
-<h3 class="anchored" data-anchor-id="hadoop-mapreduce">2.3 Hadoop MapReduce</h3>
-<ul>
-<li>Key Concepts</li>
-</ul>
-</section>
-<section id="spark" class="level3">
-<h3 class="anchored" data-anchor-id="spark">2.4 Spark</h3>
-<ul>
-<li>Key Concepts</li>
-<li>Importing/Exporting data</li>
-<li>How to run Spark ?</li>
-</ul>
-<hr>
-</section>
-<section id="cloud-computing" class="level3">
-<h3 class="anchored" data-anchor-id="cloud-computing">3 Cloud Computing</h3>
-<ul>
-<li>Traditional IT, Virtualization, Containerization</li>
-<li>Why cloud computing ?</li>
-<li>categories of cloud services</li>
-</ul>
-</section>
-</section>
-<section id="labs" class="level2">
-<h2 class="anchored" data-anchor-id="labs">Labs</h2>
-<ul>
-<li><a href="./docs/lab/lab0/lab0.html">Lab 0</a> : Discover Amazon Web Service (AWS)</li>
-<li><a href="./docs/lab/lab1/lab1.html">Lab 1</a> : First steps with Spark</li>
-<li><a href="./docs/lab/lab2/lab2.html">Lab 2</a> : Spark ML</li>
-<li><a href="./docs/lab/lab3/lab3.html">Lab 3</a> : Stream processing with Spark</li>
-</ul>
+<p>Si tout se passe bien, les fichiers sont copiés toutes les 2 secondes du dossier source vers destination.<br>
+Ce dernier est vidé lorsque tous les fichiers sont copiés.</p>
 
 
 </section>

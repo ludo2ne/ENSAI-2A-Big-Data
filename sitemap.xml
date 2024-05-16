@@ -2,58 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ludo2ne.github.io/ENSAI-2A-Big-Data/index.html</loc>
-    <lastmod>2024-05-15T15:48:22.652Z</lastmod>
+    <lastmod>2024-05-16T07:32:29.602Z</lastmod>
   </url>
   <url>
     <loc>https://ludo2ne.github.io/ENSAI-2A-Big-Data/docs/lab/lab3/lab3-correction.html</loc>
-    <lastmod>2024-05-15T15:48:22.652Z</lastmod>
+    <lastmod>2024-05-16T07:32:29.602Z</lastmod>
   </url>
   <url>
     <loc>https://ludo2ne.github.io/ENSAI-2A-Big-Data/docs/lab/lab2/lab2-correction.html</loc>
-    <lastmod>2024-05-15T15:48:22.640Z</lastmod>
+    <lastmod>2024-05-16T07:32:29.594Z</lastmod>
   </url>
   <url>
     <loc>https://ludo2ne.github.io/ENSAI-2A-Big-Data/docs/lab/lab1/lab1-correction.html</loc>
-    <lastmod>2024-05-15T15:48:22.636Z</lastmod>
+    <lastmod>2024-05-16T07:32:29.590Z</lastmod>
   </url>
   <url>
     <loc>https://ludo2ne.github.io/ENSAI-2A-Big-Data/docs/lab/lab-setup.html</loc>
-    <lastmod>2024-05-15T15:48:22.584Z</lastmod>
+    <lastmod>2024-05-16T07:32:29.538Z</lastmod>
   </url>
   <url>
     <loc>https://ludo2ne.github.io/ENSAI-2A-Big-Data/docs/lab/lab-create-spark-session.html</loc>
-    <lastmod>2024-05-15T15:48:22.584Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ludo2ne.github.io/ENSAI-2A-Big-Data/docs/duckdb.html</loc>
-    <lastmod>2024-05-15T15:48:22.584Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ludo2ne.github.io/ENSAI-2A-Big-Data/docs/bibliography.html</loc>
-    <lastmod>2024-05-15T15:48:22.584Z</lastmod>
+    <lastmod>2024-05-16T07:32:29.538Z</lastmod>
   </url>
   <url>
     <loc>https://ludo2ne.github.io/ENSAI-2A-Big-Data/docs/lab/aws-cluster-spark.html</loc>
-    <lastmod>2024-05-15T15:48:22.584Z</lastmod>
+    <lastmod>2024-05-16T07:32:29.538Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ludo2ne.github.io/ENSAI-2A-Big-Data/docs/bibliography.html</loc>
+    <lastmod>2024-05-16T07:32:29.538Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ludo2ne.github.io/ENSAI-2A-Big-Data/docs/duckdb.html</loc>
+    <lastmod>2024-05-16T07:32:29.538Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ludo2ne.github.io/ENSAI-2A-Big-Data/docs/lab/aws-stream-simulation.html</loc>
+    <lastmod>2024-05-16T07:32:29.538Z</lastmod>
   </url>
   <url>
     <loc>https://ludo2ne.github.io/ENSAI-2A-Big-Data/docs/lab/lab-end.html</loc>
-    <lastmod>2024-05-15T15:48:22.584Z</lastmod>
+    <lastmod>2024-05-16T07:32:29.538Z</lastmod>
   </url>
   <url>
     <loc>https://ludo2ne.github.io/ENSAI-2A-Big-Data/docs/lab/lab0/lab0.html</loc>
-    <lastmod>2024-05-15T15:48:22.600Z</lastmod>
+    <lastmod>2024-05-16T07:32:29.550Z</lastmod>
   </url>
   <url>
     <loc>https://ludo2ne.github.io/ENSAI-2A-Big-Data/docs/lab/lab1/lab1.html</loc>
-    <lastmod>2024-05-15T15:48:22.636Z</lastmod>
+    <lastmod>2024-05-16T07:32:29.590Z</lastmod>
   </url>
   <url>
     <loc>https://ludo2ne.github.io/ENSAI-2A-Big-Data/docs/lab/lab2/lab2.html</loc>
-    <lastmod>2024-05-15T15:48:22.640Z</lastmod>
+    <lastmod>2024-05-16T07:32:29.594Z</lastmod>
   </url>
   <url>
     <loc>https://ludo2ne.github.io/ENSAI-2A-Big-Data/docs/lab/lab3/lab3.html</loc>
-    <lastmod>2024-05-15T15:48:22.652Z</lastmod>
+    <lastmod>2024-05-16T07:32:29.602Z</lastmod>
   </url>
 </urlset>
