@@ -71,7 +71,7 @@ while True:
         response_dest = s3.list_objects_v2(Bucket=bucket_destination, Prefix=destination_folder)
         json_dest_files = [obj["Key"] for obj in response_dest["Contents"] if obj["Key"].endswith(".jsonl.gz")]
         print(f"{len(json_dest_files)}", end=", ")
-        if len(json_dest_files) % 5 == 0:
+        if len(json_dest_files) % 20 == 0:
             print()
         
         file_name = file.split("/")[-1]    
