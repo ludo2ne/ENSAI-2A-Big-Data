@@ -8,7 +8,7 @@
 
 <meta name="author" content="Ludovic Deneuville">
 
-<title>Big Data - Create a Spark cluster on AWS</title>
+<title>Big Data - Simulation de Streaming sur SSPCloud</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -184,15 +218,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#chrome-setup" id="toc-chrome-setup" class="nav-link active" data-scroll-target="#chrome-setup"><span class="header-section-number">1</span> Chrome Setup</a></li>
-  <li><a href="#run-the-aws-learner-lab" id="toc-run-the-aws-learner-lab" class="nav-link" data-scroll-target="#run-the-aws-learner-lab"><span class="header-section-number">2</span> Run the AWS Learner Lab</a></li>
-  <li><a href="#create-a-studio" id="toc-create-a-studio" class="nav-link" data-scroll-target="#create-a-studio"><span class="header-section-number">3</span> Create a Studio</a></li>
-  <li><a href="#create-a-cluster" id="toc-create-a-cluster" class="nav-link" data-scroll-target="#create-a-cluster"><span class="header-section-number">4</span> Create a Cluster</a>
-  <ul class="collapse">
-  <li><a href="#clone-the-cluster" id="toc-clone-the-cluster" class="nav-link" data-scroll-target="#clone-the-cluster"><span class="header-section-number">4.1</span> Clone the Cluster</a></li>
-  </ul></li>
-  <li><a href="#associate-the-cluster-with-a-workspace" id="toc-associate-the-cluster-with-a-workspace" class="nav-link" data-scroll-target="#associate-the-cluster-with-a-workspace"><span class="header-section-number">5</span> Associate the cluster with a workspace</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#objectif" id="toc-objectif" class="nav-link active" data-scroll-target="#objectif"><span class="header-section-number">1</span> Objectif</a></li>
+  <li><a href="#créer-un-dossier-destination" id="toc-créer-un-dossier-destination" class="nav-link" data-scroll-target="#créer-un-dossier-destination"><span class="header-section-number">2</span> Créer un dossier destination</a></li>
+  <li><a href="#comment-se-connecter-à-votre-s3" id="toc-comment-se-connecter-à-votre-s3" class="nav-link" data-scroll-target="#comment-se-connecter-à-votre-s3"><span class="header-section-number">3</span> Comment se connecter à votre S3</a></li>
+  <li><a href="#lancer-le-programme-de-copie" id="toc-lancer-le-programme-de-copie" class="nav-link" data-scroll-target="#lancer-le-programme-de-copie"><span class="header-section-number">4</span> Lancer le programme de copie</a></li>
   </ul>
 </nav>
 </nav>
@@ -205,7 +234,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Create a Spark cluster on AWS</h1>
+<h1 class="title">Simulation de Streaming sur SSPCloud</h1>
 </div>
 
 
@@ -228,267 +257,93 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>We strongly recommend using the Google Chrome browser!</p>
-</div>
-</div>
-<section id="chrome-setup" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="chrome-setup"><span class="header-section-number">1</span> Chrome Setup</h2>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Only the first lab</p>
-</div>
-</div>
+<section id="objectif" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="objectif"><span class="header-section-number">1</span> Objectif</h2>
+<ul>
+<li>un dossier <em>source</em> contient 280 fichiers <code>tweets-xxx.json</code></li>
+<li>un dossier <em>destination</em> servira d’entrée pour le TP</li>
+<li>créer un programme qui copie toutes les 2 secondes un fichier depuis <em>source</em> vers <em>destination</em>
+<ul>
+<li>cela simule un flux continu de données</li>
+<li>quand tous les fichiers sont copiés, le dossier <em>destination</em> est vidé et ça recommence</li>
+</ul></li>
+</ul>
+<p>Connectez-vous au SSPCloud</p>
+</section>
+<section id="créer-un-dossier-destination" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="créer-un-dossier-destination"><span class="header-section-number">2</span> Créer un dossier destination</h2>
 <ul class="task-list">
-<li><label><input type="checkbox">Open Chrome</label></li>
-<li><label><input type="checkbox">In the top right, click on the 3 dots, then select Settings.</label></li>
-<li><label><input type="checkbox">Click on Privacy and security, then Site settings, then Pop-ups and redirects.</label></li>
-<li><label><input type="checkbox">Websites can show pop-ups and use redirects</label></li>
+<li><label><input type="checkbox">Aller dans <code>Mes fichiers</code></label></li>
+<li><label><input type="checkbox">Créer un dossier <code>destination</code></label></li>
+<li><label><input type="checkbox">Noter l’URI complète (ex: <code>s3/&lt;nom_utilisateur&gt;/destination</code>)</label></li>
+<li><label><input type="checkbox">Dans le TP, il faudra brancher le stream à cette adresse</label></li>
 </ul>
 </section>
-<section id="run-the-aws-learner-lab" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="run-the-aws-learner-lab"><span class="header-section-number">2</span> Run the AWS Learner Lab</h2>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>To be done for each lab</p>
-</div>
-</div>
-<ul>
-<li>Log in <a href="https://awsacademy.instructure.com/login/canvas">AWS academy</a>
-<ul>
-<li>use your ENSAI mail</li>
-</ul></li>
-<li>Go to the <code>Dashboard</code>
-<ul>
-<li>Select course <em>AWS Academy Learner Lab [78065]</em></li>
-<li>Click on <code>Learner Lab</code></li>
-<li>Click on <em>Start Lab</em> <span class="emoji" data-emoji="arrow_forward">▶️</span></li>
-<li>Wait for 2 minutes until the circle next to AWS turns green</li>
-<li>Click on <code>AWS</code></li>
-</ul></li>
-</ul>
-<p>Now, you enter the lab.</p>
-</section>
-<section id="create-a-studio" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="create-a-studio"><span class="header-section-number">3</span> Create a Studio</h2>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Only the first lab</p>
-</div>
-</div>
-<ul>
-<li>In the search bar, search for the EMR service</li>
-<li>Click on <code>Studios</code>, then <em>Create Studio</em></li>
-<li>Setup options <span class="emoji" data-emoji="arrow_right">➡️</span> select <em>Custom</em></li>
-<li>Studio settings
-<ul>
-<li>Service role to let Studio access your AWS resources : <code>LabRole</code></li>
-</ul></li>
-<li>Networking and security
-<ul>
-<li>VPC : select the default VPC</li>
-<li>Subnets : choose one and note its name for later</li>
-<li>Click on <code>Create Studio</code>
-<ul>
-<li>If Encryption key is required, then uncheck the <em>Encrypt Workspace files with your own AWS KMS key</em> box</li>
-</ul></li>
-</ul></li>
+<section id="comment-se-connecter-à-votre-s3" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="comment-se-connecter-à-votre-s3"><span class="header-section-number">3</span> Comment se connecter à votre S3</h2>
+<ul class="task-list">
+<li><p><label><input type="checkbox">Aller dans <code>Mon Compte</code> puis dans l’onglet <code>Connexion au stockage</code></label></p></li>
+<li><p><label><input type="checkbox">Copier la config <em>Python boto3</em>, qui ressemble à :</label></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> boto3</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>s3 <span class="op">=</span> boto3.client(<span class="st">"s3"</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                  endpoint_url <span class="op">=</span> <span class="st">'yyy'</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                  aws_access_key_id<span class="op">=</span> <span class="st">'ttt'</span>, </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                  aws_secret_access_key<span class="op">=</span> <span class="st">'zzz'</span>, </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                  aws_session_token <span class="op">=</span> <span class="st">'xxx'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
 </section>
-<section id="create-a-cluster" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="create-a-cluster"><span class="header-section-number">4</span> Create a Cluster</h2>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Only the first lab</p>
-</div>
-</div>
-<ul>
-<li>Click on <code>Clusters</code>, then <code>Create cluster</code></li>
-<li>Go to the <em>Cluster Configuration</em> section
-<ul>
-<li>For <em>Primary</em>, <em>Core</em> and <em>Task 1 of 1</em>, choose EC2 instance type : <code>m4.large</code></li>
-</ul></li>
-<li>Networking section
-<ul>
-<li>Use the same subnet as before</li>
-</ul></li>
-<li>Bootstrap actions
-<ul>
-<li>Add</li>
-<li>Script location : <code>s3://ensai-labs-2023-2024-files/install_packages.sh</code>
-<ul>
-<li>this script contain instructions to install numpy and pandas : <em>sudo pip3 install numpy pandas</em></li>
-</ul></li>
-</ul></li>
-<li>Security configuration and EC2 key pair section
-<ul>
-<li>Amazon EC2 key pair for SSH to the cluster : vockey</li>
-</ul></li>
-<li>Identity and Access Management (IAM) roles section
-<ul>
-<li>Service role : EMR_DefaultRole</li>
-<li>Instance profile : EMR_EC2_DefaultRole</li>
-</ul></li>
-<li><em>Create Cluster</em></li>
+<section id="lancer-le-programme-de-copie" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="lancer-le-programme-de-copie"><span class="header-section-number">4</span> Lancer le programme de copie</h2>
+<ul class="task-list">
+<li><label><input type="checkbox">Lancer un service <em>jupyter-python</em> ou <em>vscode-python</em></label></li>
+<li><label><input type="checkbox">Coller le code ci-dessous</label></li>
 </ul>
-<p>The cluster creation takes some time (10 min). You can advance the reading of the subject.</p>
-<p>Go back to EMR &gt; Cluster and wait until the cluster status is <em>Waiting</em> (refresh <span class="emoji" data-emoji="arrows_counterclockwise">🔄</span>)</p>
-<section id="clone-the-cluster" class="level3" data-number="4.1">
-<h3 data-number="4.1" class="anchored" data-anchor-id="clone-the-cluster"><span class="header-section-number">4.1</span> Clone the Cluster</h3>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Starting from the second lab</p>
-</div>
-</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> boto3</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;&lt;&lt;</span> COLLER VOTRE CONFIG DE CONNEXION A S3 ICI <span class="op">&gt;&gt;&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>bucket_source <span class="op">=</span> <span class="st">"ludo2ne"</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>source_folder <span class="op">=</span> <span class="st">"diffusion/ensai/stream_tweet"</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;&lt;&lt;</span> REMPLACER LE BUCKET ET LE FOLDER DESTINATION <span class="op">&gt;&gt;&gt;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>bucket_destination <span class="op">=</span> <span class="st">"sspcloud_idep"</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>destination_folder <span class="op">=</span> <span class="st">"destination"</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Number of files : "</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> s3.list_objects_v2(Bucket<span class="op">=</span>bucket_source, Prefix<span class="op">=</span>source_folder)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    json_files <span class="op">=</span> [obj[<span class="st">"Key"</span>] <span class="cf">for</span> obj <span class="kw">in</span> response[<span class="st">"Contents"</span>] <span class="cf">if</span> obj[<span class="st">"Key"</span>].endswith(<span class="st">".jsonl.gz"</span>)]</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> json_files:</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        response_dest <span class="op">=</span> s3.list_objects_v2(Bucket<span class="op">=</span>bucket_destination, Prefix<span class="op">=</span>destination_folder)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        json_dest_files <span class="op">=</span> [obj[<span class="st">"Key"</span>] <span class="cf">for</span> obj <span class="kw">in</span> response_dest[<span class="st">"Contents"</span>] <span class="cf">if</span> obj[<span class="st">"Key"</span>].endswith(<span class="st">".jsonl.gz"</span>)]</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="bu">len</span>(json_dest_files)<span class="sc">}</span><span class="ss">"</span>, end<span class="op">=</span><span class="st">", "</span>)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(json_dest_files) <span class="op">%</span> <span class="dv">5</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>()</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        file_name <span class="op">=</span> <span class="bu">file</span>.split(<span class="st">"/"</span>)[<span class="op">-</span><span class="dv">1</span>]    </span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>        destination_object <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>destination_folder<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>file_name<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>        s3.copy_object(CopySource<span class="op">=</span>{<span class="st">'Bucket'</span>: bucket_source, <span class="st">'Key'</span>: <span class="bu">file</span>},</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>                       Bucket<span class="op">=</span>bucket_destination,</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>                       Key<span class="op">=</span>destination_object)</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>        <span class="co">#print(f"File '{file_name}' copied from '{source_folder}' to '{destination_folder}'")</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>        time.sleep(<span class="dv">2</span>)</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Delete each JSON file from the bucket</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    response_dest <span class="op">=</span> s3.list_objects_v2(Bucket<span class="op">=</span>bucket_destination, Prefix<span class="op">=</span>destination_folder)</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    json_dest_files <span class="op">=</span> [obj[<span class="st">"Key"</span>] <span class="cf">for</span> obj <span class="kw">in</span> response_dest[<span class="st">"Contents"</span>] <span class="cf">if</span> obj[<span class="st">"Key"</span>].endswith(<span class="st">".jsonl.gz"</span>)]</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> json_file <span class="kw">in</span> json_dest_files:</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>        s3.delete_object(Bucket<span class="op">=</span>bucket_destination, Key<span class="op">=</span>json_file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>Go to <em>EMR service</em> and then <em>Clusters</em></li>
-<li>Select the old cluster and click on <em>Clone</em>
-<ul>
-<li>Before validate clone creation (<span class="emoji" data-emoji="warning">⚠️</span> TODO because i forgot it in section “Create a cluster”)</li>
-<li>Go to section <em>Bootstrap actions</em></li>
-<li>Add</li>
-<li>Script location : <code>s3://ensai-labs-2023-2024-files/install_packages.sh</code>
-<ul>
-<li>this script contain instructions to install numpy and pandas on all nodes</li>
-<li>workaround : if you want, feel free to :
-<ul>
-<li>create your own <em>sh</em> file,</li>
-<li>paste this code : <em>sudo pip3 install numpy pandas</em></li>
-<li>store the file in your own bucket</li>
-<li>Script location : *s3://<your_bucket>/&lt;your_file.sh&gt;</your_bucket></li>
-</ul></li>
-</ul></li>
-</ul></li>
-<li>The cluster creation takes some time (10 min). You can advance the reading of the subject.</li>
-<li>Go back to EMR &gt; Cluster and wait until the cluster status is <em>Waiting</em> (refresh <span class="emoji" data-emoji="arrows_counterclockwise">🔄</span>)</li>
+<li>en cas de soucis, il suffit d’interrompte le kernel</li>
+<li>il est également possible de supprimer puis recréer le dossier destination</li>
+<li><label><input type="checkbox">n’oubliez pas d’arrêter vos stream, vos programmes et vos service à la fin !</label></li>
 </ul>
-</section>
-</section>
-<section id="associate-the-cluster-with-a-workspace" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="associate-the-cluster-with-a-workspace"><span class="header-section-number">5</span> Associate the cluster with a workspace</h2>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>To be done for each lab</p>
-</div>
-</div>
-<ul>
-<li>Click on <code>Workspaces (Notebooks)</code></li>
-<li>Select the workspace
-<ul>
-<li>click on Actions &gt; Stop</li>
-<li>Refresh until the status turn to <em>Idle</em></li>
-</ul></li>
-<li>Select the workspace, then click on <code>Attach cluster</code>
-<ul>
-<li>Check <em>Launch in Jupyter</em></li>
-<li>EMR cluster : your cluster</li>
-<li>Attach cluster and launch</li>
-</ul></li>
-</ul>
-<p>A new tab will open. Save the URL, for example by bookmarking it.</p>
-<p>Now you can load the lab notebooks (<em>lab_.ipynb</em> file) and then open it.</p>
-<p>Once it’s open, verify that the kernel is set to <strong>PySpark</strong> on the top right. If not : Kernel &gt; Change Kernel &gt; PySpark</p>
-</section>
-<section id="summary" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="summary">Summary</h2>
-<table class="table">
-<colgroup>
-<col style="width: 29%">
-<col style="width: 34%">
-<col style="width: 36%">
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th>First Lab</th>
-<th>Other Labs</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Learner Lab</td>
-<td>launch</td>
-<td>launch</td>
-</tr>
-<tr class="even">
-<td>Studio</td>
-<td>create</td>
-<td>-</td>
-</tr>
-<tr class="odd">
-<td>Cluster</td>
-<td>create</td>
-<td>clone</td>
-</tr>
-<tr class="even">
-<td>Workspace</td>
-<td>attach cluster</td>
-<td>attach cluster</td>
-</tr>
-<tr class="odd">
-<td>End of the lab</td>
-<td>terminate cluster <span class="emoji" data-emoji="exclamation">❗</span></td>
-<td>terminate cluster <span class="emoji" data-emoji="exclamation">❗</span></td>
-</tr>
-</tbody>
-</table>
 
 
 </section>
