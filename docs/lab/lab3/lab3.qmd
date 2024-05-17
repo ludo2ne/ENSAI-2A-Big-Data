@@ -21,7 +21,9 @@ lightbox: true
 
 - [ ] Download this [Jupyter Notebook](lab3.ipynb){target="_blank"}
 - [ ] Follow these [instructions](../lab-setup.qmd){target="_blank"}
-
+- [ ] If you want to simulate a stream:
+  - [AWS](../aws-stream-simulation.qmd){target="_blank"}
+  - [SSPCloud](../ssp-stream-simulation.qmd){target="_blank"}
 
 ## Outline {.unnumbered}
 
