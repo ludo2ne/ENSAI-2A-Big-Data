@@ -174,11 +174,13 @@ window.Quarto = {
   </li>  
     </ul>
   </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-other-resources" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Other resources</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-other-resources">    
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-other-resources">    
         <li>
     <a class="dropdown-item" href="../../../docs/duckdb.html">
  <span class="dropdown-text">DuckDB</span></a>
@@ -186,11 +188,9 @@ window.Quarto = {
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="../../../docs/bibliography.html"> 
-<span class="menu-text">Bibliography</span></a>
+    <a class="nav-link" href="../../../docs/resources.html"> 
+<span class="menu-text">Useful resources</span></a>
   </li>  
-</ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/ludo2ne/ENSAI-2A-Big-Data" target="_blank"> <i class="bi bi-github" role="img">
 </i> 
@@ -1187,7 +1187,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom","loop":false,"selector":".lightbox"});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":false,"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
