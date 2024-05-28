@@ -1,5 +1,5 @@
 ---
-title: Bibliography
+title: Useful resources
 description: Some interesting articles
 author: Ludovic Deneuville
 format:
@@ -10,7 +10,15 @@ format:
 from: markdown+emoji
 ---
 
+## Big Data
+
 - [Big Data Is Dead… Long Live Big Data](https://ponder.io/big-data-is-dead-long-live-big-data/){target="_blank"}, Aditya Parameswaran, 2023.03.06
 - [Big Data Is Dead](https://motherduck.com/blog/big-data-is-dead/){target="_blank"}, MotherDuck, 2023.02.07
-- [Manipulation de données massives avec R](https://sortie-sas.pages.lab.sspcloud.fr/tutoriels/tutoriel-manipulation-de-donnees-massives/){target="_blank"}, INSEE
 - [Formation BCEAO](https://inseefrlab.github.io/formation-bceao/){target="_blank"}, INSEE
+
+
+## Explore data with R
+
+- [Manipulation de données massives avec R](https://sortie-sas.pages.lab.sspcloud.fr/tutoriels/tutoriel-manipulation-de-donnees-massives/){target="_blank"}, INSEE
+- [Manipuler des données avec arrow](https://book.utilitr.org/03_Fiches_thematiques/Fiche_arrow.html){target="_blank"}, UtilitR
+- [Manipuler des données avec duckdb](https://book.utilitr.org/03_Fiches_thematiques/Fiche_duckdb.html){target="_blank"}, UtilitR

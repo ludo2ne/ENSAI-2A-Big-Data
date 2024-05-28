@@ -31,14 +31,13 @@ website:
             text: "Stream Simulation AWS"
           - href: docs/lab/ssp-stream-simulation.qmd
             text: "Stream Simulation SSP"
-            
+    right:
       - text: Other resources
         menu:
           - href: docs/duckdb.qmd
             text: "DuckDB"
-      - href: docs/bibliography.qmd
-        text: Bibliography
-    right:
+      - href: docs/resources.qmd
+        text: Useful resources
       - icon: github
         href: https://github.com/ludo2ne/ENSAI-2A-Big-Data
         target: "_blank"
