@@ -1,0 +1,258 @@
+---
+title: Datalab SSPCloud
+description: TP Découverte du datalab SSPCloud
+author: Ludovic Deneuville
+format:
+  html:
+    toc: true
+    toc-location: left
+    toc-expand: 3
+from: markdown+emoji
+number-sections: true
+number-depth: 3
+lightbox: true
+---
+
+## Introduction {.unnumbered}
+
+Ce [datalab](https://datalab.sspcloud.fr/){target="_blank"} a été créé pour permettre aux statisticiens de la sphère publique et aux étudiants de découvrir, d'expérimenter, d'apprendre, de se former aux outils de la data.
+
+Le principe est d'offrir aux utilisateurs de nombreux services à la demande et une puissance de calcul adaptée aux besoins.
+
+Ce datalab est une implémentation d'[Onyxia](https://github.com/InseeFrLab/onyxia){target="_blank"}, projet Open source initié par le [lab de l'INSEE](https://github.com/InseeFrLab){target="_blank"}.
+
+## Créer et configuration de compte
+
+Pour profiter des services, vous devez créer un compte.
+
+### Générer un token GitHub
+
+Sur le datalab, vos services ont une durée de vie limitée.
+
+Pour sauvegarder vos programme, la bonne pratique est d'utiliser un dépôt git. Nous allons donc utiliser créer et utiliser un jeton pour communiquer avec GitHub.
+
+Pour suivre la démarche, il faut disposer d'un compte [GitHub](https://github.com/){target="_blank"}. Il est possible de suivre une démarche similaire avec [GitLab](https://about.gitlab.com/){target="_blank"}.
+
+- [ ] Connectez-vous à votre compte GitHub
+- [ ] Allez dans settings > Developer settings > Personal access tokens > Tokens (classic)
+- [ ] Générez un [nouveau jeton classique](https://github.com/settings/tokens/new){target="_blank"}
+  - Renseigner : nom du token, date d'expiration
+  - :white_check_mark: Cochez repo
+  - Cliquez sur `Generate token`
+  - Copiez ce jeton commençant par *ghp_* et gardez le précieusement de côté quelques minutes
+
+::: {.callout-warning}
+- Ce jeton ne sera visible qu'une seule fois
+- si vous le perdez ou s'il est expiré, il faut en générer un nouveau
+:::
+
+
+### Déclarer votre jeton sur le Datalab
+
+[Doc officielle](https://inseefrlab.github.io/docs.sspcloud.fr/docs/fr/version-control.html){target="_blank"}
+
+Sur le [Datalab](https://datalab.sspcloud.fr/){target="_blank} :
+
+- [ ] Allez dans `Mon Compte` > Onglet `Git`
+- [ ] Rentrez votre nom d'utilisateur Git et votre mail (celui utilisé pour votre compte GitHub)
+- [ ] Collez votre token
+
+
+## Le stockage
+
+Lorsque l'on travaille dans le cloud, il est essentiel de séparer les données des programmes pour mieux gérer les ressources, renforcer la sécurité en limitant les accès et les permissions, et permettre une scalabilité indépendante des composants.
+
+MinIO est une solution de stockage d'objets open-source qui permet de déployer facilement un stockage évolutif et performant. Elle est compatible avec l'API S3 d'Amazon, ce qui facilite l'intégration avec les applications existantes. MinIO offre une haute disponibilité, une sécurité renforcée grâce au chiffrement des données et des contrôles d'accès, et des performances élevées, particulièrement adaptées aux environnements nécessitant un accès rapide aux données, comme le Big Data et l'intelligence artificielle.
+
+Pour accéder à votre stockage :
+
+- Depuis le Datalab, allez dans `Mes fichiers`
+- Depuis la [console MinIO](https://minio-console.lab.sspcloud.fr/){target="_blank"}
+- Depuis le terminal d'un service voir [section ci-dessous]{#Accéder-à-votre-stockage}
+
+Lors de votre création de compte, un bucket est créé avec votre nom d'utilisateur. Dans ce bucket, vous pouvez :
+
+- créer / supprimer des dossiers
+- importer / supprimer des fichiers
+- créer un dossier nommé `diffusion` à la racine de votre bucket
+  - celui-ci sera accessible en lecture à tous les utilisateurs du datalab
+
+### Stocker des fichiers
+
+- [ ] Téléchargez le [fichier des prénoms par département de naissance](https://www.insee.fr/fr/statistiques/7633685) en 2022 au format csv
+- [ ] Dézippez ce fichier
+- [ ] Dans votre bucket, créez un dossier `diffusion`, puis à l'intérieur un dossier `INSEE`
+- [ ] Dans ce dossier, importez le fichier des prénoms
+- [ ] Double cliquez sur le fichier importé pour explorer son contenu
+
+
+## Les services
+
+### Dépôt pour le code
+
+Avant de créer un service, nous allons créer un dépôt GitHub qui permettra de sauvegarder votre code.
+
+- [ ] Dans GitHub, créer un [nouveau *Repository*](https://github.com/new){target="_blank"}
+  - Repository name : TP-datalab
+  - Public
+  - Cochez *Add a README file*
+  - .gitignore template : R
+  - Choose a license : Apache Licence 2.0
+  - `Create Repository`
+- [ ] Sur la page de votre repo, cliquez sur le bouton **[Code]{style="background-color: green"}**
+- [ ] Copiez l'adresse *https* du repo
+
+### Créer un service
+
+- [ ] Allez dans `Catalogue de services`, sélectionner le service *Rstudio*, puis cliquez sur `Lancer`
+- [ ] Allez dans Configuration
+  - De nombreux onglets permettent de configurer votre service
+  - Service : possibilité d'utiliser une autre image Docker
+  - Resources : choisir CPU et RAM
+  - Init : script à lancer au démarrage
+- [ ] Allez dans l'onglet `Git` et collez l'adresse *https* du repo
+- [ ] Lancez le service
+  - Attendez quelques secondes le temps que le service se lance
+- [ ] Cliquez pour copier le mot de passe
+- [ ] Cliquez sur `Ouvrir le service` :rocket:
+  - username : onyxia
+  - password : collez le mot de passe
+
+Votre R Studio s'ouvre et vous remarquez dans l'explorateur en bas à droite que votre repo git a été cloné.
+
+### Jouer avec votre service
+
+- [ ] File > New File > R Script
+- [ ] Enregistrez ce fichier sous le nom *tp1.R* dans votre repo *TP-datalab*
+
+### Accéder à votre stockage
+
+Nous allons utiliser par exemple la librairie `aws.s3` pour accéder au stockage.
+
+- Chargez la librairie
+
+```{.R}
+library(aws.s3)
+library(dplyr)
+```
+
+- Lister les fichiers de votre bucket
+
+```{.R}
+aws.s3::get_bucket("<username>", region = "")
+```
+
+- Lister les fichiers d'un dossier spécifique
+
+```{.R}
+aws.s3::get_bucket("<username>", region = "", prefix = "diffusion/INSEE")
+```
+
+- Lire un fichier csv
+
+```{.R}
+df <- aws.s3::s3read_using(
+  FUN = data.table::fread,
+  object = "/diffusion/INSEE/dpt2022_csv.zip",
+  bucket = "ludo2ne",
+  opts = list("region" = "")
+)
+```
+
+- requêter les données
+
+```{.R}
+# Top 10 des prénoms féminins en 2021
+df |>
+  filter(sexe == 2, annais == 2021, preusuel != "_PRENOMS_RARES") |>
+  group_by(preusuel) |>
+  summarise(nombre_total = sum(nombre)) |>
+  arrange(desc(nombre_total)) |>
+  head(10) |>
+  collect()  
+```
+
+### Client MinIO
+
+Le [client MinIO](https://min.io/docs/minio/linux/reference/minio-mc.html){target="_blank"} installé et utilisable depuis le terminal permet également d'interagir avec vos fichiers.
+
+- [ ] `mc ls s3/<username>/diffusion` : pour lister le contenu de votre dossier diffusion
+- [ ] `mc cp s3/<username>/diffusion/INSEE/dpt2022.csv .` : pour copier le fichier depuis s3 dans votre dossier courant
+  - le fichier apparait dans votre explorer
+- [ ] Supprimez ce fichier : `rm dpt2022.csv`
+  - Car importer les fichiers de données dans son espace de travail n'est pas une bonne pratique
+
+
+### Sauver son code
+
+- [ ] Allez dans le terminal
+- [ ] Positionnez-vous dans le repo : `cd /home/onyxia/work/TP-datalab`
+- [ ] `git status` pour voir l'état actuel
+  - le fichier *tp1.R* doit apparaître dans les *Untracked files*
+- [ ] Ajoutez ce fichier à l'index : `git add .`
+- [ ] Créez un commit : `git commit -m "création fichier tp1"
+- [ ] Poussez ce commit vers votre dépôt distant (GitHub)
+  - Vous pouvez vérifier sur GitHub que votre fichier *tp1.R* est bien présent
+
+### Surveiller son service
+
+- [ ] Sur la page du Datalab, allez dans *Mes services*
+- [ ] Cliquez sur le nom du service (Rstudio)
+- [ ] Cliquez sur `Surveillance externe`
+
+Vous arrivez sur la page de l'outil **Grafana** qui permet d'observer les métriques de votre service.
+
+### Terminer son service
+
+Une fois vos travaux terminé, il est temps de libérer les ressources réservées.
+
+- [ ] Dans *Mes services*, mettez votre service à la poubelle
+
+De toute manière, vous pouvez aisément reproduire votre travail plus tard :
+
+- Votre code est sur GitHub
+- Vos données son sur MinIO
+- Il suffit de relancer un nouveau service
+
+
+## Les secrets
+
+Certains éléments ne doivent pas être diffusés dans votre code (jeton d'accès, mots de passe).
+
+Pour éviter d'avoir à nettoyer votre code à chaque fois que vous le poussez sur GitHub, le datalab propose de gérer vos secrets.
+
+### Créer un secret
+
+- [ ] Allez dans *Mes secrets*
+- [ ] Créez un `Nouveau secret` nommé *projet_patate*
+- [ ] Double-cliquez pour ouvrir ce secret
+- [ ] `Ajoutez une variable`
+  - Nom : PATATE_TOKEN
+  - Valeur : 123456
+  - Cliquez sur :white_check_mark: pour valider
+- [ ] Ajoutez une autre variable
+  - Nom : PATATE_PORT
+  - Valeur : 5236
+  - Cliquez sur :white_check_mark: pour valider
+
+### Utiliser dans un service
+
+- [ ] Préparez le lancement d'un service Rstudio
+- [ ] Dans la configuration, allez dans l'onglet `Vault`
+- [ ] secret : *projet_patate*
+- [ ] Lancez le service
+
+
+## Pour aller plus loin {.unnumbered}
+
+Onyxia, comment ça marche
+
+{{< video https://www.youtube.com/watch?v=GXINfnVB21E >}}
+
+
+
+## Bibliographie {.unnumbered}
+
+- [Utiliser RStudio sur l’environnement SSP Cloud](https://book.utilitr.org/01_R_Insee/Fiche_utiliser_Rstudio_SSPCloud.html){target="_blank"}, UtilitR
+- [Découverte du Datalab](https://www.sspcloud.fr/formation){target="_blank"}, Plateforme SSP Cloud
+- [Découverte d'Onyxia et de son datalab SSP Cloud](https://github.com/TheAIWizard/Hands-on-Spark-Lab/blob/main/First-steps-with-cloud-computing/First-steps-with-cloud-computing.md){target="_blank"}, Nathan Randriamanana

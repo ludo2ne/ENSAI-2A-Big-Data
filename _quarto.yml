@@ -34,6 +34,8 @@ website:
     right:
       - text: Other resources
         menu:
+          - href: docs/sspcloud.qmd
+            text: "SSPCloud"
           - href: docs/duckdb.qmd
             text: "DuckDB"
       - href: docs/resources.qmd
