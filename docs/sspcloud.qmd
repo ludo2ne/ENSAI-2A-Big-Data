@@ -357,7 +357,7 @@ Dans votre servives, les deux variables d'environnement ont été créées.
 
 ## Pour aller plus loin {.unnumbered}
 
-### Le projet Onyxia de A à Z {.unnumbered}
+### Le projet Onyxia de A à Z {.unnumbered  .unlisted}
 
 Une présentation complète du projet Onyxia au Devoxx 2023, de sa philosophie et de son fonctionnement par Olivier LEVITT, Joseph GARRONE et Comte FREDERIC.
 
@@ -371,7 +371,7 @@ Une présentation complète du projet Onyxia au Devoxx 2023, de sa philosophie e
 
 
 
-## Bibliographie {.unnumbered .unlisted}
+## Bibliographie {.unnumbered}
 
 - [Utiliser RStudio sur l’environnement SSP Cloud](https://book.utilitr.org/01_R_Insee/Fiche_utiliser_Rstudio_SSPCloud.html){target="_blank"}, UtilitR
 - [Découverte du Datalab](https://www.sspcloud.fr/formation){target="_blank"}, Plateforme SSP Cloud
