@@ -321,11 +321,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="only-on-sspcloud" class="level3" data-number="1.1">
 <h3 data-number="1.1" class="anchored" data-anchor-id="only-on-sspcloud"><span class="header-section-number">1.1</span> Only on SSPCloud</h3>
 <p>See default configuration on the datalab :</p>
-<div id="d0f9b9e2" class="cell" data-execution_count="1">
+<div id="4536558b" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span> cat <span class="op">/</span>opt<span class="op">/</span>spark<span class="op">/</span>conf<span class="op">/</span>spark<span class="op">-</span>defaults.conf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To modify the config :</p>
-<div id="72761d6e" class="cell" data-execution_count="2">
+<div id="45907c06" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -350,14 +350,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>         .getOrCreate()</span>
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="e8d06508" class="cell" data-execution_count="3">
+<div id="37035a59" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See the current number of executors (one for now)</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>kubectl get pods <span class="op">-</span>l spark<span class="op">-</span>role<span class="op">=</span>executor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="only-on-aws" class="level3" data-number="1.2">
 <h3 data-number="1.2" class="anchored" data-anchor-id="only-on-aws"><span class="header-section-number">1.2</span> Only on AWS</h3>
-<div id="d14128ba" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-04-30T09:07:18.788943Z&quot;,&quot;iopub.status.busy&quot;:&quot;2023-04-30T09:07:18.788720Z&quot;,&quot;iopub.status.idle&quot;:&quot;2023-04-30T09:07:18.853566Z&quot;,&quot;shell.execute_reply&quot;:&quot;2023-04-30T09:07:18.853007Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2023-04-30T09:07:18.788920Z&quot;}" data-tags="[]" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="4">
+<div id="43109f74" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-04-30T09:07:18.788943Z&quot;,&quot;iopub.status.busy&quot;:&quot;2023-04-30T09:07:18.788720Z&quot;,&quot;iopub.status.idle&quot;:&quot;2023-04-30T09:07:18.853566Z&quot;,&quot;shell.execute_reply&quot;:&quot;2023-04-30T09:07:18.853007Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2023-04-30T09:07:18.788920Z&quot;}" data-tags="[]" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Spark session</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>spark</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -367,7 +367,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="check-spark-session" class="level3" data-number="1.3">
 <h3 data-number="1.3" class="anchored" data-anchor-id="check-spark-session"><span class="header-section-number">1.3</span> Check spark session</h3>
-<div id="4b16bad5" class="cell" data-execution_count="5">
+<div id="5ad412fa" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>spark</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Explanation:</strong></p>
@@ -380,7 +380,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote></li>
 </ul>
 <p><strong>Import all required libraries</strong>.</p>
-<div id="8f5aaa53" class="cell" data-execution_count="6">
+<div id="bcda572c" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> time <span class="im">import</span> sleep</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> from_json, window, col, expr, size, explode, avg, <span class="bu">min</span>, <span class="bu">max</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.types <span class="im">import</span> StructType,StructField, StringType, IntegerType, ArrayType, TimestampType, BooleanType, LongType, DoubleType</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -588,7 +588,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-65"><a href="#cb11-65" aria-hidden="true" tabindex="-1"></a>  ]),<span class="va">True</span>)</span>
 <span id="cb11-66"><a href="#cb11-66" aria-hidden="true" tabindex="-1"></a>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
-<div id="f2c1df08" class="cell" data-execution_count="7">
+<div id="2ea4070a" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.types <span class="im">import</span> StructType,StructField, StringType, IntegerType, ArrayType, TimestampType, BooleanType, LongType, DoubleType</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  </span>
@@ -669,7 +669,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <blockquote class="blockquote">
 <p>🤔 Nothing happen ? It’s normal ! Do not forget, Spark use lazy evaluation. It doesn’t use data if you don’t define an action. For now Spark only know how to get the stream, that’s all.</p>
 </blockquote>
-<div id="e713d0a8" class="cell" data-execution_count="8">
+<div id="6eb0d327" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>tweet_stream <span class="op">=</span> spark<span class="op">\</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  .readStream<span class="op">\</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  .schema(schema_tweet)<span class="op">\</span></span>
@@ -682,7 +682,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>It should print the type of <code>tweet_stream</code> and the associated schema. You can see you created a DataFrame like in lab2 !</li>
 </ul></li>
 </ul>
-<div id="805ec024" class="cell" data-execution_count="9">
+<div id="3c3cb1d5" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>tweet_stream</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -702,11 +702,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>).show()</span>
 <span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>stream_size_query.stop() <span class="co">#needed to close the query</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
-<div id="69e8e98c" class="cell" data-execution_count="10">
+<div id="840cea39" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> stream <span class="kw">in</span> spark.streams.active:</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    stream.stop()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="b9b46aef" class="cell" data-execution_count="11">
+<div id="f9096412" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>stream_size_query<span class="op">=</span> tweet_stream<span class="op">\</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  .writeStream<span class="op">\</span></span>
@@ -829,7 +829,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Name your DataFrame <code>lang_count_stream</code></li>
 </ul></li>
 </ul>
-<div id="a0102f84" class="cell" data-execution_count="12">
+<div id="2a81efff" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>lang_count_stream <span class="op">=</span> tweet_stream<span class="op">\</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  .groupBy(<span class="st">"data.lang"</span>)<span class="op">\</span></span>
@@ -844,7 +844,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Name you query <code>lang_count</code></li>
 </ul></li>
 </ul>
-<div id="fa8932ba" class="cell" data-execution_count="13">
+<div id="d24eaebc" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>lang_query <span class="op">=</span> lang_count_stream<span class="op">\</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  .writeStream<span class="op">\</span></span>
@@ -856,7 +856,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul class="task-list">
 <li><label><input type="checkbox">Then run this code</label></li>
 </ul>
-<div id="434639d5" class="cell" data-execution_count="14">
+<div id="927f7a66" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>): <span class="co"># we use an _ because the variable isn't use. You can use i if you prefere</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    sleep(<span class="dv">3</span>)</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    spark.sql(<span class="st">"""</span></span>
@@ -895,7 +895,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>You can count the size of <code>data.entities.hashtags</code> to check if it’s empty or not.</li>
 </ul></li>
 </ul>
-<div id="49abbec9" class="cell" data-execution_count="15">
+<div id="c7af21b1" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> size, col</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>tweet_has_hashtag <span class="op">=</span> tweet_stream<span class="op">\</span></span>
@@ -905,7 +905,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul class="task-list">
 <li><label><input type="checkbox">Group and count by the <code>has_hashtag</code> column</label></li>
 </ul>
-<div id="a5e14c18" class="cell" data-execution_count="16">
+<div id="bf8fd9da" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>count_tweet_hashtag <span class="op">=</span> tweet_has_hashtag.groupBy(col(<span class="st">"has_hashtag"</span>))<span class="op">\</span></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  .count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -913,7 +913,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul class="task-list">
 <li><label><input type="checkbox">Print some results</label></li>
 </ul>
-<div id="c3f1d5ec" class="cell" data-execution_count="17">
+<div id="8cfd4301" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>count_tweet_hashtag_query <span class="op">=</span> count_tweet_hashtag<span class="op">\</span></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  .writeStream<span class="op">\</span></span>
@@ -963,7 +963,7 @@ pyspark.sql.utils.IllegalArgumentException: 'Cannot start query with name has_ha
 </ul></li>
 </ul>
 <p>You will notice no record are dropped.</p>
-<div id="7a5ad606" class="cell" data-execution_count="18">
+<div id="ade82a43" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>filtered_stream <span class="op">=</span> tweet_stream.na.drop(<span class="st">"any"</span>)</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -989,7 +989,7 @@ pyspark.sql.utils.IllegalArgumentException: 'Cannot start query with name has_ha
 <li><code>data.entities.hashtags</code> is an array too ! To group by tag (the hashtag content) you will need to explode it too.</li>
 </ul></li>
 </ul>
-<div id="37bc37eb" class="cell" data-execution_count="19">
+<div id="146f169d" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>filtered_stream <span class="op">=</span> tweet_stream<span class="op">\</span></span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  .withColumn(<span class="st">"verified"</span>, explode(<span class="st">"includes.users.verified"</span>))<span class="op">\</span></span>
@@ -1026,7 +1026,7 @@ pyspark.sql.utils.IllegalArgumentException: 'Cannot start query with name has_ha
 <li>Only keep <code>data.text</code>, <code>data.lang</code>, <code>data.public_metrics</code> and <code>data.created_at</code></li>
 </ul></li>
 </ul>
-<div id="e5ccf4a5" class="cell" data-execution_count="20">
+<div id="fa483c52" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>ukraine_related_stream <span class="op">=</span> tweet_stream<span class="op">\</span></span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  .withColumn(<span class="st">"ukraine_related"</span>, expr(<span class="st">"LOWER(data.text) LIKE '</span><span class="sc">%u</span><span class="st">kraine%'"</span>))<span class="op">\</span></span>
@@ -1052,7 +1052,7 @@ pyspark.sql.utils.IllegalArgumentException: 'Cannot start query with name has_ha
 <ul class="task-list">
 <li><label><input type="checkbox">Count the number of different hashtag.</label></li>
 </ul>
-<div id="50f772ed" class="cell" data-execution_count="21">
+<div id="ef9b7a8c" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> explode</span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1080,7 +1080,7 @@ pyspark.sql.utils.IllegalArgumentException: 'Cannot start query with name has_ha
 <li>Use the <code>groupBy()</code> and <code>agg()</code> transformations</li>
 </ul></li>
 </ul>
-<div id="1988ee40" class="cell" data-execution_count="22">
+<div id="417636d9" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> count, <span class="bu">min</span>, <span class="bu">max</span>, avg</span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1181,7 +1181,7 @@ pyspark.sql.utils.IllegalArgumentException: 'Cannot start query with name has_ha
 </table>
 <p>A <code>null</code> value mean this dimension wasn’t use for this row. For instance, the first row gives the averages when <code>hashtag==cat</code> independently of the <code>lang</code>. The before last row gives averages when <code>lang==en</code> independently of the <code>hashtag</code>. And the last row gives the averages for the full DataFrame.</p></li>
 </ul>
-<div id="5a95fba9" class="cell" data-execution_count="23">
+<div id="860d5898" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>adhesion_metrics_stream <span class="op">=</span> tweet_stream<span class="op">\</span></span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>.withColumn(<span class="st">"hashtag"</span>, explode(<span class="st">"data.entities.hashtags.tag"</span>))<span class="op">\</span></span>
@@ -1244,7 +1244,7 @@ pyspark.sql.utils.IllegalArgumentException: 'Cannot start query with name has_ha
 <ul class="task-list">
 <li><label><input type="checkbox">Count the number of event with a 10 seconds time window (use the <code>created_at</code> column)</label></li>
 </ul>
-<div id="e1d6d502" class="cell" data-execution_count="24">
+<div id="26a04d33" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> window, col</span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1271,7 +1271,7 @@ pyspark.sql.utils.IllegalArgumentException: 'Cannot start query with name has_ha
 <ul class="task-list">
 <li><label><input type="checkbox">Count the number of event by verified / unverified user with a 10 seconds time window (use the <code>Creation_Time</code> column)</label></li>
 </ul>
-<div id="f27af99b" class="cell" data-execution_count="25">
+<div id="6a52a404" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>sliding_windows_tweet_count <span class="op">=</span> tweet_stream<span class="op">\</span></span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  .withColumn(<span class="st">"verified"</span>, explode(<span class="st">"includes.users.verified"</span>))<span class="op">\</span></span>
@@ -1297,7 +1297,7 @@ pyspark.sql.utils.IllegalArgumentException: 'Cannot start query with name has_ha
 <ul class="task-list">
 <li><label><input type="checkbox">Count the number of event with a 10 seconds time window sliding every 5 seconds</label></li>
 </ul>
-<div id="73534e0a" class="cell" data-execution_count="26">
+<div id="a33ca1b6" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>sliding_windows_tweet_count <span class="op">=</span> tweet_stream<span class="op">\</span></span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  .groupBy(window(tweet_stream.data.created_at, <span class="st">"10 seconds"</span>, <span class="st">"5 seconds"</span> ))<span class="op">\</span></span>
@@ -1347,7 +1347,7 @@ pyspark.sql.utils.IllegalArgumentException: 'Cannot start query with name has_ha
 <ul class="task-list">
 <li><label><input type="checkbox">Count the number of event with a 10 seconds time window (use the <code>created_at</code> column) with a 5 seconds watermark</label></li>
 </ul>
-<div id="5ee6ef58" class="cell" data-execution_count="27">
+<div id="629df021" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>sliding_windows_tweet_count_with_watermark <span class="op">=</span> tweet_stream<span class="op">\</span></span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  .withColumn(<span class="st">"timestamp"</span>, col(<span class="st">"data.created_at"</span>))<span class="op">\</span></span>
@@ -1374,7 +1374,7 @@ pyspark.sql.utils.IllegalArgumentException: 'Cannot start query with name has_ha
 <ul class="task-list">
 <li><label><input type="checkbox">Count the number of event by hashtag with a 30 seconds time window with a 1 minute watermark</label></li>
 </ul>
-<div id="052360aa" class="cell" data-execution_count="28">
+<div id="910b6ad8" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>sliding_windows_tweet_count <span class="op">=</span> tweet_stream<span class="op">\</span></span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  .withColumn(<span class="st">"timestamp"</span>, col(<span class="st">"data.created_at"</span>))<span class="op">\</span></span>
@@ -1402,7 +1402,7 @@ pyspark.sql.utils.IllegalArgumentException: 'Cannot start query with name has_ha
 <ul class="task-list">
 <li><label><input type="checkbox">Count the number of events post by verified user with a 10 seconds time window sliding every 5 seconds with 25 seconds watermark.</label></li>
 </ul>
-<div id="2ae4d0bb" class="cell" data-execution_count="29">
+<div id="32adc06d" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>sliding_windows_tweet_count2 <span class="op">=</span> tweet_stream<span class="op">\</span></span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  .withColumn(<span class="st">"verified"</span>, explode(<span class="st">"includes.users.verified"</span>))<span class="op">\</span></span>
@@ -2045,7 +2045,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":false,"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
