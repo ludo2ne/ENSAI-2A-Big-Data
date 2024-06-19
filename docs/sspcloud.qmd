@@ -111,7 +111,7 @@ Avant de créer un service, nous allons créer un dépôt GitHub qui permettra d
 - [ ] Dans GitHub, créer un [nouveau Repository](https://github.com/new){target="_blank"}
   - Repository name : TP-datalab
   - Public
-  - Cochez *Add a README file*
+  - :white_check_mark: Cochez *Add a README file*
   - .gitignore template : R
   - Choose a license : Apache Licence 2.0
   - `Create Repository`
