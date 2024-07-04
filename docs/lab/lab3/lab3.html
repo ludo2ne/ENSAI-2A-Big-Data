@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.5.53">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Rémi Pépin, Arthur Katossky, Ludovic Deneuville">
 <meta name="description" content="Lab 3">
 
-<title>Big Data - Stream processing with Spark</title>
+<title>Stream processing with Spark – Big Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -35,7 +35,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -124,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -134,7 +134,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-labs" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-labs" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Labs</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-labs">    
@@ -161,7 +161,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </ul>
   </li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-aws" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-aws" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">AWS</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-aws">    
@@ -182,7 +182,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-other-resources" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-other-resources" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Other resources</span>
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-other-resources">    
@@ -207,7 +207,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
@@ -226,9 +226,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#before-you-start" id="toc-before-you-start" class="nav-link active" data-scroll-target="#before-you-start">Before you start</a></li>
-  <li><a href="#outline" id="toc-outline" class="nav-link" data-scroll-target="#outline">Outline</a></li>
-  <li><a href="#create-a-spark-session" id="toc-create-a-spark-session" class="nav-link" data-scroll-target="#create-a-spark-session"><span class="header-section-number">1</span> Create a Spark session</a>
+  <li><a href="#create-a-spark-session" id="toc-create-a-spark-session" class="nav-link active" data-scroll-target="#create-a-spark-session"><span class="header-section-number">1</span> Create a Spark session</a>
   <ul class="collapse">
   <li><a href="#only-on-sspcloud" id="toc-only-on-sspcloud" class="nav-link" data-scroll-target="#only-on-sspcloud"><span class="header-section-number">1.1</span> Only on SSPCloud</a></li>
   <li><a href="#only-on-aws" id="toc-only-on-aws" class="nav-link" data-scroll-target="#only-on-aws"><span class="header-section-number">1.2</span> Only on AWS</a></li>
@@ -266,7 +264,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -301,22 +299,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="before-you-start" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="before-you-start">Before you start</h2>
-<ul class="task-list">
-<li><label><input type="checkbox">Download this <a href="lab3.ipynb" target="_blank">Jupyter Notebook</a></label></li>
-<li><label><input type="checkbox">Follow these <a href="../../../docs/lab/lab-setup.html" target="_blank">instructions</a></label></li>
-<li><label><input type="checkbox">If you want to simulate a stream:</label>
-<ul>
-<li><a href="../../../docs/lab/aws-stream-simulation.html" target="_blank">AWS</a></li>
-<li><a href="../../../docs/lab/ssp-stream-simulation.html" target="_blank">SSPCloud</a></li>
-</ul></li>
-</ul>
-</section>
-<section id="outline" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="outline">Outline</h2>
-<p>This tutorial will teach you the basic of <strong>stream processing with Spark</strong>. As soon as an application compute something with business value (for instance customer activity), and new inputs arrive continuously, companies will want to compute this result continuously too. Spark makes possible to process stream with the <strong>Structured Streaming API</strong>. This lab will teach you the basics of this Spark’s API. Because the Structured Streaming API is based on the DataFrame API most syntaxes of tutorial 1 are still relevant.</p>
-</section>
+<p>execute: eval: false</p>
+<hr>
 <section id="create-a-spark-session" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="create-a-spark-session"><span class="header-section-number">1</span> Create a Spark session</h2>
 <ul class="task-list">
@@ -325,11 +309,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="only-on-sspcloud" class="level3" data-number="1.1">
 <h3 data-number="1.1" class="anchored" data-anchor-id="only-on-sspcloud"><span class="header-section-number">1.1</span> Only on SSPCloud</h3>
 <p>See default configuration on the datalab :</p>
-<div id="fcb5117f" class="cell" data-execution_count="1">
+<div id="9f4f85ff" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span> cat <span class="op">/</span>opt<span class="op">/</span>spark<span class="op">/</span>conf<span class="op">/</span>spark<span class="op">-</span>defaults.conf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To modify the config :</p>
-<div id="1d1abb57" class="cell" data-execution_count="2">
+<div id="03e4dded" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -354,14 +338,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>         .getOrCreate()</span>
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="462b4e6d" class="cell" data-execution_count="3">
+<div id="6f8ff8b7" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See the current number of executors (one for now)</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>kubectl get pods <span class="op">-</span>l spark<span class="op">-</span>role<span class="op">=</span>executor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="only-on-aws" class="level3" data-number="1.2">
 <h3 data-number="1.2" class="anchored" data-anchor-id="only-on-aws"><span class="header-section-number">1.2</span> Only on AWS</h3>
-<div id="37b2b5c4" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-04-30T09:07:18.788943Z&quot;,&quot;iopub.status.busy&quot;:&quot;2023-04-30T09:07:18.788720Z&quot;,&quot;iopub.status.idle&quot;:&quot;2023-04-30T09:07:18.853566Z&quot;,&quot;shell.execute_reply&quot;:&quot;2023-04-30T09:07:18.853007Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2023-04-30T09:07:18.788920Z&quot;}" data-tags="[]" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="4">
+<div id="603a9d47" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-04-30T09:07:18.788943Z&quot;,&quot;iopub.status.busy&quot;:&quot;2023-04-30T09:07:18.788720Z&quot;,&quot;iopub.status.idle&quot;:&quot;2023-04-30T09:07:18.853566Z&quot;,&quot;shell.execute_reply&quot;:&quot;2023-04-30T09:07:18.853007Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2023-04-30T09:07:18.788920Z&quot;}" data-tags="[]" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Spark session</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>spark</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -371,7 +355,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="check-spark-session" class="level3" data-number="1.3">
 <h3 data-number="1.3" class="anchored" data-anchor-id="check-spark-session"><span class="header-section-number">1.3</span> Check spark session</h3>
-<div id="8569d2e2" class="cell" data-execution_count="5">
+<div id="97b023e3" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>spark</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Explanation:</strong></p>
@@ -384,7 +368,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote></li>
 </ul>
 <p><strong>Import all required libraries</strong>.</p>
-<div id="7bd3df5c" class="cell" data-execution_count="6">
+<div id="d34ec3d7" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> time <span class="im">import</span> sleep</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> from_json, window, col, expr, size, explode, avg, <span class="bu">min</span>, <span class="bu">max</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.types <span class="im">import</span> StructType,StructField, StringType, IntegerType, ArrayType, TimestampType, BooleanType, LongType, DoubleType</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -409,7 +393,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="white-box">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://databricks.com/wp-content/uploads/2016/07/image01-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1" title="data stream"><img src="https://databricks.com/wp-content/uploads/2016/07/image01-1.png" class="img-fluid figure-img" alt="data stream"></a></p>
+<p><a href="https://databricks.com/wp-content/uploads/2016/07/image01-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="data stream"><img src="https://databricks.com/wp-content/uploads/2016/07/image01-1.png" class="img-fluid figure-img" alt="data stream"></a></p>
 <figcaption>data stream</figcaption>
 </figure>
 </div>
@@ -592,7 +576,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-65"><a href="#cb11-65" aria-hidden="true" tabindex="-1"></a>  ]),<span class="va">True</span>)</span>
 <span id="cb11-66"><a href="#cb11-66" aria-hidden="true" tabindex="-1"></a>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
-<div id="f5dd3375" class="cell" data-execution_count="7">
+<div id="3caa8f74" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
@@ -604,7 +588,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Use the option <code>option("maxFilePerTrigger", "1")</code> to process each new files one by one</li>
 </ul></li>
 </ul>
-<div id="8bfc5460" class="cell" data-execution_count="8">
+<div id="aa4c48e2" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
@@ -616,7 +600,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>It should print the type of <code>tweet_stream</code> and the associated schema. You can see you created a DataFrame like in lab2 !</li>
 </ul></li>
 </ul>
-<div id="e6ced596" class="cell" data-execution_count="9">
+<div id="cdf99dbf" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
@@ -634,7 +618,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>).show()</span>
 <span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>stream_size_query.stop() <span class="co">#needed to close the query</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
-<div id="60364f9f" class="cell" data-execution_count="10">
+<div id="75dd61fd" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -743,7 +727,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Name your DataFrame <code>lang_count</code></li>
 </ul></li>
 </ul>
-<div id="04a5c799" class="cell" data-execution_count="11">
+<div id="abd99f6b" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
@@ -755,7 +739,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Name you query <code>lang_count</code></li>
 </ul></li>
 </ul>
-<div id="295f9d60" class="cell" data-execution_count="12">
+<div id="2b9fa66b" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
@@ -766,7 +750,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT * FROM lang_count"""</span>).show()</span>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>lang_query.stop() <span class="co">#needed to close the stream</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
-<div id="1a59988d" class="cell" data-execution_count="13">
+<div id="fdf3d9e7" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
@@ -800,19 +784,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>You can count the size of <code>data.entities.hashtags</code> to check if it’s empty or not.</li>
 </ul></li>
 </ul>
-<div id="3c68b7ee" class="cell" data-execution_count="14">
+<div id="86d33128" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Group and count by the <code>has_hashtag</code> column</label></li>
 </ul>
-<div id="e9e6375a" class="cell" data-execution_count="15">
+<div id="c07b042e" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Print some results</label></li>
 </ul>
-<div id="ef0f4a78" class="cell" data-execution_count="16">
+<div id="62a50466" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -848,7 +832,7 @@ pyspark.sql.utils.IllegalArgumentException: 'Cannot start query with name has_ha
 </ul></li>
 </ul>
 <p>You will notice no record are dropped.</p>
-<div id="38a83fa9" class="cell" data-execution_count="17">
+<div id="e4b6c5bb" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
@@ -858,7 +842,7 @@ pyspark.sql.utils.IllegalArgumentException: 'Cannot start query with name has_ha
 <li><code>data.entities.hashtags</code> is an array too ! To group by tag (the hashtag content) you will need to explode it too.</li>
 </ul></li>
 </ul>
-<div id="936e3b51" class="cell" data-execution_count="18">
+<div id="ea048f2d" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
@@ -874,7 +858,7 @@ pyspark.sql.utils.IllegalArgumentException: 'Cannot start query with name has_ha
 <li>Only keep <code>data.text</code>, <code>data.lang</code>, <code>data.public_metrics</code> and <code>data.created_at</code></li>
 </ul></li>
 </ul>
-<div id="46edee8f" class="cell" data-execution_count="19">
+<div id="540c0a2d" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -883,7 +867,7 @@ pyspark.sql.utils.IllegalArgumentException: 'Cannot start query with name has_ha
 <ul class="task-list">
 <li><label><input type="checkbox">Count the number of different hashtag.</label></li>
 </ul>
-<div id="37b03bae" class="cell" data-execution_count="20">
+<div id="05e7dd0c" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
@@ -892,7 +876,7 @@ pyspark.sql.utils.IllegalArgumentException: 'Cannot start query with name has_ha
 <li>Use the <code>groupBy()</code> and <code>agg()</code> transformations</li>
 </ul></li>
 </ul>
-<div id="ce44ceb0" class="cell" data-execution_count="21">
+<div id="2dbf8ca7" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
@@ -968,7 +952,7 @@ pyspark.sql.utils.IllegalArgumentException: 'Cannot start query with name has_ha
 </table>
 <p>A <code>null</code> value mean this dimension wasn’t use for this row. For instance, the first row gives the averages when <code>hashtag==cat</code> independently of the <code>lang</code>. The before last row gives averages when <code>lang==en</code> independently of the <code>hashtag</code>. And the last row gives the averages for the full DataFrame.</p></li>
 </ul>
-<div id="6e088f5b" class="cell" data-execution_count="22">
+<div id="a7df79df" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -1010,19 +994,19 @@ pyspark.sql.utils.IllegalArgumentException: 'Cannot start query with name has_ha
 <ul class="task-list">
 <li><label><input type="checkbox">Count the number of event with a 10 seconds time window (use the <code>created_at</code> column)</label></li>
 </ul>
-<div id="e00b2d86" class="cell" data-execution_count="23">
+<div id="8dc9014d" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Count the number of event by verified / unverified user with a 10 seconds time window (use the <code>Creation_Time</code> column)</label></li>
 </ul>
-<div id="f7f24b2c" class="cell" data-execution_count="24">
+<div id="a13eb313" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Count the number of event with a 10 seconds time window sliding every 5 seconds</label></li>
 </ul>
-<div id="3ed96ce4" class="cell" data-execution_count="25">
+<div id="7feb22ed" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -1053,19 +1037,19 @@ pyspark.sql.utils.IllegalArgumentException: 'Cannot start query with name has_ha
 <ul class="task-list">
 <li><label><input type="checkbox">Count the number of event with a 10 seconds time window (use the <code>created_at</code> column) with a 5 seconds watermark</label></li>
 </ul>
-<div id="e9750955" class="cell" data-execution_count="26">
+<div id="cada35d0" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Count the number of event by hashtag with a 30 seconds time window with a 1 minute watermark</label></li>
 </ul>
-<div id="8ca812a0" class="cell" data-execution_count="27">
+<div id="795b950e" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Count the number of events post by verified user with a 10 seconds time window sliding every 5 seconds with 25 seconds watermark.</label></li>
 </ul>
-<div id="5daaa904" class="cell" data-execution_count="28">
+<div id="82bb4f92" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -1126,9 +1110,6 @@ Solution
 </div>
 
 
-<div class="hidden" aria-hidden="true">
-<span class="glightbox-desc lightbox-desc-1">data stream</span>
-</div>
 </section>
 </section>
 
@@ -1312,18 +1293,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1355,7 +1325,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp("https:\/\/ludo2ne\.github\.io\/ENSAI-2A-Big-Data\/");
@@ -1363,7 +1355,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -1700,30 +1692,37 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":false,"openEffect":"zoom","selector":".lightbox","closeEffect":"zoom","descPosition":"bottom"});
-window.onload = () => {
-  lightboxQuarto.on('slide_before_load', (data) => {
-    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-    const href = trigger.getAttribute('href');
-    if (href !== null) {
-      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-      if (imgEl !== null) {
-        const srcAttr = imgEl.getAttribute("src");
-        if (srcAttr && srcAttr.startsWith("data:")) {
-          slideConfig.href = srcAttr;
-        }
-      }
-    } 
-  });
-
-  lightboxQuarto.on('slide_after_load', (data) => {
-    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-    if (window.Quarto?.typesetMath) {
-      window.Quarto.typesetMath(slideNode);
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
     }
-  });
-
-};
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
           </script>
 
 

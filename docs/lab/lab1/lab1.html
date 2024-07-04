@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.5.53">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Rémi Pépin, Arthur Katossky, Ludovic Deneuville">
 <meta name="description" content="Lab 1">
 
-<title>Big Data - First steps with Spark</title>
+<title>First steps with Spark – Big Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -35,7 +35,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -124,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -134,7 +134,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-labs" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-labs" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Labs</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-labs">    
@@ -161,7 +161,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </ul>
   </li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-aws" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-aws" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">AWS</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-aws">    
@@ -182,7 +182,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-other-resources" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-other-resources" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Other resources</span>
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-other-resources">    
@@ -207,7 +207,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
@@ -226,47 +226,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#before-you-start" id="toc-before-you-start" class="nav-link active" data-scroll-target="#before-you-start">Before you start</a></li>
-  <li><a href="#what-is-spark" id="toc-what-is-spark" class="nav-link" data-scroll-target="#what-is-spark"><span class="header-section-number">1</span> What is Spark ?</a>
+  <li><a href="#create-a-spark-session" id="toc-create-a-spark-session" class="nav-link active" data-scroll-target="#create-a-spark-session"><span class="header-section-number">1</span> Create a Spark session</a>
   <ul class="collapse">
-  <li><a href="#lets-keep-it-simple." id="toc-lets-keep-it-simple." class="nav-link" data-scroll-target="#lets-keep-it-simple."><span class="header-section-number">1.1</span> Let’s keep it simple.</a></li>
-  <li><a href="#if-you-want-more" id="toc-if-you-want-more" class="nav-link" data-scroll-target="#if-you-want-more"><span class="header-section-number">1.2</span> If you want more !</a></li>
+  <li><a href="#only-on-sspcloud" id="toc-only-on-sspcloud" class="nav-link" data-scroll-target="#only-on-sspcloud"><span class="header-section-number">1.1</span> Only on SSPCloud</a></li>
+  <li><a href="#only-on-aws" id="toc-only-on-aws" class="nav-link" data-scroll-target="#only-on-aws"><span class="header-section-number">1.2</span> Only on AWS</a></li>
+  <li><a href="#check-spark-session" id="toc-check-spark-session" class="nav-link" data-scroll-target="#check-spark-session"><span class="header-section-number">1.3</span> Check spark session</a></li>
   </ul></li>
-  <li><a href="#create-a-spark-session" id="toc-create-a-spark-session" class="nav-link" data-scroll-target="#create-a-spark-session"><span class="header-section-number">2</span> Create a Spark session</a>
+  <li><a href="#first-steps-with-spark---data-importation" id="toc-first-steps-with-spark---data-importation" class="nav-link" data-scroll-target="#first-steps-with-spark---data-importation"><span class="header-section-number">2</span> First steps with Spark - Data importation</a>
   <ul class="collapse">
-  <li><a href="#only-on-sspcloud" id="toc-only-on-sspcloud" class="nav-link" data-scroll-target="#only-on-sspcloud"><span class="header-section-number">2.1</span> Only on SSPCloud</a></li>
-  <li><a href="#only-on-aws" id="toc-only-on-aws" class="nav-link" data-scroll-target="#only-on-aws"><span class="header-section-number">2.2</span> Only on AWS</a></li>
-  <li><a href="#check-spark-session" id="toc-check-spark-session" class="nav-link" data-scroll-target="#check-spark-session"><span class="header-section-number">2.3</span> Check spark session</a></li>
+  <li><a href="#hands-on-1---data-importation" id="toc-hands-on-1---data-importation" class="nav-link" data-scroll-target="#hands-on-1---data-importation"><span class="header-section-number">2.1</span> ✍Hands-on 1 - Data importation</a></li>
   </ul></li>
-  <li><a href="#first-steps-with-spark---data-importation" id="toc-first-steps-with-spark---data-importation" class="nav-link" data-scroll-target="#first-steps-with-spark---data-importation"><span class="header-section-number">3</span> First steps with Spark - Data importation</a>
+  <li><a href="#data-frame-basic-manipulations" id="toc-data-frame-basic-manipulations" class="nav-link" data-scroll-target="#data-frame-basic-manipulations"><span class="header-section-number">3</span> Data frame basic manipulations</a>
   <ul class="collapse">
-  <li><a href="#hands-on-1---data-importation" id="toc-hands-on-1---data-importation" class="nav-link" data-scroll-target="#hands-on-1---data-importation"><span class="header-section-number">3.1</span> ✍Hands-on 1 - Data importation</a></li>
+  <li><a href="#lazy-evaluation" id="toc-lazy-evaluation" class="nav-link" data-scroll-target="#lazy-evaluation"><span class="header-section-number">3.1</span> Lazy evaluation</a></li>
+  <li><a href="#hands-on-2---data-frame-basic-manipulations" id="toc-hands-on-2---data-frame-basic-manipulations" class="nav-link" data-scroll-target="#hands-on-2---data-frame-basic-manipulations"><span class="header-section-number">3.2</span> ✍Hands-on 2 - Data frame basic manipulations</a></li>
   </ul></li>
-  <li><a href="#data-frame-basic-manipulations" id="toc-data-frame-basic-manipulations" class="nav-link" data-scroll-target="#data-frame-basic-manipulations"><span class="header-section-number">4</span> Data frame basic manipulations</a>
+  <li><a href="#basic-dataframe-column-manipulation" id="toc-basic-dataframe-column-manipulation" class="nav-link" data-scroll-target="#basic-dataframe-column-manipulation"><span class="header-section-number">4</span> Basic DataFrame column manipulation</a>
   <ul class="collapse">
-  <li><a href="#lazy-evaluation" id="toc-lazy-evaluation" class="nav-link" data-scroll-target="#lazy-evaluation"><span class="header-section-number">4.1</span> Lazy evaluation</a></li>
-  <li><a href="#hands-on-2---data-frame-basic-manipulations" id="toc-hands-on-2---data-frame-basic-manipulations" class="nav-link" data-scroll-target="#hands-on-2---data-frame-basic-manipulations"><span class="header-section-number">4.2</span> ✍Hands-on 2 - Data frame basic manipulations</a></li>
+  <li><a href="#hands-on-3---basic-dataframe-column-manipulation" id="toc-hands-on-3---basic-dataframe-column-manipulation" class="nav-link" data-scroll-target="#hands-on-3---basic-dataframe-column-manipulation"><span class="header-section-number">4.1</span> ✍Hands-on 3 - Basic DataFrame column manipulation</a></li>
   </ul></li>
-  <li><a href="#basic-dataframe-column-manipulation" id="toc-basic-dataframe-column-manipulation" class="nav-link" data-scroll-target="#basic-dataframe-column-manipulation"><span class="header-section-number">5</span> Basic DataFrame column manipulation</a>
+  <li><a href="#advance-dataframe-column-manipulation" id="toc-advance-dataframe-column-manipulation" class="nav-link" data-scroll-target="#advance-dataframe-column-manipulation"><span class="header-section-number">5</span> Advance DataFrame column manipulation</a>
   <ul class="collapse">
-  <li><a href="#hands-on-3---basic-dataframe-column-manipulation" id="toc-hands-on-3---basic-dataframe-column-manipulation" class="nav-link" data-scroll-target="#hands-on-3---basic-dataframe-column-manipulation"><span class="header-section-number">5.1</span> ✍Hands-on 3 - Basic DataFrame column manipulation</a></li>
+  <li><a href="#array-manipulation" id="toc-array-manipulation" class="nav-link" data-scroll-target="#array-manipulation"><span class="header-section-number">5.1</span> Array manipulation</a></li>
+  <li><a href="#user-defined-function" id="toc-user-defined-function" class="nav-link" data-scroll-target="#user-defined-function"><span class="header-section-number">5.2</span> User defined function</a></li>
   </ul></li>
-  <li><a href="#advance-dataframe-column-manipulation" id="toc-advance-dataframe-column-manipulation" class="nav-link" data-scroll-target="#advance-dataframe-column-manipulation"><span class="header-section-number">6</span> Advance DataFrame column manipulation</a>
+  <li><a href="#aggregation-functions" id="toc-aggregation-functions" class="nav-link" data-scroll-target="#aggregation-functions"><span class="header-section-number">6</span> Aggregation functions</a>
   <ul class="collapse">
-  <li><a href="#array-manipulation" id="toc-array-manipulation" class="nav-link" data-scroll-target="#array-manipulation"><span class="header-section-number">6.1</span> Array manipulation</a></li>
-  <li><a href="#user-defined-function" id="toc-user-defined-function" class="nav-link" data-scroll-target="#user-defined-function"><span class="header-section-number">6.2</span> User defined function</a></li>
+  <li><a href="#hands-on-6---aggregation-functions" id="toc-hands-on-6---aggregation-functions" class="nav-link" data-scroll-target="#hands-on-6---aggregation-functions"><span class="header-section-number">6.1</span> ✍Hands-on 6 - Aggregation functions</a></li>
   </ul></li>
-  <li><a href="#aggregation-functions" id="toc-aggregation-functions" class="nav-link" data-scroll-target="#aggregation-functions"><span class="header-section-number">7</span> Aggregation functions</a>
+  <li><a href="#grouping-functions" id="toc-grouping-functions" class="nav-link" data-scroll-target="#grouping-functions"><span class="header-section-number">7</span> Grouping functions</a>
   <ul class="collapse">
-  <li><a href="#hands-on-6---aggregation-functions" id="toc-hands-on-6---aggregation-functions" class="nav-link" data-scroll-target="#hands-on-6---aggregation-functions"><span class="header-section-number">7.1</span> ✍Hands-on 6 - Aggregation functions</a></li>
+  <li><a href="#hands-on-7---grouping-functions" id="toc-hands-on-7---grouping-functions" class="nav-link" data-scroll-target="#hands-on-7---grouping-functions"><span class="header-section-number">7.1</span> ✍Hands-on 7 - Grouping functions</a></li>
   </ul></li>
-  <li><a href="#grouping-functions" id="toc-grouping-functions" class="nav-link" data-scroll-target="#grouping-functions"><span class="header-section-number">8</span> Grouping functions</a>
+  <li><a href="#spark-sql" id="toc-spark-sql" class="nav-link" data-scroll-target="#spark-sql"><span class="header-section-number">8</span> Spark SQL</a>
   <ul class="collapse">
-  <li><a href="#hands-on-7---grouping-functions" id="toc-hands-on-7---grouping-functions" class="nav-link" data-scroll-target="#hands-on-7---grouping-functions"><span class="header-section-number">8.1</span> ✍Hands-on 7 - Grouping functions</a></li>
-  </ul></li>
-  <li><a href="#spark-sql" id="toc-spark-sql" class="nav-link" data-scroll-target="#spark-sql"><span class="header-section-number">9</span> Spark SQL</a>
-  <ul class="collapse">
-  <li><a href="#hands-on-8---spark-sql" id="toc-hands-on-8---spark-sql" class="nav-link" data-scroll-target="#hands-on-8---spark-sql"><span class="header-section-number">9.1</span> ✍Hands-on 8 - Spark SQL</a></li>
+  <li><a href="#hands-on-8---spark-sql" id="toc-hands-on-8---spark-sql" class="nav-link" data-scroll-target="#hands-on-8---spark-sql"><span class="header-section-number">8.1</span> ✍Hands-on 8 - Spark SQL</a></li>
   </ul></li>
   <li><a href="#end-of-the-lab" id="toc-end-of-the-lab" class="nav-link" data-scroll-target="#end-of-the-lab">End of the Lab</a>
   <ul class="collapse">
@@ -278,7 +272,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -313,65 +307,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="before-you-start" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="before-you-start">Before you start</h2>
-<ul class="task-list">
-<li><label><input type="checkbox">Download this <a href="lab1.ipynb" target="_blank">Jupyter Notebook</a></label></li>
-<li><label><input type="checkbox">Follow these <a href="../../../docs/lab/lab-setup.html" target="_blank">instructions</a></label></li>
-</ul>
-</section>
-<section id="what-is-spark" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="what-is-spark"><span class="header-section-number">1</span> What is Spark ?</h2>
-<section id="lets-keep-it-simple." class="level3" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="lets-keep-it-simple."><span class="header-section-number">1.1</span> Let’s keep it simple.</h3>
-<p>The intuitive way: Spark distributes tasks to different Worker nodes (machine executing the tasks).<br>
-The Kubernetes way: Spark distributes tasks to different containers. The location of containers among the different worker nodes is then handled by Kubernetes. The more computation power you need, the more containers get created. It’s a smooth way to save Worker nodes resources. With Kubernetes, we just speak in terms of Pods rathen than containers.</p>
-<p>Pretty handy right ? If you want to have a deeper look on how it’s done, you can by clicking on the link bellow but you still have some work to do so don’t waste your time ! You can keep it to the end.</p>
-</section>
-<section id="if-you-want-more" class="level3" data-number="1.2">
-<h3 data-number="1.2" class="anchored" data-anchor-id="if-you-want-more"><span class="header-section-number">1.2</span> If you want more !</h3>
-<section id="spark-context" class="level4">
-<h4 class="anchored" data-anchor-id="spark-context">Spark Context</h4>
-<p>The <strong>Spark Context</strong> is an object that hides the complexity of the underlying infrastructure to perform computation from the Data Scientist.</p>
-<p>This Spark context is a JVM process that gives access to a Spark <strong>driver</strong> which schedules the tasks and spans tasks across Worker nodes through Executors. In brief, the Spark driver communicates with all the Worker nodes.</p>
-<p>Each Worker node consists of one or more Executor(s) who are responsible for running the Task. Executors register themselves with Driver. The Driver has all the information about the Executors at all the time.</p>
-<p>This working combination of Driver and Workers is known as <strong>Spark Application</strong>.</p>
-<p>JVM: Java virtual machine that load, verifies and executes Java bytecode.</p>
-<p><a href="img/spark_context.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="img/spark_context.png" class="img-fluid"></a></p>
-<p>The Spark Application is launched with the help of the <strong>Cluster Manager</strong>. Spark is dependent on the <strong>Cluster Manager</strong> to launch the Executors and also the Driver (in Cluster mode).</p>
-<p>Spark can be run with any of the 5 following <strong>Cluster Manager</strong> :</p>
-<ul>
-<li>local : Driver use CPU threads on your local machine</li>
-<li>Spark Standalone Mode : A basic resource manager provided by Spark</li>
-<li>YARN : the historical resource manager commonly used in traditional Big Data infrastructures (Courdera or Hortonworks cluster for instance)</li>
-<li>Mesos : the resource manager from Berkeley University</li>
-<li>Kubernetes : the game changing containers orchestrator</li>
-</ul>
-</section>
-<section id="spark-on-a-kubernetes-cluster" class="level4">
-<h4 class="anchored" data-anchor-id="spark-on-a-kubernetes-cluster">Spark on a Kubernetes cluster</h4>
-<div class="white-box">
-<p><a href="img/k8spark_cluster_mode.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="img/k8spark_cluster_mode.png" class="img-fluid"></a></p>
-</div>
-<p>The Spark driver runs on a Kubernetes Pod and creates executors running within Kubernetes pods. In simple terms, Spark driver is in a Pod and it distributes tasks to different Pods. The location of Pods among the different worker nodes is then handled by Kubernetes.</p>
-<p>The Kubernetes <strong>Scheduler</strong> checks if pods are assigned to nodes. For every Pod that the scheduler discovers, the scheduler is responsible of finding the best node for that Pod to run on.<br>
-The Kubernetes <strong>API Server</strong> allows to interact with Pods. It schedules executor Pods by creating or deleting Pods.</p>
-</section>
-</section>
-</section>
-<section id="create-a-spark-session" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="create-a-spark-session"><span class="header-section-number">2</span> Create a Spark session</h2>
+<p>execute: eval: false</p>
+<hr>
+<section id="create-a-spark-session" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="create-a-spark-session"><span class="header-section-number">1</span> Create a Spark session</h2>
 <ul class="task-list">
 <li><label><input type="checkbox">Depending on the <strong>chosen platform</strong>, initialize the Spark session</label></li>
 </ul>
-<section id="only-on-sspcloud" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="only-on-sspcloud"><span class="header-section-number">2.1</span> Only on SSPCloud</h3>
+<section id="only-on-sspcloud" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="only-on-sspcloud"><span class="header-section-number">1.1</span> Only on SSPCloud</h3>
 <p>See default configuration on the datalab :</p>
-<div id="c4082a4a" class="cell" data-execution_count="1">
+<div id="7120b95c" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span> cat <span class="op">/</span>opt<span class="op">/</span>spark<span class="op">/</span>conf<span class="op">/</span>spark<span class="op">-</span>defaults.conf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To modify the config :</p>
-<div id="5c038e0e" class="cell" data-execution_count="2">
+<div id="3b3267bd" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -396,14 +346,14 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>         .getOrCreate()</span>
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="f08aeaa2" class="cell" data-execution_count="3">
+<div id="166efcf4" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See the current number of executors (one for now)</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>kubectl get pods <span class="op">-</span>l spark<span class="op">-</span>role<span class="op">=</span>executor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="only-on-aws" class="level3" data-number="2.2">
-<h3 data-number="2.2" class="anchored" data-anchor-id="only-on-aws"><span class="header-section-number">2.2</span> Only on AWS</h3>
-<div id="fbcbe2df" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-04-30T09:07:18.788943Z&quot;,&quot;iopub.status.busy&quot;:&quot;2023-04-30T09:07:18.788720Z&quot;,&quot;iopub.status.idle&quot;:&quot;2023-04-30T09:07:18.853566Z&quot;,&quot;shell.execute_reply&quot;:&quot;2023-04-30T09:07:18.853007Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2023-04-30T09:07:18.788920Z&quot;}" data-tags="[]" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="4">
+<section id="only-on-aws" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="only-on-aws"><span class="header-section-number">1.2</span> Only on AWS</h3>
+<div id="d3e3e37a" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-04-30T09:07:18.788943Z&quot;,&quot;iopub.status.busy&quot;:&quot;2023-04-30T09:07:18.788720Z&quot;,&quot;iopub.status.idle&quot;:&quot;2023-04-30T09:07:18.853566Z&quot;,&quot;shell.execute_reply&quot;:&quot;2023-04-30T09:07:18.853007Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2023-04-30T09:07:18.788920Z&quot;}" data-tags="[]" data-vscode="{&quot;languageId&quot;:&quot;json&quot;}" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Spark session</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>spark</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -411,15 +361,15 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>spark._jsc.hadoopConfiguration().<span class="bu">set</span>(<span class="st">"fs.s3.useRequesterPaysHeader"</span>,<span class="st">"true"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="check-spark-session" class="level3" data-number="2.3">
-<h3 data-number="2.3" class="anchored" data-anchor-id="check-spark-session"><span class="header-section-number">2.3</span> Check spark session</h3>
-<div id="12d12dc0" class="cell" data-execution_count="5">
+<section id="check-spark-session" class="level3" data-number="1.3">
+<h3 data-number="1.3" class="anchored" data-anchor-id="check-spark-session"><span class="header-section-number">1.3</span> Check spark session</h3>
+<div id="a316f0fd" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>spark</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
-<section id="first-steps-with-spark---data-importation" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="first-steps-with-spark---data-importation"><span class="header-section-number">3</span> First steps with Spark - Data importation</h2>
+<section id="first-steps-with-spark---data-importation" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="first-steps-with-spark---data-importation"><span class="header-section-number">2</span> First steps with Spark - Data importation</h2>
 <p>Spark’s main object class is the DataFrame, which is a distributed table. It is analogous to R’s or Python (Pandas)’s data frames:</p>
 <ul>
 <li>one row represents an observation,</li>
@@ -441,8 +391,8 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <p>In the future, you may consult the <a href="https://spark.apache.org/docs/latest/sql-data-sources.html">Data Source documentation</a> to have the complete description of Spark’s reading abilities.</p>
 <p>The data you will use in this lab are real data from the twitter <a href="https://developer.twitter.com/en/docs/twitter-api/tweets/sampled-stream/introduction">sampled stream API</a> and <a href="https://developer.twitter.com/en/docs/twitter-api/tweets/filtered-stream/introduction">filtered stream API</a>. The tweets folder contains more than 50 files and more than 2 million tweets. The tweets was collected between the 14/04/2021 and the 18/04/2021. The total collection time was less than 10 hours.</p>
 <hr>
-<section id="hands-on-1---data-importation" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="hands-on-1---data-importation"><span class="header-section-number">3.1</span> ✍Hands-on 1 - Data importation</h3>
+<section id="hands-on-1---data-importation" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="hands-on-1---data-importation"><span class="header-section-number">2.1</span> ✍Hands-on 1 - Data importation</h3>
 <ul class="task-list">
 <li><p><label><input type="checkbox">Load the json file stored here :</label></p>
 <ul>
@@ -472,7 +422,7 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <li>in jupyter, read it using : <code>s3://&lt;bucket_name&gt;/&lt;file_name&gt;.jsonl.gz</code></li>
 </ul></li>
 </ul>
-<div id="2c02535e" class="cell" data-execution_count="6">
+<div id="cd3e90f0" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># DataFrame creation</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># caching</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -480,8 +430,8 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 </section>
 </section>
 </section>
-<section id="data-frame-basic-manipulations" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="data-frame-basic-manipulations"><span class="header-section-number">4</span> Data frame basic manipulations</h2>
+<section id="data-frame-basic-manipulations" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="data-frame-basic-manipulations"><span class="header-section-number">3</span> Data frame basic manipulations</h2>
 <p>If DataFrames are immutable, they can however be <strong><em>transformed</em></strong> in other DataFrames, in the sense that a modified copy is returned. Such <strong>transformations</strong> include: filtering, sampling, dropping columns, selecting columns, adding new columns…</p>
 <p>First, you can get information about the columns with:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df.columns       <span class="co"># get the column names</span></span>
@@ -501,9 +451,9 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  .<span class="bu">filter</span>(df.variable1<span class="op">==</span><span class="st">"value"</span>)<span class="op">\</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  .show(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>As said before your data are distributed over multiple nodes (executors) and data inside a node are split into partitions. Then each transformations will be run in parallel. They are called <em>narrow transformation</em> For example, to sample a DataFrame, Spark sample every partitions in parallel because sample all partition produce the sample DataFrame. For some transformations, like <code>groupBy()</code> it’s impossible, and it’s cannot be run in parallel.</p>
-<p><a href="img/spark_exemple2_pipeline.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="img/spark_exemple2_pipeline.png" class="img-fluid"></a></p>
-<section id="lazy-evaluation" class="level3" data-number="4.1">
-<h3 data-number="4.1" class="anchored" data-anchor-id="lazy-evaluation"><span class="header-section-number">4.1</span> Lazy evaluation</h3>
+<p><a href="img/spark_exemple2_pipeline.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="img/spark_exemple2_pipeline.png" class="img-fluid"></a></p>
+<section id="lazy-evaluation" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="lazy-evaluation"><span class="header-section-number">3.1</span> Lazy evaluation</h3>
 <p>This is because Spark has what is known as <strong>lazy evaluation</strong>, in the sense that it will wait as much as it can before performing the actual computation. Said otherwise, when you run an instruction such as:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>tweet_author_hashtags <span class="op">=</span> df_tweet_big.select(<span class="st">"auteur"</span>,<span class="st">"hashtags"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>… you are not executing anything! Rather, you are building an <strong>execution plan</strong>, to be realised later.</p>
@@ -520,27 +470,27 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <p><strong>This has also drawbacks.</strong> Since the computation is optimized for the end result, the intermediate stages are discarded by default. So if you need a DataFrame multiple times, you have to cache it in memory because if you don’t Spark will recompute it every single time.</p>
 <hr>
 </section>
-<section id="hands-on-2---data-frame-basic-manipulations" class="level3" data-number="4.2">
-<h3 data-number="4.2" class="anchored" data-anchor-id="hands-on-2---data-frame-basic-manipulations"><span class="header-section-number">4.2</span> ✍Hands-on 2 - Data frame basic manipulations</h3>
+<section id="hands-on-2---data-frame-basic-manipulations" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="hands-on-2---data-frame-basic-manipulations"><span class="header-section-number">3.2</span> ✍Hands-on 2 - Data frame basic manipulations</h3>
 <ul class="task-list">
 <li><label><input type="checkbox">How many rows have your DataFrame ?</label></li>
 </ul>
-<div id="c4947a2b" class="cell" data-execution_count="7">
+<div id="a39bf7fb" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Display columns names and then the schema</label></li>
 </ul>
-<div id="e8979b75" class="cell" data-execution_count="8">
+<div id="47adaab1" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="fee94df5" class="cell" data-execution_count="9">
+<div id="c6470302" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Display 10 rows of df_tweet</label></li>
 </ul>
-<div id="61e8b7fe" class="cell" data-execution_count="10">
+<div id="87b41633" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
@@ -550,7 +500,7 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <li>If computations take too long on the full DataFrame, use this one instead or add a sample transformation in your expression.</li>
 </ul></li>
 </ul>
-<div id="d0572372" class="cell" data-execution_count="11">
+<div id="98ad74ea" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
@@ -559,7 +509,7 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <li><label><input type="checkbox">Then display 5 rows</label></li>
 </ul></li>
 </ul>
-<div id="1aa6c87a" class="cell" data-execution_count="12">
+<div id="37737a98" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
@@ -568,7 +518,7 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <li><code>mentions</code> and <code>urls</code> are both nested columns in <code>entities</code></li>
 </ul></li>
 </ul>
-<div id="90deb33d" class="cell" data-execution_count="13">
+<div id="8ccdd0e9" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
@@ -578,13 +528,13 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <li><label><input type="checkbox">Print 10 lines</label></li>
 </ul></li>
 </ul>
-<div id="be52ca3f" class="cell" data-execution_count="14">
+<div id="b5e6cba7" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
-<section id="basic-dataframe-column-manipulation" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="basic-dataframe-column-manipulation"><span class="header-section-number">5</span> Basic DataFrame column manipulation</h2>
+<section id="basic-dataframe-column-manipulation" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="basic-dataframe-column-manipulation"><span class="header-section-number">4</span> Basic DataFrame column manipulation</h2>
 <p>You can add/update/rename column of a DataFrame using <strong>spark</strong> :</p>
 <ul>
 <li>Drop : <code>df.drop(columnName : str )</code></li>
@@ -597,29 +547,29 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"like_rt_ratio"</span>,                                  <span class="co"># like_rt_ratio "OVERCONFIDENCE"</span></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    df_tweet.like_count <span class="op">/</span>df_tweet.retweet_count)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>See <a href="https://spark.apache.org/docs/3.1.1/api/python/reference/pyspark.sql.html#functions" class="external" target="_blank">here</a> for the list of all functions available in an expression.</p>
-<section id="hands-on-3---basic-dataframe-column-manipulation" class="level3" data-number="5.1">
-<h3 data-number="5.1" class="anchored" data-anchor-id="hands-on-3---basic-dataframe-column-manipulation"><span class="header-section-number">5.1</span> ✍Hands-on 3 - Basic DataFrame column manipulation</h3>
+<section id="hands-on-3---basic-dataframe-column-manipulation" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="hands-on-3---basic-dataframe-column-manipulation"><span class="header-section-number">4.1</span> ✍Hands-on 3 - Basic DataFrame column manipulation</h3>
 <ul class="task-list">
 <li><label><input type="checkbox">Define a DataFrame with a column names <code>interaction_count</code> named <code>df_tweet_interaction_count</code></label>
 <ul>
 <li>This column is the sum of <code>like_count</code>, <code>reply_count</code> and <code>retweet_count</code>.</li>
 </ul></li>
 </ul>
-<div id="d62aaabe" class="cell" data-execution_count="15">
+<div id="f2389740" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Update the DataFrame you imported at the beginning of this lab and drop the <code>other</code> column</label></li>
 </ul>
-<div id="7985362b" class="cell" data-execution_count="16">
+<div id="25e79563" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
-<section id="advance-dataframe-column-manipulation" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="advance-dataframe-column-manipulation"><span class="header-section-number">6</span> Advance DataFrame column manipulation</h2>
-<section id="array-manipulation" class="level3" data-number="6.1">
-<h3 data-number="6.1" class="anchored" data-anchor-id="array-manipulation"><span class="header-section-number">6.1</span> Array manipulation</h3>
+<section id="advance-dataframe-column-manipulation" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="advance-dataframe-column-manipulation"><span class="header-section-number">5</span> Advance DataFrame column manipulation</h2>
+<section id="array-manipulation" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="array-manipulation"><span class="header-section-number">5.1</span> Array manipulation</h3>
 <p>Some columns often contain arrays (lists) of values instead of just one value. This may seem surprising but this actually quite natural. For instance, you may create an array of words from a text, or generate a list of random numbers for each observation, etc.</p>
 <p>You may <strong>create array of values</strong> with:</p>
 <ul>
@@ -698,25 +648,25 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <ul class="task-list">
 <li><label><input type="checkbox">Keep all the tweets with hashtags and for each remaining line, split the hashtag text into an array of hashtags</label></li>
 </ul>
-<div id="cdde229b" class="cell" data-execution_count="17">
+<div id="66a0620d" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Create a new column with the number of words of the <code>contenu</code> column. (Use <code>split()</code> + <code>size()</code>)</label></li>
 </ul>
-<div id="7ec59627" class="cell" data-execution_count="18">
+<div id="c15e4572" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Count how many tweet contain the <code>Ukraine</code> hashtag (use the <code>count()</code> action)</label></li>
 </ul>
-<div id="ce9aa323" class="cell" data-execution_count="19">
+<div id="15c295e7" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
-<section id="user-defined-function" class="level3" data-number="6.2">
-<h3 data-number="6.2" class="anchored" data-anchor-id="user-defined-function"><span class="header-section-number">6.2</span> User defined function</h3>
+<section id="user-defined-function" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="user-defined-function"><span class="header-section-number">5.2</span> User defined function</h3>
 <p>For more very specific column manipulation you will need Spark’s <code>udf()</code> function (<em>User Defined Function</em>). It can be useful if Spark does not provide a feature you want. But Spark is a popular and active project, so before coding an udf, go check the documentation. For instance for natural language processing, Spark already has some <a href="https://spark.apache.org/docs/3.1.1/api/python/reference/api/pyspark.ml.feature.Tokenizer.html#pyspark.ml.feature.Tokenizer">functions</a>. Last things, python udf can lead to performance issues (see https://stackoverflow.com/a/38297050) and learning a little bit of scala or java can be a good idea.</p>
 <p>For example :</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># !!!! DOES NOT WORK !!!!</span></span>
@@ -755,14 +705,14 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <li>your function will return an <code>IntegerType</code> and not a <code>StringType</code></li>
 </ul></li>
 </ul>
-<div id="8c558311" class="cell" data-execution_count="20">
+<div id="808998f5" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
 </section>
-<section id="aggregation-functions" class="level2" data-number="7">
-<h2 data-number="7" class="anchored" data-anchor-id="aggregation-functions"><span class="header-section-number">7</span> Aggregation functions</h2>
+<section id="aggregation-functions" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="aggregation-functions"><span class="header-section-number">6</span> Aggregation functions</h2>
 <p>Spark offer a variety of aggregation functions :</p>
 <ul>
 <li><p><code>count(column : string)</code> will count every not null value of the specify column. You cant use <code>count(1)</code> of <code>count("*")</code> to count every line (even row with only null values)</p></li>
@@ -776,15 +726,15 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <li><p>You have access to all other common functions <code>min()</code>, <code>max()</code>, <code>first()</code>, <code>last()</code>, <code>sum()</code>, <code>sumDistinct()</code>, <code>avg()</code> etc (you should import them first <code>from pyspark.sql.functions import min, max, avg, first, last, sum, sumDistinct</code>)</p></li>
 </ul>
 <hr>
-<section id="hands-on-6---aggregation-functions" class="level3" data-number="7.1">
-<h3 data-number="7.1" class="anchored" data-anchor-id="hands-on-6---aggregation-functions"><span class="header-section-number">7.1</span> ✍Hands-on 6 - Aggregation functions</h3>
+<section id="hands-on-6---aggregation-functions" class="level3" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="hands-on-6---aggregation-functions"><span class="header-section-number">6.1</span> ✍Hands-on 6 - Aggregation functions</h3>
 <ul class="task-list">
 <li><label><input type="checkbox">What are the min, max, average of <code>interaction_count</code> (use <code>df_tweet_interaction_count</code> created earlier)</label>
 <ul>
 <li>don’t forget to import the required functions</li>
 </ul></li>
 </ul>
-<div id="d1eea9f7" class="cell" data-execution_count="21">
+<div id="2da5a4d3" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
@@ -794,13 +744,13 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <li><label><input type="checkbox">Try the approximative count with 0.1 and 0.01 as maximum estimation error allowed.</label></li>
 </ul></li>
 </ul>
-<div id="3ec5cb59" class="cell" data-execution_count="22">
+<div id="c4ee7cee" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
-<section id="grouping-functions" class="level2" data-number="8">
-<h2 data-number="8" class="anchored" data-anchor-id="grouping-functions"><span class="header-section-number">8</span> Grouping functions</h2>
+<section id="grouping-functions" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="grouping-functions"><span class="header-section-number">7</span> Grouping functions</h2>
 <p>Like SQL you can group row by a criteria with Spark. Just use the <code>groupBy(column : string)</code> method. Then you can compute some aggregation over those groups.</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>df<span class="op">\</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  .groupBy(<span class="st">"col1"</span>)<span class="op">\</span></span>
@@ -814,9 +764,9 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>       avg(<span class="st">"col3"</span>).alias(<span class="st">"avg3"</span>))<span class="op">\</span></span>
 <span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  .show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Aggregation and grouping transformations work differently than the previous method like <code>filter()</code>, <code>select()</code>, <code>withColumn()</code> etc. Those transformations cannot be run over each partitions in parallel, and need to transfer data between partitions and executors. They are called “wide transformations”</p>
-<p><a href="img/spark_exemple2_pipeline.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="img/spark_exemple2_pipeline.png" class="img-fluid"></a></p>
-<section id="hands-on-7---grouping-functions" class="level3" data-number="8.1">
-<h3 data-number="8.1" class="anchored" data-anchor-id="hands-on-7---grouping-functions"><span class="header-section-number">8.1</span> ✍Hands-on 7 - Grouping functions</h3>
+<p><a href="img/spark_exemple2_pipeline.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="img/spark_exemple2_pipeline.png" class="img-fluid"></a></p>
+<section id="hands-on-7---grouping-functions" class="level3" data-number="7.1">
+<h3 data-number="7.1" class="anchored" data-anchor-id="hands-on-7---grouping-functions"><span class="header-section-number">7.1</span> ✍Hands-on 7 - Grouping functions</h3>
 <ul class="task-list">
 <li><label><input type="checkbox">Compute a daframe with the min, max and average retweet of each <code>auteur</code>.</label>
 <ul>
@@ -826,13 +776,13 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <div class="sourceCode" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> desc</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>df.orderBy(desc(<span class="st">"col"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
-<div id="7012714e" class="cell" data-execution_count="23">
+<div id="7cb59882" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
-<section id="spark-sql" class="level2" data-number="9">
-<h2 data-number="9" class="anchored" data-anchor-id="spark-sql"><span class="header-section-number">9</span> Spark SQL</h2>
+<section id="spark-sql" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="spark-sql"><span class="header-section-number">8</span> Spark SQL</h2>
 <p>Spark understand SQL statement. It’s not a hack nor a workaround to use SQL in Spark, it’s one a the more powerful feature in Spark. To use SQL you will need :</p>
 <ol type="1">
 <li><p>Register a view pointing to your DataFrame</p>
@@ -844,21 +794,21 @@ The Kubernetes <strong>API Server</strong> allows to interact with Pods. It sche
 <p>You could manipulate every registered DataFrame by their view name with plain SQL.</p></li>
 </ol>
 <p>In fact you can do most of this tutorial without any knowledge in PySpark nor Spark. Many things can only be done in Spark if you know SQL and how to use it in Spark.</p>
-<section id="hands-on-8---spark-sql" class="level3" data-number="9.1">
-<h3 data-number="9.1" class="anchored" data-anchor-id="hands-on-8---spark-sql"><span class="header-section-number">9.1</span> ✍Hands-on 8 - Spark SQL</h3>
+<section id="hands-on-8---spark-sql" class="level3" data-number="8.1">
+<h3 data-number="8.1" class="anchored" data-anchor-id="hands-on-8---spark-sql"><span class="header-section-number">8.1</span> ✍Hands-on 8 - Spark SQL</h3>
 <ul class="task-list">
 <li><label><input type="checkbox">How many tweets have hashtags ?</label>
 <ul class="task-list">
 <li><label><input type="checkbox">Distinct hashtags ?</label></li>
 </ul></li>
 </ul>
-<div id="3f663bcb" class="cell" data-execution_count="24">
+<div id="86334d62" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Compute a dataframe with the min, max and average retweet of each <code>auteur</code> using Spark SQL</label></li>
 </ul>
-<div id="2055ab9f" class="cell" data-execution_count="25">
+<div id="b9e2e05e" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code Here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -1091,18 +1041,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1134,7 +1073,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp("https:\/\/ludo2ne\.github\.io\/ENSAI-2A-Big-Data\/");
@@ -1142,7 +1103,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -1479,30 +1440,37 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":false,"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","openEffect":"zoom"});
-window.onload = () => {
-  lightboxQuarto.on('slide_before_load', (data) => {
-    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-    const href = trigger.getAttribute('href');
-    if (href !== null) {
-      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-      if (imgEl !== null) {
-        const srcAttr = imgEl.getAttribute("src");
-        if (srcAttr && srcAttr.startsWith("data:")) {
-          slideConfig.href = srcAttr;
-        }
-      }
-    } 
-  });
-
-  lightboxQuarto.on('slide_after_load', (data) => {
-    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-    if (window.Quarto?.typesetMath) {
-      window.Quarto.typesetMath(slideNode);
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","descPosition":"bottom","loop":false,"closeEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
     }
-  });
-
-};
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
           </script>
 
 
