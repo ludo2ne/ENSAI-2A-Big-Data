@@ -1,3 +1,5 @@
+var:
+  url-repo: https://github.com/ludo2ne/ENSAI-2A-Big-Data   # to call this value : {{< meta var.url-repo >}}
 
 project:
   type: website
@@ -6,6 +8,9 @@ project:
 
 website:
   title: "Big Data"
+  repo-url: "{{< meta var.url-repo >}}"
+  repo-branch: main
+  reader-mode: true
   navbar:
     background: "#447099"
     left:
@@ -41,13 +46,13 @@ website:
       - href: docs/resources.qmd
         text: Useful resources
       - icon: github
-        href: https://github.com/ludo2ne/ENSAI-2A-Big-Data
+        href: "{{< meta var.url-repo >}}"
         target: "_blank"
   reader-mode: true
   page-footer:
     right: |
       Website built with [Quarto](https://quarto.org/){.external target="_blank"} <br>
-      [Source code](https://github.com/ludo2ne/ENSAI-2A-Big-Data){.external target="_blank"}
+      [Source code]({{< meta var.url-repo >}}){.external target="_blank"}
 
 format:
   html:

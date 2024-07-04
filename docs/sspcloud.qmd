@@ -43,7 +43,7 @@ Pour profiter des services, vous devez créer un compte.
 
 Sur le datalab, vos services ont une durée de vie limitée.
 
-Pour sauvegarder vos programmes, la bonne pratique est d'utiliser un dépôt git. Nous allons donc utiliser créer et utiliser un jeton pour communiquer avec GitHub.
+Pour sauvegarder vos programmes, la bonne pratique est d'utiliser un dépôt git. Nous allons donc créer et utiliser un jeton pour communiquer avec GitHub.
 
 Pour suivre la démarche, il faut disposer d'un compte [GitHub](https://github.com/){target="_blank"}. Il est possible de suivre une démarche similaire avec [GitLab](https://about.gitlab.com/){target="_blank"}.
 
